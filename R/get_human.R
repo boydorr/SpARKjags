@@ -11,12 +11,12 @@
 #' @export
 #'
 get_human <- function(classification,
-                       pathogen,
-                       kleb,
-                       indeterminate = "I",
-                       removeCarbapenem = F,
-                       onlyCarbapenem = F,
-                       removeQuinPen = T) {
+                      pathogen,
+                      kleb,
+                      indeterminate = "I",
+                      removeCarbapenem = F,
+                      onlyCarbapenem = F,
+                      removeQuinPen = T) {
 
   if ((missing(pathogen) && missing(kleb)) ||
       ((!missing(pathogen)) && (pathogen == "all"))) {
@@ -229,8 +229,14 @@ get_human <- function(classification,
 
 
   } else {
+    class_tables <- SpARK::ATBdata %>%
+      dplyr::select(Antibiotic_name, Classification) %>%
+      unique() %>%
+      dplyr::rename(antibiotic = Antibiotic_name)
+
     # Filter by antibiotic class
-    data %<>%
+    data %>%
+      merge(class_tables, all.x = TRUE) %>%
       dplyr::filter(Classification %in% classification) %>%
       # Determine class_interpretation
       dplyr::mutate(class_interpretation = dplyr::case_when(
@@ -417,15 +423,16 @@ get_human <- function(classification,
 removeCarbapenem <- function(data) {
   n <- length(unique(data$GUID))
   remove_these <- data %>%
-    select(GUID, Classification, Interpretation) %>%
-    filter(Classification == "Carbapenem") %>%
-    group_by(GUID, Interpretation) %>%
-    summarise(count = n()) %>%
-    filter(Interpretation == "R") %$%
+    dplyr::select(GUID, Classification, Interpretation) %>%
+    dplyr::filter(Classification == "Carbapenem") %>%
+    dplyr::group_by(GUID, Interpretation) %>%
+    dplyr::summarise(count = dplyr::n()) %>%
+    dplyr::filter(Interpretation == "R") %$%
     GUID
-  data %<>% filter(!GUID %in% remove_these)
+  data %<>% dplyr::filter(!GUID %in% remove_these)
   assertthat::assert_that(
     length(unique(data$GUID)) == n - length(remove_these))
+  data
 }
 
 
@@ -434,13 +441,13 @@ removeCarbapenem <- function(data) {
 onlyCarbapenem <- function(data) {
   n <- length(unique(data$GUID))
   keep_these <- data %>%
-    select(GUID, Classification, Interpretation) %>%
-    filter(Classification == "Carbapenem") %>%
-    group_by(GUID, Interpretation) %>%
-    summarise(count = n()) %>%
-    filter(Interpretation == "R") %$%
+    dplyr::select(GUID, Classification, Interpretation) %>%
+    dplyr::filter(Classification == "Carbapenem") %>%
+    dplyr::group_by(GUID, Interpretation) %>%
+    dplyr::summarise(count = dplyr::n()) %>%
+    dplyr::filter(Interpretation == "R") %$%
     GUID
-  data %<>% filter(GUID %in% keep_these)
+  data %<>% dplyr::filter(GUID %in% keep_these)
 }
 
 

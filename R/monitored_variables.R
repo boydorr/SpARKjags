@@ -3,8 +3,13 @@
 #' @export
 #'
 monitored_variables <- function(model) {
-  model$summary[[1]] %>%
-    rownames() %>%
-    .[-which(. == "deviance")] %>%
-    .[-which(grepl("^bad.", .))]
+  tmp <- rownames(model$summary[[1]])
+
+  if(any(grepl("deviance", tmp)))
+    tmp <- tmp[-which(tmp == "deviance")]
+
+  if(any(grepl("^bad.", tmp)))
+    tmp <- tmp[-which(grepl("^bad.", .))]
+
+  tmp
 }
