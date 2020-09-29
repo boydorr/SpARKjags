@@ -9,12 +9,12 @@ filter_pathogen <- function(data, path, pathogen, kleb) {
       dplyr::filter(Phoenix_Organism %in% pathogen,
                     !grepl("NEG", GUID)) %>%
       dplyr::rename(bacteria = Phoenix_Organism) %>%
-      left_join(KLEBdata %>% dplyr::select(GUID, ST),
+      left_join(SpARK::KLEBdata %>% dplyr::select(GUID, ST),
                 by = "GUID")
   } else {
     data %<>%
       dplyr::filter(!grepl("NEG", GUID)) %>%
-      left_join(KLEBdata %>% dplyr::select(GUID, species, ST),
+      left_join(SpARK::KLEBdata %>% dplyr::select(GUID, species, ST),
                 by = "GUID") %>%
       dplyr::filter(species %in% kleb,
                     Clinical != "dontknow") %>%
