@@ -4,7 +4,7 @@
 \alias{get_model}
 \title{get_model}
 \usage{
-get_model(model_name, directory, knit)
+get_model(model_name, directory)
 }
 \description{
 get_model

@@ -4,7 +4,7 @@
 \alias{get_vars}
 \title{get_vars}
 \usage{
-get_vars()
+get_vars(result)
 }
 \description{
 get_vars
