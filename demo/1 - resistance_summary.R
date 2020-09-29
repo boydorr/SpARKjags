@@ -10,11 +10,6 @@
 #' ---
 #' Last updated: `r Sys.time()`
 
-# filter out carbapenem samples
-# run jags models on other antibiotics
-# do models look similar?
-# is clinical / carriage still important?
-
 #+ r setup, include=FALSE
 
 knitr::opts_chunk$set(message=FALSE)
