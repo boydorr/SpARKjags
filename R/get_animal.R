@@ -7,6 +7,7 @@
 #' @param removeCarbapenem default is FALSE; remove Carbapenem resitant samples
 #' @param onlyCarbapenem default is FALSE
 #' @param removeQuinPen default is TRUE
+#'
 #' @export
 #'
 get_animal <- function(classification,
@@ -63,8 +64,8 @@ get_animal <- function(classification,
 
 
   # Merge METAdata with ward type lookup table
-  data <- METAdata %>%
-    merge(ATBdata %>% dplyr::rename(GUID = UNIQUE_SPARK_ID) , all.x = T)
+  data <- SpARK::METAdata %>%
+    merge(SpARK::ATBdata %>% dplyr::rename(GUID = UNIQUE_SPARK_ID) , all.x = T)
 
   # Remove samples that are resistant to Carbapenem
   if(removeCarbapenem) data %<>% removeCarbapenem()
@@ -128,7 +129,7 @@ get_animal <- function(classification,
       dplyr::mutate(class_interpretation = NA)
     assertthat::assert_that(length(unique(data$GUID)) == nrow(data))
 
-    class_tables <- ATBdata %>%
+    class_tables <- SpARK::ATBdata %>%
       dplyr::select(Antibiotic_name, Classification) %>%
       unique() %>%
       dplyr::filter(Antibiotic_name %in% colnames(data))
@@ -191,7 +192,7 @@ get_animal <- function(classification,
       tidyr::spread(antibiotic, interpretation)
     assertthat::assert_that(length(unique(data$GUID)) == nrow(data))
 
-    antibiotics <- ATBdata %>%
+    antibiotics <- SpARK::ATBdata %>%
       dplyr::filter(Classification %in% classification) %$%
       Antibiotic_name %>% unique() %>% as.character()
   }

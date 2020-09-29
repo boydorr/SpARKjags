@@ -80,8 +80,8 @@ get_human <- function(classification,
 
 
   # Merge METAdata with ward type lookup table
-  data <- merge(METAdata, ward_types, all.x = T) %>%
-    merge(ATBdata %>% dplyr::rename(GUID = UNIQUE_SPARK_ID) , all.x = T)
+  data <- merge(SpARK::METAdata, ward_types, all.x = T) %>%
+    merge(SpARK::ATBdata %>% dplyr::rename(GUID = UNIQUE_SPARK_ID) , all.x = T)
 
   # Remove samples that are resistant to Carbapenem
   if(removeCarbapenem) data %<>% removeCarbapenem()
@@ -184,7 +184,7 @@ get_human <- function(classification,
       dplyr::mutate(class_interpretation = NA)
     assertthat::assert_that(length(unique(data$GUID)) == nrow(data))
 
-    class_tables <- ATBdata %>%
+    class_tables <- SpARK::ATBdata %>%
       dplyr::select(Antibiotic_name, Classification) %>%
       unique() %>%
       dplyr::filter(Antibiotic_name %in% colnames(data))
@@ -247,7 +247,7 @@ get_human <- function(classification,
       tidyr::spread(antibiotic, interpretation)
     assertthat::assert_that(length(unique(data$GUID)) == nrow(data))
 
-    antibiotics <- ATBdata %>%
+    antibiotics <- SpARK::ATBdata %>%
       dplyr::filter(Classification %in% classification) %$%
       Antibiotic_name %>% unique() %>% as.character()
   }
