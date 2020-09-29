@@ -5,7 +5,7 @@
 import_data <- function(model, data) {
 
   # Animal lookup -----------------------------------------------------------
-  species <- METAdata %>%
+  species <- SpARK::METAdata %>%
     dplyr::select(ASSOCIATED_SPECIES) %>% unique() %>%
     dplyr::filter(!grepl("^Un", ASSOCIATED_SPECIES),
                   !is.na(ASSOCIATED_SPECIES)) %>%
