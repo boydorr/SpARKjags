@@ -3,13 +3,18 @@
 #' @export
 #'
 run_model <- function(data, model_name, directory, thin) {
+  # Find model
+  location <- system.file(directory, paste0(model_name, ".R"),
+                          package = "SpARKcarbapenem")
+
+  # Run model
   if(missing(thin)) {
-    results <- run.jags(paste0(directory, "/", model_name, ".R"),
+    results <- runjags::run.jags(location,
                         data = data$jags,
                         n.chains = 2,
                         silent.jags = T)
   } else {
-    results <- run.jags(paste0(directory, "/", model_name, ".R"),
+    results <- runjags::run.jags(location,
                         data = data$jags,
                         n.chains = 2,
                         silent.jags = T,
@@ -17,8 +22,10 @@ run_model <- function(data, model_name, directory, thin) {
   }
 
   if(!results$summary.available) {
-    results <- add.summary(results)
+    results <- runjags::add.summary(results)
   }
 
-  saveRDS(results, paste0(directory, "/", model_name, ".rds"))
+  # Save results
+  save_here <- file.path(dirname(location), paste0(model_name, ".rds"))
+  saveRDS(results, save_here)
 }

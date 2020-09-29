@@ -2,7 +2,11 @@
 #'
 #' @export
 #'
-get_model <- function(model_name, directory, knit) {
-  if (knit) directory <- paste0("../", directory)
-  readRDS(paste0(directory, "/", model_name, ".rds"))
+get_model <- function(model_name, directory) {
+  # Find results
+  location <- system.file(directory, paste0(model_name, ".rds"),
+                          package = "SpARKcarbapenem")
+
+  # Read results
+  readRDS(location)
 }
