@@ -12,6 +12,9 @@ on:
 jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
+    # use GITHUB_TOKEN as enviromental version for all steps
+    env:
+      GITHUB_PAT: ${{ secrets.GH_PAT }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
