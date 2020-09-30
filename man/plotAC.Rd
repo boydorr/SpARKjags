@@ -17,8 +17,10 @@ plotAC(model, var.regex, filename)
 plotAC
 }
 \examples{
+\dontrun{
 res.a_naive <- get_model("a_naive", "goodbad_models")
 plotAC(model = res.a_naive,
        var.regex = "(a.prob)|(intercept)|(sd)")
+}
 
 }
