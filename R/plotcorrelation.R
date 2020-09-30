@@ -29,8 +29,8 @@ plotcorrelation <- function(model, data) {
                             .data$badgroup)) %>%
       dplyr::filter(.data$badgroup == groups[i]) %>%
       dplyr::select(.data$GUID, .data$badgroup) %>%
-      unique() %>%
-      .data$GUID
+      unique()
+    these <- these$GUID
 
     tmp <- response %>%
       dplyr::filter(.data$GUID %in% these) %>%
