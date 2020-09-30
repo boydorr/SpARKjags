@@ -21,6 +21,8 @@ densityplot(model, data, var.regex, params, labels = rep(NA, length(params)))
 densityplot
 }
 \examples{
+\dontrun{
+\donttest{
 data <- jags_data(classification = "all",
                   categories = "human",
                   pathogen = "Klebsiella pneumoniae",
@@ -31,5 +33,6 @@ densityplot(model = res.a,
             var.regex = get_vars(res.a),
             params = get_params(),
             labels = get_labels(data))
+}}
 
 }

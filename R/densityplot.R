@@ -9,6 +9,8 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' \donttest{
 #' data <- jags_data(classification = "all",
 #'                   categories = "human",
 #'                   pathogen = "Klebsiella pneumoniae",
@@ -19,6 +21,7 @@
 #'             var.regex = get_vars(res.a),
 #'             params = get_params(),
 #'             labels = get_labels(data))
+#' }}
 #'
 densityplot <- function(model,
                         data,
