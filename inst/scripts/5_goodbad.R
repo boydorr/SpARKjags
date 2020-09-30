@@ -23,18 +23,18 @@ directory <- "goodbad_models"
 
 data_full <- jags_data(classification = "all",
                        categories = "human",
-                       kleb = "Klebsiella pneumoniae",
+                       pathogen = "Klebsiella pneumoniae",
                        removeQuinPen = F)
 
 # Remove Quinolone and Penicillin as levels in antibiotic_classes
 data <- jags_data(classification = "all",
                   categories = "human",
-                  kleb = "Klebsiella pneumoniae",
+                  pathogen = "Klebsiella pneumoniae",
                   removeQuinPen = T)
 
 data_ah <- jags_data(classification = "all",
                      categories = c("human", "animal"),
-                     kleb = "Klebsiella pneumoniae",
+                     pathogen = "Klebsiella pneumoniae",
                      removeQuinPen = T)
 
 
@@ -129,7 +129,7 @@ res.a <- get_model("a", directory)
 
 #' #### Posterior
 #+ res.a, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
+var.regex <- get_vars(res.a)
 params <- get_params()
 labels <- get_labels(data)
 res.a %>% densityplot(data, var.regex, params, labels)
