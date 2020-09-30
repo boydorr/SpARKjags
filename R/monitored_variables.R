@@ -1,6 +1,6 @@
 #' monitored_variables
 #'
-#' @export
+#' @param model model
 #'
 monitored_variables <- function(model) {
   tmp <- rownames(model$summary[[1]])
@@ -9,7 +9,7 @@ monitored_variables <- function(model) {
     tmp <- tmp[-which(tmp == "deviance")]
 
   if(any(grepl("^bad.", tmp)))
-    tmp <- tmp[-which(grepl("^bad.", .))]
+    tmp <- tmp[-which(grepl("^bad.", tmp))]
 
   tmp
 }

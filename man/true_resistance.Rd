@@ -6,6 +6,11 @@
 \usage{
 true_resistance(model, data)
 }
+\arguments{
+\item{model}{model}
+
+\item{data}{data}
+}
 \description{
 true_resistance
 }

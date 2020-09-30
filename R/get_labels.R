@@ -1,5 +1,9 @@
 #' get_labels
 #'
+#' @param data data
+#' @param ind ind
+#' @param cat cat
+#'
 #' @export
 #'
 get_labels <- function(data, ind, cat) {
@@ -7,21 +11,24 @@ get_labels <- function(data, ind, cat) {
   tmp <- data$lookup$antibiotic_class %>%
     mutate(index = paste0("a.prob[", 1:13, ",1]"))
 
-  tmp2 <- paste0("prob.of.bad.", c("vol", "out", "gp", "hosp")) %>%
-    data.frame(index = ., stringsAsFactors = F) %>%
+  tmp2 <- data.frame(index = paste0("prob.of.bad.",
+                                    c("vol", "out", "gp", "hosp")),
+                     stringsAsFactors = F) %>%
     mutate(category = c("Volunteer", "Outpatient", "GP", "Hospital"))
 
   clinical <- data$lookup$clinical %>%
-    dplyr::filter(clinical == "yes") %$% index
+    dplyr::filter(clinical == "yes")
+  clinical <- clinical$index
   carriage <- data$lookup$clinical %>%
-    dplyr::filter(clinical == "no") %$% index
+    dplyr::filter(clinical == "no")
+  carriage <- carriage$index
 
   tmp.clin <- data.frame(index = paste0("prob.of.bad.hosp[", clinical, "]"),
                          category = "Hospital (clinical)", stringsAsFactors = F)
   tmp.car <- data.frame(index = paste0("prob.of.bad.hosp[", carriage, "]"),
                         category = "Hospital (carriage)", stringsAsFactors = F)
 
-  tmp2 %<>% dplyr::bind_rows(tmp.clin, tmp.car)
+  tmp2 <- tmp2 %>% dplyr::bind_rows(tmp.clin, tmp.car)
 
   tmp.ainmals <- data.frame(index = c("prob.of.bad.livestock",
                                       "prob.of.bad.cattle",
@@ -46,14 +53,14 @@ get_labels <- function(data, ind, cat) {
                                          "Turtle",
                                          "Crow"))
 
-  tmp2 %<>% dplyr::bind_rows(tmp.ainmals)
+  tmp2 <- tmp2 %>% dplyr::bind_rows(tmp.ainmals)
 
   if(!missing(ind) && !missing(cat)) {
     tmp3 <- data.frame(index = ind, category = cat, stringsAsFactors = F)
-    tmp2 %<>% dplyr::bind_rows(tmp3)
+    tmp2 <- tmp2 %>% dplyr::bind_rows(tmp3)
   }
 
 
-  list(tmp2, tmp, tmp %>% mutate(index = gsub(",1", ",2", index)),
+  list(tmp2, tmp, tmp %>% mutate(index = gsub(",1", ",2", .data$index)),
        NA, NA)
 }

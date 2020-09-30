@@ -6,6 +6,17 @@
 \usage{
 plot_jags(res, var, labels, intercept, condense = F)
 }
+\arguments{
+\item{res}{res}
+
+\item{var}{var}
+
+\item{labels}{labels}
+
+\item{intercept}{intercept}
+
+\item{condense}{condense}
+}
 \description{
 plot_jags
 }

@@ -1,138 +1,106 @@
 #' get_animal
 #'
 #' @param classification Antibiotic classification
-#' @param pathogen Pathogen name (Phoenix_Organism)
-#' @param kleb Pathogen name (Kleborate)
+#' @param pathogen Pathogen name (Kleborate)
 #' @param indeterminate c("R", "S"), default is "I"
 #' @param removeCarbapenem default is FALSE; remove Carbapenem resitant samples
 #' @param onlyCarbapenem default is FALSE
 #' @param removeQuinPen default is TRUE
 #'
-#' @export
-#'
 get_animal <- function(classification,
-                        pathogen,
-                        kleb,
-                        indeterminate = "I",
-                        removeCarbapenem = F,
-                        onlyCarbapenem = F,
-                        removeQuinPen = T) {
-
-  if ((missing(pathogen) && missing(kleb)) ||
-      ((!missing(pathogen)) && (pathogen == "all"))) {
-    pathogen <- c("Klebsiella_pneumoniae",
-                  "Klebsiella_aerogenes",
-                  "Klebsiella_oxytoca",
-                  "Klebsiella_variicola",
-                  "Raoultella_planticola",
-                  "Raoultella_ornithinolytica",
-                  "Klebsiella_spp.",
-                  "Raoultella_spp.",
-                  "Klebsiella_oxytoca/Raoultella_ornithinolytica",
-                  "Enterobacter_aerogenes",
-                  "Raoultella_terrigena",
-                  "Klebsiella_ozaenae")
-    path <- TRUE
-
-  } else if (!missing(kleb) && (kleb == "all"))  {
-    kleb <- c("Klebsiella aerogenes",
-              "Klebsiella grimontii",
-              "Klebsiella huaxiensis",
-              "Klebsiella michiganensis",
-              "Klebsiella oxytoca",
-              "Klebsiella pneumoniae",
-              "Klebsiella quasipneumoniae subsp. quasipneumoniae",
-              "Klebsiella quasipneumoniae subsp. similipneumoniae",
-              "Klebsiella quasivariicola",
-              "Klebsiella variicola",
-              "Raoultella ornithinolytica",
-              "Raoultella planticola",
-              "Raoultella terrigena")
-    path <- FALSE
-  } else
-    path <- missing(kleb)
+                       pathogen,
+                       indeterminate = "I",
+                       removeCarbapenem = FALSE,
+                       onlyCarbapenem = FALSE,
+                       removeQuinPen = TRUE) {
 
   # Generate Lookup tables --------------------------------------------------
 
-
   resistance <- cbind.data.frame(index = c(1, 0),
                                  interpretation = c("R", "S")) %>%
-    dplyr::arrange(index)
+    dplyr::arrange(.data$index)
 
 
   # Initialise dataset ------------------------------------------------------
 
-
   # Merge METAdata with ward type lookup table
   data <- SpARK::METAdata %>%
-    merge(SpARK::ATBdata %>% dplyr::rename(GUID = UNIQUE_SPARK_ID) , all.x = T)
+    merge(SpARK::ATBdata %>% dplyr::rename(GUID = .data$UNIQUE_SPARK_ID),
+          all.x = TRUE)
 
   # Remove samples that are resistant to Carbapenem
-  if(removeCarbapenem) data %<>% removeCarbapenem()
+  if(removeCarbapenem) data <- data %>% removeCarbapenem()
 
   # Remove samples that are not resistant to Carbapenem
-  if(onlyCarbapenem) data %<>% onlyCarbapenem()
+  if(onlyCarbapenem) data <- data %>% onlyCarbapenem()
 
   # Change interpretation of indeterminate results
-  data %<>% dplyr::mutate(Interpretation = dplyr::case_when(
-    Interpretation == "I" ~ indeterminate,
-    T ~ Interpretation))
+  data <- data %>% dplyr::mutate(Interpretation = dplyr::case_when(
+    .data$Interpretation == "I" ~ indeterminate,
+    TRUE ~ Interpretation))
 
   # Filter by pathogen
-  data %<>% filter_pathogen(path, pathogen, kleb)
+  data <- data %>% filter_pathogen(pathogen)
+
+  if(nrow(data) == 0) stop("No animal data remaining")
 
   if(removeQuinPen)
-    data %<>% dplyr::filter(Classification != "Quinolone",
-                            Classification != "Penicillin")
+    data <- data %>% dplyr::filter(.data$Classification != "Quinolone",
+                                   .data$Classification != "Penicillin")
 
+  if(nrow(data) == 0) stop("No animal data remaining")
 
   # Tidy  columns ------------------------------------------------------
 
+  data <- data %>%
+    dplyr::filter(.data$used_MIC == "yes",
+                  .data$Category %in% "animal")
 
-  data %<>%
-    dplyr::filter(used_MIC == "yes",
-                  Category %in% "animal") %>%
-    dplyr::rename(associated_species = ASSOCIATED_SPECIES,
-                  associated_group = ASSOCIATED_GROUP,
-                  type = TYPE,
-                  sample_type = SAMPLE_TYPE,
-                  interpretation = Interpretation,
-                  antibiotic = Antibiotic_name) %>%
-    dplyr::mutate(sample_GUID = gsub("_C[1-9]$", "", GUID),
+  if(nrow(data) == 0) stop("No animal data remaining")
+
+  data <- data %>%
+    dplyr::rename(associated_species = .data$ASSOCIATED_SPECIES,
+                  associated_group = .data$ASSOCIATED_GROUP,
+                  type = .data$TYPE,
+                  sample_type = .data$SAMPLE_TYPE,
+                  interpretation = .data$Interpretation,
+                  antibiotic = .data$Antibiotic_name) %>%
+    dplyr::mutate(sample_GUID = gsub("_C[1-9]$", "", .data$GUID),
                   sample_month = lubridate::month(
-                    lubridate::ymd(SAMPLE_DATE)),
+                    lubridate::ymd(.data$SAMPLE_DATE)),
                   sample_season = case_when(
                     sample_month %in% 3:5 ~ "spring",
                     sample_month %in% 6:8 ~ "summer",
                     sample_month %in% 9:11 ~ "autumn",
                     sample_month %in% c(12, 1, 2) ~ "winter")) %>%
-    dplyr::select(GUID, interpretation, bacteria, ST, antibiotic,
-                  sample_GUID, sample_type, associated_species,
-                  associated_group, type, Livestock, Companion_animal,
-                  Wild_animal, sample_month, sample_season)
+    dplyr::select(.data$GUID, .data$interpretation, .data$bacteria, .data$ST,
+                  .data$antibiotic, .data$sample_GUID, .data$sample_type,
+                  .data$associated_species, .data$associated_group, .data$type,
+                  .data$Livestock, .data$Companion_animal, .data$Wild_animal,
+                  .data$sample_month, .data$sample_season)
 
 
   # Determine class_interpretation ------------------------------------------
   # (resistance to each class of antibiotics)
 
-  if(classification == "all") {
+  if(any(classification == "all")) {
     # Convert antibiotic interpretation to numeric where R = 1, S = 0, and
     # I or ND = NA
-    data %<>%
+    data <- data %>%
       dplyr::mutate(
         interpretation = dplyr::case_when(
           interpretation == "R" ~ 1,
           interpretation == "S" ~ 0)) %>%
       # Transform dataset such that there is only one row per GUID
       dplyr::ungroup() %>%
-      tidyr::spread(antibiotic, interpretation) %>%
+      tidyr::spread(.data$antibiotic, .data$interpretation) %>%
       dplyr::mutate(class_interpretation = NA)
     assertthat::assert_that(length(unique(data$GUID)) == nrow(data))
 
     class_tables <- SpARK::ATBdata %>%
-      dplyr::select(Antibiotic_name, Classification) %>%
+      dplyr::select(.data$Antibiotic_name, .data$Classification) %>%
       unique() %>%
-      dplyr::filter(Antibiotic_name %in% colnames(data))
+      dplyr::filter(.data$Antibiotic_name %in% colnames(data))
 
     all_classes <- unique(class_tables$Classification) %>%
       as.character() %>%
@@ -145,56 +113,64 @@ get_animal <- function(classification,
     # "index", "classification" lookup table
     antibiotic_class <- cbind.data.frame(index = seq_along(all_classes),
                                          classification = all_classes,
-                                         stringsAsFactors = F) %>%
-      dplyr::arrange(index)
+                                         stringsAsFactors = FALSE) %>%
+      dplyr::arrange(.data$index)
 
 
     # Generate a matrix of response variables
     # (column for each class_interpretation)
     response <- lapply(seq_along(all_classes), function(x) {
       these_antibiotics <- class_tables %>%
-        dplyr::filter(Classification %in% all_classes[x]) %$%
-        Antibiotic_name %>%
+        dplyr::filter(.data$Classification %in% all_classes[x])
+      these_antibiotics <- these_antibiotics$Antibiotic_name %>%
         as.character()
       tmp <- data %>%
-        dplyr::select(GUID, one_of(these_antibiotics)) %>%
+        dplyr::select(.data$GUID, one_of(these_antibiotics)) %>%
         dplyr::mutate(class_interpretation =
                         dplyr::case_when(rowSums(. == 1,
-                                                 na.rm = T) > 0 ~ 1,
+                                                 na.rm = TRUE) > 0 ~ 1,
                                          rowSums(. == 0,
-                                                 na.rm = T) > 0 ~ 0)) %>%
-        dplyr::select(GUID, class_interpretation)
+                                                 na.rm = TRUE) > 0 ~ 0)) %>%
+        dplyr::select(.data$GUID, .data$class_interpretation)
       colnames(tmp)[2] <- all_classes[x]
       tmp
     }) %>%
       purrr::reduce(full_join, by = "GUID") %>%
-      dplyr::arrange(GUID) %>%
-      dplyr::select(-GUID) %>%
+      dplyr::arrange(.data$GUID) %>%
+      dplyr::select(-.data$GUID) %>%
       as.matrix()
 
 
   } else {
+    class_tables <- SpARK::ATBdata %>%
+      dplyr::select(.data$Antibiotic_name, .data$Classification) %>%
+      unique() %>%
+      dplyr::rename(antibiotic = .data$Antibiotic_name)
+
     # Filter by antibiotic class
-    data %<>%
-      dplyr::filter(Classification %in% classification) %>%
+    data <- data %>%
+      merge(class_tables, all.x = TRUE) %>%
+      dplyr::filter(.data$Classification %in% classification) %>%
       # Determine class_interpretation
       dplyr::mutate(class_interpretation = dplyr::case_when(
-        sum(interpretation == "R") > 0 ~ 1,
-        sum(interpretation == "S") > 0 ~ 0)) %>%
+        sum(.data$interpretation == "R") > 0 ~ 1,
+        sum(.data$interpretation == "S") > 0 ~ 0)) %>%
       # Convert antibiotic interpretation to numeric where R = 1, S = 0, and
       # I or ND = NA
       dplyr::mutate(
         interpretation = dplyr::case_when(
-          interpretation == "R" ~ 1,
-          interpretation == "S" ~ 0)) %>%
+          .data$interpretation == "R" ~ 1,
+          .data$interpretation == "S" ~ 0)) %>%
       # Transform dataset such that there is only one row per GUID
       dplyr::ungroup() %>%
-      tidyr::spread(antibiotic, interpretation)
-    assertthat::assert_that(length(unique(data$GUID)) == nrow(data))
+      tidyr::spread(.data$antibiotic, .data$interpretation)
+
+    if(length(classification) == 1)
+      assertthat::assert_that(length(unique(data$GUID)) == nrow(data))
 
     antibiotics <- SpARK::ATBdata %>%
-      dplyr::filter(Classification %in% classification) %$%
-      Antibiotic_name %>% unique() %>% as.character()
+      dplyr::filter(.data$Classification %in% classification)
+    antibiotics <- antibiotics$Antibiotic_name %>% unique() %>% as.character()
   }
 
 
@@ -208,27 +184,26 @@ get_animal <- function(classification,
       out <- resistance
 
     }else {
-      out <- data[, x, drop = F] %>%
+      out <- data[, x, drop = FALSE] %>%
         dplyr::rename(index = colnames(data)[x])
       if(class(out$index) == "character")
-        out %<>% dplyr::mutate(index = as.factor(index))
+        out <- out %>% dplyr::mutate(index = as.factor(.data$index))
       if(class(out$index) == "factor")
-        out %<>% dplyr::mutate(index = as.numeric(index))
+        out <- out %>% dplyr::mutate(index = as.numeric(.data$index))
       out <- cbind.data.frame(out, data[, x, drop = F]) %>%
         unique() %>%
-        dplyr::arrange(index)
+        dplyr::arrange(.data$index)
     }
   })
   names(lookup_tables) <- colnames(data)
 
-  if(classification == "all") {
+  if(any(classification == "all")) {
     lookup_tables <- append(lookup_tables, list(antibiotic_class))
     names(lookup_tables)[length(lookup_tables)] <- "antibiotic_class"
   }
 
 
   # Convert factors to numeric ----------------------------------------------
-
 
   dat_numeric <- data %>%
     dplyr::mutate_if(is.character, as.factor) %>%
@@ -239,59 +214,58 @@ get_animal <- function(classification,
 
   # Livestock samples
   ind <- lookup_tables$Livestock %>%
-    filter(Livestock == "yes") %$% index
-  livestock_dat <- dat_numeric %>% # see line 116
-    dplyr::filter(Livestock == ind) %>%
-    dplyr::select(GUID, sample_GUID, bacteria, ST, class_interpretation,
-                  sample_type, associated_species, associated_group,
-                  sample_month, sample_season,
+    dplyr::filter(.data$Livestock == "yes")
+  ind <- ind$index
+  livestock_dat <- dat_numeric %>%
+    dplyr::filter(.data$Livestock == ind) %>%
+    dplyr::select(.data$GUID, .data$sample_GUID, .data$bacteria, .data$ST,
+                  .data$class_interpretation, .data$sample_type,
+                  .data$associated_species, .data$associated_group,
+                  .data$sample_month, .data$sample_season,
                   dplyr::one_of(antibiotics)) %>%
     unique() %>%
-    dplyr::arrange(GUID) %>%
-    tibble::as_tibble()
+    dplyr::arrange(.data$GUID)
 
   # Companion animal samples
   ind <- lookup_tables$Companion_animal %>%
-    filter(Companion_animal == "yes") %$% index
+    dplyr::filter(.data$Companion_animal == "yes")
+  ind <- ind$index
   companion_dat <- dat_numeric %>% # see line 116
-    dplyr::filter(Companion_animal == ind) %>%
-    dplyr::select(GUID, sample_GUID, bacteria, ST, class_interpretation,
-                  sample_type, associated_species, associated_group,
-                  sample_month, sample_season,
+    dplyr::filter(.data$Companion_animal == ind) %>%
+    dplyr::select(.data$GUID, .data$sample_GUID, .data$bacteria, .data$ST,
+                  .data$class_interpretation, .data$sample_type,
+                  .data$associated_species, .data$associated_group,
+                  .data$sample_month, .data$sample_season,
                   dplyr::one_of(antibiotics)) %>%
     unique() %>%
-    dplyr::arrange(GUID) %>%
-    tibble::as_tibble()
+    dplyr::arrange(.data$GUID)
 
   # Wild animal samples
   ind <- lookup_tables$Wild_animal %>%
-    filter(Wild_animal == "yes") %$% index
+    dplyr::filter(.data$Wild_animal == "yes")
+  ind <- ind$index
   wild_dat <- dat_numeric %>% # see line 116
-    dplyr::filter(Wild_animal == ind) %>%
-    dplyr::select(GUID, sample_GUID, bacteria, ST, class_interpretation,
-                  sample_type, associated_species, associated_group,
-                  sample_month, sample_season,
+    dplyr::filter(.data$Wild_animal == ind) %>%
+    dplyr::select(.data$GUID, .data$sample_GUID, .data$bacteria, .data$ST,
+                  .data$class_interpretation, .data$sample_type,
+                  .data$associated_species, .data$associated_group,
+                  .data$sample_month, .data$sample_season,
                   dplyr::one_of(antibiotics)) %>%
     unique() %>%
-    dplyr::arrange(GUID) %>%
-    tibble::as_tibble()
-
+    dplyr::arrange(.data$GUID)
 
   # Checks ------------------------------------------------------------------
 
-
   # assertthat::assert_that(nrow(dat_numeric) == nrow(livestock_dat))
-
 
   # Output ------------------------------------------------------------------
 
-
-  data %<>%
-    merge(lookup_tables$GUID, all.x = T) %>%
+  data <- data %>%
+    merge(lookup_tables$GUID, all.x = TRUE) %>%
     dplyr::mutate(dataset = dplyr::case_when(
-      index %in% livestock_dat$GUID ~ "livestock",
-      index %in% companion_dat$GUID ~ "companion",
-      index %in% wild_dat$GUID ~ "wild"))
+      .data$index %in% livestock_dat$GUID ~ "livestock",
+      .data$index %in% companion_dat$GUID ~ "companion",
+      .data$index %in% wild_dat$GUID ~ "wild"))
 
 
   df <- list(livestock_dat = livestock_dat,
@@ -300,7 +274,7 @@ get_animal <- function(classification,
              lookup_tables = lookup_tables,
              data = data)
 
-  if(classification == "all") {
+  if(any(classification == "all")) {
     df$response <- response
     df$antibiotic_classes <- as.numeric(as.factor(all_classes))
   }

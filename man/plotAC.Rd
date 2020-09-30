@@ -6,6 +6,19 @@
 \usage{
 plotAC(model, var.regex, filename)
 }
+\arguments{
+\item{model}{a \code{runjags} object containing model results}
+
+\item{var.regex}{a regex \code{string} to filter variables}
+
+\item{filename}{a \code{string} specifying the filename}
+}
 \description{
 plotAC
+}
+\examples{
+res.a_naive <- get_model("a_naive", "goodbad_models")
+plotAC(model = res.a_naive,
+       var.regex = "(a.prob)|(intercept)|(sd)")
+
 }

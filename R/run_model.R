@@ -1,5 +1,10 @@
 #' run_model
 #'
+#' @param data data
+#' @param model_name model_name
+#' @param directory directory
+#' @param thin thin
+#'
 #' @export
 #'
 run_model <- function(data, model_name, directory, thin) {

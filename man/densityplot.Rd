@@ -6,6 +6,30 @@
 \usage{
 densityplot(model, data, var.regex, params, labels = rep(NA, length(params)))
 }
+\arguments{
+\item{model}{a \code{runjags} object containing model results}
+
+\item{data}{data input}
+
+\item{var.regex}{a regex \code{string} to filter variables}
+
+\item{params}{params}
+
+\item{labels}{labels}
+}
 \description{
 densityplot
+}
+\examples{
+data <- jags_data(classification = "all",
+                  categories = "human",
+                  pathogen = "Klebsiella pneumoniae",
+                  removeQuinPen = TRUE)
+res.a <- get_model("a", "goodbad_models")
+densityplot(model = res.a,
+            data = data,
+            var.regex = get_vars(res.a),
+            params = get_params(),
+            labels = get_labels(data))
+
 }

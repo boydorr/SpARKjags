@@ -1,5 +1,11 @@
 #' plot_jags
 #'
+#' @param res res
+#' @param var var
+#' @param labels labels
+#' @param intercept intercept
+#' @param condense condense
+#'
 #' @export
 #'
 plot_jags <- function(res, var, labels, intercept, condense = F) {
@@ -7,28 +13,28 @@ plot_jags <- function(res, var, labels, intercept, condense = F) {
   if(condense) {
 
     if(is.null(res$summaries))
-      res %<>% add.summary()
+      res <- res %>% add.summary()
 
     d1 <- res %>%
       coda::as.mcmc.list() %>%
       ggmcmc::ggs() %>%
-      dplyr::filter(Parameter %in% var) %>%
-      dplyr::group_by(Parameter) %>%
-      dplyr::summarise(ymin = min(value),
-                       lower = quantile(value, probs = .25),
-                       middle = mean(value),
-                       upper = quantile(value, probs = .75),
-                       ymax = max(value))
+      dplyr::filter(.data$Parameter %in% var) %>%
+      dplyr::group_by(.data$Parameter) %>%
+      dplyr::summarise(ymin = min(.data$value),
+                       lower = stats::quantile(.data$value, probs = .25),
+                       middle = mean(.data$value),
+                       upper = stats::quantile(.data$value, probs = .75),
+                       ymax = max(.data$value))
 
     if(!missing(labels))
-      d1 %<>% merge(labels) %>%
-      dplyr::mutate(Label = factor(Label, levels = labels$Label))
+      d1 <- d1 %>% merge(labels) %>%
+      dplyr::mutate(Label = factor(.data$Label, levels = labels$Label))
 
     g1 <- d1 %>%
       ggplot2::ggplot() + ggplot2::coord_flip() + ggplot2::theme_minimal() +
-      ggplot2::geom_boxplot(ggplot2::aes(x = Label, ymin = ymin, lower = lower,
-                                         middle = middle, upper = upper,
-                                         ymax = ymax), stat = "identity") +
+      ggplot2::geom_boxplot(ggplot2::aes_string(
+        x = "Label", ymin = "ymin", lower = "lower", middle = "middle",
+        upper = "upper", ymax = "ymax"), stat = "identity") +
       ggplot2::labs(x = "log-odds")
 
     if(!missing(intercept))
@@ -37,10 +43,10 @@ plot_jags <- function(res, var, labels, intercept, condense = F) {
     d2 <- res %>%
       coda::as.mcmc.list() %>%
       ggmcmc::ggs() %>%
-      dplyr::filter(Parameter %in% var)
+      dplyr::filter(.data$Parameter %in% var)
 
     if(!missing(labels))
-      d2 %<>% merge(labels) %>%
+      d2 <- d2 %>% merge(labels) %>%
       dplyr::mutate(Label = factor(Label, levels = labels$Label))
 
     g2 <- d2 %>%
@@ -55,20 +61,20 @@ plot_jags <- function(res, var, labels, intercept, condense = F) {
     df <- res %>%
       coda::as.mcmc.list() %>%
       ggmcmc::ggs() %>%
-      dplyr::filter(Parameter %in% var)
+      dplyr::filter(.data$Parameter %in% var)
 
     if(missing(labels)) {
-      df %<>% mutate(Label = Parameter)
+      df <- df %>% mutate(Label = .data$Parameter)
     } else {
-      df %<>% merge(labels) %>%
-        dplyr::mutate(Label = factor(Label, levels = labels$Label))
+      df <- df %>% merge(labels) %>%
+        dplyr::mutate(Label = factor(.data$Label, levels = labels$Label))
     }
 
     # Density plot
     g1 <- df %>%
       ggplot2::ggplot() + theme_minimal() +
-      ggplot2::geom_density(aes(x = value, group = Chain, fill = Label),
-                            alpha = .4) +
+      ggplot2::geom_density(aes_string(x = "value", group = "Chain",
+                                       fill = "Label"), alpha = .4) +
       ggplot2::theme(legend.position = "none") +
       ggplot2::labs(x = "log-odds")
 
@@ -81,10 +87,11 @@ plot_jags <- function(res, var, labels, intercept, condense = F) {
 
     # Caterpillar
     g2 <- df %>%
-      dplyr::mutate(Chain = as.factor(Chain)) %>%
+      dplyr::mutate(Chain = as.factor(.data$Chain)) %>%
       ggplot2::ggplot() + theme_minimal() +
       ggplot2::facet_grid(Label ~ ., scale  = 'free_y', switch = 'y') +
-      ggplot2::geom_line(ggplot2::aes(x = Iteration, y = value, col = Chain)) +
+      ggplot2::geom_line(ggplot2::aes_string(x = "Iteration", y = "value",
+                                             col = "Chain")) +
       ggplot2::theme(legend.position = "none")
 
     if(!missing(intercept))
@@ -92,5 +99,5 @@ plot_jags <- function(res, var, labels, intercept, condense = F) {
 
   }
 
-  cowplot::plot_grid(g1, g2, nrow = 1, rel_widths = c(.6, .4))
+  egg::ggarrange(plots = list(g1, g2), nrow = 1, widths = c(.6, .4))
 }

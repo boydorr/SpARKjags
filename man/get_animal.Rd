@@ -7,19 +7,16 @@
 get_animal(
   classification,
   pathogen,
-  kleb,
   indeterminate = "I",
-  removeCarbapenem = F,
-  onlyCarbapenem = F,
-  removeQuinPen = T
+  removeCarbapenem = FALSE,
+  onlyCarbapenem = FALSE,
+  removeQuinPen = TRUE
 )
 }
 \arguments{
 \item{classification}{Antibiotic classification}
 
-\item{pathogen}{Pathogen name (Phoenix_Organism)}
-
-\item{kleb}{Pathogen name (Kleborate)}
+\item{pathogen}{Pathogen name (Kleborate)}
 
 \item{indeterminate}{c("R", "S"), default is "I"}
 

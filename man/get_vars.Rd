@@ -6,6 +6,9 @@
 \usage{
 get_vars(result)
 }
+\arguments{
+\item{result}{result}
+}
 \description{
 get_vars
 }

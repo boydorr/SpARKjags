@@ -6,6 +6,11 @@
 \usage{
 get_model(model_name, directory)
 }
+\arguments{
+\item{model_name}{model_name}
+
+\item{directory}{directory}
+}
 \description{
 get_model
 }

@@ -6,6 +6,9 @@
 \usage{
 check_fit(model)
 }
+\arguments{
+\item{model}{model}
+}
 \description{
 check_fit
 }

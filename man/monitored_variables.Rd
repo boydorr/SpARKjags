@@ -6,6 +6,9 @@
 \usage{
 monitored_variables(model)
 }
+\arguments{
+\item{model}{model}
+}
 \description{
 monitored_variables
 }

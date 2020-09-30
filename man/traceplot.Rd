@@ -6,6 +6,13 @@
 \usage{
 traceplot(model, var.regex, filename)
 }
+\arguments{
+\item{model}{model}
+
+\item{var.regex}{var.regex}
+
+\item{filename}{filename}
+}
 \description{
 traceplot
 }

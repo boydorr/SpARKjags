@@ -6,6 +6,15 @@
 \usage{
 run_model(data, model_name, directory, thin)
 }
+\arguments{
+\item{data}{data}
+
+\item{model_name}{model_name}
+
+\item{directory}{directory}
+
+\item{thin}{thin}
+}
 \description{
 run_model
 }

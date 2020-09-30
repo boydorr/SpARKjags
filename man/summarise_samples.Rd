@@ -6,6 +6,11 @@
 \usage{
 summarise_samples(model, data)
 }
+\arguments{
+\item{model}{model}
+
+\item{data}{data}
+}
 \description{
 summarise_samples
 }

@@ -1,14 +1,15 @@
 #' import_data
 #'
-#' @export
+#' @param model model
+#' @param data data
 #'
 import_data <- function(model, data) {
 
   # Animal lookup -----------------------------------------------------------
   species <- SpARK::METAdata %>%
-    dplyr::select(ASSOCIATED_SPECIES) %>% unique() %>%
-    dplyr::filter(!grepl("^Un", ASSOCIATED_SPECIES),
-                  !is.na(ASSOCIATED_SPECIES)) %>%
+    dplyr::select(.data$ASSOCIATED_SPECIES) %>% unique() %>%
+    dplyr::filter(!grepl("^Un", .data$ASSOCIATED_SPECIES),
+                  !is.na(.data$ASSOCIATED_SPECIES)) %>%
     unlist()
   names(species) <- NULL
   # species <- data$lookup$associated_species$associated_species
@@ -44,8 +45,8 @@ import_data <- function(model, data) {
 
     output <- all_data %>%
       merge(pp.badgroup, all.y = TRUE) %>%
-      dplyr::rename(mean.p.bad = Mean) %>%
-      dplyr::mutate(badgroup = dplyr::if_else(mean.p.bad > 0.5, 1, 0))
+      dplyr::rename(mean.p.bad = .data$Mean) %>%
+      dplyr::mutate(badgroup = dplyr::if_else(.data$mean.p.bad > 0.5, 1, 0))
 
   } else {
     output <- all_data
@@ -53,9 +54,9 @@ import_data <- function(model, data) {
 
   output %>%
     dplyr::mutate(label = dplyr::case_when(
-      name == "Hospital" & clinical == "yes" ~ "Hospital\n(Clinical)",
-      name == "Hospital" & clinical == "no" ~ "Hospital\n(Carriage)",
-      T ~ name))
+      .data$name == "Hospital" & .data$clinical == "yes" ~ "Hospital\n(Clinical)",
+      .data$name == "Hospital" & .data$clinical == "no" ~ "Hospital\n(Carriage)",
+      T ~ .data$name))
 }
 
 

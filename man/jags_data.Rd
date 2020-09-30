@@ -4,8 +4,77 @@
 \alias{jags_data}
 \title{jags_data}
 \usage{
-jags_data(classification, categories, ...)
+jags_data(classification, categories, pathogen, ...)
+}
+\arguments{
+\item{classification}{a \code{string} specifying the antibiotic
+classification, options are:
+\itemize{
+\item{"all"} {}
+}
+or any combination of the following, in a \code{vector}:
+\itemize{
+\item{"Aminoglycoside"} {}
+\item{"Penicillin Combination"} {}
+\item{"Penicillin"} {}
+\item{"Monobactam"} {}
+\item{"Cephalosporin"} {}
+\item{"Fluoroquinolone"} {}
+\item{"Colistin"} {}
+\item{"Carbapenem"} {}
+\item{"Fosfomycin"} {}
+\item{"Penicillin (Penams)"} {}
+\item{"Quinolone"} {}
+\item{"Nitrofurantoin"} {}
+\item{"Tetracycline"} {}
+\item{"Trimethoprim"} {}
+\item{"Trimethoprim/Sulfamethoxazole"} {}
+}}
+
+\item{categories}{a \code{string} specifying data category, options are:
+\itemize{
+\item{"human"}
+\item{c("human", "animal")}
+}}
+
+\item{pathogen}{a \code{string} specifying pathogen name (taken from
+Kleborate data), options are:
+\itemize{
+\item{"all"} {}
+}
+or any combination of the following, in a \code{vector}:
+\itemize{
+\item{"Klebsiella pneumoniae} {}
+\item{"Klebsiella quasipneumoniae subsp. quasipneumoniae"} {}
+\item{"Klebsiella michiganensis"} {}
+\item{"Klebsiella (Raoultella) planticola"} {}
+\item{"Klebsiella variicola subsp. variicola"} {}
+\item{"Klebsiella quasipneumoniae subsp. similipneumoniae"} {}
+\item{"Klebsiella grimontii"} {}
+\item{"Klebsiella oxytoca"} {}
+\item{"Klebsiella (Raoultella) ornithinolytica"} {}
+\item{"Klebsiella aerogenes"} {}
+\item{"Klebsiella pasteurii"} {}
+\item{"Klebsiella spallanzanii"} {}
+\item{"Klebsiella quasivariicola"} {}
+\item{"Klebsiella (Raoultella) terrigena"} {}
+\item{"Klebsiella huaxiensis"} {}
+\item{"unknown"} - {Removed from possible options}
+\item{"Raoultella quasiterrigena"} {}
+}}
+
+\item{...}{Additional parameters may be included:
+\itemize{
+ \item{indeterminate}: {a \code{string} specifying how indeterminate samples
+ should be interpreted; options are "R", "S", or "I"; default is "I"}
+ \item{removeCarbapenem}: {a boolean flag to indicate removal of
+ Carbapenem resitant samples (\code{TRUE}); default is \code{FALSE}}
+ \item{onlyCarbapenem}: {a boolean flag to indicate removal of everything
+ but Carbapenem resitant samples (\code{TRUE}); default is \code{FALSE}}
+ \item{removeQuinPen}: {a boolean flag to indicate removal of Quinolone and
+ Penicillin samples (\code{TRUE}); default is \code{TRUE}}
+}}
 }
 \description{
-jags_data
+Function to generate data input for jags models
 }

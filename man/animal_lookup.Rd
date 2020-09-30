@@ -6,6 +6,9 @@
 \usage{
 animal_lookup(data)
 }
+\arguments{
+\item{data}{data}
+}
 \description{
 animal_lookup
 }

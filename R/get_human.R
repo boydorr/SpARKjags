@@ -1,193 +1,163 @@
 #' get_human
 #'
 #' @param classification Antibiotic classification
-#' @param pathogen Pathogen name (Phoenix_Organism)
-#' @param kleb Pathogen name (Kleborate)
+#' @param pathogen Pathogen name (Kleborate)
 #' @param indeterminate c("R", "S"), default is "I"
 #' @param removeCarbapenem default is FALSE; remove Carbapenem resitant samples
 #' @param onlyCarbapenem default is FALSE
 #' @param removeQuinPen default is TRUE
 #'
-#' @export
-#'
 get_human <- function(classification,
                       pathogen,
-                      kleb,
                       indeterminate = "I",
-                      removeCarbapenem = F,
-                      onlyCarbapenem = F,
-                      removeQuinPen = T) {
-
-  if ((missing(pathogen) && missing(kleb)) ||
-      ((!missing(pathogen)) && (pathogen == "all"))) {
-    pathogen <- c("Klebsiella_pneumoniae",
-                  "Klebsiella_aerogenes",
-                  "Klebsiella_oxytoca",
-                  "Klebsiella_variicola",
-                  "Raoultella_planticola",
-                  "Raoultella_ornithinolytica",
-                  "Klebsiella_spp.",
-                  "Raoultella_spp.",
-                  "Klebsiella_oxytoca/Raoultella_ornithinolytica",
-                  "Enterobacter_aerogenes",
-                  "Raoultella_terrigena",
-                  "Klebsiella_ozaenae")
-    path <- TRUE
-
-  } else if (!missing(kleb) && (kleb == "all"))  {
-    kleb <- c("Klebsiella aerogenes",
-              "Klebsiella grimontii",
-              "Klebsiella huaxiensis",
-              "Klebsiella michiganensis",
-              "Klebsiella oxytoca",
-              "Klebsiella pneumoniae",
-              "Klebsiella quasipneumoniae subsp. quasipneumoniae",
-              "Klebsiella quasipneumoniae subsp. similipneumoniae",
-              "Klebsiella quasivariicola",
-              "Klebsiella variicola",
-              "Raoultella ornithinolytica",
-              "Raoultella planticola",
-              "Raoultella terrigena")
-    path <- FALSE
-  } else
-    path <- missing(kleb)
-
-
+                      removeCarbapenem = FALSE,
+                      onlyCarbapenem = FALSE,
+                      removeQuinPen = TRUE) {
 
   # Generate Lookup tables --------------------------------------------------
 
-
-  ward_types <- wards %>%
-    dplyr::select(HOSPITAL_WARD, Area) %>%
-    dplyr::rename(ward_type = Area) %>%
-    dplyr::arrange(ward_type) %>%
+  ward_types <- SpARKjags::wards %>%
+    dplyr::select(.data$HOSPITAL_WARD, .data$Area) %>%
+    dplyr::rename(ward_type = .data$Area) %>%
+    dplyr::arrange(.data$ward_type) %>%
     dplyr::mutate(ward_type = dplyr::case_when(
-      ward_type == "" ~ paste0("system", dplyr::row_number()),
-      T ~ ward_type))
+      .data$ward_type == "" ~ paste0("system", dplyr::row_number()),
+      T ~ .data$ward_type))
 
   resistance <- cbind.data.frame(index = c(1, 0),
                                  interpretation = c("R", "S")) %>%
-    dplyr::arrange(index)
+    dplyr::arrange(.data$index)
 
   hospitals <- cbind.data.frame(index = c(1, 2, 3, 4, -1, -2),
                                 hospital = c("San_Matteo", "Montescano",
                                              "Maugeri", "Santa_Margherita",
                                              "Belgioioso", "Pavia_citizen")) %>%
-    dplyr::arrange(index)
+    dplyr::arrange(.data$index)
 
 
   # Initialise dataset ------------------------------------------------------
 
-
   # Merge METAdata with ward type lookup table
-  data <- merge(SpARK::METAdata, ward_types, all.x = T) %>%
-    merge(SpARK::ATBdata %>% dplyr::rename(GUID = UNIQUE_SPARK_ID) , all.x = T)
+  data <- SpARK::METAdata %>%
+    merge(ward_types, all.x = TRUE) %>%
+    merge(SpARK::ATBdata %>% dplyr::rename(GUID = .data$UNIQUE_SPARK_ID),
+          all.x = TRUE)
 
   # Remove samples that are resistant to Carbapenem
-  if(removeCarbapenem) data %<>% removeCarbapenem()
+  if(removeCarbapenem) data <- data %>% removeCarbapenem()
 
   # Remove samples that are not resistant to Carbapenem
-  if(onlyCarbapenem) data %<>% onlyCarbapenem()
+  if(onlyCarbapenem) data <- data %>% onlyCarbapenem()
 
   # Change interpretation of indeterminate results
-  data %<>% dplyr::mutate(Interpretation = dplyr::case_when(
+  data <- data %>% dplyr::mutate(Interpretation = dplyr::case_when(
     Interpretation == "I" ~ indeterminate,
-    T ~ Interpretation))
+    TRUE ~ Interpretation))
 
   # Filter by pathogen
-  data %<>% filter_pathogen(path, pathogen, kleb)
+  data <- data %>% filter_pathogen(pathogen)
 
+  if(nrow(data) == 0) stop("No human data remaining")
 
-
+  # Remove Quinolone and Penicillin
   if(removeQuinPen)
-    data %<>% dplyr::filter(Classification != "Quinolone",
-                            Classification != "Penicillin")
+    data <- data %>% dplyr::filter(.data$Classification != "Quinolone",
+                                   .data$Classification != "Penicillin")
 
+  if(nrow(data) == 0) stop("No human data remaining")
 
   # Tidy dataset ------------------------------------------------------
 
 
-  data %<>%
-    dplyr::filter(used_MIC == "yes",
-                  Category %in% "human",
-                  DATE_OF_BIRTH != "XXXX") %>%
-    dplyr::rename(ward = HOSPITAL_WARD,
-                  sample_type = SAMPLE_TYPE,
-                  hospital = SPECIFIC_GROUP,
-                  gender = SEX,
-                  clinical = Clinical,
-                  ward_type = ward_type,
-                  interpretation = Interpretation,
-                  antibiotic = Antibiotic_name) %>%
+  data <- data %>%
+    dplyr::filter(.data$used_MIC == "yes",
+                  .data$Category %in% "human",
+                  .data$DATE_OF_BIRTH != "XXXX")
+
+  if(nrow(data) == 0) stop("No human data remaining")
+
+  data <- data %>%
+    dplyr::rename(ward = .data$HOSPITAL_WARD,
+                  sample_type = .data$SAMPLE_TYPE,
+                  hospital = .data$SPECIFIC_GROUP,
+                  gender = .data$SEX,
+                  clinical = .data$Clinical,
+                  ward_type = .data$ward_type,
+                  interpretation = .data$Interpretation,
+                  antibiotic = .data$Antibiotic_name) %>%
     merge(hospitals, by = "hospital") %>%
-    dplyr::mutate(hospital = index,
-                  sample_GUID = gsub("_C[1-9]$", "", GUID),
+    dplyr::mutate(hospital = .data$index,
+                  sample_GUID = gsub("_C[1-9]$", "", .data$GUID),
                   age = as.numeric(lubridate::interval(
-                    lubridate::ymd(DATE_OF_BIRTH),
-                    lubridate::ymd(SAMPLE_DATE)),
+                    lubridate::ymd(.data$DATE_OF_BIRTH),
+                    lubridate::ymd(.data$SAMPLE_DATE)),
                     unit = "years"),
                   sample_month = lubridate::month(
-                    lubridate::ymd(SAMPLE_DATE)),
+                    lubridate::ymd(.data$SAMPLE_DATE)),
                   sample_season = case_when(
-                    sample_month %in% 3:5 ~ "spring",
-                    sample_month %in% 6:8 ~ "summer",
-                    sample_month %in% 9:11 ~ "autumn",
-                    sample_month %in% c(12, 1, 2) ~ "winter")) %>%
+                    .data$sample_month %in% 3:5 ~ "spring",
+                    .data$sample_month %in% 6:8 ~ "summer",
+                    .data$sample_month %in% 9:11 ~ "autumn",
+                    .data$sample_month %in% c(12, 1, 2) ~ "winter")) %>%
     bin_ages(10) %>%
-    dplyr::select(GUID, interpretation, bacteria, ST, antibiotic,
-                  sample_GUID, sample_type, ward, hospital,
-                  gender, clinical, age_group, age_group2,
-                  ward_type, sample_month, sample_season, age)
+    dplyr::select(.data$GUID, .data$interpretation, .data$bacteria,
+                  .data$ST, .data$antibiotic, .data$sample_GUID,
+                  .data$sample_type, .data$ward, .data$hospital,
+                  .data$gender, .data$clinical, .data$age_group,
+                  .data$age_group2, .data$ward_type, .data$sample_month,
+                  .data$sample_season, .data$age)
 
   # Define clinical status
-  data %<>% defineClinical()
+  data <- data %>% defineClinical()
 
   # "Remove the sample taken from the Microbiology_and_Virology_Laboratory
   # ward in San Matteo
   delete_sample <- data %>%
-    dplyr::filter(hospital != -2, ward_type == "Volunteer") %$%
-    GUID %>%
-    unique()
-  if(length(delete_sample) > 0) data %<>%
-    dplyr::filter(GUID != delete_sample)
+    dplyr::filter(.data$hospital != -2,
+                  .data$ward_type == "Volunteer")
+  delete_sample <- unique(delete_sample$GUID)
+
+  if(length(delete_sample) > 0) data <- data %>%
+    dplyr::filter(.data$GUID != delete_sample)
 
   # "index", "ward" lookup table
   w <- data %>%
-    dplyr::select(hospital, ward) %>%
+    dplyr::select(.data$hospital, .data$ward) %>%
     unique() %>%
-    dplyr::arrange(desc(hospital)) %>%
+    dplyr::arrange(desc(.data$hospital)) %>%
     dplyr::mutate(index = dplyr::case_when(
-      hospital == -1 ~ -1,
-      hospital == -2 ~ -2,
-      T ~ as.numeric(dplyr::row_number()))) %>%
-    dplyr::select(index, ward, -hospital)
+      .data$hospital == -1 ~ -1,
+      .data$hospital == -2 ~ -2,
+      TRUE ~ as.numeric(dplyr::row_number()))) %>%
+    dplyr::select(.data$index, .data$ward, -.data$hospital)
 
   # Merge data with ward lookup table
-  data %<>% merge(w, by = "ward") %>%
-    dplyr::select(-index)
+  data <- data %>%
+    merge(w, by = "ward") %>%
+    dplyr::select(-.data$index)
 
 
   # Determine class_interpretation ------------------------------------------
   # (resistance to each class of antibiotics)
 
-  if(classification == "all") {
+  if(any(classification == "all")) {
     # Convert antibiotic interpretation to numeric where R = 1, S = 0, and
     # I or ND = NA
-    data %<>%
+    data <- data %>%
       dplyr::mutate(
         interpretation = dplyr::case_when(
-          interpretation == "R" ~ 1,
-          interpretation == "S" ~ 0)) %>%
+          .data$interpretation == "R" ~ 1,
+          .data$interpretation == "S" ~ 0)) %>%
       # Transform dataset such that there is only one row per GUID
       dplyr::ungroup() %>%
-      tidyr::spread(antibiotic, interpretation) %>%
+      tidyr::spread(.data$antibiotic, .data$interpretation) %>%
       dplyr::mutate(class_interpretation = NA)
     assertthat::assert_that(length(unique(data$GUID)) == nrow(data))
 
     class_tables <- SpARK::ATBdata %>%
-      dplyr::select(Antibiotic_name, Classification) %>%
+      dplyr::select(.data$Antibiotic_name, .data$Classification) %>%
       unique() %>%
-      dplyr::filter(Antibiotic_name %in% colnames(data))
+      dplyr::filter(.data$Antibiotic_name %in% colnames(data))
 
     all_classes <- unique(class_tables$Classification) %>%
       as.character() %>%
@@ -200,62 +170,64 @@ get_human <- function(classification,
     # "index", "classification" lookup table
     antibiotic_class <- cbind.data.frame(index = seq_along(all_classes),
                                          classification = all_classes,
-                                         stringsAsFactors = F) %>%
-      dplyr::arrange(index)
+                                         stringsAsFactors = FALSE) %>%
+      dplyr::arrange(.data$index)
 
 
     # Generate a matrix of response variables
     # (column for each class_interpretation)
     response <- lapply(seq_along(all_classes), function(x) {
       these_antibiotics <- class_tables %>%
-        dplyr::filter(Classification %in% all_classes[x]) %$%
-        Antibiotic_name %>%
+        dplyr::filter(.data$Classification %in% all_classes[x])
+      these_antibiotics <- these_antibiotics$Antibiotic_name %>%
         as.character()
       tmp <- data %>%
-        dplyr::select(GUID, one_of(these_antibiotics)) %>%
+        dplyr::select(.data$GUID, one_of(these_antibiotics)) %>%
         dplyr::mutate(class_interpretation =
                         dplyr::case_when(rowSums(. == 1,
-                                                 na.rm = T) > 0 ~ 1,
+                                                 na.rm = TRUE) > 0 ~ 1,
                                          rowSums(. == 0,
-                                                 na.rm = T) > 0 ~ 0)) %>%
-        dplyr::select(GUID, class_interpretation)
+                                                 na.rm = TRUE) > 0 ~ 0)) %>%
+        dplyr::select(.data$GUID, .data$class_interpretation)
       colnames(tmp)[2] <- all_classes[x]
       tmp
     }) %>%
       purrr::reduce(full_join, by = "GUID") %>%
-      dplyr::arrange(GUID) %>%
-      dplyr::select(-GUID) %>%
+      dplyr::arrange(.data$GUID) %>%
+      dplyr::select(-.data$GUID) %>%
       as.matrix()
 
 
   } else {
     class_tables <- SpARK::ATBdata %>%
-      dplyr::select(Antibiotic_name, Classification) %>%
+      dplyr::select(.data$Antibiotic_name, .data$Classification) %>%
       unique() %>%
-      dplyr::rename(antibiotic = Antibiotic_name)
+      dplyr::rename(antibiotic = .data$Antibiotic_name)
 
     # Filter by antibiotic class
-    data %>%
+    data <- data %>%
       merge(class_tables, all.x = TRUE) %>%
-      dplyr::filter(Classification %in% classification) %>%
+      dplyr::filter(.data$Classification %in% classification) %>%
       # Determine class_interpretation
       dplyr::mutate(class_interpretation = dplyr::case_when(
-        sum(interpretation == "R") > 0 ~ 1,
-        sum(interpretation == "S") > 0 ~ 0)) %>%
+        sum(.data$interpretation == "R") > 0 ~ 1,
+        sum(.data$interpretation == "S") > 0 ~ 0)) %>%
       # Convert antibiotic interpretation to numeric where R = 1, S = 0, and
       # I or ND = NA
       dplyr::mutate(
         interpretation = dplyr::case_when(
-          interpretation == "R" ~ 1,
-          interpretation == "S" ~ 0)) %>%
+          .data$interpretation == "R" ~ 1,
+          .data$interpretation == "S" ~ 0)) %>%
       # Transform dataset such that there is only one row per GUID
       dplyr::ungroup() %>%
-      tidyr::spread(antibiotic, interpretation)
-    assertthat::assert_that(length(unique(data$GUID)) == nrow(data))
+      tidyr::spread(.data$antibiotic, .data$interpretation)
+
+    if(length(classification) == 1)
+      assertthat::assert_that(length(unique(data$GUID)) == nrow(data))
 
     antibiotics <- SpARK::ATBdata %>%
-      dplyr::filter(Classification %in% classification) %$%
-      Antibiotic_name %>% unique() %>% as.character()
+      dplyr::filter(.data$Classification %in% classification)
+    antibiotics <- antibiotics$Antibiotic_name %>% unique() %>% as.character()
   }
 
 
@@ -278,20 +250,20 @@ get_human <- function(classification,
       out <- cbind.data.frame(index = data$age, age = data$age)
 
     }else {
-      out <- data[, x, drop = F] %>%
+      out <- data[, x, drop = FALSE] %>%
         dplyr::rename(index = colnames(data)[x])
       if(class(out$index) == "character")
-        out %<>% dplyr::mutate(index = as.factor(index))
+        out <- out %>% dplyr::mutate(index = as.factor(.data$index))
       if(class(out$index) == "factor")
-        out %<>% dplyr::mutate(index = as.numeric(index))
-      out <- cbind.data.frame(out, data[, x, drop = F]) %>%
+        out <- out %>% dplyr::mutate(index = as.numeric(.data$index))
+      out <- cbind.data.frame(out, data[, x, drop = FALSE]) %>%
         unique() %>%
-        dplyr::arrange(index)
+        dplyr::arrange(.data$index)
     }
   })
   names(lookup_tables) <- colnames(data)
 
-  if(classification == "all") {
+  if(any(classification == "all")) {
     lookup_tables <- append(lookup_tables, list(antibiotic_class))
     names(lookup_tables)[length(lookup_tables)] <- "antibiotic_class"
   }
@@ -299,6 +271,26 @@ get_human <- function(classification,
 
   # Convert factors to numeric ----------------------------------------------
 
+  tmp <- data %>%
+    dplyr::select(.data$sample_type, .data$clinical) %>%
+    dplyr::filter(.data$sample_type == "rectal_swab") %>%
+    unique() %>% nrow()
+
+  if(tmp == 2) {
+    data <- data %>%
+      dplyr::mutate(sample_type = dplyr::case_when(
+        .data$sample_type == "rectal_swab" &
+          .data$clinical == "yes" ~ "rectal_swab_clinical",
+        .data$sample_type == "rectal_swab" &
+          .data$clinical == "no" ~ "rectal_swab_carriage",
+        TRUE ~ .data$sample_type)) %>%
+      dplyr::mutate(sample_type = dplyr::case_when(
+        .data$sample_type == "skin_swab" &
+          .data$clinical == "yes" ~ "skin_swab_clinical",
+        .data$sample_type == "skin_swab" &
+          .data$clinical == "no" ~ "skin_swab_carriage",
+        TRUE ~ .data$sample_type))
+  }
 
   dat_numeric <- data %>%
     dplyr::mutate_if(is.character, as.factor) %>%
@@ -310,73 +302,70 @@ get_human <- function(classification,
 
   # Sample_collection centre index
   ind <- lookup_tables$ward_type %>%
-    dplyr::filter(ward_type == "Sample_Collection_Center") %$%
-    index
+    dplyr::filter(.data$ward_type == "Sample_Collection_Center")
+  ind <- ind$index
 
   # Hospital samples
   hospital_dat <- dat_numeric %>%
-    dplyr::filter(!hospital %in% c(-2, -1),
-                  ward_type != ind) %>%
-    dplyr::select(GUID, sample_GUID, bacteria, ST, class_interpretation,
+    dplyr::filter(!.data$hospital %in% c(-2, -1),
+                  .data$ward_type != ind) %>%
+    dplyr::select(.data$GUID, .data$sample_GUID, .data$bacteria, .data$ST,
+                  .data$class_interpretation,
                   dplyr::one_of(antibiotics)) %>%
     unique() %>%
-    dplyr::arrange(GUID) %>%
-    tibble::as_tibble()
+    dplyr::arrange(.data$GUID)
 
   # GP samples (sample collection centre, Belgioioso)
   gp_dat <- dat_numeric %>%
-    dplyr::filter(hospital == -1) %>%
-    dplyr::select(GUID, sample_GUID, bacteria, ST, class_interpretation,
+    dplyr::filter(.data$hospital == -1) %>%
+    dplyr::select(.data$GUID, .data$sample_GUID, .data$bacteria, .data$ST,
+                  .data$class_interpretation,
                   dplyr::one_of(antibiotics)) %>%
     unique() %>%
-    dplyr::arrange(GUID) %>%
-    tibble::as_tibble()
+    dplyr::arrange(.data$GUID)
 
   # Outpatients (sample collection centre, San Matteo)
   outpatients_dat <- dat_numeric %>%
-    dplyr::filter(hospital == 1,
-                  ward_type == ind) %>%
-    dplyr::select(GUID, sample_GUID, bacteria, ST, class_interpretation,
+    dplyr::filter(.data$hospital == 1,
+                  .data$ward_type == ind) %>%
+    dplyr::select(.data$GUID, .data$sample_GUID, .data$bacteria, .data$ST,
+                  .data$class_interpretation,
                   dplyr::one_of(antibiotics)) %>%
     unique() %>%
-    dplyr::arrange(GUID) %>%
-    tibble::as_tibble()
+    dplyr::arrange(.data$GUID)
 
   # Volunteer samples
   volunteer_dat <- dat_numeric %>%
-    dplyr::filter(hospital == -2) %>%
-    dplyr::select(GUID, sample_GUID, bacteria, ST, class_interpretation,
+    dplyr::filter(.data$hospital == -2) %>%
+    dplyr::select(.data$GUID, .data$sample_GUID, .data$bacteria, .data$ST,
+                  .data$class_interpretation,
                   dplyr::one_of(antibiotics)) %>%
     unique() %>%
-    dplyr::arrange(GUID) %>%
-    tibble::as_tibble()
+    dplyr::arrange(.data$GUID)
 
   # Ward information
   ward_dat <- dat_numeric %>%
-    dplyr::select(ward, hospital, ward_type) %>%
-    dplyr::filter(!ward %in% -1:-2) %>%
+    dplyr::select(.data$ward, .data$hospital, .data$ward_type) %>%
+    dplyr::filter(!.data$ward %in% -1:-2) %>%
     unique() %>%
-    dplyr::arrange(ward) %>%
-    tibble::as_tibble()
+    dplyr::arrange(.data$ward)
 
   # Sample type information
   sample_type_dat <- dat_numeric %>%
-    dplyr::select(sample_type, clinical) %>%
+    dplyr::select(.data$sample_type, .data$clinical) %>%
     unique() %>%
-    dplyr::arrange(sample_type) %>%
-    tibble::as_tibble()
+    dplyr::arrange(.data$sample_type)
 
   # General information
   sample_dat <- dat_numeric %>%
-    dplyr::select(sample_GUID, sample_month, sample_season, sample_type,
-                  ward, age, age_group, age_group2, gender) %>%
+    dplyr::select(.data$sample_GUID, .data$sample_month, .data$sample_season,
+                  .data$sample_type, .data$ward, .data$age, .data$age_group,
+                  .data$age_group2, .data$gender) %>%
     unique() %>%
-    dplyr::arrange(sample_GUID) %>%
-    tibble::as_tibble()
+    dplyr::arrange(.data$sample_GUID)
 
 
   # Checks ------------------------------------------------------------------
-
 
   assertthat::assert_that(nrow(dat_numeric) == nrow(hospital_dat) +
                             nrow(gp_dat) + nrow(outpatients_dat) +
@@ -389,14 +378,13 @@ get_human <- function(classification,
 
   # Output ------------------------------------------------------------------
 
-
-  data %<>%
-    merge(lookup_tables$GUID, all.x = T) %>%
+  data <- data %>%
+    merge(lookup_tables$GUID, all.x = TRUE) %>%
     dplyr::mutate(dataset = dplyr::case_when(
-      index %in% hospital_dat$GUID ~ "hosp",
-      index %in% gp_dat$GUID ~ "gp",
-      index %in% volunteer_dat$GUID ~ "vol",
-      index %in% outpatients_dat$GUID ~ "out"))
+      .data$index %in% hospital_dat$GUID ~ "hosp",
+      .data$index %in% gp_dat$GUID ~ "gp",
+      .data$index %in% volunteer_dat$GUID ~ "vol",
+      .data$index %in% outpatients_dat$GUID ~ "out"))
 
   df <- list(hospital_dat = hospital_dat,
              gp_dat = gp_dat,
@@ -408,68 +396,10 @@ get_human <- function(classification,
              lookup_tables = lookup_tables,
              data = data)
 
-  if(classification == "all") {
+  if(any(classification == "all")) {
     df$response <- response
     df$antibiotic_classes <- as.numeric(as.factor(all_classes))
   }
   df
 
 }
-
-
-
-#' removeCarbapenem
-#'
-removeCarbapenem <- function(data) {
-  n <- length(unique(data$GUID))
-  remove_these <- data %>%
-    dplyr::select(GUID, Classification, Interpretation) %>%
-    dplyr::filter(Classification == "Carbapenem") %>%
-    dplyr::group_by(GUID, Interpretation) %>%
-    dplyr::summarise(count = dplyr::n()) %>%
-    dplyr::filter(Interpretation == "R") %$%
-    GUID
-  data %<>% dplyr::filter(!GUID %in% remove_these)
-  assertthat::assert_that(
-    length(unique(data$GUID)) == n - length(remove_these))
-  data
-}
-
-
-#' onlyCarbapenem
-#'
-onlyCarbapenem <- function(data) {
-  n <- length(unique(data$GUID))
-  keep_these <- data %>%
-    dplyr::select(GUID, Classification, Interpretation) %>%
-    dplyr::filter(Classification == "Carbapenem") %>%
-    dplyr::group_by(GUID, Interpretation) %>%
-    dplyr::summarise(count = dplyr::n()) %>%
-    dplyr::filter(Interpretation == "R") %$%
-    GUID
-  data %<>% dplyr::filter(GUID %in% keep_these)
-}
-
-
-#' defineClinical
-#'
-defineClinical <- function(data) {
-  data %>%
-    dplyr::mutate(clinical = dplyr::case_when(
-      hospital == -2 ~ "no",                              # volunteers
-      hospital == 1 &&
-        ward_type == "Sample_Collection_Center" ~ "yes",  # outpatients
-      hospital == -1 ~ "yes",                             # gp
-      T ~ clinical),
-      sample_type = dplyr::case_when(
-        hospital == -2 & sample_type == "feces" ~ "feces_volunteer",
-        T ~ sample_type)) # all volunteers are fecal samples
-}
-
-
-
-
-
-
-
-

@@ -6,6 +6,11 @@
 \usage{
 antibioticsplot(model, data)
 }
+\arguments{
+\item{model}{model}
+
+\item{data}{data}
+}
 \description{
 Identify bad group samples from bad.p and look at location, amr profile, and
 general distribution

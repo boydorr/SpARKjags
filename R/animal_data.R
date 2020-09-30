@@ -1,6 +1,7 @@
 #' animal_data
 #'
-#' @export
+#' @param data data
+#' @param these_animals these_animals
 #'
 animal_data <- function(data, these_animals) {
 
@@ -15,39 +16,40 @@ animal_data <- function(data, these_animals) {
     if(these_animals[x] %in% lookup$species) {
       # Find dataset
       this_dataset <- lookup %>%
-        dplyr::filter(species == these_animals[x]) %$% dataset
+        dplyr::filter(.data$species == these_animals[x]) %>% .data$dataset
     } else if(these_animals[x] %in% lookup$group) {
       this_dataset <- lookup %>%
-        dplyr::filter(group == these_animals[x]) %$%
-        dataset %>% unique()
+        dplyr::filter(.data$group == these_animals[x]) %>%
+        .data$dataset %>% unique()
     } else stop('animal not found')
 
     if(these_animals[x] %in% c("livestock", "companion", "wild")) {
       this_group <- tmp[[this_dataset]]
     } else { # Find species in dataset
       species_index <- tmp$lookup_tables$associated_species %>%
-        dplyr::filter(associated_species == these_animals[x]) %$% index
+        dplyr::filter(.data$associated_species == these_animals[x]) %>%
+        .data$index
       this_group <- tmp[[this_dataset]] %>%
-        dplyr::filter(associated_species == species_index)
+        dplyr::filter(.data$associated_species == species_index)
     }
 
     this_group %>%
-      dplyr::select(GUID) %>%
-      dplyr::rename(GUIDindex = GUID) %>%
+      dplyr::select(.data$GUID) %>%
+      dplyr::rename(GUIDindex = .data$GUID) %>%
       dplyr::mutate(name = these_animals[x]) %>%
       merge(tmp$lookup_tables$GUID %>%
-              dplyr::rename(GUIDindex = index), all.x = TRUE) %>%
-      dplyr::select(GUID, name)
-  }) %>%
-    do.call(rbind.data.frame, .)
+              dplyr::rename(GUIDindex = .data$index), all.x = TRUE) %>%
+      dplyr::select(.data$GUID, .data$name)
+  })
+  animal_res <- do.call(rbind.data.frame, animal_res)
 
   # Original resistance values
   response <- tmp$response %>%
-    as.data.frame() %>%
-    tibble::rownames_to_column("index") %>%
+    as.data.frame()
+  response <- cbind.data.frame(response, index = rownames(response)) %>%
     merge(tmp$lookup_tables$GUID, all.x = TRUE) %>%
-    select(-index) %>%
-    select(GUID, everything())
+    select(-.data$index) %>%
+    select(.data$GUID, everything())
 
   # Combine data
   dfGUID <- animal_res %>%

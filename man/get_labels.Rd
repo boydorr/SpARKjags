@@ -6,6 +6,13 @@
 \usage{
 get_labels(data, ind, cat)
 }
+\arguments{
+\item{data}{data}
+
+\item{ind}{ind}
+
+\item{cat}{cat}
+}
 \description{
 get_labels
 }

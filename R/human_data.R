@@ -1,6 +1,6 @@
 #' human_data
 #'
-#' @export
+#' @param data data
 #'
 human_data <- function(data) {
   # Extract data
@@ -25,19 +25,20 @@ human_data <- function(data) {
 
   # Original resistance values
   response <- tmp$response %>%
-    as.data.frame() %>%
-    tibble::rownames_to_column("index") %>%
+    as.data.frame()
+  response <- cbind.data.frame(response, index = rownames(response)) %>%
     merge(tmp$lookup_tables$GUID, all.x = TRUE) %>%
-    select(-index) %>%
-    select(GUID, everything())
+    select(-.data$index) %>%
+    select(.data$GUID, everything())
 
   # Combine data
   dfGUID <- dplyr::bind_rows(p, gp, v, o) %>%
     merge(tmp$lookup_tables$GUID %>%
-            dplyr::rename(GUIDindex = index), all.x = TRUE) %>%
+            dplyr::rename(GUIDindex = .data$index), all.x = TRUE) %>%
     merge(tag, all.x = TRUE) %>%
-    dplyr::select(GUID, name) %>%
+    dplyr::select(.data$GUID, .data$name) %>%
     merge(tmp$data %>%
-            dplyr::select(GUID, hospital, clinical), all.x = TRUE) %>%
+            dplyr::select(.data$GUID, .data$hospital, .data$clinical),
+          all.x = TRUE) %>%
     merge(response, all.x = TRUE)
 }

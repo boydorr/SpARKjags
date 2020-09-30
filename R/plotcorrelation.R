@@ -1,12 +1,16 @@
 #' plotcorrelation
 #'
+#' @param model model
+#' @param data data
+#'
 #' @export
 #'
 plotcorrelation <- function(model, data) {
 
   df <- import_data(model, data)
-  response <- df %>% dplyr::select(-name, -hospital, -clinical,
-                                   -mean.p.bad, -badgroup, -label)
+  response <- df %>%
+    dplyr::select(-.data$name, -.data$hospital, -.data$clinical,
+                  -.data$mean.p.bad, -.data$badgroup, -.data$label)
 
   # Plot results
   plots <- list()
@@ -21,30 +25,31 @@ plotcorrelation <- function(model, data) {
                 name == "Hospital" & clinical == "yes" ~ "Hospital\nClinical",
                 name == "Hospital" & clinical == "no" ~ "Hospital\nCarriage",
                 T ~ name)) %>%
-              dplyr::select(GUID, mean.p.bad, name, badgroup)) %>%
-      dplyr::filter(badgroup == groups[i]) %>%
-      dplyr::select(GUID, badgroup) %>%
-      unique() %$%
-      GUID
+              dplyr::select(.data$GUID, .data$mean.p.bad, .data$name,
+                            .data$badgroup)) %>%
+      dplyr::filter(.data$badgroup == groups[i]) %>%
+      dplyr::select(.data$GUID, .data$badgroup) %>%
+      unique() %>%
+      .data$GUID
 
     tmp <- response %>%
-      dplyr::filter(GUID %in% these) %>%
-      dplyr::select(-GUID) %>%
-      dplyr::rename(Ami = Aminoglycoside,
-                    Carbape = Carbapenem,
-                    Cephalo = Cephalosporin,
-                    Colisti = Colistin,
-                    Fluoroq = Fluoroquinolone,
-                    Fosfomy = Fosfomycin,
-                    Monobac = Monobactam,
-                    Nitrofu = Nitrofurantoin,
-                    `Pen (P)` = `Penicillin (Penams)`,
-                    `Pen (C)` = `Penicillin Combination`,
-                    Tetracy = Tetracycline,
-                    Trimeth = Trimethoprim,
-                    `Tri/Sul` = `Trimethoprim/Sulfamethoxazole`)
+      dplyr::filter(.data$GUID %in% these) %>%
+      dplyr::select(-.data$GUID) %>%
+      dplyr::rename(Ami = .data$Aminoglycoside,
+                    Carbape = .data$Carbapenem,
+                    Cephalo = .data$Cephalosporin,
+                    Colisti = .data$Colistin,
+                    Fluoroq = .data$Fluoroquinolone,
+                    Fosfomy = .data$Fosfomycin,
+                    Monobac = .data$Monobactam,
+                    Nitrofu = .data$Nitrofurantoin,
+                    `Pen (P)` = .data$`Penicillin (Penams)`,
+                    `Pen (C)` = .data$`Penicillin Combination`,
+                    Tetracy = .data$Tetracycline,
+                    Trimeth = .data$Trimethoprim,
+                    `Tri/Sul` = .data$`Trimethoprim/Sulfamethoxazole`)
 
-    res <- cor(tmp,
+    res <- stats::cor(tmp,
                use = "pairwise.complete.obs",
                method = "pearson")
 
@@ -60,11 +65,6 @@ plotcorrelation <- function(model, data) {
     plots[[i]] <- g
   }
 
-  cowplot::plot_grid(plotlist = plots, ncol = 1)
+  egg::ggarrange(plots = plots, nrow = 1)
 }
-
-
-
-
-
 

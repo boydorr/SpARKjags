@@ -6,6 +6,9 @@
 \usage{
 DICtable(models)
 }
+\arguments{
+\item{models}{models}
+}
 \description{
 DICtable
 }

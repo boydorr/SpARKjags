@@ -6,6 +6,11 @@
 \usage{
 import_data(model, data)
 }
+\arguments{
+\item{model}{model}
+
+\item{data}{data}
+}
 \description{
 import_data
 }

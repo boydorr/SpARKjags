@@ -1,5 +1,7 @@
 #' check_fit
 #'
+#' @param model model
+#'
 #' @export
 #'
 check_fit <- function(model) {

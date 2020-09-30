@@ -6,6 +6,11 @@
 \usage{
 testPSRF(model, plot = F)
 }
+\arguments{
+\item{model}{model}
+
+\item{plot}{plot}
+}
 \description{
 testPSRF
 }

@@ -1,5 +1,8 @@
 #' get_model
 #'
+#' @param model_name model_name
+#' @param directory directory
+#'
 #' @export
 #'
 get_model <- function(model_name, directory) {

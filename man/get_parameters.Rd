@@ -6,6 +6,9 @@
 \usage{
 get_parameters(results)
 }
+\arguments{
+\item{results}{results}
+}
 \description{
 get_parameters
 }

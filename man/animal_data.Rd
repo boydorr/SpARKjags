@@ -6,6 +6,11 @@
 \usage{
 animal_data(data, these_animals)
 }
+\arguments{
+\item{data}{data}
+
+\item{these_animals}{these_animals}
+}
 \description{
 animal_data
 }

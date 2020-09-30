@@ -6,6 +6,11 @@
 \usage{
 badgroup_posterior(model, data)
 }
+\arguments{
+\item{model}{model}
+
+\item{data}{data}
+}
 \description{
 badgroup_posterior
 }

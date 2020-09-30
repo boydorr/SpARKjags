@@ -4,7 +4,12 @@
 \alias{filter_pathogen}
 \title{filter_pathogen}
 \usage{
-filter_pathogen(data, path, pathogen, kleb)
+filter_pathogen(data, pathogen)
+}
+\arguments{
+\item{data}{data}
+
+\item{pathogen}{pathogen}
 }
 \description{
 filter_pathogen

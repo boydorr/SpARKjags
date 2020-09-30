@@ -6,6 +6,9 @@
 \usage{
 human_data(data)
 }
+\arguments{
+\item{data}{data}
+}
 \description{
 human_data
 }

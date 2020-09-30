@@ -6,6 +6,9 @@
 \usage{
 DIC(model_name)
 }
+\arguments{
+\item{model_name}{model_name}
+}
 \description{
 DIC
 }

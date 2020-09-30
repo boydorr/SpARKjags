@@ -1,5 +1,9 @@
 #' traceplot
 #'
+#' @param model model
+#' @param var.regex var.regex
+#' @param filename filename
+#'
 #' @export
 #'
 traceplot <- function(model,
@@ -9,11 +13,11 @@ traceplot <- function(model,
   model.ggs <- model %>%
     coda::as.mcmc.list() %>%
     ggmcmc::ggs(family = var.regex) %>%
-    dplyr::mutate(Chain = as.factor(Chain))
+    dplyr::mutate(Chain = as.factor(.data$Chain))
 
   g <- ggplot2::ggplot(model.ggs) + ggplot2::theme_minimal() +
-    ggplot2::geom_line(ggplot2::aes(x = Iteration, y = value,
-                                    group = Chain, colour = Chain),
+    ggplot2::geom_line(ggplot2::aes_string(x = "Iteration", y = "value",
+                                    group = "Chain", colour = "Chain"),
                        alpha = 0.8) +
     ggplot2::facet_wrap(~ Parameter, scales = "free_y") +
     ggplot2::scale_color_manual(values = c("grey", "#2c7fb8")) +
@@ -23,7 +27,7 @@ traceplot <- function(model,
   if(missing(filename)) {
     g
   } else {
-    n <- length(unique(tmp$Parameter))
+    n <- length(unique(model.ggs$Parameter))
     ggplot2::ggsave(filename, g, height = n/ncol, limitsize = F)
   }
 }
