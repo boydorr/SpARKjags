@@ -7,9 +7,12 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' \donttest{
 #' res.a_naive <- get_model("a_naive", "goodbad_models")
 #' plotAC(model = res.a_naive,
 #'        var.regex = "(a.prob)|(intercept)|(sd)")
+#' }}
 #'
 plotAC <- function(model,
                    var.regex,
