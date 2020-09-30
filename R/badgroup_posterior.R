@@ -97,7 +97,7 @@ badgroup_posterior <- function(model, data) {
         # Check
         true_sp <- SpARK::METAdata %>%
           dplyr::filter(.data$ASSOCIATED_SPECIES == these_animals[x])
-        true_sp <- true_sp$GUID %>% .[grepl("^SP", .data)]
+        true_sp <- true_sp$GUID[grepl("^SP", true_sp$GUID)]
         assertthat::assert_that(all(this_group$GUID %in% true_sp))
       }
 

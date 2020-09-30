@@ -16,19 +16,20 @@ animal_data <- function(data, these_animals) {
     if(these_animals[x] %in% lookup$species) {
       # Find dataset
       this_dataset <- lookup %>%
-        dplyr::filter(.data$species == these_animals[x]) %>% .data$dataset
+        dplyr::filter(.data$species == these_animals[x])
+      this_dataset <- this_dataset$dataset
     } else if(these_animals[x] %in% lookup$group) {
       this_dataset <- lookup %>%
-        dplyr::filter(.data$group == these_animals[x]) %>%
-        .data$dataset %>% unique()
+        dplyr::filter(.data$group == these_animals[x])
+      this_dataset <- this_dataset$dataset %>% unique()
     } else stop('animal not found')
 
     if(these_animals[x] %in% c("livestock", "companion", "wild")) {
       this_group <- tmp[[this_dataset]]
     } else { # Find species in dataset
       species_index <- tmp$lookup_tables$associated_species %>%
-        dplyr::filter(.data$associated_species == these_animals[x]) %>%
-        .data$index
+        dplyr::filter(.data$associated_species == these_animals[x])
+      species_index <- species_index$index
       this_group <- tmp[[this_dataset]] %>%
         dplyr::filter(.data$associated_species == species_index)
     }
