@@ -6,8 +6,7 @@
 #' @export
 #'
 testSSEF <- function(model, plot = F) {
-  tmp <- model$mcse$sseff %>%
-    data.frame(SSeff = .data)
+  tmp <- data.frame(SSeff =  model$mcse$sseff)
 
   tmp <- cbind.data.frame(tmp, Parameter = rownames(tmp)) %>%
     mutate(test = case_when(.data$SSeff <= 300 ~ "bad",
