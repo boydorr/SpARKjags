@@ -4,16 +4,18 @@
 \alias{run_model}
 \title{run_model}
 \usage{
-run_model(data, model_name, directory, thin)
+run_model(data, SpARKjags_model, thin, user_model, save_to)
 }
 \arguments{
 \item{data}{data}
 
-\item{model_name}{model_name}
-
-\item{directory}{directory}
+\item{SpARKjags_model}{model path e.g. goodbad_models/a.R}
 
 \item{thin}{thin}
+
+\item{user_model}{user_model}
+
+\item{save_to}{save_to}
 }
 \description{
 run_model

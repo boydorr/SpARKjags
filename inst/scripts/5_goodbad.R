@@ -11,8 +11,8 @@
 #' Last updated: `r Sys.time()`
 
 #+ setup, include=F
-library(SpARK)
-library(SpARKcarbapenem)
+
+library(SpARKjags)
 library(runjags)
 library(dplyr)
 set.seed(1234)
@@ -86,12 +86,12 @@ data$data.human$data %>%
 #'
 
 
-# run_model(data, "a_naive", directory)
-res.a_naive <- get_model("a_naive", directory)
+# run_model(data, file.path(directory, "a_naive.R"))
+res.a_naive <- get_model(file.path("..", directory, "a_naive.rds"))
 
 #' #### Posterior
 #+ res.a_naive, fig.height = 6
-var.regex <- "(a.prob)|(intercept)|(sd)"
+var.regex <- get_vars(res.a_naive)
 params <- list(`probability of resistance` = "prob", "intercept", "sd")
 tmp <- data$lookup$antibiotic_class %>%
   dplyr::mutate(index = paste0("a.prob[", 1:13, "]"))
@@ -124,8 +124,8 @@ res.a_naive
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-# run_model(data, "a", directory, thin = 10)
-res.a <- get_model("a", directory)
+# run_model(data, file.path(directory, "a.R"), thin = 10)
+res.a <- get_model(file.path("..", directory, "a.rds"))
 
 #' #### Posterior
 #+ res.a, fig.height = 10
@@ -240,8 +240,8 @@ dplyr::bind_rows(livestock, companion, wild) %>%
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-# run_model(data_ah, "a_livestock", directory, thin = 10)
-res.a_livestock <- get_model("a_livestock", directory)
+# run_model(data_ah, file.path(directory, "a_livestock.R"), thin = 10)
+res.a_livestock <- get_model(file.path("..", directory, "a_livestock.rds"))
 
 #' #### Posterior
 #+ res.a_livestock, fig.height = 10
@@ -288,8 +288,8 @@ res.a_livestock
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-# run_model(data_ah, "a_cattle", directory, thin = 10)
-res.a_cattle <- get_model("a_cattle", directory)
+# run_model(data_ah, file.path(directory, "a_cattle.R"), thin = 10)
+res.a_cattle <- get_model(file.path("..", directory, "a_cattle.rds"))
 
 #' #### Posterior
 #+ res.a_cattle, fig.height = 10
@@ -335,8 +335,8 @@ res.a_cattle
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-# run_model(data_ah, "a_pig", directory, thin = 10)
-res.a_pig <- get_model("a_pig", directory)
+# run_model(data_ah, file.path(directory, "a_pig.R"), thin = 10)
+res.a_pig <- get_model(file.path("..", directory, "a_pig.rds"))
 
 #' #### Posterior
 #+ res.a_pig, fig.height = 10
@@ -382,8 +382,8 @@ res.a_pig
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-# run_model(data_ah, "a_chicken", directory, thin = 10)
-res.a_chicken <- get_model("a_chicken", directory)
+# run_model(data_ah, file.path(directory, "a_chicken.R"), thin = 10)
+res.a_chicken <- get_model(file.path("..", directory, "a_chicken.rds"))
 
 #' #### Posterior
 #+ res.a_chicken, fig.height = 10
@@ -429,8 +429,8 @@ res.a_chicken
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-# run_model(data_ah, "a_livestock_subsets", directory, thin = 10)
-res.a_livestock_subsets <- get_model("a_livestock_subsets", directory)
+# run_model(data_ah, file.path(directory, "a_livestock_subsets.R"), thin = 10)
+res.a_livestock_subsets <- get_model(file.path("..", directory, "a_livestock_subsets.rds"))
 
 #' #### Posterior
 #+ res.a_livestock_subsets, fig.height = 10
@@ -477,8 +477,8 @@ res.a_livestock_subsets
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-# run_model(data_ah, "a_companion", directory, thin = 10)
-res.a_companion <- get_model("a_companion", directory)
+# run_model(data_ah, file.path(directory, "a_companion.R"), thin = 10)
+res.a_companion <- get_model(file.path("..", directory, "a_companion.rds"))
 
 #' #### Posterior
 #+ a_companion, fig.height = 10
@@ -524,8 +524,8 @@ res.a_companion
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-# run_model(data_ah, "a_companion_subsets", directory, thin = 10)
-res.a_companion_subsets <- get_model("a_companion_subsets", directory)
+# run_model(data_ah, file.path(directory, "a_companion_subsets.R"), thin = 10)
+res.a_companion_subsets <- get_model(file.path("..", directory, "a_companion_subsets.rds"))
 
 #' #### Posterior
 #+ res.a_companion_subsets, fig.height = 10
@@ -572,8 +572,8 @@ res.a_companion_subsets
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-# run_model(data_ah, "a_wild", directory, thin = 10)
-res.a_wild <- get_model("a_wild", directory)
+# run_model(data_ah, file.path(directory, "a_wild.R"), thin = 10)
+res.a_wild <- get_model(file.path("..", directory, "a_wild.rds"))
 
 #' #### Posterior
 #+ a_wild, fig.height = 10
@@ -619,8 +619,8 @@ res.a_wild
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-# run_model(data_ah, "a_wild_subsets", directory, thin = 10)
-res.a_wild_subsets <- get_model("a_wild_subsets", directory)
+# run_model(data_ah, file.path(directory, "a_wild_subsets.R"), thin = 10)
+res.a_wild_subsets <- get_model(file.path("..", directory, "a_wild_subsets.rds"))
 
 #' #### Posterior
 #+ res.a_wild_subsets, fig.height = 10
@@ -667,8 +667,8 @@ res.a_wild_subsets
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-# run_model(data_ah, "a_types", directory, thin = 10)
-res.a_types <- get_model("a_types", directory)
+# run_model(data_ah, file.path(directory, "a_types.R"), thin = 10)
+res.a_types <- get_model(file.path("..", directory, "a_types.rds"))
 
 #' #### Posterior
 #+ res.a_types, fig.height = 10
@@ -715,8 +715,8 @@ res.a_types
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-# run_model(data_ah, "a_subsets", directory, thin = 10)
-res.a_subsets <- get_model("a_subsets", directory)
+# run_model(data_ah, file.path(directory, "a_subsets.R"), thin = 10)
+res.a_subsets <- get_model(file.path("..", directory, "a_subsets.rds"))
 
 #' #### Posterior
 #+ res.a_subsets, fig.height = 10
@@ -764,8 +764,8 @@ res.a_subsets
 #' goodbad ~ clinical
 #'
 
-# run_model(data, "ac1", directory)
-res.ac1 <- get_model("ac1", directory)
+# run_model(data, file.path(directory, "ac1.R"))
+res.ac1 <- get_model(file.path("..", directory, "ac1.rds"))
 
 #' #### Posterior
 #+ res.ac1, fig.height = 10
@@ -811,8 +811,8 @@ res.ac1
 #' response ~ antibiotic.class_{goodbad} + clinical
 #'
 
-# run_model(data, "ac2", directory)
-res.ac2 <- get_model("ac2", directory)
+# run_model(data, "file.path(directory, "ac2.R"))
+res.ac2 <- get_model(file.path("..", directory, "ac2.rds"))
 
 #' #### Posterior
 #+ res.ac2, fig.height = 10
@@ -858,8 +858,8 @@ res.ac2
 #' response ~ antibiotic.class_{goodbad,clinical}
 #'
 
-# run_model(data, "a_c", directory)
-res.a_c <- get_model("a_c", directory)
+# run_model(data, file.path(directory, "a_c.R"))
+res.a_c <- get_model(file.path("..", directory, "a_c.rds"))
 
 #' #### Posterior
 #+ res.a_c, fig.height = 10
@@ -910,8 +910,8 @@ DICtable(c("res.ac1", "res.ac2", "res.a_c"))
 #' response ~ antibiotic.class_{goodbad} + sample.month
 #'
 
-# run_model(data, "asm", directory, thin = 10)
-res.asm <- get_model("asm", directory)
+# run_model(data, file.path(directory, "asm.R"), thin = 10)
+res.asm <- get_model(file.path("..", directory, "asm.rds"))
 
 #' #### Posterior
 #+ res.asm, fig.height = 10
@@ -957,8 +957,8 @@ res.asm
 #' response ~ antibiotic_class_{goodbad} + sample_season
 #'
 
-# run_model(data, "ass", directory, thin = 30)
-res.ass <- get_model("ass", directory)
+# run_model(data, file.path(directory, "ass.R"), thin = 30)
+res.ass <- get_model(file.path("..", directory, "ass.rds"))
 
 #' #### Posterior
 #+ res.ass, fig.height = 10
@@ -1013,8 +1013,8 @@ DICtable(c("res.a_naive", "res.a", "res.asm", "res.ass"))
 #' response ~ antibiotic_class_{goodbad} + sample_season + gender
 #'
 
-# run_model(data, "assg", directory, thin = 30)
-res.assg <- get_model("assg", directory)
+# run_model(data, file.path(directory, "assg.R"), thin = 30)
+res.assg <- get_model(file.path("..", directory, "assg.rds"))
 
 #' #### Posterior
 #+ res.assg, fig.height = 10
@@ -1060,8 +1060,8 @@ res.assg
 #' response ~ antibiotic_class_{goodbad} + sample_season + agegroup
 #'
 
-# run_model(data, "assag", directory, thin = 30)
-res.assag <- get_model("assag", directory)
+# run_model(data, file.path(directory, "assag.R"), thin = 30)
+res.assag <- get_model(file.path("..", directory, "assag.rds"))
 
 #' #### Posterior
 #+ res.assag, fig.height = 10
@@ -1107,8 +1107,8 @@ res.assag
 #' response ~ antibiotic_class_{goodbad} + sample_season + agegroup2
 #'
 
-# run_model(data, "assag2", directory, thin = 30)
-res.assag2 <- get_model("assag2", directory)
+# run_model(data, file.path(directory, "assag2.R"), thin = 30)
+res.assag2 <- get_model(file.path("..", directory, "assag2.rds"))
 
 #' #### Posterior
 #+ res.assag2, fig.height = 10
@@ -1154,8 +1154,8 @@ res.assag2
 #' response ~ antibiotic_class_{goodbad} + sampling_month + age
 #'
 
-# run_model(data, "assage", directory, thin = 20)
-res.assage <- get_model("assage", directory)
+# run_model(data, file.path(directory, "assage.R"), thin = 20)
+res.assage <- get_model(file.path("..", directory, "assage.rds"))
 
 #' #### Posterior
 #+ res.assage, fig.height = 10
@@ -1201,8 +1201,8 @@ res.assage
 #' response ~ antibiotic_class_{goodbad} + sample_season + age^2 + age
 #'
 
-# run_model(data, "assagesq", directory, thin = 20)
-res.assagesq <- get_model("assagesq", directory)
+# run_model(data, file.path(directory, "assagesq.R"), thin = 20)
+res.assagesq <- get_model(file.path("..", directory, "assagesq.rds"))
 
 #' #### Posterior
 #+ res.assagesq, fig.height = 10
@@ -1249,8 +1249,8 @@ res.assagesq
 #' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + gender
 #'
 
-# run_model(data, "assagg", directory, thin = 20)
-res.assagg <- get_model("assagg", directory)
+# run_model(data, file.path(directory, "assagg.R"), thin = 20)
+res.assagg <- get_model(file.path("..", directory, "assagg.rds"))
 
 #' #### Posterior
 #+ res.assagg, fig.height = 10
@@ -1307,8 +1307,8 @@ DICtable(c("res.assg", "res.assag", "res.assag2", "res.assage",
 #' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + hospital
 #'
 
-# run_model(data, "assagh", directory, thin = 20)
-res.assagh <- get_model("assagh", directory)
+# run_model(data, file.path(directory, "assagh.R"), thin = 20)
+res.assagh <- get_model(file.path("..", directory, "assagh.rds"))
 
 #' #### Posterior
 #+ res.assagh, fig.height = 10
@@ -1354,8 +1354,8 @@ res.assagh
 #' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + wardtype
 #'
 
-# run_model(data, "assagwt", directory, thin = 20)
-res.assagwt <- get_model("assagwt", directory)
+# run_model(data, file.path(directory, "assagwt.R"), thin = 20)
+res.assagwt <- get_model(file.path("..", directory, "assagwt.rds"))
 
 #' #### Posterior
 #+ res.assagwt, fig.height = 10
@@ -1401,8 +1401,8 @@ res.assagwt
 #' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + ward
 #'
 
-# run_model(data, "assagw", directory, thin = 20)
-res.assagw <- get_model("assagw", directory)
+# run_model(data, file.path(directory, "assagw.R"), thin = 20)
+res.assagw <- get_model(file.path("..", directory, "assagw.rds"))
 
 #' #### Posterior
 #+ res.assagw, fig.height = 10
@@ -1448,8 +1448,8 @@ res.assagw
 #' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + wardtype_{ward}
 #'
 
-# run_model(data, "assagwt_w", directory, thin = 20)
-res.assagwt_w <- get_model("assagwt_w", directory)
+# run_model(data, file.path(directory, "assagwt_w.R"), thin = 20)
+res.assagwt_w <- get_model(file.path("..", directory, "assagwt_w.rds"))
 
 #' #### Posterior
 #+ res.assagwt_w, fig.height = 10
@@ -1494,8 +1494,8 @@ res.assagwt_w
 #' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + hospital + wardtype + ward
 #'
 
-# run_model(data, "assaghwtw", directory, thin = 20)
-res.assaghwtw <- get_model("assaghwtw", directory)
+# run_model(data, file.path(directory, "assaghwtw.R"), thin = 20)
+res.assaghwtw <- get_model(file.path("..", directory, "assaghwtw.rds"))
 
 #' #### Posterior
 #+ res.assaghwtw, fig.height = 10
@@ -1541,8 +1541,8 @@ res.assaghwtw
 #' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + hospital_{wardtype_{ward}}
 #'
 
-# run_model(data, "assagh_wt_w", directory, thin = 20)
-res.assagh_wt_w <- get_model("assagh_wt_w", directory)
+# run_model(data, file.path(directory, "assagh_wt_w.R"), thin = 20)
+res.assagh_wt_w <- get_model(file.path("..", directory, "assagh_wt_w.rds"))
 
 #' #### Posterior
 #+ res.assagh_wt_w, fig.height = 10
@@ -1600,8 +1600,8 @@ DICtable(c("res.assagh", "res.assagwt", "res.assagw", "res.assagwt_w",
 #' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + ward + clinical
 #'
 
-# run_model(data, "assagwc", directory, thin = 20)
-res.assagwc <- get_model("assagwc", directory)
+# run_model(data, file.path(directory, "assagwc.R"), thin = 20)
+res.assagwc <- get_model(file.path("..", directory, "assagwc.rds"))
 
 #' #### Posterior
 #+ res.assagwc, fig.height = 10
@@ -1647,8 +1647,8 @@ res.assagwc
 #' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + ward + clinical + sample_type
 #'
 
-# run_model(data, "assagwcst", directory, thin = 30)
-res.assagwcst <- get_model("assagwcst", directory)
+# run_model(data, file.path(directory, "assagwcst.R"), thin = 30)
+res.assagwcst <- get_model(file.path("..", directory, "assagwcst.rds"))
 
 #' #### Posterior
 #+ res.assagwcst, fig.height = 10
@@ -1694,8 +1694,8 @@ res.assagwcst
 #' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + ward + clinical_{sampletype}
 #'
 
-# run_model(data, "assagwc_st", directory, thin = 30)
-res.assagwc_st <- get_model("assagwc_st", directory)
+# run_model(data, file.path(directory, "assagwc_st.R"), thin = 30)
+res.assagwc_st <- get_model(file.path("..", directory, "assagwc_st.rds"))
 
 #' #### Posterior
 #+ res.assagwc_st, fig.height = 10
@@ -1740,8 +1740,8 @@ res.assagwc_st
 #' response ~ antibiotic_class_{goodbad,clinical} + sample_season + agegroup + ward + sampletype
 #'
 
-# run_model(data, "a_cssagwst", directory, thin = 10)
-res.a_cssagwst <- get_model("a_cssagwst", directory)
+# run_model(data, file.path(directory, "a_cssagwst.R"), thin = 10)
+res.a_cssagwst <- get_model(file.path("..", directory, "a_cssagwst.rds"))
 
 #' #### Posterior
 #+ res.a_cssagwst, fig.height = 10
@@ -1789,12 +1789,3 @@ DICtable(c("res.assg", "res.assag", "res.assag2", "res.assage",
 DICtable(c("res.assagh", "res.assagwt", "res.assagw", "res.assagwt_w",
            "res.assaghwtw", "res.assagh_wt_w"))
 DICtable(c("res.assagwc", "res.assagwcst", "res.assagwc_st", "res.a_cssagwst"))
-
-
-
-
-
-
-
-
-

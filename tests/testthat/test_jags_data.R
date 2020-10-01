@@ -1,5 +1,4 @@
 library(SpARKjags)
-library(SpARK)
 
 testthat::context("Test jags_data() can generate different datasets")
 

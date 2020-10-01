@@ -1,15 +1,13 @@
 #' get_model
 #'
-#' @param model_name model_name
-#' @param directory directory
+#' @param path path
 #'
 #' @export
 #'
-get_model <- function(model_name, directory) {
-  # Find results
-  location <- system.file(directory, paste0(model_name, ".rds"),
-                          package = "SpARKcarbapenem")
+get_model <- function(path) {
+
+  assertthat::assert_that(grepl(".rds$", path))
 
   # Read results
-  readRDS(location)
+  readRDS(path)
 }

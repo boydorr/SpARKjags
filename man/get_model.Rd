@@ -4,12 +4,10 @@
 \alias{get_model}
 \title{get_model}
 \usage{
-get_model(model_name, directory)
+get_model(path)
 }
 \arguments{
-\item{model_name}{model_name}
-
-\item{directory}{directory}
+\item{path}{path}
 }
 \description{
 get_model
