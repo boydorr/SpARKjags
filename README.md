@@ -19,7 +19,7 @@
 | filter_pathogen     | -               | get_animal & get_human | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
 | get_animal          | -               | jags_data              | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
 | get_human           | -               | jags_data              | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| get_labels          |  |                                       | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> |
+| get_labels          | Generate labels argument |               | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
 | get_model           | Load model results           | -         | <ul><li>[x] </li></ul> | <ul><li>[x] </li></ul> |
 | get_parameters      |  |                                       | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> |
 | get_params          | Generate param argument |                | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
@@ -37,5 +37,5 @@
 | summarise_samples   | Summarise samples            | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
 | testPSRF            | Test PSRF                    | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
 | testSSEF            | Test SSEF                    | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| traceplot           |  |                                       | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
+| traceplot           | Plot caterpillars |                      | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
 | true_resistance     |  |                                       | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> |
