@@ -51,13 +51,23 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
-      - name: Install system dependencies
+      - name: Install system dependencies (ubuntu)
         if: runner.os == 'Linux'
         run: |
           while read -r cmd
           do
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
+
+      - name: Install system dependencies (macOS and windows)
+        if: runner.os != 'Linux'
+        run: |
+          devtools::install_url("http://sourceforge.net/projects/mcmc-jags/files/rjags/3/rjags_3-2.tar.gz",
+                      args="--configure-args='--with-jags-include=/Users/casallas/homebrew/opt/jags/include/JAGS
+                                              --with-jags-lib=/Users/casallas/homebrew/opt/jags/lib'
+                            "
+                      )
+        shell: Rscript {0}
 
       - name: Install dependencies
         run: |
