@@ -59,8 +59,8 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
 
-      - name: Install jags (macOS-latest)
-        if: runner.os == 'macOS'
+      - name: Install jags (macOS-latest and windows-latest)
+        if: runner.os != 'Linux'
         run : |
               rm '/usr/local/bin/gfortran'
               brew install jags
