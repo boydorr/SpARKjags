@@ -83,6 +83,11 @@ jobs:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 
+      - name: Install covr dependencies (ubuntu)
+        if: runner.os == 'Linux'
+        run: |
+          apt-get install -y libcurl4-openssl-dev
+
       - name: Test coverage
         run: |
           remotes::install_cran("covr")
