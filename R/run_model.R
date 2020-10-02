@@ -19,7 +19,7 @@ run_model <- function(data, SpARKjags_model, thin, user_model, save_to) {
     location <- user_model
   } else {
     location <- base::system.file(SpARKjags_model,
-                                  package = "SpARKcarbapenem")
+                                  package = "SpARKjags")
   }
 
   # If the user doesn't provide a save_to location, save it in the same
