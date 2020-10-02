@@ -35,5 +35,6 @@ import(lubridate)
 import(purrr, except = compose)
 
 import(reshape2)
+import(rjags)
 import(runjags)
 import(tidyr, except = extract)

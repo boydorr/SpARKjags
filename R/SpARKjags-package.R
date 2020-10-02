@@ -15,6 +15,7 @@
 #' @import loo
 #' @import lubridate
 #' @import reshape2
+#' @import rjags
 #' @import runjags
 #' @import SpARK
 #' @rawNamespace import(tidyr, except = extract)
