@@ -68,7 +68,7 @@ jobs:
       - name: Install jags (windows-latest)
         if: runner.os == 'windows'
         run : |
-              choco install jags
+              winget install jags
 
       - name: Install dependencies
         run: |
