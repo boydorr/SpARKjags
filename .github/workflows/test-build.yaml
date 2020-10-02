@@ -62,6 +62,7 @@ jobs:
       - name: Install system dependencies (macOS and windows)
         if: runner.os != 'Linux'
         run: |
+          install.packages('devtools')
           devtools::install_url("http://sourceforge.net/projects/mcmc-jags/files/rjags/3/rjags_3-2.tar.gz",
                       args="--configure-args='--with-jags-include=/Users/casallas/homebrew/opt/jags/include/JAGS
                                               --with-jags-lib=/Users/casallas/homebrew/opt/jags/lib'
