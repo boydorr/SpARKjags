@@ -23,7 +23,6 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: 'release'}
           - {os: macOS-latest, r: 'release'}
           - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
@@ -64,12 +63,6 @@ jobs:
         run : |
               rm '/usr/local/bin/gfortran'
               brew install jags
-
-      - name: Install jags (windows-latest)
-        if: runner.os == 'windows'
-        run : |
-              wget -O JAGS-4.3.0.exe https://sourceforge.net/projects/mcmc-jags/files/JAGS/4.x/Windows/JAGS-4.3.0.exe/download
-              JAGS-4.3.0.exe
 
       - name: Install dependencies
         run: |
