@@ -85,5 +85,6 @@ jobs:
 
       - name: Test coverage
         run: |
+          remotes::install_cran("covr")
           covr::codecov()
         shell: Rscript {0}
