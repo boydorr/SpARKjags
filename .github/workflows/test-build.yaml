@@ -59,16 +59,10 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
 
-      - name: Install system dependencies (macOS and windows)
-        if: runner.os != 'Linux'
-        run: |
-          install.packages('devtools')
-          devtools::install_url("http://sourceforge.net/projects/mcmc-jags/files/rjags/4/rjags_4-4.tar.gz",
-                      args="--configure-args='--with-jags-include=/Users/casallas/homebrew/opt/jags/include/JAGS
-                                              --with-jags-lib=/Users/casallas/homebrew/opt/jags/lib'
-                            "
-                      )
-        shell: Rscript {0}
+      - name: Install jags (macOS-latest)
+        if: runner.os == 'macOS'
+        run : |
+              brew install jags
 
       - name: Install dependencies
         run: |
