@@ -32,11 +32,11 @@ plotnull <- function(model, data) {
   axis.labels <- list(data$lookup$antibiotic_class %>%
                         mutate(index = paste0("a.prob[", 1:13, "]")), NA, NA)
 
-  densityplot(model = model,
-              data = data,
-              var.regex = get_vars(model),
-              params = facet.titles.and.contents,
-              labels = axis.labels)
+  plot_density(model = model,
+               data = data,
+               var.regex = get_vars(model),
+               params = facet.titles.and.contents,
+               labels = axis.labels)
 }
 
 #+
@@ -71,13 +71,13 @@ res.a %>% DIC() # 12262.57
 res.a %>% testSSEF()
 res.a %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.a %>% traceplot(get_vars(.))
+res.a %>% plot_caterpillar(get_vars(.))
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a %>% plotAC(get_vars(.))
+res.a %>% plot_autocorr(get_vars(.))
 
 #' #### Model
 res.a$model
@@ -96,13 +96,13 @@ res.asm %>% DIC() # 12011.55
 res.asm %>% testSSEF()
 res.asm %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.asm %>% traceplot(get_vars(.))
+res.asm %>% plot_caterpillar(get_vars(.))
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asm %>% plotAC(get_vars(.))
+res.asm %>% plot_autocorr(get_vars(.))
 
 #' #### Model
 res.asm$model
@@ -121,13 +121,13 @@ res.ass %>% DIC() # 12097.86
 res.ass %>% testSSEF()
 res.ass %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.ass %>% traceplot(get_vars(.))
+res.ass %>% plot_caterpillar(get_vars(.))
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.ass %>% plotAC(get_vars(.))
+res.ass %>% plot_autocorr(get_vars(.))
 
 #' #### Model
 res.ass$model
@@ -156,13 +156,13 @@ res.asmg %>% DIC() # 11862.36
 res.asmg %>% testSSEF()
 res.asmg %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.asmg %>% traceplot(get_vars(.))
+res.asmg %>% plot_caterpillar(get_vars(.))
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmg %>% plotAC(get_vars(.))
+res.asmg %>% plot_autocorr(get_vars(.))
 
 #' ### ~ antibiotic_class + sample_month + agegroup {.tabset}
 
@@ -174,13 +174,13 @@ res.asmag %>% DIC() # 11786.2
 res.asmag %>% testSSEF()
 res.asmag %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.asmag %>% traceplot(get_vars(.))
+res.asmag %>% plot_caterpillar(get_vars(.))
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmag %>% plotAC(get_vars(.))
+res.asmag %>% plot_autocorr(get_vars(.))
 
 #' #### Model
 res.asmag$model
@@ -199,13 +199,13 @@ res.asmag2 %>% DIC() # 11788.27
 res.asmag2 %>% testSSEF()
 res.asmag2 %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.asmag2 %>% traceplot(get_vars(.))
+res.asmag2 %>% plot_caterpillar(get_vars(.))
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmag2 %>% plotAC(get_vars(.))
+res.asmag2 %>% plot_autocorr(get_vars(.))
 
 #' #### Model
 res.asmag2$model
@@ -224,9 +224,9 @@ res.asmage %>% DIC() # 11993.5
 res.asmage %>% testSSEF()
 res.asmage %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.asmage %>% traceplot(get_vars(.))
+res.asmage %>% plot_caterpillar(get_vars(.))
 
 #' #### Model
 res.asmage$model
@@ -245,9 +245,9 @@ res.asmagesq %>% DIC() # 11836.08
 res.asmagesq %>% testSSEF()
 res.asmagesq %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.asmagesq %>% traceplot(get_vars(.))
+res.asmagesq %>% plot_caterpillar(get_vars(.))
 
 #' #### Model
 res.asmagesq$model
@@ -266,9 +266,9 @@ res.asmagg %>% DIC() # 11647.46
 res.asmagg %>% testSSEF()
 res.asmagg %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.asmagg %>% traceplot(get_vars(.))
+res.asmagg %>% plot_caterpillar(get_vars(.))
 
 #' #### Model
 res.asmagg$model
@@ -298,13 +298,13 @@ res.asmaggh %>% DIC() # 10973.54
 res.asmaggh %>% testSSEF()
 res.asmaggh %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.asmaggh %>% traceplot(get_vars(.))
+res.asmaggh %>% plot_caterpillar(get_vars(.))
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmaggh %>% plotAC(get_vars(.))
+res.asmaggh %>% plot_autocorr(get_vars(.))
 
 #' #### Model
 res.asmaggh$model
@@ -324,9 +324,9 @@ res.asmaggwt %>% DIC() # 11057.68
 res.asmaggwt %>% testSSEF()
 res.asmaggwt %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.asmaggwt %>% traceplot(get_vars(.))
+res.asmaggwt %>% plot_caterpillar(get_vars(.))
 
 #' #### Model
 res.asmaggwt$model
@@ -345,9 +345,9 @@ res.asmaggw %>% DIC() # 9914.729
 res.asmaggw %>% testSSEF()
 res.asmaggw %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.asmaggw %>% traceplot(get_vars(.))
+res.asmaggw %>% plot_caterpillar(get_vars(.))
 
 #' #### Model
 res.asmaggw$model
@@ -367,9 +367,9 @@ res.asmaggwt_w %>% DIC() # 9915.182
 res.asmaggwt_w %>% testSSEF()
 res.asmaggwt_w %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.asmaggwt_w %>% traceplot(get_vars(.))
+res.asmaggwt_w %>% plot_caterpillar(get_vars(.))
 
 #' #### Model
 res.asmaggwt_w$model
@@ -389,13 +389,13 @@ res.asmagghwtw %>% DIC() # 9916.447
 res.asmagghwtw %>% testSSEF()
 res.asmagghwtw %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.asmagghwtw %>% traceplot(get_vars(.))
+res.asmagghwtw %>% plot_caterpillar(get_vars(.))
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmagghwtw %>% plotAC(get_vars(.))
+res.asmagghwtw %>% plot_autocorr(get_vars(.))
 
 #' #### Model
 res.asmagghwtw$model
@@ -415,13 +415,13 @@ res.asmaggh_wt_w %>% DIC() # 9916.827
 res.asmaggh_wt_w %>% testSSEF()
 res.asmaggh_wt_w %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.asmaggh_wt_w %>% traceplot(get_vars(.))
+res.asmaggh_wt_w %>% plot_caterpillar(get_vars(.))
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmaggh_wt_w %>% plotAC(get_vars(.))
+res.asmaggh_wt_w %>% plot_autocorr(get_vars(.))
 
 #' #### Model
 res.asmaggh_wt_w$model
@@ -500,13 +500,13 @@ res.asmaggwc %>% DIC() # 9911.505
 res.asmaggwc %>% testSSEF()
 res.asmaggwc %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.asmaggwc %>% traceplot(get_vars(.))
+res.asmaggwc %>% plot_caterpillar(get_vars(.))
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmaggwc %>% plotAC(get_vars(.))
+res.asmaggwc %>% plot_autocorr(get_vars(.))
 
 #' #### Model
 res.asmaggwc$model
@@ -526,13 +526,13 @@ res.asmaggwcst %>% DIC() # 9764.723
 res.asmaggwcst %>% testSSEF()
 res.asmaggwcst %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.asmaggwcst %>% traceplot(get_vars(.))
+res.asmaggwcst %>% plot_caterpillar(get_vars(.))
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmaggwcst %>% plotAC(get_vars(.))
+res.asmaggwcst %>% plot_autocorr(get_vars(.))
 
 #' #### Model
 res.asmaggwcst$model
@@ -552,13 +552,13 @@ res.asmaggwc_st %>% DIC() # 9748.901
 res.asmaggwc_st %>% testSSEF()
 res.asmaggwc_st %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.asmaggwc_st %>% traceplot(get_vars(.))
+res.asmaggwc_st %>% plot_caterpillar(get_vars(.))
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmaggwc_st %>% plotAC(get_vars(.))
+res.asmaggwc_st %>% plot_autocorr(get_vars(.))
 
 #' #### Model
 res.asmaggwc_st$model

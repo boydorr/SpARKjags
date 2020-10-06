@@ -1,4 +1,4 @@
-#' traceplot
+#' plot_caterpillar
 #'
 #' @param model model
 #' @param var.regex var.regex
@@ -6,9 +6,9 @@
 #'
 #' @export
 #'
-traceplot <- function(model,
-                      var.regex,
-                      filename) {
+plot_caterpillar <- function(model,
+                             var.regex,
+                             filename) {
 
   model.ggs <- model %>%
     coda::as.mcmc.list() %>%
@@ -17,7 +17,7 @@ traceplot <- function(model,
 
   g <- ggplot2::ggplot(model.ggs) + ggplot2::theme_minimal() +
     ggplot2::geom_line(ggplot2::aes_string(x = "Iteration", y = "value",
-                                    group = "Chain", colour = "Chain"),
+                                           group = "Chain", colour = "Chain"),
                        alpha = 0.8) +
     ggplot2::facet_wrap(~ Parameter, scales = "free_y") +
     ggplot2::scale_color_manual(values = c("grey", "#2c7fb8")) +

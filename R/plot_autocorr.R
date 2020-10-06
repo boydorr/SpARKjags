@@ -1,4 +1,4 @@
-#' plotAC
+#' plot_autocorr
 #'
 #' @param model a \code{runjags} object containing model results
 #' @param var.regex a regex \code{string} to filter variables
@@ -9,13 +9,13 @@
 #' @examples
 #' \dontrun{
 #' res.a_naive <- get_model("a_naive", "goodbad_models")
-#' plotAC(model = res.a_naive,
-#'        var.regex = "(a.prob)|(intercept)|(sd)")
+#' plot_autocorr(model = res.a_naive,
+#'               var.regex = "(a.prob)|(intercept)|(sd)")
 #' }
 #'
-plotAC <- function(model,
-                   var.regex,
-                   filename) {
+plot_autocorr <- function(model,
+                          var.regex,
+                          filename) {
 
   mcmc.model <- coda::as.mcmc.list(model)
   ind <- grepl(var.regex, colnames(mcmc.model[[1]]))

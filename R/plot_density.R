@@ -1,4 +1,4 @@
-#' densityplot
+#' plot_density
 #'
 #' @param model a \code{runjags} object containing model results
 #' @param data data input
@@ -15,18 +15,18 @@
 #'                   pathogen = "Klebsiella pneumoniae",
 #'                   removeQuinPen = TRUE)
 #' res.a <- get_model("a", "goodbad_models")
-#' densityplot(model = res.a,
+#' plot_density(model = res.a,
 #'             data = data,
 #'             var.regex = get_vars(res.a),
 #'             params = get_params(),
 #'             labels = get_labels(data))
 #' }
 #'
-densityplot <- function(model,
-                        data,
-                        var.regex,
-                        params,
-                        labels = rep(NA, length(params))) {
+plot_density <- function(model,
+                         data,
+                         var.regex,
+                         params,
+                         labels = rep(NA, length(params))) {
 
   df <- import_data(model, data)
 
@@ -82,7 +82,7 @@ densityplot <- function(model,
       ggplot2::stat_summary(ggplot2::aes_string(x = "Parameter", y = "value"),
                             fun = function(z) {
                               stats::quantile(z, c(0.25, 0.75))
-                              },
+                            },
                             geom = "line",
                             colour = "grey33") +
       ggplot2::theme(strip.background = ggplot2::element_blank(),
@@ -141,7 +141,7 @@ densityplot <- function(model,
 
       if(this_many <= 12) {
         manual_colours <- stats::setNames(ggthemes::ptol_pal()(this_many),
-                                   labs)
+                                          labs)
 
       } else {
         colours <- ggthemes::ptol_pal()(12)

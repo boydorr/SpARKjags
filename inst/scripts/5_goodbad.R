@@ -96,20 +96,20 @@ params <- list(`probability of resistance` = "prob", "intercept", "sd")
 tmp <- data$lookup$antibiotic_class %>%
   dplyr::mutate(index = paste0("a.prob[", 1:13, "]"))
 labels <- list(tmp, NA, NA)
-res.a_naive %>% densityplot(data, var.regex, params, labels)
+res.a_naive %>% plot_density(data, var.regex, params, labels)
 
 #' #### Diagnostics
 res.a_naive %>% DIC() # 6166.735
 res.a_naive %>% testSSEF()
 res.a_naive %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.a_naive %>% traceplot(var.regex)
+res.a_naive %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_naive %>% plotAC(var.regex)
+res.a_naive %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.a_naive$model
@@ -132,31 +132,31 @@ res.a <- get_model(file.path("..", directory, "a.rds"))
 var.regex <- get_vars(res.a)
 params <- get_params()
 labels <- get_labels(data)
-res.a %>% densityplot(data, var.regex, params, labels)
+res.a %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.a %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.a %>% antibioticsplot(data)
+res.a %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.a %>% plotcorrelation(data)
+res.a %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.a %>% DIC() # 6151.664
 res.a %>% testSSEF()
 res.a %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.a %>% traceplot(var.regex)
+res.a %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a %>% plotAC(var.regex)
+res.a %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.a$model
@@ -248,7 +248,7 @@ res.a_livestock <- get_model(file.path("..", directory, "a_livestock.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data_ah)
-res.a_livestock %>% densityplot(data_ah, var.regex, params, labels)
+res.a_livestock %>% plot_density(data_ah, var.regex, params, labels)
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -256,24 +256,24 @@ res.a_livestock %>% summarise_samples(data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.a_livestock %>% antibioticsplot(data_ah)
+res.a_livestock %>% plot_antibiotics(data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.a_livestock %>% plotcorrelation(data_ah)
+res.a_livestock %>% plot_correlation(data_ah)
 
 #' #### Diagnostics
 res.a_livestock %>% DIC() # 6151.664
 res.a_livestock %>% testSSEF()
 res.a_livestock %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.a_livestock %>% traceplot(var.regex)
+res.a_livestock %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_livestock %>% plotAC(var.regex)
+res.a_livestock %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.a_livestock$model
@@ -296,31 +296,31 @@ res.a_cattle <- get_model(file.path("..", directory, "a_cattle.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data_ah)
-res.a_cattle %>% densityplot(data_ah, var.regex, params, labels)
+res.a_cattle %>% plot_density(data_ah, var.regex, params, labels)
 
 #' #### Statistics
 res.a_cattle %>% summarise_samples(data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.a_cattle %>% antibioticsplot(data_ah)
+res.a_cattle %>% plot_antibiotics(data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.a_cattle %>% plotcorrelation(data_ah)
+res.a_cattle %>% plot_correlation(data_ah)
 
 #' #### Diagnostics
 res.a_cattle %>% DIC() # 6151.664
 res.a_cattle %>% testSSEF()
 res.a_cattle %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.a_cattle %>% traceplot(var.regex)
+res.a_cattle %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_cattle %>% plotAC(var.regex)
+res.a_cattle %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.a_cattle$model
@@ -343,31 +343,31 @@ res.a_pig <- get_model(file.path("..", directory, "a_pig.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data_ah)
-res.a_pig %>% densityplot(data_ah, var.regex, params, labels)
+res.a_pig %>% plot_density(data_ah, var.regex, params, labels)
 
 #' #### Statistics
 res.a_pig %>% summarise_samples(data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.a_pig %>% antibioticsplot(data_ah)
+res.a_pig %>% plot_antibiotics(data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.a_pig %>% plotcorrelation(data_ah)
+res.a_pig %>% plot_correlation(data_ah)
 
 #' #### Diagnostics
 res.a_pig %>% DIC() # 6151.664
 res.a_pig %>% testSSEF()
 res.a_pig %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.a_pig %>% traceplot(var.regex)
+res.a_pig %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_pig %>% plotAC(var.regex)
+res.a_pig %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.a_pig$model
@@ -390,31 +390,31 @@ res.a_chicken <- get_model(file.path("..", directory, "a_chicken.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data_ah)
-res.a_chicken %>% densityplot(data_ah, var.regex, params, labels)
+res.a_chicken %>% plot_density(data_ah, var.regex, params, labels)
 
 #' #### Statistics
 res.a_chicken %>% summarise_samples(data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.a_chicken %>% antibioticsplot(data_ah)
+res.a_chicken %>% plot_antibiotics(data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.a_chicken %>% plotcorrelation(data_ah)
+res.a_chicken %>% plot_correlation(data_ah)
 
 #' #### Diagnostics
 res.a_chicken %>% DIC() # 6151.664
 res.a_chicken %>% testSSEF()
 res.a_chicken %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.a_chicken %>% traceplot(var.regex)
+res.a_chicken %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_chicken %>% plotAC(var.regex)
+res.a_chicken %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.a_chicken$model
@@ -437,7 +437,7 @@ res.a_livestock_subsets <- get_model(file.path("..", directory, "a_livestock_sub
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data_ah)
-res.a_livestock_subsets %>% densityplot(data_ah, var.regex, params, labels)
+res.a_livestock_subsets %>% plot_density(data_ah, var.regex, params, labels)
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -445,24 +445,24 @@ res.a_livestock_subsets %>% summarise_samples(data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.a_livestock_subsets %>% antibioticsplot(data_ah)
+res.a_livestock_subsets %>% plot_antibiotics(data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.a_livestock_subsets %>% plotcorrelation(data_ah)
+res.a_livestock_subsets %>% plot_correlation(data_ah)
 
 #' #### Diagnostics
 res.a_livestock_subsets %>% DIC() # 6151.664
 res.a_livestock_subsets %>% testSSEF()
 res.a_livestock_subsets %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.a_livestock_subsets %>% traceplot(var.regex)
+res.a_livestock_subsets %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_livestock_subsets %>% plotAC(var.regex)
+res.a_livestock_subsets %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.a_livestock_subsets$model
@@ -485,31 +485,31 @@ res.a_companion <- get_model(file.path("..", directory, "a_companion.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data_ah)
-res.a_companion %>% densityplot(data_ah, var.regex, params, labels)
+res.a_companion %>% plot_density(data_ah, var.regex, params, labels)
 
 #' #### Statistics
 res.a_companion %>% summarise_samples(data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.a_companion %>% antibioticsplot(data_ah)
+res.a_companion %>% plot_antibiotics(data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.a_companion %>% plotcorrelation(data_ah)
+res.a_companion %>% plot_correlation(data_ah)
 
 #' #### Diagnostics
 res.a_companion %>% DIC() # 6151.664
 res.a_companion %>% testSSEF()
 res.a_companion %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.a_companion %>% traceplot(var.regex)
+res.a_companion %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_companion %>% plotAC(var.regex)
+res.a_companion %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.a_companion$model
@@ -532,7 +532,7 @@ res.a_companion_subsets <- get_model(file.path("..", directory, "a_companion_sub
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data_ah)
-res.a_companion_subsets %>% densityplot(data_ah, var.regex, params, labels)
+res.a_companion_subsets %>% plot_density(data_ah, var.regex, params, labels)
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -540,24 +540,24 @@ res.a_companion_subsets %>% summarise_samples(data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.a_companion_subsets %>% antibioticsplot(data_ah)
+res.a_companion_subsets %>% plot_antibiotics(data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.a_companion_subsets %>% plotcorrelation(data_ah)
+res.a_companion_subsets %>% plot_correlation(data_ah)
 
 #' #### Diagnostics
 res.a_companion_subsets %>% DIC() # 6151.664
 res.a_companion_subsets %>% testSSEF()
 res.a_companion_subsets %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.a_companion_subsets %>% traceplot(var.regex)
+res.a_companion_subsets %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_companion_subsets %>% plotAC(var.regex)
+res.a_companion_subsets %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.a_companion_subsets$model
@@ -580,31 +580,31 @@ res.a_wild <- get_model(file.path("..", directory, "a_wild.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data_ah)
-res.a_wild %>% densityplot(data_ah, var.regex, params, labels)
+res.a_wild %>% plot_density(data_ah, var.regex, params, labels)
 
 #' #### Statistics
 res.a_wild %>% summarise_samples(data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.a_wild %>% antibioticsplot(data_ah)
+res.a_wild %>% plot_antibiotics(data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.a_wild %>% plotcorrelation(data_ah)
+res.a_wild %>% plot_correlation(data_ah)
 
 #' #### Diagnostics
 res.a_wild %>% DIC() # 6151.664
 res.a_wild %>% testSSEF()
 res.a_wild %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.a_wild %>% traceplot(var.regex)
+res.a_wild %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_wild %>% plotAC(var.regex)
+res.a_wild %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.a_wild$model
@@ -627,7 +627,7 @@ res.a_wild_subsets <- get_model(file.path("..", directory, "a_wild_subsets.rds")
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data_ah)
-res.a_wild_subsets %>% densityplot(data_ah, var.regex, params, labels)
+res.a_wild_subsets %>% plot_density(data_ah, var.regex, params, labels)
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -635,24 +635,24 @@ res.a_wild_subsets %>% summarise_samples(data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.a_wild_subsets %>% antibioticsplot(data_ah)
+res.a_wild_subsets %>% plot_antibiotics(data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.a_wild_subsets %>% plotcorrelation(data_ah)
+res.a_wild_subsets %>% plot_correlation(data_ah)
 
 #' #### Diagnostics
 res.a_wild_subsets %>% DIC() # 6151.664
 res.a_wild_subsets %>% testSSEF()
 res.a_wild_subsets %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.a_wild_subsets %>% traceplot(var.regex)
+res.a_wild_subsets %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_wild_subsets %>% plotAC(var.regex)
+res.a_wild_subsets %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.a_wild_subsets$model
@@ -675,7 +675,7 @@ res.a_types <- get_model(file.path("..", directory, "a_types.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data_ah)
-res.a_types %>% densityplot(data_ah, var.regex, params, labels)
+res.a_types %>% plot_density(data_ah, var.regex, params, labels)
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -683,24 +683,24 @@ res.a_types %>% summarise_samples(data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.a_types %>% antibioticsplot(data_ah)
+res.a_types %>% plot_antibiotics(data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.a_types %>% plotcorrelation(data_ah)
+res.a_types %>% plot_correlation(data_ah)
 
 #' #### Diagnostics
 res.a_types %>% DIC() # 6151.664
 res.a_types %>% testSSEF()
 res.a_types %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.a_types %>% traceplot(var.regex)
+res.a_types %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_types %>% plotAC(var.regex)
+res.a_types %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.a_types$model
@@ -723,7 +723,7 @@ res.a_subsets <- get_model(file.path("..", directory, "a_subsets.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data_ah)
-res.a_subsets %>% densityplot(data_ah, var.regex, params, labels)
+res.a_subsets %>% plot_density(data_ah, var.regex, params, labels)
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -731,24 +731,24 @@ res.a_subsets %>% summarise_samples(data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.a_subsets %>% antibioticsplot(data_ah)
+res.a_subsets %>% plot_antibiotics(data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.a_subsets %>% plotcorrelation(data_ah)
+res.a_subsets %>% plot_correlation(data_ah)
 
 #' #### Diagnostics
 res.a_subsets %>% DIC() # 6151.664
 res.a_subsets %>% testSSEF()
 res.a_subsets %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.a_subsets %>% traceplot(var.regex)
+res.a_subsets %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_subsets %>% plotAC(var.regex)
+res.a_subsets %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.a_subsets$model
@@ -772,31 +772,31 @@ res.ac1 <- get_model(file.path("..", directory, "ac1.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.ac1 %>% densityplot(data, var.regex, params, labels)
+res.ac1 %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.ac1 %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.ac1 %>% antibioticsplot(data)
+res.ac1 %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.ac1 %>% plotcorrelation(data)
+res.ac1 %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.ac1 %>% DIC() # 6156.994
 res.ac1 %>% testSSEF()
 res.ac1 %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.ac1 %>% traceplot(var.regex)
+res.ac1 %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.ac1 %>% plotAC(var.regex)
+res.ac1 %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.ac1$model
@@ -819,31 +819,31 @@ res.ac2 <- get_model(file.path("..", directory, "ac2.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.ac2 %>% densityplot(data, var.regex, params, labels)
+res.ac2 %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.ac2 %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.ac2 %>% antibioticsplot(data)
+res.ac2 %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.ac2 %>% plotcorrelation(data)
+res.ac2 %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.ac2 %>% DIC() # 6079.197
 res.ac2 %>% testSSEF()
 res.ac2 %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.ac2 %>% traceplot(var.regex)
+res.ac2 %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.ac2 %>% plotAC(var.regex)
+res.ac2 %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.ac2$model
@@ -866,31 +866,31 @@ res.a_c <- get_model(file.path("..", directory, "a_c.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.a_c %>% densityplot(data, var.regex, params, labels)
+res.a_c %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.a_c %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.a_c %>% antibioticsplot(data)
+res.a_c %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.a_c %>% plotcorrelation(data)
+res.a_c %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.a_c %>% DIC() # 6045.375
 res.a_c %>% testSSEF()
 res.a_c %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.a_c %>% traceplot(var.regex)
+res.a_c %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_c %>% plotAC(var.regex)
+res.a_c %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.a_c$model
@@ -918,31 +918,31 @@ res.asm <- get_model(file.path("..", directory, "asm.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.asm %>% densityplot(data, var.regex, params, labels)
+res.asm %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.asm %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.asm %>% antibioticsplot(data)
+res.asm %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.asm %>% plotcorrelation(data)
+res.asm %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.asm %>% DIC() # 6065.661
 res.asm %>% testSSEF()
 res.asm %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.asm %>% traceplot(var.regex)
+res.asm %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asm %>% plotAC(var.regex)
+res.asm %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.asm$model
@@ -965,31 +965,31 @@ res.ass <- get_model(file.path("..", directory, "ass.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.ass %>% densityplot(data, var.regex, params, labels)
+res.ass %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.ass %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.ass %>% antibioticsplot(data)
+res.ass %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.ass %>% plotcorrelation(data)
+res.ass %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.ass %>% DIC() # 6049.671
 res.ass %>% testSSEF()
 res.ass %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.ass %>% traceplot(var.regex)
+res.ass %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.ass %>% plotAC(var.regex)
+res.ass %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.ass$model
@@ -1021,31 +1021,31 @@ res.assg <- get_model(file.path("..", directory, "assg.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.assg %>% densityplot(data, var.regex, params, labels)
+res.assg %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.assg %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.assg %>% antibioticsplot(data)
+res.assg %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.assg %>% plotcorrelation(data)
+res.assg %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.assg %>% DIC() # 6035.019
 res.assg %>% testSSEF()
 res.assg %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.assg %>% traceplot(var.regex)
+res.assg %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assg %>% plotAC(var.regex)
+res.assg %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.assg$model
@@ -1068,31 +1068,31 @@ res.assag <- get_model(file.path("..", directory, "assag.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.assag %>% densityplot(data, var.regex, params, labels)
+res.assag %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.assag %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.assag %>% antibioticsplot(data)
+res.assag %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.assag %>% plotcorrelation(data)
+res.assag %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.assag %>% DIC() # 6030.135
 res.assag %>% testSSEF()
 res.assag %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.assag %>% traceplot(var.regex)
+res.assag %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assag %>% plotAC(var.regex)
+res.assag %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.assag$model
@@ -1115,31 +1115,31 @@ res.assag2 <- get_model(file.path("..", directory, "assag2.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.assag2 %>% densityplot(data, var.regex, params, labels)
+res.assag2 %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.assag2 %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.assag2 %>% antibioticsplot(data)
+res.assag2 %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.assag2 %>% plotcorrelation(data)
+res.assag2 %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.assag2 %>% DIC() # 6047.175
 res.assag2 %>% testSSEF()
 res.assag2 %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.assag2 %>% traceplot(var.regex)
+res.assag2 %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assag2 %>% plotAC(var.regex)
+res.assag2 %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.assag2$model
@@ -1162,31 +1162,31 @@ res.assage <- get_model(file.path("..", directory, "assage.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.assage %>% densityplot(data, var.regex, params, labels)
+res.assage %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.assage %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.assage %>% antibioticsplot(data)
+res.assage %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.assage %>% plotcorrelation(data)
+res.assage %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.assage %>% DIC() # 6032.315
 res.assage %>% testSSEF()
 res.assage %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.assage %>% traceplot(var.regex)
+res.assage %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assage %>% plotAC(var.regex)
+res.assage %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.assage$model
@@ -1209,31 +1209,31 @@ res.assagesq <- get_model(file.path("..", directory, "assagesq.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.assagesq %>% densityplot(data, var.regex, params, labels)
+res.assagesq %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.assagesq %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.assagesq %>% antibioticsplot(data)
+res.assagesq %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.assagesq %>% plotcorrelation(data)
+res.assagesq %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.assagesq %>% DIC() # 6095.407
 res.assagesq %>% testSSEF()
 res.assagesq %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.assagesq %>% traceplot(var.regex)
+res.assagesq %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagesq %>% plotAC(var.regex)
+res.assagesq %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.assagesq$model
@@ -1257,31 +1257,31 @@ res.assagg <- get_model(file.path("..", directory, "assagg.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.assagg %>% densityplot(data, var.regex, params, labels)
+res.assagg %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.assagg %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.assagg %>% antibioticsplot(data)
+res.assagg %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.assagg %>% plotcorrelation(data)
+res.assagg %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.assagg %>% DIC() # 6049.079
 res.assagg %>% testSSEF()
 res.assagg %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.assagg %>% traceplot(var.regex)
+res.assagg %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagg %>% plotAC(var.regex)
+res.assagg %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.assagg$model
@@ -1315,31 +1315,31 @@ res.assagh <- get_model(file.path("..", directory, "assagh.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.assagh %>% densityplot(data, var.regex, params, labels)
+res.assagh %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.assagh %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.assagh %>% antibioticsplot(data)
+res.assagh %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.assagh %>% plotcorrelation(data)
+res.assagh %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.assagh %>% DIC() # 5998.832
 res.assagh %>% testSSEF()
 res.assagh %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.assagh %>% traceplot(var.regex)
+res.assagh %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagh %>% plotAC(var.regex)
+res.assagh %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.assagh$model
@@ -1362,31 +1362,31 @@ res.assagwt <- get_model(file.path("..", directory, "assagwt.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.assagwt %>% densityplot(data, var.regex, params, labels)
+res.assagwt %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.assagwt %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.assagwt %>% antibioticsplot(data)
+res.assagwt %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.assagwt %>% plotcorrelation(data)
+res.assagwt %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.assagwt %>% DIC() # 5953.609
 res.assagwt %>% testSSEF()
 res.assagwt %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.assagwt %>% traceplot(var.regex)
+res.assagwt %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagwt %>% plotAC(var.regex)
+res.assagwt %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.assagwt$model
@@ -1409,31 +1409,31 @@ res.assagw <- get_model(file.path("..", directory, "assagw.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.assagw %>% densityplot(data, var.regex, params, labels)
+res.assagw %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.assagw %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.assagw %>% antibioticsplot(data)
+res.assagw %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.assagw %>% plotcorrelation(data)
+res.assagw %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.assagw %>% DIC() # 5883.045
 res.assagw %>% testSSEF()
 res.assagw %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.assagw %>% traceplot(var.regex)
+res.assagw %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagw %>% plotAC(var.regex)
+res.assagw %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.assagw$model
@@ -1456,31 +1456,31 @@ res.assagwt_w <- get_model(file.path("..", directory, "assagwt_w.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.assagwt_w %>% densityplot(data, var.regex, params, labels)
+res.assagwt_w %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.assagwt_w %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.assagwt_w %>% antibioticsplot(data)
+res.assagwt_w %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.assagwt_w %>% plotcorrelation(data)
+res.assagwt_w %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.assagwt_w %>% DIC() # 5882.934
 res.assagwt_w %>% testSSEF()
 res.assagwt_w %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.assagwt_w %>% traceplot(var.regex)
+res.assagwt_w %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagwt_w %>% plotAC(var.regex)
+res.assagwt_w %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.assagwt_w$model
@@ -1502,31 +1502,31 @@ res.assaghwtw <- get_model(file.path("..", directory, "assaghwtw.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.assaghwtw %>% densityplot(data, var.regex, params, labels)
+res.assaghwtw %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.assaghwtw %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.assaghwtw %>% antibioticsplot(data)
+res.assaghwtw %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.assaghwtw %>% plotcorrelation(data)
+res.assaghwtw %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.assaghwtw %>% DIC() # 5885.554
 res.assaghwtw %>% testSSEF()
 res.assaghwtw %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.assaghwtw %>% traceplot(var.regex)
+res.assaghwtw %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assaghwtw %>% plotAC(var.regex)
+res.assaghwtw %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.assaghwtw$model
@@ -1549,31 +1549,31 @@ res.assagh_wt_w <- get_model(file.path("..", directory, "assagh_wt_w.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.assagh_wt_w %>% densityplot(data, var.regex, params, labels)
+res.assagh_wt_w %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.assagh_wt_w %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.assagh_wt_w %>% antibioticsplot(data)
+res.assagh_wt_w %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.assagh_wt_w %>% plotcorrelation(data)
+res.assagh_wt_w %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.assagh_wt_w %>% DIC() # 5882.687
 res.assagh_wt_w %>% testSSEF()
 res.assagh_wt_w %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.assagh_wt_w %>% traceplot(var.regex)
+res.assagh_wt_w %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagh_wt_w %>% plotAC(var.regex)
+res.assagh_wt_w %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.assagh_wt_w$model
@@ -1608,31 +1608,31 @@ res.assagwc <- get_model(file.path("..", directory, "assagwc.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.assagwc %>% densityplot(data, var.regex, params, labels)
+res.assagwc %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.assagwc %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.assagwc %>% antibioticsplot(data)
+res.assagwc %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.assagwc %>% plotcorrelation(data)
+res.assagwc %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.assagwc %>% DIC() # 5886.387
 res.assagwc %>% testSSEF()
 res.assagwc %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.assagwc %>% traceplot(var.regex)
+res.assagwc %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagwc %>% plotAC(var.regex)
+res.assagwc %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.assagwc$model
@@ -1655,31 +1655,31 @@ res.assagwcst <- get_model(file.path("..", directory, "assagwcst.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.assagwcst %>% densityplot(data, var.regex, params, labels)
+res.assagwcst %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.assagwcst %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.assagwcst %>% antibioticsplot(data)
+res.assagwcst %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.assagwcst %>% plotcorrelation(data)
+res.assagwcst %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.assagwcst %>% DIC() # 5835.189
 res.assagwcst %>% testSSEF()
 res.assagwcst %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.assagwcst %>% traceplot(var.regex)
+res.assagwcst %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagwcst %>% plotAC(var.regex)
+res.assagwcst %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.assagwcst$model
@@ -1702,31 +1702,31 @@ res.assagwc_st <- get_model(file.path("..", directory, "assagwc_st.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.assagwc_st %>% densityplot(data, var.regex, params, labels)
+res.assagwc_st %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.assagwc_st %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.assagwc_st %>% antibioticsplot(data)
+res.assagwc_st %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.assagwc_st %>% plotcorrelation(data)
+res.assagwc_st %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.assagwc_st %>% DIC() # 5846.981
 res.assagwc_st %>% testSSEF()
 res.assagwc_st %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.assagwc_st %>% traceplot(var.regex)
+res.assagwc_st %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagwc_st %>% plotAC(var.regex)
+res.assagwc_st %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.assagwc_st$model
@@ -1748,31 +1748,31 @@ res.a_cssagwst <- get_model(file.path("..", directory, "a_cssagwst.rds"))
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
 params <- get_params()
 labels <- get_labels(data)
-res.a_cssagwst %>% densityplot(data, var.regex, params, labels)
+res.a_cssagwst %>% plot_density(data, var.regex, params, labels)
 
 #' #### Statistics
 res.a_cssagwst %>% summarise_samples(data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-res.a_cssagwst %>% antibioticsplot(data)
+res.a_cssagwst %>% plot_antibiotics(data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-res.a_cssagwst %>% plotcorrelation(data)
+res.a_cssagwst %>% plot_correlation(data)
 
 #' #### Diagnostics
 res.a_cssagwst %>% DIC() # 5773.768
 res.a_cssagwst %>% testSSEF()
 res.a_cssagwst %>% testPSRF()
 
-#' #### Traceplot
+#' #### plot_caterpillar
 #+ fig.height = 6
-res.a_cssagwst %>% traceplot(var.regex)
+res.a_cssagwst %>% plot_caterpillar(var.regex)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_cssagwst %>% plotAC(var.regex)
+res.a_cssagwst %>% plot_autocorr(var.regex)
 
 #' #### Model
 res.a_cssagwst$model

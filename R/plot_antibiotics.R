@@ -1,4 +1,4 @@
-#' antibioticsplot
+#' plot_antibiotics
 #'
 #' Identify bad group samples from bad.p and look at location, amr profile, and
 #' general distribution
@@ -8,7 +8,7 @@
 #'
 #' @export
 #'
-antibioticsplot <- function(model, data) {
+plot_antibiotics <- function(model, data) {
 
   df <- import_data(model, data)
   response <- df %>% dplyr::select(-.data$name, -.data$hospital,
@@ -82,7 +82,7 @@ antibioticsplot <- function(model, data) {
     # Plot
     g <- plotthis %>% ggplot2::ggplot() + ggplot2::theme_minimal() +
       ggplot2::geom_tile(ggplot2::aes_string(x = "class", y = "GUID",
-                                      fill = "interpretation"),
+                                             fill = "interpretation"),
                          colour = "grey") +
       ggplot2::scale_fill_manual(values = c("#d73027", "#fee08b")) +
       ggplot2::facet_grid(name ~ ., scales = "free", space = "free") +

@@ -1,11 +1,11 @@
-#' plotcorrelation
+#' plot_correlation
 #'
 #' @param model model
 #' @param data data
 #'
 #' @export
 #'
-plotcorrelation <- function(model, data) {
+plot_correlation <- function(model, data) {
 
   df <- import_data(model, data)
   response <- df %>%
