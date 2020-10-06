@@ -23,6 +23,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
+          - {os: windows-latest, r: 'release'}
           - {os: macOS-latest, r: 'release'}
           - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
@@ -58,7 +59,14 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
 
-      - name: Install jags (macOS-latest)
+      - name: Install system dependencies, jags (windows-latest)
+      if: runner.os == 'windows'
+        run: |
+          curl.exe -o wjags.exe --url https://deac-fra.dl.sourceforge.net/project/mcmc-jags/JAGS/4.x/Windows/JAGS-4.2.0-Rtools33.exe
+          wjags.exe /S
+        shell: cmd
+
+      - name: Install system dependencies, jags (macOS-latest)
         if: runner.os == 'macOS'
         run : |
               rm '/usr/local/bin/gfortran'
