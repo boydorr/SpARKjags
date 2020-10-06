@@ -8,17 +8,29 @@ data <- jags_data(classification = "all",
                   pathogen = "Klebsiella pneumoniae",
                   removeQuinPen = T)
 
-test_that("a runjags object is read in", {
-  # Run model and save output to tmp/a.rds
+location <- system.file("test_data", "a.rds", package = "SpARKjags")
+res <- get_model(location)
 
-  location <- system.file("test_data", "a.rds", package = "SpARKjags")
-  res <- get_model(location)
-
+test_that("plot_density runs without error", {
   expect_silent(g <- plot_density(model = res,
                                   data = data,
                                   var.regex = get_vars(res),
                                   params = get_params(),
                                   labels = get_labels(data)))
+
+  expect_equal(class(g), c("egg", "gtable", "gTree", "grob", "gDesc"))
+})
+
+test_that("plot_caterpillar runs without error", {
+  expect_silent(g <- plot_caterpillar(model = res,
+                                      var.regex = get_vars(res)))
+
+  expect_equal(class(g), c("gg", "ggplot"))
+})
+
+test_that("plot_antibiotics runs without error", {
+  expect_silent(g <- plot_antibiotics(model = res,
+                                      data = data))
 
   expect_equal(class(g), c("egg", "gtable", "gTree", "grob", "gDesc"))
 })
