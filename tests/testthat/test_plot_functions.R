@@ -22,7 +22,3 @@ test_that("a runjags object is read in", {
 
   expect_equal(class(g), c("egg", "gtable", "gTree", "grob", "gDesc"))
 })
-
-unlink("tmp_test_dir", recursive = TRUE)
-
-
