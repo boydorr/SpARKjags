@@ -45,13 +45,13 @@ Note that you must have access to the SpARK project datasets for any of this cod
     ```
     path <- run_SpARKjags_model(data = data,
                                 SpARKjags_model = "individual_models/h.R",
-                                saveto = "mylocation/myresults.rds)
+                                saveto = "myresults_dir/myresults.rds)
     ```
 
   * **Run your own model**
     ```
     path <- run_custom_model(data = data,
-                             custom_model = "mydirectory/mymodel.R")
+                             custom_model = "mymodel_dir/mymodel.R")
     ```
     Like `run_SpARKjags_model()`, `run_custom_model()` will save the model output in the same directory as the model script, unless the `save_to` argument is specified.
     
