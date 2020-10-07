@@ -1,5 +1,9 @@
 #' plot_density
 #'
+#' Generates a violin plot where violins represent the posterior probability of
+#' resistance and points represent the calculated probability of resistance to
+#' each antibiotic class.
+#'
 #' @param model a \code{runjags} object containing model results
 #' @param data data input
 #' @param var.regex a regex \code{string} to filter variables
@@ -28,6 +32,9 @@ plot_density <- function(model,
                          params,
                          labels = rep(NA, length(params))) {
 
+  # data.frame listing SpARK samples, and their resistances to each antibiotic
+  # class, as well as the posterior probability of being in the bad group
+  # (mean.p.bad), which defines the badgroup (1 if mean.p.bad > 0.5)
   df <- import_data(model, data)
 
   model.ggs <- model %>%
@@ -53,16 +60,17 @@ plot_density <- function(model,
   # Plot each facet ---------------------------------------------------------
 
   plots <- lapply(seq_along(params), function(this_set) {
-    # Subset parameters
+
+    # Initialise parameters
     plot_these <- sapply(params[this_set], function(x)
       parameters[grepl(x, parameters)]) %>%
       unlist() %>%
       unique()
-
     title <- names(params)[[this_set]]
     good <- if_else(grepl("(good group)", title), T, F)
     bad <- if_else(grepl("\\(bad group)", title), T, F)
 
+    # Get posterior probabilities of resistance to each antibiotic class
     plot_this <- model.ggs %>%
       dplyr::filter(.data$Parameter %in% plot_these)
 
@@ -71,8 +79,9 @@ plot_density <- function(model,
       ggplot2::theme_minimal() +
       ggplot2::geom_violin(ggplot2::aes_string(x = "Parameter",
                                                y = "value"),
-                           colour = NA,
-                           fill = "grey66",
+                           trim = FALSE,
+                           colour = "black",
+                           fill = "white",
                            scale = "width") +
       ggplot2::stat_summary(ggplot2::aes_string(x = "Parameter", y = "value"),
                             fun = stats::median,
@@ -89,8 +98,6 @@ plot_density <- function(model,
                      strip.text = ggplot2::element_blank(),
                      axis.title.y = ggplot2::element_blank()) +
       ggplot2::labs(title = title)
-
-
 
     if(title == "probability of being in the bad group") {
       labs <- labels[[1]] %>%
@@ -109,23 +116,37 @@ plot_density <- function(model,
       if(bad) df <- df %>% dplyr::filter(.data$badgroup == 1)
       if(good) df <- df %>% dplyr::filter(.data$badgroup == 0)
 
-      # Observed resistance probability
+      # Note that hospital-clinical groups are defined as:
+      # Hospital\n(Carriage),
+      # Outpatients,
+      # Hospital\n(Clinical),
+      # Hospital\n(Clinical),
+      # Hospital\n(Carriage), and
+      # Hospital\n(Clinical)
+
+      # Calculate the observed resistance probability -----------------------
+
+      # Count of the number of samples in each hospital-clinical group
       n <- df %>%
         dplyr::group_by(.data$label) %>%
         dplyr::summarise(n = dplyr::n())
 
-      if(good | bad) { # goodbad models
+      # Define which columns should be used when the input is a goodbad model
+      # or naive (e.g. res.a_naive)
+      if(good | bad) {
         columns <- df %>%
           select(-.data$GUID, -.data$name, -.data$hospital, -.data$clinical,
                  -.data$mean.p.bad, -.data$badgroup, -.data$label) %>%
           colnames()
-      } else { # res.a_naive
+      } else {
         columns <- df %>%
           select(-.data$GUID, -.data$name, -.data$hospital, -.data$clinical,
                  -.data$label) %>%
           colnames()
       }
 
+      # Count of the number of samples with resistance to each antibiotic class
+      # in each hospital-clinical group
       s <- df %>%
         dplyr::group_by(.data$label) %>%
         dplyr::summarise_at(vars(contains(columns)), sum, na.rm = T)
@@ -153,6 +174,8 @@ plot_density <- function(model,
 
       labs <- labs[which(labs %in% s$label)]
 
+      # Calculate the probability of a sample from a hospital-clinical group
+      # having resistance to each antibiotic class
       probabilities <- merge(n, s) %>%
         dplyr::mutate_at(vars(contains(columns)), ~ . / n) %>%
         reshape2::melt(id.var = "label",
@@ -172,8 +195,38 @@ plot_density <- function(model,
       manual_shapes <- manual_shapes[labs]
 
       # Extract labels
-      xaxis <- labels[[this_set]]
-      rownames(xaxis) <- xaxis$index
+      xaxis <- labels[[this_set]] %>%
+        dplyr::mutate(ind = gsub("a.prob", "", .data$index)) %>%
+        dplyr::mutate(classification = dplyr::case_when(
+          classification == "Aminoglycoside" ~
+            paste("Aminoglycoside", ind),
+          classification == "Carbapenem" ~
+            paste("Carbapenem", ind),
+          classification == "Cephalosporin" ~
+            paste("Cephalosporin", ind),
+          classification == "Colistin" ~
+            paste("Colistin", ind),
+          classification == "Fluoroquinolone" ~
+            paste("Fluoroquinolone", ind),
+          classification == "Fosfomycin" ~
+            paste("Fosfomycin", ind),
+          classification == "Monobactam" ~
+            paste("Monobactam", ind),
+          classification == "Nitrofurantoin" ~
+            paste("Nitrofurantoin", ind),
+          classification == "Penicillin (Penams)" ~
+            paste("Penicillin (Penams)", ind),
+          classification == "Penicillin Combination" ~
+            paste("Penicillin Combination", ind),
+          classification == "Tetracycline" ~
+            paste("Tetracycline", ind),
+          classification == "Trimethoprim" ~
+            paste("Trimethoprim", ind),
+          classification == "Trimethoprim/Sulfamethoxazole" ~
+            paste("Tri/Sul", ind)))
+      assertthat::assert_that(all(xaxis$index == c(plot_these)))
+      xaxis <- xaxis$classification
+      names(xaxis) <- plot_these
 
       g <- g + ggplot2::geom_point(
         ggplot2::aes_string(x = "index",
@@ -188,11 +241,8 @@ plot_density <- function(model,
                                     values = manual_shapes,
                                     labels = labs) +
         ggplot2::scale_x_discrete(breaks = plot_these,
-                                  labels = xaxis[plot_these,]) +
+                                  labels = xaxis) +
         ggplot2::theme(legend.position = "bottom")
-      # +
-      #   ggplot2::guides(color = ggplot2::guide_legend(nrow = 1))
-
     }
 
     # Set axis limits

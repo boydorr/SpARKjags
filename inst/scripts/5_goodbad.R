@@ -74,17 +74,20 @@ data$data.human$data %>%
 #'
 #' # 1. Control for the structure of the data
 #'
-#' * Posterior: The grey bar represents the 1st and 3rd quantile distance around the median
+#' * Posterior: The grey bar represents the 1st and 3rd quantile distance around
+#'   the median
 #' * AMR Correlation: calculated Pearson correlation using pairwise.complete.obs
-#' * Class interpretation: R when sample is resistant to at least one antibiotic, S when sample is susceptible to at least one antibiotic, otherwise NA
-#' * Samples are determined as being in the bad group when bad.p (bad.gp, bad,v, and bad.o) is greater than 0.5
+#' * Class interpretation: R when sample is resistant to at least one
+#'   antibiotic, S when sample is susceptible to at least one antibiotic,
+#'   otherwise NA
+#' * Samples are determined as being in the bad group when bad.p (bad.gp, bad,v,
+#'   and bad.o) is greater than 0.5
 #'
 #' ## 1a. Experimental structure
 #'
 #' ### res.a_naive {.tabset}
 #' response ~ antibiotic_class (naive model)
 #'
-
 
 path <- run_SpARKjags_model(data, file.path(directory, "a_naive.R"))
 res.a_naive <- get_model(path)
@@ -184,7 +187,8 @@ SpARK::METAdata %>%
   dplyr::group_by(ASSOCIATED_SPECIES, species, TYPE) %>%
   dplyr::summarise(count = dplyr::n()) %>%
   ggplot2::ggplot() + ggplot2::theme_bw() + ggplot2::coord_flip() +
-  ggplot2::geom_bar(ggplot2::aes(x = ASSOCIATED_SPECIES, y = count, fill = TYPE),
+  ggplot2::geom_bar(ggplot2::aes(x = ASSOCIATED_SPECIES, y = count,
+                                 fill = TYPE),
                     colour = "black",
                     stat = "identity") +
   ggplot2::facet_wrap(~species, scales = "free")
@@ -240,7 +244,8 @@ dplyr::bind_rows(livestock, companion, wild) %>%
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory, "a_livestock.R"), thin = 10)
+path <- run_SpARKjags_model(data_ah, file.path(directory, "a_livestock.R"),
+                            thin = 10)
 res.a_livestock <- get_model(path)
 
 #' #### Posterior
@@ -288,7 +293,8 @@ res.a_livestock
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory, "a_cattle.R"), thin = 10)
+path <- run_SpARKjags_model(data_ah, file.path(directory, "a_cattle.R"),
+                            thin = 10)
 res.a_cattle <- get_model(path)
 
 #' #### Posterior
@@ -382,7 +388,8 @@ res.a_pig
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory, "a_chicken.R"), thin = 10)
+path <- run_SpARKjags_model(data_ah, file.path(directory, "a_chicken.R"),
+                            thin = 10)
 res.a_chicken <- get_model(path)
 
 #' #### Posterior
@@ -429,7 +436,8 @@ res.a_chicken
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory, "a_livestock_subsets.R"),
+path <- run_SpARKjags_model(data_ah, file.path(directory,
+                                               "a_livestock_subsets.R"),
                   thin = 10)
 res.a_livestock_subsets <- get_model(path)
 
@@ -478,7 +486,8 @@ res.a_livestock_subsets
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory, "a_companion.R"), thin = 10)
+path <- run_SpARKjags_model(data_ah, file.path(directory, "a_companion.R"),
+                            thin = 10)
 res.a_companion <- get_model(path)
 
 #' #### Posterior
@@ -525,7 +534,8 @@ res.a_companion
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory, "a_companion_subsets.R"),
+path <- run_SpARKjags_model(data_ah, file.path(directory,
+                                               "a_companion_subsets.R"),
                   thin = 10)
 res.a_companion_subsets <- get_model(path)
 
@@ -574,7 +584,8 @@ res.a_companion_subsets
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory, "a_wild.R"), thin = 10)
+path <- run_SpARKjags_model(data_ah, file.path(directory, "a_wild.R"),
+                            thin = 10)
 res.a_wild <- get_model(path)
 
 #' #### Posterior
@@ -621,7 +632,8 @@ res.a_wild
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory, "a_wild_subsets.R"), thin = 10)
+path <- run_SpARKjags_model(data_ah, file.path(directory, "a_wild_subsets.R"),
+                            thin = 10)
 res.a_wild_subsets <- get_model(path)
 
 #' #### Posterior
@@ -669,7 +681,8 @@ res.a_wild_subsets
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory, "a_types.R"), thin = 10)
+path <- run_SpARKjags_model(data_ah, file.path(directory, "a_types.R"),
+                            thin = 10)
 res.a_types <- get_model(path)
 
 #' #### Posterior
@@ -717,7 +730,8 @@ res.a_types
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory, "a_subsets.R"), thin = 10)
+path <- run_SpARKjags_model(data_ah, file.path(directory, "a_subsets.R"),
+                            thin = 10)
 res.a_subsets <- get_model(path)
 
 #' #### Posterior
@@ -1447,10 +1461,12 @@ res.assagw
 
 
 #' ### res.assagwt_w {.tabset}
-#' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + wardtype_{ward}
+#' response ~ antibiotic_class_{goodbad} + sample_season + agegroup +
+#' wardtype_{ward}
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "assagwt_w.R"), thin = 20)
+path <- run_SpARKjags_model(data, file.path(directory, "assagwt_w.R"),
+                            thin = 20)
 res.assagwt_w <- get_model(path)
 
 #' #### Posterior
@@ -1493,10 +1509,12 @@ res.assagwt_w
 
 
 #' ### res.assaghwtw {.tabset}
-#' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + hospital + wardtype + ward
+#' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + hospital +
+#' wardtype + ward
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "assaghwtw.R"), thin = 20)
+path <- run_SpARKjags_model(data, file.path(directory, "assaghwtw.R"),
+                            thin = 20)
 res.assaghwtw <- get_model(path)
 
 #' #### Posterior
@@ -1540,10 +1558,12 @@ res.assaghwtw
 
 
 #' ### res.assagh_wt_w {.tabset}
-#' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + hospital_{wardtype_{ward}}
+#' response ~ antibiotic_class_{goodbad} + sample_season + agegroup +
+#' hospital_{wardtype_{ward}}
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "assagh_wt_w.R"), thin = 20)
+path <- run_SpARKjags_model(data, file.path(directory, "assagh_wt_w.R"),
+                            thin = 20)
 res.assagh_wt_w <- get_model(path)
 
 #' #### Posterior
@@ -1599,7 +1619,8 @@ DICtable(c("res.assagh", "res.assagwt", "res.assagw", "res.assagwt_w",
 
 
 #' ### res.assagwc {.tabset}
-#' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + ward + clinical
+#' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + ward +
+#' clinical
 #'
 
 path <- run_SpARKjags_model(data, file.path(directory, "assagwc.R"), thin = 20)
@@ -1646,7 +1667,8 @@ res.assagwc
 
 
 #' ### res.assagwcst {.tabset}
-#' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + ward + clinical + sample_type
+#' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + ward +
+#' clinical + sample_type
 #'
 
 path <- run_SpARKjags_model(data, file.path(directory, "assagwcst.R"), thin = 30)
@@ -1693,10 +1715,12 @@ res.assagwcst
 
 
 #' ### res.assagwc_st {.tabset}
-#' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + ward + clinical_{sampletype}
+#' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + ward +
+#' clinical_{sampletype}
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "assagwc_st.R"), thin = 30)
+path <- run_SpARKjags_model(data, file.path(directory, "assagwc_st.R"),
+                            thin = 30)
 res.assagwc_st <- get_model(path)
 
 #' #### Posterior
@@ -1739,10 +1763,12 @@ res.assagwc_st
 
 
 #' ### res.a_cssagwst {.tabset}
-#' response ~ antibiotic_class_{goodbad,clinical} + sample_season + agegroup + ward + sampletype
+#' response ~ antibiotic_class_{goodbad,clinical} + sample_season + agegroup +
+#' ward + sampletype
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "a_cssagwst.R"), thin = 10)
+path <- run_SpARKjags_model(data, file.path(directory, "a_cssagwst.R"),
+                            thin = 10)
 res.a_cssagwst <- get_model(path)
 
 #' #### Posterior

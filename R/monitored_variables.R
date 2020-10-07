@@ -2,6 +2,8 @@
 #'
 #' @param model model
 #'
+#' @export
+#'
 monitored_variables <- function(model) {
   tmp <- rownames(model$summary[[1]])
 

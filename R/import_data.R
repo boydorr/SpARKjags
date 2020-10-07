@@ -6,18 +6,21 @@
 import_data <- function(model, data) {
 
   # Animal lookup -----------------------------------------------------------
+
+  # List all species in SpARK dataset
   species <- SpARK::METAdata %>%
     dplyr::select(.data$ASSOCIATED_SPECIES) %>% unique() %>%
     dplyr::filter(!grepl("^Un", .data$ASSOCIATED_SPECIES),
                   !is.na(.data$ASSOCIATED_SPECIES)) %>%
-    unlist()
-  names(species) <- NULL
-  # species <- data$lookup$associated_species$associated_species
+    unlist() %>%
+    unname()
+
   group <- c("livestock", "companion", "wild")
   animal_lookup <- c(species, group)
 
 
   # Original human data -----------------------------------------------------
+
   human <- human_data(data)
 
 
@@ -38,11 +41,13 @@ import_data <- function(model, data) {
 
 
   # Posterior probability of each sample being in the bad group -------------
+
   if(any(grepl(".bad.", model$monitor))) {
     pp.badgroup <- badgroup_posterior(model, data)
-
     assertthat::assert_that(nrow(pp.badgroup) == nrow(all_data))
 
+    # If the posterior probability of a sample being in the bad group is more
+    # than 0.5, then assign 1, otherwise assign 0
     output <- all_data %>%
       merge(pp.badgroup, all.y = TRUE) %>%
       dplyr::rename(mean.p.bad = .data$Mean) %>%

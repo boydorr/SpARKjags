@@ -18,7 +18,9 @@ plot_density(model, data, var.regex, params, labels = rep(NA, length(params)))
 \item{labels}{labels}
 }
 \description{
-plot_density
+Generates a violin plot where violins represent the posterior probability of
+resistance and points represent the calculated probability of resistance to
+each antibiotic class.
 }
 \examples{
 \dontrun{

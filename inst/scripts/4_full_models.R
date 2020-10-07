@@ -91,6 +91,12 @@ res.a
 path <- run_SpARKjags_model(data, file.path(directory, "asm.R"), thin = 20)
 res.asm <- get_model(path)
 
+var.regex <- get_vars(res.asm)
+monitored_variables(res.asm)
+params <- list(`probability of resistance`)
+labels <- get_labels(data)
+res.asm %>% plot_density(data, var.regex, params, labels)
+
 #' #### Diagnostics
 res.asm %>% DIC() # 12011.55
 res.asm %>% testSSEF()
