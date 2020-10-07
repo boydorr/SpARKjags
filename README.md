@@ -81,6 +81,7 @@ Note that you must have access to the SpARK project datasets for any of this cod
 | check_fit           |  |                                       | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> |
 | data                | -                            | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
 | defineClinical      | -                            | get_human | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
+| delete_results      | Delete SpARKjags model results | -       | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
 | DIC                 | Get DIC                      | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
 | DICtable            |  |                                       | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
 | filter_pathogen     | -               | get_animal & get_human | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
@@ -103,7 +104,9 @@ Note that you must have access to the SpARK project datasets for any of this cod
 | plot_density        | Generate density plot        | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
 | plot_jags           |  |                                       | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> |
 | removeCarbapenem    | -               | get_animal & get_human | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| run_model           | Run jags model               | -         | <ul><li>[x] </li></ul> | <ul><li>[x] </li></ul> |
+| run_custom_model    | Run custom model             | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
+| run_model           | - | run_SpARKjags_model & run_custom_model | <ul><li>[x] </li></ul> | <ul><li>[x] </li></ul> |
+| run_SpARKjags_model | Run SpARKjags model          | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
 | summarise_samples   | Summarise samples            | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
 | testPSRF            | Test PSRF                    | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
 | testSSEF            | Test SSEF                    | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
