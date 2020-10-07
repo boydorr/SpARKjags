@@ -52,6 +52,11 @@ Note that you must have access to the SpARK project datasets for any of this cod
     ```
     path <- run_custom_model()
     ```
+* **Read model output into R**
+  ```
+  results <- get_model(path)
+  ```
+
 
 ## Function map
 
