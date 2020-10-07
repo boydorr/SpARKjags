@@ -14,9 +14,7 @@ res <- get_model(location)
 test_that("plot_density runs without error", {
   expect_silent(g <- plot_density(model = res,
                                   data = data,
-                                  var.regex = get_vars(res),
-                                  params = get_params(),
-                                  labels = get_labels(data)))
+                                  var.regex = get_vars(res)))
 
   expect_equal(class(g), c("egg", "gtable", "gTree", "grob", "gDesc"))
 })
