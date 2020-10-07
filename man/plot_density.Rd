@@ -12,8 +12,6 @@ plot_density(model, data, var.regex)
 \item{data}{data input}
 
 \item{var.regex}{a regex \code{string} to filter variables}
-
-\item{params}{params}
 }
 \description{
 Generates a violin plot where violins represent the posterior probability of

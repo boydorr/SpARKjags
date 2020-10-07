@@ -7,7 +7,6 @@
 #' @param model a \code{runjags} object containing model results
 #' @param data data input
 #' @param var.regex a regex \code{string} to filter variables
-#' @param params params
 #'
 #' @export
 #'
