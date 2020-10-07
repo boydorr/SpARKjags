@@ -16,8 +16,11 @@ save_to <- "tmp_test_dir/h.rds"
 
 test_that("a runjags object is read in", {
   # Run model and save output to tmp/a.rds
-  expect_warning(path <- run_model(data, "individual_models/h.R",
-                           save_to = save_to))
+  expect_warning(
+    path <- run_SpARKjags_model(data = data,
+                                SpARKjags_model = "individual_models/h.R",
+                                save_to = save_to)
+  )
 
   expect_silent(get_model(path))
 })

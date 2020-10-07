@@ -34,3 +34,8 @@ test_that("plot_antibiotics runs without error", {
 
   expect_equal(class(g), c("egg", "gtable", "gTree", "grob", "gDesc"))
 })
+
+
+
+# write cache_model() function to replace run model
+# write delete_all_caches() function

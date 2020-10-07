@@ -1,5 +1,5 @@
 #' ---
-#' title: Seemingly unrelated regressions
+#' title: Full models
 #' date: Feb 2020
 #' output:
 #'   html_document:
@@ -44,8 +44,8 @@ plotnull <- function(model, data) {
 
 #' ### null {.tabset}
 
-# run_model(data, file.path(directory, "null.R"))
-res.null <- get_model(file.path("..", directory, "null.rds"))
+path <- run_SpARKjags_model(data, file.path(directory, "null.R"))
+res.null <- get_model(path)
 
 #' #### Diagnostics
 res.null %>% DIC() # 13030.99
@@ -62,9 +62,9 @@ res.null %>% testPSRF()
 #'
 
 #' ### ~ antibiotic class {.tabset}
-
-# run_model(data, file.path(directory, "a.R"))
-res.a <- get_model(file.path("..", directory, "a.rds"))
+#+ a
+path <- run_SpARKjags_model(data, file.path(directory, "a.R"))
+res.a <- get_model(path)
 
 #' #### Diagnostics
 res.a %>% DIC() # 12262.57
@@ -87,9 +87,9 @@ res.a
 
 
 #' ### ~ antibiotic_class + sample_month {.tabset}
-
-# run_model(data, file.path(directory, "asm.R"), thin = 20)
-res.asm <- get_model(file.path("..", directory, "asm.rds"))
+#+ asm
+path <- run_SpARKjags_model(data, file.path(directory, "asm.R"), thin = 20)
+res.asm <- get_model(path)
 
 #' #### Diagnostics
 res.asm %>% DIC() # 12011.55
@@ -112,9 +112,9 @@ res.asm
 
 
 #' ### ~ antibiotic_class + sample_season {.tabset}
-
-# run_model(data, file.path(directory, "ass.R"), thin = 20)
-res.ass <- get_model(file.path("..", directory, "ass.rds"))
+#+ ass
+path <- run_SpARKjags_model(data, file.path(directory, "ass.R"), thin = 20)
+res.ass <- get_model(path)
 
 #' #### Diagnostics
 res.ass %>% DIC() # 12097.86
@@ -147,9 +147,9 @@ DICtable(c("res.null", "res.a", "res.asm", "res.ass"))
 #'
 
 #' ### ~ antibiotic_class + sample_month + gender {.tabset}
-
-# run_model(data, file.path(directory, "asmg.R"), thin = 20)
-res.asmg <- get_model(file.path("..", directory, "asmg.rds"))
+#+ asmg
+path <- run_SpARKjags_model(data, file.path(directory, "asmg.R"), thin = 20)
+res.asmg <- get_model(path)
 
 #' #### Diagnostics
 res.asmg %>% DIC() # 11862.36
@@ -165,9 +165,9 @@ res.asmg %>% plot_caterpillar(get_vars(.))
 res.asmg %>% plot_autocorr(get_vars(.))
 
 #' ### ~ antibiotic_class + sample_month + agegroup {.tabset}
-
-# run_model(data, file.path(directory, "asmag.R"), thin = 20)
-res.asmag <- get_model(file.path("..", directory, "asmag.rds"))
+#+ asmag
+path <- run_SpARKjags_model(data, file.path(directory, "asmag.R"), thin = 20)
+res.asmag <- get_model(path)
 
 #' #### Diagnostics
 res.asmag %>% DIC() # 11786.2
@@ -190,9 +190,9 @@ res.asmag
 
 
 #' ### ~ antibiotic_class + sample_month + agegroup2 {.tabset}
-
-# run_model(data, file.path(directory, "asmag2.R"))
-res.asmag2 <- get_model(file.path("..", directory, "asmag2.rds"))
+#+ asmag2
+path <- run_SpARKjags_model(data, file.path(directory, "asmag2.R"), thin = 20)
+res.asmag2 <- get_model(path)
 
 #' #### Diagnostics
 res.asmag2 %>% DIC() # 11788.27
@@ -215,9 +215,9 @@ res.asmag2
 
 
 #' ### ~ antibiotic_class + sample_month + age {.tabset}
-
-# run_model(data, file.path(directory, "asmage.R"), thin = 20)
-res.asmage <- get_model(file.path("..", directory, "asmage.rds"))
+#+ asmage
+path <- run_SpARKjags_model(data, file.path(directory, "asmage.R"), thin = 20)
+res.asmage <- get_model(path)
 
 #' #### Diagnostics
 res.asmage %>% DIC() # 11993.5
@@ -236,9 +236,9 @@ res.asmage
 
 
 #' ### ~ antibiotic_class + sample_month + age^2 + age {.tabset}
-
-# run_model(data, file.path(directory, "asmagesq.R"), thin = 20)
-res.asmagesq <- get_model(file.path("..", directory, "asmagesq.rds"))
+#+ asmagesq
+path <- run_SpARKjags_model(data, file.path(directory, "asmagesq.R"), thin = 20)
+res.asmagesq <- get_model(path)
 
 #' #### Diagnostics
 res.asmagesq %>% DIC() # 11836.08
@@ -257,9 +257,9 @@ res.asmagesq
 
 
 #' ### ~ antibiotic_class + sample_month + agegroup + gender {.tabset}
-
-# run_model(data, file.path(directory, "asmagg.R"), thin = 20)
-res.asmagg <- get_model(file.path("..", directory, "asmagg.rds"))
+#+ asmagg
+path <- run_SpARKjags_model(data, file.path(directory, "asmagg.R"), thin = 20)
+res.asmagg <- get_model(path)
 
 #' #### Diagnostics
 res.asmagg %>% DIC() # 11647.46
@@ -289,9 +289,9 @@ DICtable(c("res.asmg", "res.asmag", "res.asmag2",
 #'
 
 #' ### ~ antibiotic_class + sample_month + agegroup + gender + hospital {.tabset}
-
-# run_model(data, file.path(directory, "asmaggh.R"), thin = 20)
-res.asmaggh <- get_model(file.path("..", directory, "asmaggh.rds"))
+#+ asmaggh
+path <- run_SpARKjags_model(data, file.path(directory, "asmaggh.R"), thin = 20)
+res.asmaggh <- get_model(path)
 
 #' #### Diagnostics
 res.asmaggh %>% DIC() # 10973.54
@@ -315,9 +315,9 @@ res.asmaggh
 
 
 #' ### ~ antibiotic_class + sample_month + agegroup + gender + wardtype {.tabset}
-
-# run_model(data, file.path(directory, "asmaggwt.R"), thin = 10)
-res.asmaggwt <- get_model(file.path("..", directory, "asmaggwt.rds"))
+#+ asmaggwt
+path <- run_SpARKjags_model(data, file.path(directory, "asmaggwt.R"), thin = 10)
+res.asmaggwt <- get_model(path)
 
 #' #### Diagnostics
 res.asmaggwt %>% DIC() # 11057.68
@@ -337,8 +337,8 @@ res.asmaggwt
 
 #' ### ~ antibiotic_class + sample_month + agegroup + gender + ward {.tabset}
 
-# run_model(data, file.path(directory, "asmaggw.R"), thin = 10)
-res.asmaggw <- get_model(file.path("..", directory, "asmaggw.rds"))
+path <- run_SpARKjags_model(data, file.path(directory, "asmaggw.R"), thin = 10)
+res.asmaggw <- get_model(path)
 
 #' #### Diagnostics
 res.asmaggw %>% DIC() # 9914.729
@@ -359,8 +359,8 @@ res.asmaggw
 #' ### ~ antibiotic_class + sample_month + agegroup + gender + wardtype_{ward} {.tabset}
 
 #+ asmaggwt_w
-# run_model(data, file.path(directory, "asmaggwt_w.R"), thin = 10)
-res.asmaggwt_w <- get_model(file.path("..", directory, "asmaggwt_w.rds"))
+path <- run_SpARKjags_model(data, file.path(directory, "asmaggwt_w.R"), thin = 10)
+res.asmaggwt_w <- get_model(path)
 
 #' #### Diagnostics
 res.asmaggwt_w %>% DIC() # 9915.182
@@ -381,8 +381,8 @@ res.asmaggwt_w
 #' ### ~ antibiotic_class + sample_month + agegroup + gender + hospital + wardtype + ward {.tabset}
 
 #+ asmagghwtw
-# run_model(data, file.path(directory, "asmagghwtw.R"), thin = 10)
-res.asmagghwtw <- get_model(file.path("..", directory, "asmagghwtw.rds"))
+path <- run_SpARKjags_model(data, file.path(directory, "asmagghwtw.R"), thin = 10)
+res.asmagghwtw <- get_model(path)
 
 #' #### Diagnostics
 res.asmagghwtw %>% DIC() # 9916.447
@@ -407,8 +407,8 @@ res.asmagghwtw
 #' ### ~ antibiotic_class + sample_month + agegroup + gender + hospital_{wardtype_{ward}} {.tabset}
 
 #+ asmaggh_wt_w
-# run_model(data, file.path(directory, "asmaggh_wt_w.R"), thin = 10)
-res.asmaggh_wt_w <- get_model(file.path("..", directory, "asmaggh_wt_w.rds"))
+path <- run_SpARKjags_model(data, file.path(directory, "asmaggh_wt_w.R"), thin = 10)
+res.asmaggh_wt_w <- get_model(path)
 
 #' #### Diagnostics
 res.asmaggh_wt_w %>% DIC() # 9916.827
@@ -449,7 +449,8 @@ DICtable(c("res.asmaggh", "res.asmaggwt", "res.asmaggw", "res.asmaggwt_w",
 
 #' ### This is the best null model
 #+ best null
-res.asmaggw <- get_model(file.path("..", directory, "asmaggw.rds"))
+path <- run_SpARKjags_model(data, file.path(directory, "asmaggw.R"), thin = 10)
+res.asmaggw <- get_model(path)
 
 plotnull(res.asmaggw, data)
 
@@ -460,9 +461,11 @@ data.carb.res <- jags_data(classification = "all",
                            pathogen = "Klebsiella pneumoniae",
                            onlyCarbapenem = T,
                            removeQuinPen = T)
-# run_model(data.carb.res, "asmaggw_CarbRes", directory, thin = 10)
+
 #+ best null carb res
-res.asmaggw_CarbRes <- get_model(file.path("..", directory, "asmaggw_CarbRes.rds"))
+path <- run_SpARKjags_model(data.carb.res, file.path(directory, "asmaggw_CarbRes.R"),
+                  thin = 10)
+res.asmaggw_CarbRes <- get_model(path)
 
 plotnull(res.asmaggw_CarbRes, data)
 
@@ -474,9 +477,10 @@ data.carb.sus <- jags_data(classification = "all",
                            removeCarbapenem = T,
                            removeQuinPen = T)
 
-# run_model(data.carb.sus, "asmaggw_CarbSus", directory, thin = 10)
 #+ best null carb sus
-res.asmaggw_CarbSus <- get_model(file.path("..", directory, "asmaggw_CarbSus.rds"))
+path <- run_SpARKjags_model(data.carb.sus, file.path(directory, "asmaggw_CarbSus.R"),
+                  thin = 10)
+res.asmaggw_CarbSus <- get_model(path)
 
 plotnull(res.asmaggw_CarbSus, data)
 
@@ -492,8 +496,9 @@ plotnull(res.asmaggw_CarbSus, data)
 #' ### ~ antibioticclass + sample_month + agegroup + gender + ward + clinical {.tabset}
 
 #+ asmaggwc
-# run_model(data, file.path(directory, "asmaggwc.R"), thin = 10)
-res.asmaggwc <- get_model(file.path("..", directory, "asmaggwc.rds"))
+
+path <- run_SpARKjags_model(data, file.path(directory, "asmaggwc.R"), thin = 10)
+res.asmaggwc <- get_model(path)
 
 #' #### Diagnostics
 res.asmaggwc %>% DIC() # 9911.505
@@ -518,8 +523,8 @@ res.asmaggwc
 #' ### ~ antibioticclass + sample_month + agegroup + gender + ward + clinical + sampletype {.tabset}
 
 #+ asmaggwcst
-# run_model(data, file.path(directory, "asmaggwcst.R"), thin = 10)
-res.asmaggwcst <- get_model(file.path("..", directory, "asmaggwcst.rds"))
+path <- run_SpARKjags_model(data, file.path(directory, "asmaggwcst.R"), thin = 10)
+res.asmaggwcst <- get_model(path)
 
 #' #### Diagnostics
 res.asmaggwcst %>% DIC() # 9764.723
@@ -544,8 +549,8 @@ res.asmaggwcst
 #' ### ~ antibioticclass + sample_month + agegroup + gender + ward + clinical_{sampletype} {.tabset}
 
 #+ asmaggwc_st
-# run_model(data, file.path(directory, "asmaggwc_st.R"), thin = 10)
-res.asmaggwc_st <- get_model(file.path("..", directory, "asmaggwc_st.rds"))
+path <- run_SpARKjags_model(data, file.path(directory, "asmaggwc_st.R"), thin = 10)
+res.asmaggwc_st <- get_model(path)
 
 #' #### Diagnostics
 res.asmaggwc_st %>% DIC() # 9748.901

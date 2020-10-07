@@ -1,2 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+/inst/full_models/*.rds
+/inst/goodbad_models/*.rds
+/inst/individual_models/*.rds

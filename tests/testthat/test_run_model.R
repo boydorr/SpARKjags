@@ -16,11 +16,12 @@ save_to <- "tmp_test_dir/h.rds"
 
 test_that("a runjags object is generated", {
   # Run model and save output to tmp_test_dir/a.rds
-    expect_warning(
-      run_model(data, "individual_models/h.R",
-                save_to = save_to),
-      "No initial values were provided - JAGS will use the same initial values for all chains"
-    )
+  expect_warning(
+    run_SpARKjags_model(data = data,
+                        SpARKjags_model = "individual_models/h.R",
+                        save_to = save_to),
+    "No initial values were provided - JAGS will use the same initial values for all chains"
+  )
 
   # Read output file
   tmp <- readRDS(save_to)

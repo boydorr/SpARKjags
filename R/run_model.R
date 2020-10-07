@@ -1,68 +1,53 @@
 #' run_model
 #'
-#' @param data data
-#' @param SpARKjags_model model path e.g. goodbad_models/a.R
-#' @param thin thin
-#' @param user_model user_model
-#' @param save_to save_to
+#' Run model. If model results already exists, return file location.
 #'
-#' @export
+#' @param data a \code{list} output from the jags_data function
+#' @param location a \code{string} specifying a model location
+#' @param thin (optional; default = 1) an \code{integer} specifying (from
+#' \code{runjags::run.jags()}) the thinning interval to be used in JAGS.
+#' Increasing the thinning interval may reduce autocorrelation, and therefore
+#' reduce the number of samples required, but will increase the time required to
+#' run the simulation. Using this option thinning is performed directly in JAGS,
+#' rather than on an existing MCMC object.
+#' @param save_to (optional) a \code{string} specifying a custom save location
+#' for the model output. If save_to is missing, the model output will be
+#' saved in the same directory as the model script.
 #'
-run_model <- function(data, SpARKjags_model, thin, user_model, save_to) {
+#' @return Returns code{string} specifying the location of the model output
+#'
+run_model <- function(data,
+                      location,
+                      thin,
+                      save_to) {
 
-  # Check only one model script has been input
-  if(!missing(SpARKjags_model) & !missing(user_model))
-    stop("Input SpARKjags_model location or user_model location, not both.")
+  # If file already exists, return its path
+  if(file.exists(save_to)) {
+    message("File already exists")
+    return(save_to)
 
-  # Find model script
-  if(missing(SpARKjags_model)) {
-    location <- user_model
   } else {
-    if(grepl("/", SpARKjags_model))
-    location <- system.file(SpARKjags_model,
-                            package = "SpARKjags")
-  }
+    # If directory doesn't exist, create it
+    if(!grepl("/", save_to))
+      save_to <- paste0("./", save_to)
+    directory <- dirname(save_to)
+    if(!file.exists(directory))
+      dir.create(directory, recursive = TRUE)
 
-  # If the user doesn't provide a save_to location, save it in the same
-  # directory as the model
-  if(missing(save_to)) {
-    save_to <- gsub(".r$", "", location)
-    save_to <- gsub(".R$", "", location)
-    save_to <- paste0(save_to, ".rds")
-  }
-  assertthat::assert_that(grepl(".rds$", save_to))
-
-  # If file already exists, stop
-  if(file.exists(save_to))
-    stop(paste0("A file already exists at this location: ", save_to))
-
-  # If directory doesn't exist, create it
-  if(!grepl("/", save_to))
-    save_to <- paste0("./", save_to)
-  directory <- dirname(save_to)
-  if(!file.exists(directory))
-    dir.create(directory, recursive = TRUE)
-
-  # Run model
-  if(missing(thin)) {
-    results <- runjags::run.jags(location,
-                                 data = data$jags,
-                                 n.chains = 2,
-                                 silent.jags = T)
-  } else {
+    # Run model
     results <- runjags::run.jags(location,
                                  data = data$jags,
                                  n.chains = 2,
                                  silent.jags = T,
                                  thin = thin)
-  }
 
-  # If a results summary hasn't been generated, generate it
-  if(!results$summary.available) {
-    results <- runjags::add.summary(results)
-  }
+    # If a results summary hasn't been generated, generate it
+    if(!results$summary.available) {
+      results <- runjags::add.summary(results)
+    }
 
-  # Save results
-  saveRDS(results, save_to)
-  save_to
+    # Save results
+    saveRDS(results, save_to)
+    return(save_to)
+  }
 }
