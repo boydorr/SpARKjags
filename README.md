@@ -41,17 +41,17 @@ Note that you must have access to the SpARK project datasets for any of this cod
   ```
   This will save the model output to the same directory as the model script, within the SpARKjags package itself. The `run_SpARKjags_model()` function will return the path of the model output.
 
-* **Choose your own model output save location**
-  ```
-  path <- run_SpARKjags_model(data = data,
-                              SpARKjags_model = "individual_models/h.R",
-                              saveto = "mylocation/myresults.rds)
-  ```
+  * **Choose your own model output save location**
+    ```
+    path <- run_SpARKjags_model(data = data,
+                                SpARKjags_model = "individual_models/h.R",
+                                saveto = "mylocation/myresults.rds)
+    ```
 
-* **Run your own model**
-  ```
-  path <- run_custom_model()
-  ```
+  * **Run your own model**
+    ```
+    path <- run_custom_model()
+    ```
 
 ## Function map
 
