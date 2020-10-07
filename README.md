@@ -56,7 +56,7 @@ Note that you must have access to the SpARK project datasets for any of this cod
   ```
   results <- get_model(path)
   ```
-* **Delete SpARKjags model output**
+* **Delete SpARKjags model output**  
   Remember that `run_SpARKjags_model()` will save the model output to the the same directory as the model script (within the SpARKjags package) if you don't define the `save_to` argument? To delete these outputs:
   ```
   # Delete single model output
