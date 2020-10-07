@@ -3,6 +3,26 @@
 [![test-build](https://github.com/soniamitchell/SpARKjags/workflows/build/badge.svg)](https://github.com/soniamitchell/SpARKjags/actions)
 [![codecov](https://codecov.io/gh/soniamitchell/SpARKjags/branch/master/graph/badge.svg?=1)](https://codecov.io/gh/soniamitchell/SpARKjags)
 
+## Table of contents
+* [General info](#general-info)
+* [Setup](#setup)
+* [How to](#how-to)
+* [Functions](#functions)
+
+## General info
+This package contains JAGS models and associated functionality for use with SpARK project data.
+
+## Setup
+To install this package in R, run:
+```
+install.packages("devtools")
+devtools::install_github("soniamitchell/SpARKjags")
+```
+
+## How to
+To run a model
+
+## Functions
 
 | Function            | Description                  | Called by | Checked                | Tested                 |
 | ------------------- | ---------------------------- | --------- | ---------------------- | ---------------------- |
