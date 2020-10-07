@@ -45,7 +45,7 @@ Note that you must have access to the SpARK project datasets for any of this cod
     ```R
     path <- run_SpARKjags_model(data = data,
                                 SpARKjags_model = "individual_models/h.R",
-                                saveto = "myresults_dir/myresults.rds)
+                                save_to = "myresults_dir/myresults.rds)
     ```
 
   * **Run your own model**
