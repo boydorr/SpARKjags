@@ -95,18 +95,14 @@ res.a_naive <- get_model(path)
 #' #### Posterior
 #+ res.a_naive, fig.height = 6
 var.regex <- get_vars(res.a_naive)
-params <- list(`probability of resistance` = "prob", "intercept", "sd")
-tmp <- data$lookup$antibiotic_class %>%
-  dplyr::mutate(index = paste0("a.prob[", 1:13, "]"))
-labels <- list(tmp, NA, NA)
-res.a_naive %>% plot_density(data, var.regex, params, labels)
+res.a_naive %>% plot_density(data, var.regex)
 
 #' #### Diagnostics
 res.a_naive %>% DIC() # 6166.735
 res.a_naive %>% testSSEF()
 res.a_naive %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.a_naive %>% plot_caterpillar(var.regex)
 
@@ -133,9 +129,7 @@ res.a <- get_model(path)
 #' #### Posterior
 #+ res.a, fig.height = 10
 var.regex <- get_vars(res.a)
-params <- get_params()
-labels <- get_labels(data)
-res.a %>% plot_density(data, var.regex, params, labels)
+res.a %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.a %>% summarise_samples(data)
@@ -153,7 +147,7 @@ res.a %>% DIC() # 6151.664
 res.a %>% testSSEF()
 res.a %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.a %>% plot_caterpillar(var.regex)
 
@@ -251,9 +245,7 @@ res.a_livestock <- get_model(path)
 #' #### Posterior
 #+ res.a_livestock, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data_ah)
-res.a_livestock %>% plot_density(data_ah, var.regex, params, labels)
+res.a_livestock %>% plot_density(data_ah, var.regex)
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -272,7 +264,7 @@ res.a_livestock %>% DIC() # 6151.664
 res.a_livestock %>% testSSEF()
 res.a_livestock %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.a_livestock %>% plot_caterpillar(var.regex)
 
@@ -300,9 +292,7 @@ res.a_cattle <- get_model(path)
 #' #### Posterior
 #+ res.a_cattle, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data_ah)
-res.a_cattle %>% plot_density(data_ah, var.regex, params, labels)
+res.a_cattle %>% plot_density(data_ah, var.regex)
 
 #' #### Statistics
 res.a_cattle %>% summarise_samples(data_ah)
@@ -320,7 +310,7 @@ res.a_cattle %>% DIC() # 6151.664
 res.a_cattle %>% testSSEF()
 res.a_cattle %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.a_cattle %>% plot_caterpillar(var.regex)
 
@@ -347,9 +337,7 @@ res.a_pig <- get_model(path)
 #' #### Posterior
 #+ res.a_pig, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data_ah)
-res.a_pig %>% plot_density(data_ah, var.regex, params, labels)
+res.a_pig %>% plot_density(data_ah, var.regex)
 
 #' #### Statistics
 res.a_pig %>% summarise_samples(data_ah)
@@ -367,7 +355,7 @@ res.a_pig %>% DIC() # 6151.664
 res.a_pig %>% testSSEF()
 res.a_pig %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.a_pig %>% plot_caterpillar(var.regex)
 
@@ -395,9 +383,7 @@ res.a_chicken <- get_model(path)
 #' #### Posterior
 #+ res.a_chicken, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data_ah)
-res.a_chicken %>% plot_density(data_ah, var.regex, params, labels)
+res.a_chicken %>% plot_density(data_ah, var.regex)
 
 #' #### Statistics
 res.a_chicken %>% summarise_samples(data_ah)
@@ -415,7 +401,7 @@ res.a_chicken %>% DIC() # 6151.664
 res.a_chicken %>% testSSEF()
 res.a_chicken %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.a_chicken %>% plot_caterpillar(var.regex)
 
@@ -438,15 +424,13 @@ res.a_chicken
 
 path <- run_SpARKjags_model(data_ah, file.path(directory,
                                                "a_livestock_subsets.R"),
-                  thin = 10)
+                            thin = 10)
 res.a_livestock_subsets <- get_model(path)
 
 #' #### Posterior
 #+ res.a_livestock_subsets, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data_ah)
-res.a_livestock_subsets %>% plot_density(data_ah, var.regex, params, labels)
+res.a_livestock_subsets %>% plot_density(data_ah, var.regex)
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -465,7 +449,7 @@ res.a_livestock_subsets %>% DIC() # 6151.664
 res.a_livestock_subsets %>% testSSEF()
 res.a_livestock_subsets %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.a_livestock_subsets %>% plot_caterpillar(var.regex)
 
@@ -493,9 +477,7 @@ res.a_companion <- get_model(path)
 #' #### Posterior
 #+ a_companion, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data_ah)
-res.a_companion %>% plot_density(data_ah, var.regex, params, labels)
+res.a_companion %>% plot_density(data_ah, var.regex)
 
 #' #### Statistics
 res.a_companion %>% summarise_samples(data_ah)
@@ -513,7 +495,7 @@ res.a_companion %>% DIC() # 6151.664
 res.a_companion %>% testSSEF()
 res.a_companion %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.a_companion %>% plot_caterpillar(var.regex)
 
@@ -536,15 +518,13 @@ res.a_companion
 
 path <- run_SpARKjags_model(data_ah, file.path(directory,
                                                "a_companion_subsets.R"),
-                  thin = 10)
+                            thin = 10)
 res.a_companion_subsets <- get_model(path)
 
 #' #### Posterior
 #+ res.a_companion_subsets, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data_ah)
-res.a_companion_subsets %>% plot_density(data_ah, var.regex, params, labels)
+res.a_companion_subsets %>% plot_density(data_ah, var.regex)
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -563,7 +543,7 @@ res.a_companion_subsets %>% DIC() # 6151.664
 res.a_companion_subsets %>% testSSEF()
 res.a_companion_subsets %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.a_companion_subsets %>% plot_caterpillar(var.regex)
 
@@ -591,9 +571,7 @@ res.a_wild <- get_model(path)
 #' #### Posterior
 #+ a_wild, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data_ah)
-res.a_wild %>% plot_density(data_ah, var.regex, params, labels)
+res.a_wild %>% plot_density(data_ah, var.regex)
 
 #' #### Statistics
 res.a_wild %>% summarise_samples(data_ah)
@@ -611,7 +589,7 @@ res.a_wild %>% DIC() # 6151.664
 res.a_wild %>% testSSEF()
 res.a_wild %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.a_wild %>% plot_caterpillar(var.regex)
 
@@ -639,9 +617,7 @@ res.a_wild_subsets <- get_model(path)
 #' #### Posterior
 #+ res.a_wild_subsets, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data_ah)
-res.a_wild_subsets %>% plot_density(data_ah, var.regex, params, labels)
+res.a_wild_subsets %>% plot_density(data_ah, var.regex)
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -660,7 +636,7 @@ res.a_wild_subsets %>% DIC() # 6151.664
 res.a_wild_subsets %>% testSSEF()
 res.a_wild_subsets %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.a_wild_subsets %>% plot_caterpillar(var.regex)
 
@@ -688,9 +664,7 @@ res.a_types <- get_model(path)
 #' #### Posterior
 #+ res.a_types, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data_ah)
-res.a_types %>% plot_density(data_ah, var.regex, params, labels)
+res.a_types %>% plot_density(data_ah, var.regex)
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -709,7 +683,7 @@ res.a_types %>% DIC() # 6151.664
 res.a_types %>% testSSEF()
 res.a_types %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.a_types %>% plot_caterpillar(var.regex)
 
@@ -737,9 +711,7 @@ res.a_subsets <- get_model(path)
 #' #### Posterior
 #+ res.a_subsets, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data_ah)
-res.a_subsets %>% plot_density(data_ah, var.regex, params, labels)
+res.a_subsets %>% plot_density(data_ah, var.regex)
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -758,7 +730,7 @@ res.a_subsets %>% DIC() # 6151.664
 res.a_subsets %>% testSSEF()
 res.a_subsets %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.a_subsets %>% plot_caterpillar(var.regex)
 
@@ -786,9 +758,7 @@ res.ac1 <- get_model(path)
 #' #### Posterior
 #+ res.ac1, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.ac1 %>% plot_density(data, var.regex, params, labels)
+res.ac1 %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.ac1 %>% summarise_samples(data)
@@ -806,7 +776,7 @@ res.ac1 %>% DIC() # 6156.994
 res.ac1 %>% testSSEF()
 res.ac1 %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.ac1 %>% plot_caterpillar(var.regex)
 
@@ -833,9 +803,7 @@ res.ac2 <- get_model(path)
 #' #### Posterior
 #+ res.ac2, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.ac2 %>% plot_density(data, var.regex, params, labels)
+res.ac2 %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.ac2 %>% summarise_samples(data)
@@ -853,7 +821,7 @@ res.ac2 %>% DIC() # 6079.197
 res.ac2 %>% testSSEF()
 res.ac2 %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.ac2 %>% plot_caterpillar(var.regex)
 
@@ -880,9 +848,7 @@ res.a_c <- get_model(path)
 #' #### Posterior
 #+ res.a_c, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.a_c %>% plot_density(data, var.regex, params, labels)
+res.a_c %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.a_c %>% summarise_samples(data)
@@ -900,7 +866,7 @@ res.a_c %>% DIC() # 6045.375
 res.a_c %>% testSSEF()
 res.a_c %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.a_c %>% plot_caterpillar(var.regex)
 
@@ -932,9 +898,7 @@ res.asm <- get_model(path)
 #' #### Posterior
 #+ res.asm, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.asm %>% plot_density(data, var.regex, params, labels)
+res.asm %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.asm %>% summarise_samples(data)
@@ -952,7 +916,7 @@ res.asm %>% DIC() # 6065.661
 res.asm %>% testSSEF()
 res.asm %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.asm %>% plot_caterpillar(var.regex)
 
@@ -979,9 +943,7 @@ res.ass <- get_model(path)
 #' #### Posterior
 #+ res.ass, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.ass %>% plot_density(data, var.regex, params, labels)
+res.ass %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.ass %>% summarise_samples(data)
@@ -999,7 +961,7 @@ res.ass %>% DIC() # 6049.671
 res.ass %>% testSSEF()
 res.ass %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.ass %>% plot_caterpillar(var.regex)
 
@@ -1035,9 +997,7 @@ res.assg <- get_model(path)
 #' #### Posterior
 #+ res.assg, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.assg %>% plot_density(data, var.regex, params, labels)
+res.assg %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.assg %>% summarise_samples(data)
@@ -1055,7 +1015,7 @@ res.assg %>% DIC() # 6035.019
 res.assg %>% testSSEF()
 res.assg %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.assg %>% plot_caterpillar(var.regex)
 
@@ -1082,9 +1042,7 @@ res.assag <- get_model(path)
 #' #### Posterior
 #+ res.assag, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.assag %>% plot_density(data, var.regex, params, labels)
+res.assag %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.assag %>% summarise_samples(data)
@@ -1102,7 +1060,7 @@ res.assag %>% DIC() # 6030.135
 res.assag %>% testSSEF()
 res.assag %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.assag %>% plot_caterpillar(var.regex)
 
@@ -1129,9 +1087,7 @@ res.assag2 <- get_model(path)
 #' #### Posterior
 #+ res.assag2, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.assag2 %>% plot_density(data, var.regex, params, labels)
+res.assag2 %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.assag2 %>% summarise_samples(data)
@@ -1149,7 +1105,7 @@ res.assag2 %>% DIC() # 6047.175
 res.assag2 %>% testSSEF()
 res.assag2 %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.assag2 %>% plot_caterpillar(var.regex)
 
@@ -1176,9 +1132,7 @@ res.assage <- get_model(path)
 #' #### Posterior
 #+ res.assage, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.assage %>% plot_density(data, var.regex, params, labels)
+res.assage %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.assage %>% summarise_samples(data)
@@ -1196,7 +1150,7 @@ res.assage %>% DIC() # 6032.315
 res.assage %>% testSSEF()
 res.assage %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.assage %>% plot_caterpillar(var.regex)
 
@@ -1223,9 +1177,7 @@ res.assagesq <- get_model(path)
 #' #### Posterior
 #+ res.assagesq, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.assagesq %>% plot_density(data, var.regex, params, labels)
+res.assagesq %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.assagesq %>% summarise_samples(data)
@@ -1243,7 +1195,7 @@ res.assagesq %>% DIC() # 6095.407
 res.assagesq %>% testSSEF()
 res.assagesq %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.assagesq %>% plot_caterpillar(var.regex)
 
@@ -1271,9 +1223,7 @@ res.assagg <- get_model(path)
 #' #### Posterior
 #+ res.assagg, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.assagg %>% plot_density(data, var.regex, params, labels)
+res.assagg %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.assagg %>% summarise_samples(data)
@@ -1291,7 +1241,7 @@ res.assagg %>% DIC() # 6049.079
 res.assagg %>% testSSEF()
 res.assagg %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.assagg %>% plot_caterpillar(var.regex)
 
@@ -1329,9 +1279,7 @@ res.assagh <- get_model(path)
 #' #### Posterior
 #+ res.assagh, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.assagh %>% plot_density(data, var.regex, params, labels)
+res.assagh %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.assagh %>% summarise_samples(data)
@@ -1349,7 +1297,7 @@ res.assagh %>% DIC() # 5998.832
 res.assagh %>% testSSEF()
 res.assagh %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.assagh %>% plot_caterpillar(var.regex)
 
@@ -1376,9 +1324,7 @@ res.assagwt <- get_model(path)
 #' #### Posterior
 #+ res.assagwt, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.assagwt %>% plot_density(data, var.regex, params, labels)
+res.assagwt %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.assagwt %>% summarise_samples(data)
@@ -1396,7 +1342,7 @@ res.assagwt %>% DIC() # 5953.609
 res.assagwt %>% testSSEF()
 res.assagwt %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.assagwt %>% plot_caterpillar(var.regex)
 
@@ -1423,9 +1369,7 @@ res.assagw <- get_model(path)
 #' #### Posterior
 #+ res.assagw, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.assagw %>% plot_density(data, var.regex, params, labels)
+res.assagw %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.assagw %>% summarise_samples(data)
@@ -1443,7 +1387,7 @@ res.assagw %>% DIC() # 5883.045
 res.assagw %>% testSSEF()
 res.assagw %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.assagw %>% plot_caterpillar(var.regex)
 
@@ -1472,9 +1416,7 @@ res.assagwt_w <- get_model(path)
 #' #### Posterior
 #+ res.assagwt_w, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.assagwt_w %>% plot_density(data, var.regex, params, labels)
+res.assagwt_w %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.assagwt_w %>% summarise_samples(data)
@@ -1492,7 +1434,7 @@ res.assagwt_w %>% DIC() # 5882.934
 res.assagwt_w %>% testSSEF()
 res.assagwt_w %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.assagwt_w %>% plot_caterpillar(var.regex)
 
@@ -1520,9 +1462,7 @@ res.assaghwtw <- get_model(path)
 #' #### Posterior
 #+ res.assaghwtw, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.assaghwtw %>% plot_density(data, var.regex, params, labels)
+res.assaghwtw %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.assaghwtw %>% summarise_samples(data)
@@ -1540,7 +1480,7 @@ res.assaghwtw %>% DIC() # 5885.554
 res.assaghwtw %>% testSSEF()
 res.assaghwtw %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.assaghwtw %>% plot_caterpillar(var.regex)
 
@@ -1569,9 +1509,7 @@ res.assagh_wt_w <- get_model(path)
 #' #### Posterior
 #+ res.assagh_wt_w, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.assagh_wt_w %>% plot_density(data, var.regex, params, labels)
+res.assagh_wt_w %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.assagh_wt_w %>% summarise_samples(data)
@@ -1589,7 +1527,7 @@ res.assagh_wt_w %>% DIC() # 5882.687
 res.assagh_wt_w %>% testSSEF()
 res.assagh_wt_w %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.assagh_wt_w %>% plot_caterpillar(var.regex)
 
@@ -1629,9 +1567,7 @@ res.assagwc <- get_model(path)
 #' #### Posterior
 #+ res.assagwc, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.assagwc %>% plot_density(data, var.regex, params, labels)
+res.assagwc %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.assagwc %>% summarise_samples(data)
@@ -1649,7 +1585,7 @@ res.assagwc %>% DIC() # 5886.387
 res.assagwc %>% testSSEF()
 res.assagwc %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.assagwc %>% plot_caterpillar(var.regex)
 
@@ -1677,9 +1613,7 @@ res.assagwcst <- get_model(path)
 #' #### Posterior
 #+ res.assagwcst, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.assagwcst %>% plot_density(data, var.regex, params, labels)
+res.assagwcst %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.assagwcst %>% summarise_samples(data)
@@ -1697,7 +1631,7 @@ res.assagwcst %>% DIC() # 5835.189
 res.assagwcst %>% testSSEF()
 res.assagwcst %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.assagwcst %>% plot_caterpillar(var.regex)
 
@@ -1726,9 +1660,7 @@ res.assagwc_st <- get_model(path)
 #' #### Posterior
 #+ res.assagwc_st, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.assagwc_st %>% plot_density(data, var.regex, params, labels)
+res.assagwc_st %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.assagwc_st %>% summarise_samples(data)
@@ -1746,7 +1678,7 @@ res.assagwc_st %>% DIC() # 5846.981
 res.assagwc_st %>% testSSEF()
 res.assagwc_st %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.assagwc_st %>% plot_caterpillar(var.regex)
 
@@ -1774,9 +1706,7 @@ res.a_cssagwst <- get_model(path)
 #' #### Posterior
 #+ res.a_cssagwst, fig.height = 10
 var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-params <- get_params()
-labels <- get_labels(data)
-res.a_cssagwst %>% plot_density(data, var.regex, params, labels)
+res.a_cssagwst %>% plot_density(data, var.regex)
 
 #' #### Statistics
 res.a_cssagwst %>% summarise_samples(data)
@@ -1794,7 +1724,7 @@ res.a_cssagwst %>% DIC() # 5773.768
 res.a_cssagwst %>% testSSEF()
 res.a_cssagwst %>% testPSRF()
 
-#' #### plot_caterpillar
+#' #### Trace plot
 #+ fig.height = 6
 res.a_cssagwst %>% plot_caterpillar(var.regex)
 

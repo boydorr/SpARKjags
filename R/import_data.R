@@ -3,6 +3,11 @@
 #' @param model model
 #' @param data data
 #'
+#' @return Returns a \code{data.frame} listing SpARK samples, and their
+#' resistances to each antibiotic class. If model comes from the goodbad
+#' directory, the posterior probability of being in the bad group (mean.p.bad)
+#' is also included, which defines the badgroup (1 if mean.p.bad > 0.5)
+#'
 import_data <- function(model, data) {
 
   # Animal lookup -----------------------------------------------------------

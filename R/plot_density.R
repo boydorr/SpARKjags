@@ -8,7 +8,6 @@
 #' @param data data input
 #' @param var.regex a regex \code{string} to filter variables
 #' @param params params
-#' @param labels labels
 #'
 #' @export
 #'
@@ -21,21 +20,29 @@
 #' res.a <- get_model("a", "goodbad_models")
 #' plot_density(model = res.a,
 #'             data = data,
-#'             var.regex = get_vars(res.a),
-#'             params = get_params(),
-#'             labels = get_labels(data))
+#'             var.regex = get_vars(res.a))
 #' }
 #'
 plot_density <- function(model,
                          data,
-                         var.regex,
-                         params,
-                         labels = rep(NA, length(params))) {
+                         var.regex) {
 
   # data.frame listing SpARK samples, and their resistances to each antibiotic
   # class, as well as the posterior probability of being in the bad group
   # (mean.p.bad), which defines the badgroup (1 if mean.p.bad > 0.5)
   df <- import_data(model, data)
+
+  # Labels
+  if(any(colnames(df) %in% "badgroup")) {
+    labels <- get_labels(data)
+    params <- get_params()
+
+  }else {
+    tmp <- data$lookup$antibiotic_class %>%
+      dplyr::mutate(index = paste0("a.prob[", 1:13, "]"))
+    labels <- list(tmp, NA, NA)
+    params <- list(`probability of resistance` = "a.prob", "intercept", "sd")
+  }
 
   model.ggs <- model %>%
     coda::as.mcmc.list() %>%
@@ -80,7 +87,7 @@ plot_density <- function(model,
       ggplot2::geom_violin(ggplot2::aes_string(x = "Parameter",
                                                y = "value"),
                            trim = FALSE,
-                           colour = "black",
+                           colour = "grey66",
                            fill = "white",
                            scale = "width") +
       ggplot2::stat_summary(ggplot2::aes_string(x = "Parameter", y = "value"),
@@ -174,8 +181,8 @@ plot_density <- function(model,
 
       labs <- labs[which(labs %in% s$label)]
 
-      # Calculate the probability of a sample from a hospital-clinical group
-      # having resistance to each antibiotic class
+      # Calculate the proportion of samples in each hospital-clinical group
+      # that are resistant to each antibiotic class
       probabilities <- merge(n, s) %>%
         dplyr::mutate_at(vars(contains(columns)), ~ . / n) %>%
         reshape2::melt(id.var = "label",

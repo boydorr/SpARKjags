@@ -12,5 +12,6 @@ summarise_samples(model, data)
 \item{data}{data}
 }
 \description{
-summarise_samples
+Counts the number of samples identified as being in the good group or the
+bad group, extracted from posterior probabilities
 }

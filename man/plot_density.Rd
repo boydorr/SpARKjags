@@ -4,7 +4,7 @@
 \alias{plot_density}
 \title{plot_density}
 \usage{
-plot_density(model, data, var.regex, params, labels = rep(NA, length(params)))
+plot_density(model, data, var.regex)
 }
 \arguments{
 \item{model}{a \code{runjags} object containing model results}
@@ -14,8 +14,6 @@ plot_density(model, data, var.regex, params, labels = rep(NA, length(params)))
 \item{var.regex}{a regex \code{string} to filter variables}
 
 \item{params}{params}
-
-\item{labels}{labels}
 }
 \description{
 Generates a violin plot where violins represent the posterior probability of
@@ -31,9 +29,7 @@ data <- jags_data(classification = "all",
 res.a <- get_model("a", "goodbad_models")
 plot_density(model = res.a,
             data = data,
-            var.regex = get_vars(res.a),
-            params = get_params(),
-            labels = get_labels(data))
+            var.regex = get_vars(res.a))
 }
 
 }
