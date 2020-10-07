@@ -21,13 +21,13 @@ devtools::install_github("soniamitchell/SpARKjags")
 Note that you must have access to the SpARK project datasets for any of this code to work.
 
 ## How to
-* List all of the models installed as part of this package
+* **List all of the models installed as part of this package**
   ```
   list_models()
   ```
   If you have already run any of the models, outputs will also be listed.
 
-* Run one of the models included in the SpARKjags package, run:
+* **Run one of the models included in the SpARKjags package**
   ```
   # Generate JAGS input dataset
   data <- jags_data(classification = "Carbapenem",
@@ -41,14 +41,14 @@ Note that you must have access to the SpARK project datasets for any of this cod
   ```
   This will save the model output to the same directory as the model script, within the SpARKjags package itself. The `run_SpARKjags_model()` function will return the path of the model output.
 
-* If you want to choose your own save location, run:
+* **Choose your own model output save location**
   ```
   path <- run_SpARKjags_model(data = data,
                               SpARKjags_model = "individual_models/h.R",
                               saveto = "mylocation/myresults.rds)
   ```
 
-* If you want to run your own model, run:
+* **Run your own model**
   ```
   path <- run_custom_model()
   ```
