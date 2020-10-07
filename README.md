@@ -7,7 +7,7 @@
 | Function            | Description                  | Called by | Checked                | Tested                 |
 | ------------------- | ---------------------------- | --------- | ---------------------- | ---------------------- |
 | animal_data         | -                          | import_data | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| animal_lookup       |  |                                       | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> |
+| animal_lookup       | -     | badgroup_posterior & import_data | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
 | badgroup_posterior  | -                          | import_data | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
 | bin_ages            | -                            | get_human | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
 | check_fit           |  |                                       | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> |
