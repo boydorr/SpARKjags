@@ -39,7 +39,7 @@ Note that you must have access to the SpARK project datasets for any of this cod
   path <- run_SpARKjags_model(data = data,
                               SpARKjags_model = "individual_models/h.R")
   ```
-  This will save the model output to the same directory as the model script, within the SpARKjags package itself. The `run_SpARKjags_model()` function will return the path of the model output.
+  This will save the model output to the same directory as the model script (within the SpARKjags package). The `run_SpARKjags_model()` function will return the path of the model output.
 
   * **Choose your own model output save location**
     ```
@@ -56,8 +56,17 @@ Note that you must have access to the SpARK project datasets for any of this cod
   ```
   results <- get_model(path)
   ```
-
-
+* **Delete SpARKjags model output**
+  Remember that `run_SpARKjags_model()` will save the model output to the the same directory as the model script (within the SpARKjags package) if you don't define the `save_to` argument? To delete these outputs:
+  ```
+  # Delete single model output
+  delete_results("individual_models/test.rds")
+  
+  # Delete all model results in a particular directory
+  delete_results("individual_models")
+  ```
+  Again, you can use `list_models()` to see which model outputs you have already run.
+  
 ## Function map
 
 | Function            | Description                  | Called by | Checked                | Tested                 |
