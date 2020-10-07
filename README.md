@@ -65,7 +65,7 @@ Note that you must have access to the SpARK project datasets for any of this cod
   # Delete all model results in a particular directory
   delete_results("individual_models")
   ```
-  Again, you can use `list_models()` to see which model outputs you have already run.
+  Again, you can use `list_models()` to see which model outputs currently exist.
   
 ## Function map
 
