@@ -7,7 +7,7 @@
 * [General info](#general-info)
 * [Setup](#setup)
 * [How to](#how-to)
-* [Functions](#functions)
+* [Function map](#function-map)
 
 ## General info
 This package contains JAGS models and associated functionality for use with SpARK project data.
@@ -18,11 +18,42 @@ To install this package in R, run:
 install.packages("devtools")
 devtools::install_github("soniamitchell/SpARKjags")
 ```
+Note that you must have access to the SpARK project datasets for any of this code to work.
 
 ## How to
-To run a model
+To list all of the models installed as part of this package, run:
+```
+list_models()
+```
+If you have already run any of the models, outputs will also be listed.
 
-## Functions
+To run one of the models included in the SpARKjags package, run:
+```
+# Generate JAGS input dataset
+data <- jags_data(classification = "Carbapenem",
+                  categories = "human",
+                  pathogen = "Klebsiella pneumoniae",
+                  removeQuinPen = T)
+
+# Run the model                  
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = "individual_models/h.R")
+```
+This will save the model output to the same directory as the model script, within the SpARKjags package itself. The `run_SpARKjags_model()` function will return the path of the model output.
+
+If you want to choose your own save location, run:
+```
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = "individual_models/h.R",
+                            saveto = "mylocation/myresults.rds)
+```
+
+If you want to run your own model, run:
+
+
+
+
+## Function map
 
 | Function            | Description                  | Called by | Checked                | Tested                 |
 | ------------------- | ---------------------------- | --------- | ---------------------- | ---------------------- |
