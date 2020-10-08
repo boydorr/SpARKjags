@@ -4,12 +4,10 @@
 \alias{plot_caterpillar}
 \title{plot_caterpillar}
 \usage{
-plot_caterpillar(model, var.regex, filename)
+plot_caterpillar(model, filename)
 }
 \arguments{
 \item{model}{model}
-
-\item{var.regex}{var.regex}
 
 \item{filename}{filename}
 }

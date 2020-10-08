@@ -94,8 +94,7 @@ res.a_naive <- get_model(path)
 
 #' #### Posterior
 #+ res.a_naive, fig.height = 6
-var.regex <- get_vars(res.a_naive)
-res.a_naive %>% plot_density(data, var.regex)
+res.a_naive %>% plot_density(data)
 
 #' #### Diagnostics
 res.a_naive %>% DIC() # 6166.735
@@ -104,11 +103,11 @@ res.a_naive %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.a_naive %>% plot_caterpillar(var.regex)
+res.a_naive %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_naive %>% plot_autocorr(var.regex)
+res.a_naive %>% plot_autocorr()
 
 #' #### Model
 res.a_naive$model
@@ -128,7 +127,7 @@ res.a <- get_model(path)
 
 #' #### Posterior
 #+ res.a, fig.height = 10
-res.a %>% plot_density(data, get_vars(.))
+res.a %>% plot_density(data)
 
 #' #### Statistics
 res.a %>% summarise_samples(data)
@@ -148,11 +147,11 @@ res.a %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.a %>% plot_caterpillar(var.regex)
+res.a %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a %>% plot_autocorr(var.regex)
+res.a %>% plot_autocorr()
 
 #' #### Model
 res.a$model
@@ -243,7 +242,7 @@ res.a_livestock <- get_model(path)
 
 #' #### Posterior
 #+ res.a_livestock, fig.height = 10
-res.a_livestock %>% plot_density(data_ah, get_vars(.))
+res.a_livestock %>% plot_density(data_ah)
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -264,11 +263,11 @@ res.a_livestock %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.a_livestock %>% plot_caterpillar(var.regex)
+res.a_livestock %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_livestock %>% plot_autocorr(var.regex)
+res.a_livestock %>% plot_autocorr()
 
 #' #### Model
 res.a_livestock$model
@@ -289,7 +288,7 @@ res.a_cattle <- get_model(path)
 
 #' #### Posterior
 #+ res.a_cattle, fig.height = 10
-res.a_cattle %>% plot_density(data_ah, get_vars(.))
+res.a_cattle %>% plot_density(data_ah)
 
 #' #### Statistics
 res.a_cattle %>% summarise_samples(data_ah)
@@ -309,11 +308,11 @@ res.a_cattle %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.a_cattle %>% plot_caterpillar(var.regex)
+res.a_cattle %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_cattle %>% plot_autocorr(var.regex)
+res.a_cattle %>% plot_autocorr()
 
 #' #### Model
 res.a_cattle$model
@@ -333,7 +332,7 @@ res.a_pig <- get_model(path)
 
 #' #### Posterior
 #+ res.a_pig, fig.height = 10
-res.a_pig %>% plot_density(data_ah, get_vars(.))
+res.a_pig %>% plot_density(data_ah)
 
 #' #### Statistics
 res.a_pig %>% summarise_samples(data_ah)
@@ -353,11 +352,11 @@ res.a_pig %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.a_pig %>% plot_caterpillar(var.regex)
+res.a_pig %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_pig %>% plot_autocorr(var.regex)
+res.a_pig %>% plot_autocorr()
 
 #' #### Model
 res.a_pig$model
@@ -378,7 +377,7 @@ res.a_chicken <- get_model(path)
 
 #' #### Posterior
 #+ res.a_chicken, fig.height = 10
-res.a_chicken %>% plot_density(data_ah, get_vars(.))
+res.a_chicken %>% plot_density(data_ah)
 
 #' #### Statistics
 res.a_chicken %>% summarise_samples(data_ah)
@@ -398,11 +397,11 @@ res.a_chicken %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.a_chicken %>% plot_caterpillar(var.regex)
+res.a_chicken %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_chicken %>% plot_autocorr(var.regex)
+res.a_chicken %>% plot_autocorr()
 
 #' #### Model
 res.a_chicken$model
@@ -424,7 +423,7 @@ res.a_livestock_subsets <- get_model(path)
 
 #' #### Posterior
 #+ res.a_livestock_subsets, fig.height = 10
-res.a_livestock_subsets %>% plot_density(data_ah, get_vars(.))
+res.a_livestock_subsets %>% plot_density(data_ah)
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -445,11 +444,11 @@ res.a_livestock_subsets %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.a_livestock_subsets %>% plot_caterpillar(var.regex)
+res.a_livestock_subsets %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_livestock_subsets %>% plot_autocorr(var.regex)
+res.a_livestock_subsets %>% plot_autocorr()
 
 #' #### Model
 res.a_livestock_subsets$model
@@ -470,7 +469,7 @@ res.a_companion <- get_model(path)
 
 #' #### Posterior
 #+ a_companion, fig.height = 10
-res.a_companion %>% plot_density(data_ah, get_vars(.))
+res.a_companion %>% plot_density(data_ah)
 
 #' #### Statistics
 res.a_companion %>% summarise_samples(data_ah)
@@ -490,11 +489,11 @@ res.a_companion %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.a_companion %>% plot_caterpillar(var.regex)
+res.a_companion %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_companion %>% plot_autocorr(var.regex)
+res.a_companion %>% plot_autocorr()
 
 #' #### Model
 res.a_companion$model
@@ -516,7 +515,7 @@ res.a_companion_subsets <- get_model(path)
 
 #' #### Posterior
 #+ res.a_companion_subsets, fig.height = 10
-res.a_companion_subsets %>% plot_density(data_ah, get_vars(.))
+res.a_companion_subsets %>% plot_density(data_ah)
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -537,11 +536,11 @@ res.a_companion_subsets %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.a_companion_subsets %>% plot_caterpillar(var.regex)
+res.a_companion_subsets %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_companion_subsets %>% plot_autocorr(var.regex)
+res.a_companion_subsets %>% plot_autocorr()
 
 #' #### Model
 res.a_companion_subsets$model
@@ -562,7 +561,7 @@ res.a_wild <- get_model(path)
 
 #' #### Posterior
 #+ a_wild, fig.height = 10
-res.a_wild %>% plot_density(data_ah, get_vars(.))
+res.a_wild %>% plot_density(data_ah)
 
 #' #### Statistics
 res.a_wild %>% summarise_samples(data_ah)
@@ -582,11 +581,11 @@ res.a_wild %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.a_wild %>% plot_caterpillar(var.regex)
+res.a_wild %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_wild %>% plot_autocorr(var.regex)
+res.a_wild %>% plot_autocorr()
 
 #' #### Model
 res.a_wild$model
@@ -607,7 +606,7 @@ res.a_wild_subsets <- get_model(path)
 
 #' #### Posterior
 #+ res.a_wild_subsets, fig.height = 10
-res.a_wild_subsets %>% plot_density(data_ah, get_vars(.))
+res.a_wild_subsets %>% plot_density(data_ah)
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -628,11 +627,11 @@ res.a_wild_subsets %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.a_wild_subsets %>% plot_caterpillar(var.regex)
+res.a_wild_subsets %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_wild_subsets %>% plot_autocorr(var.regex)
+res.a_wild_subsets %>% plot_autocorr()
 
 #' #### Model
 res.a_wild_subsets$model
@@ -653,7 +652,7 @@ res.a_types <- get_model(path)
 
 #' #### Posterior
 #+ res.a_types, fig.height = 10
-res.a_types %>% plot_density(data_ah, get_vars(.))
+res.a_types %>% plot_density(data_ah)
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -674,11 +673,11 @@ res.a_types %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.a_types %>% plot_caterpillar(var.regex)
+res.a_types %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_types %>% plot_autocorr(var.regex)
+res.a_types %>% plot_autocorr()
 
 #' #### Model
 res.a_types$model
@@ -699,7 +698,7 @@ res.a_subsets <- get_model(path)
 
 #' #### Posterior
 #+ res.a_subsets, fig.height = 10
-res.a_subsets %>% plot_density(data_ah, get_vars(.))
+res.a_subsets %>% plot_density(data_ah)
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -720,11 +719,11 @@ res.a_subsets %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.a_subsets %>% plot_caterpillar(var.regex)
+res.a_subsets %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_subsets %>% plot_autocorr(var.regex)
+res.a_subsets %>% plot_autocorr()
 
 #' #### Model
 res.a_subsets$model
@@ -745,7 +744,7 @@ res.ac1 <- get_model(path)
 
 #' #### Posterior
 #+ res.ac1, fig.height = 10
-res.ac1 %>% plot_density(data, get_vars(.))
+res.ac1 %>% plot_density(data)
 
 #' #### Statistics
 res.ac1 %>% summarise_samples(data)
@@ -765,11 +764,11 @@ res.ac1 %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.ac1 %>% plot_caterpillar(var.regex)
+res.ac1 %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.ac1 %>% plot_autocorr(var.regex)
+res.ac1 %>% plot_autocorr()
 
 #' #### Model
 res.ac1$model
@@ -789,7 +788,7 @@ res.ac2 <- get_model(path)
 
 #' #### Posterior
 #+ res.ac2, fig.height = 10
-res.ac2 %>% plot_density(data, get_vars(.))
+res.ac2 %>% plot_density(data)
 
 #' #### Statistics
 res.ac2 %>% summarise_samples(data)
@@ -809,11 +808,11 @@ res.ac2 %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.ac2 %>% plot_caterpillar(var.regex)
+res.ac2 %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.ac2 %>% plot_autocorr(var.regex)
+res.ac2 %>% plot_autocorr()
 
 #' #### Model
 res.ac2$model
@@ -833,7 +832,7 @@ res.a_c <- get_model(path)
 
 #' #### Posterior
 #+ res.a_c, fig.height = 10
-res.a_c %>% plot_density(data, get_vars(.))
+res.a_c %>% plot_density(data)
 
 #' #### Statistics
 res.a_c %>% summarise_samples(data)
@@ -853,11 +852,11 @@ res.a_c %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.a_c %>% plot_caterpillar(var.regex)
+res.a_c %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_c %>% plot_autocorr(var.regex)
+res.a_c %>% plot_autocorr()
 
 #' #### Model
 res.a_c$model
@@ -882,7 +881,7 @@ res.asm <- get_model(path)
 
 #' #### Posterior
 #+ res.asm, fig.height = 10
-res.asm %>% plot_density(data, get_vars(.))
+res.asm %>% plot_density(data)
 
 #' #### Statistics
 res.asm %>% summarise_samples(data)
@@ -902,11 +901,11 @@ res.asm %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asm %>% plot_caterpillar(var.regex)
+res.asm %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asm %>% plot_autocorr(var.regex)
+res.asm %>% plot_autocorr()
 
 #' #### Model
 res.asm$model
@@ -926,7 +925,7 @@ res.ass <- get_model(path)
 
 #' #### Posterior
 #+ res.ass, fig.height = 10
-res.ass %>% plot_density(data, get_vars(.))
+res.ass %>% plot_density(data)
 
 #' #### Statistics
 res.ass %>% summarise_samples(data)
@@ -946,11 +945,11 @@ res.ass %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.ass %>% plot_caterpillar(var.regex)
+res.ass %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.ass %>% plot_autocorr(var.regex)
+res.ass %>% plot_autocorr()
 
 #' #### Model
 res.ass$model
@@ -979,7 +978,7 @@ res.assg <- get_model(path)
 
 #' #### Posterior
 #+ res.assg, fig.height = 10
-res.assg %>% plot_density(data, get_vars(.))
+res.assg %>% plot_density(data)
 
 #' #### Statistics
 res.assg %>% summarise_samples(data)
@@ -999,11 +998,11 @@ res.assg %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.assg %>% plot_caterpillar(var.regex)
+res.assg %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assg %>% plot_autocorr(var.regex)
+res.assg %>% plot_autocorr()
 
 #' #### Model
 res.assg$model
@@ -1023,7 +1022,7 @@ res.assag <- get_model(path)
 
 #' #### Posterior
 #+ res.assag, fig.height = 10
-res.assag %>% plot_density(data, get_vars(.))
+res.assag %>% plot_density(data)
 
 #' #### Statistics
 res.assag %>% summarise_samples(data)
@@ -1043,11 +1042,11 @@ res.assag %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.assag %>% plot_caterpillar(var.regex)
+res.assag %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assag %>% plot_autocorr(var.regex)
+res.assag %>% plot_autocorr()
 
 #' #### Model
 res.assag$model
@@ -1067,7 +1066,7 @@ res.assag2 <- get_model(path)
 
 #' #### Posterior
 #+ res.assag2, fig.height = 10
-res.assag2 %>% plot_density(data, get_vars(.))
+res.assag2 %>% plot_density(data)
 
 #' #### Statistics
 res.assag2 %>% summarise_samples(data)
@@ -1087,11 +1086,11 @@ res.assag2 %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.assag2 %>% plot_caterpillar(var.regex)
+res.assag2 %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assag2 %>% plot_autocorr(var.regex)
+res.assag2 %>% plot_autocorr()
 
 #' #### Model
 res.assag2$model
@@ -1111,7 +1110,7 @@ res.assage <- get_model(path)
 
 #' #### Posterior
 #+ res.assage, fig.height = 10
-res.assage %>% plot_density(data, get_vars(.))
+res.assage %>% plot_density(data)
 
 #' #### Statistics
 res.assage %>% summarise_samples(data)
@@ -1131,11 +1130,11 @@ res.assage %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.assage %>% plot_caterpillar(var.regex)
+res.assage %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assage %>% plot_autocorr(var.regex)
+res.assage %>% plot_autocorr()
 
 #' #### Model
 res.assage$model
@@ -1155,7 +1154,7 @@ res.assagesq <- get_model(path)
 
 #' #### Posterior
 #+ res.assagesq, fig.height = 10
-res.assagesq %>% plot_density(data, get_vars(.))
+res.assagesq %>% plot_density(data)
 
 #' #### Statistics
 res.assagesq %>% summarise_samples(data)
@@ -1175,11 +1174,11 @@ res.assagesq %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.assagesq %>% plot_caterpillar(var.regex)
+res.assagesq %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagesq %>% plot_autocorr(var.regex)
+res.assagesq %>% plot_autocorr()
 
 #' #### Model
 res.assagesq$model
@@ -1200,7 +1199,7 @@ res.assagg <- get_model(path)
 
 #' #### Posterior
 #+ res.assagg, fig.height = 10
-res.assagg %>% plot_density(data, get_vars(.))
+res.assagg %>% plot_density(data)
 
 #' #### Statistics
 res.assagg %>% summarise_samples(data)
@@ -1220,11 +1219,11 @@ res.assagg %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.assagg %>% plot_caterpillar(var.regex)
+res.assagg %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagg %>% plot_autocorr(var.regex)
+res.assagg %>% plot_autocorr()
 
 #' #### Model
 res.assagg$model
@@ -1255,7 +1254,7 @@ res.assagh <- get_model(path)
 
 #' #### Posterior
 #+ res.assagh, fig.height = 10
-res.assagh %>% plot_density(data, get_vars(.))
+res.assagh %>% plot_density(data)
 
 #' #### Statistics
 res.assagh %>% summarise_samples(data)
@@ -1275,11 +1274,11 @@ res.assagh %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.assagh %>% plot_caterpillar(var.regex)
+res.assagh %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagh %>% plot_autocorr(var.regex)
+res.assagh %>% plot_autocorr()
 
 #' #### Model
 res.assagh$model
@@ -1299,7 +1298,7 @@ res.assagwt <- get_model(path)
 
 #' #### Posterior
 #+ res.assagwt, fig.height = 10
-res.assagwt %>% plot_density(data, get_vars(.))
+res.assagwt %>% plot_density(data)
 
 #' #### Statistics
 res.assagwt %>% summarise_samples(data)
@@ -1319,11 +1318,11 @@ res.assagwt %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.assagwt %>% plot_caterpillar(var.regex)
+res.assagwt %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagwt %>% plot_autocorr(var.regex)
+res.assagwt %>% plot_autocorr()
 
 #' #### Model
 res.assagwt$model
@@ -1343,7 +1342,7 @@ res.assagw <- get_model(path)
 
 #' #### Posterior
 #+ res.assagw, fig.height = 10
-res.assagw %>% plot_density(data, get_vars(.))
+res.assagw %>% plot_density(data)
 
 #' #### Statistics
 res.assagw %>% summarise_samples(data)
@@ -1363,11 +1362,11 @@ res.assagw %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.assagw %>% plot_caterpillar(var.regex)
+res.assagw %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagw %>% plot_autocorr(var.regex)
+res.assagw %>% plot_autocorr()
 
 #' #### Model
 res.assagw$model
@@ -1389,7 +1388,7 @@ res.assagwt_w <- get_model(path)
 
 #' #### Posterior
 #+ res.assagwt_w, fig.height = 10
-res.assagwt_w %>% plot_density(data, get_vars(.))
+res.assagwt_w %>% plot_density(data)
 
 #' #### Statistics
 res.assagwt_w %>% summarise_samples(data)
@@ -1409,11 +1408,11 @@ res.assagwt_w %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.assagwt_w %>% plot_caterpillar(var.regex)
+res.assagwt_w %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagwt_w %>% plot_autocorr(var.regex)
+res.assagwt_w %>% plot_autocorr()
 
 #' #### Model
 res.assagwt_w$model
@@ -1434,7 +1433,7 @@ res.assaghwtw <- get_model(path)
 
 #' #### Posterior
 #+ res.assaghwtw, fig.height = 10
-res.assaghwtw %>% plot_density(data, get_vars(.))
+res.assaghwtw %>% plot_density(data)
 
 #' #### Statistics
 res.assaghwtw %>% summarise_samples(data)
@@ -1454,11 +1453,11 @@ res.assaghwtw %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.assaghwtw %>% plot_caterpillar(var.regex)
+res.assaghwtw %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assaghwtw %>% plot_autocorr(var.regex)
+res.assaghwtw %>% plot_autocorr()
 
 #' #### Model
 res.assaghwtw$model
@@ -1480,7 +1479,7 @@ res.assagh_wt_w <- get_model(path)
 
 #' #### Posterior
 #+ res.assagh_wt_w, fig.height = 10
-res.assagh_wt_w %>% plot_density(data, get_vars(.))
+res.assagh_wt_w %>% plot_density(data)
 
 #' #### Statistics
 res.assagh_wt_w %>% summarise_samples(data)
@@ -1500,11 +1499,11 @@ res.assagh_wt_w %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.assagh_wt_w %>% plot_caterpillar(var.regex)
+res.assagh_wt_w %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagh_wt_w %>% plot_autocorr(var.regex)
+res.assagh_wt_w %>% plot_autocorr()
 
 #' #### Model
 res.assagh_wt_w$model
@@ -1537,7 +1536,7 @@ res.assagwc <- get_model(path)
 
 #' #### Posterior
 #+ res.assagwc, fig.height = 10
-res.assagwc %>% plot_density(data, get_vars(.))
+res.assagwc %>% plot_density(data)
 
 #' #### Statistics
 res.assagwc %>% summarise_samples(data)
@@ -1557,11 +1556,11 @@ res.assagwc %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.assagwc %>% plot_caterpillar(var.regex)
+res.assagwc %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagwc %>% plot_autocorr(var.regex)
+res.assagwc %>% plot_autocorr()
 
 #' #### Model
 res.assagwc$model
@@ -1582,7 +1581,7 @@ res.assagwcst <- get_model(path)
 
 #' #### Posterior
 #+ res.assagwcst, fig.height = 10
-res.assagwcst %>% plot_density(data, get_vars(.))
+res.assagwcst %>% plot_density(data)
 
 #' #### Statistics
 res.assagwcst %>% summarise_samples(data)
@@ -1602,11 +1601,11 @@ res.assagwcst %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.assagwcst %>% plot_caterpillar(var.regex)
+res.assagwcst %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagwcst %>% plot_autocorr(var.regex)
+res.assagwcst %>% plot_autocorr()
 
 #' #### Model
 res.assagwcst$model
@@ -1628,7 +1627,7 @@ res.assagwc_st <- get_model(path)
 
 #' #### Posterior
 #+ res.assagwc_st, fig.height = 10
-res.assagwc_st %>% plot_density(data, get_vars(.))
+res.assagwc_st %>% plot_density(data)
 
 #' #### Statistics
 res.assagwc_st %>% summarise_samples(data)
@@ -1648,11 +1647,11 @@ res.assagwc_st %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.assagwc_st %>% plot_caterpillar(var.regex)
+res.assagwc_st %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.assagwc_st %>% plot_autocorr(var.regex)
+res.assagwc_st %>% plot_autocorr()
 
 #' #### Model
 res.assagwc_st$model
@@ -1673,7 +1672,7 @@ res.a_cssagwst <- get_model(path)
 
 #' #### Posterior
 #+ res.a_cssagwst, fig.height = 10
-res.a_cssagwst %>% plot_density(data, get_vars(.))
+res.a_cssagwst %>% plot_density(data)
 
 #' #### Statistics
 res.a_cssagwst %>% summarise_samples(data)
@@ -1693,11 +1692,11 @@ res.a_cssagwst %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.a_cssagwst %>% plot_caterpillar(var.regex)
+res.a_cssagwst %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a_cssagwst %>% plot_autocorr(var.regex)
+res.a_cssagwst %>% plot_autocorr()
 
 #' #### Model
 res.a_cssagwst$model

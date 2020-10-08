@@ -13,15 +13,13 @@ res <- get_model(location)
 
 test_that("plot_density runs without error", {
   expect_silent(g <- plot_density(model = res,
-                                  data = data,
-                                  var.regex = get_vars(res)))
+                                  data = data))
 
   expect_equal(class(g), c("egg", "gtable", "gTree", "grob", "gDesc"))
 })
 
 test_that("plot_caterpillar runs without error", {
-  expect_silent(g <- plot_caterpillar(model = res,
-                                      var.regex = get_vars(res)))
+  expect_silent(g <- plot_caterpillar(model = res))
 
   expect_equal(class(g), c("gg", "ggplot"))
 })

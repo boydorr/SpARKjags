@@ -6,7 +6,6 @@
 #'
 #' @param model a \code{runjags} object containing model results
 #' @param data data input
-#' @param var.regex a regex \code{string} to filter variables
 #'
 #' @export
 #'
@@ -18,13 +17,11 @@
 #'                   removeQuinPen = TRUE)
 #' res.a <- get_model("a", "goodbad_models")
 #' plot_density(model = res.a,
-#'             data = data,
-#'             var.regex = get_vars(res.a))
+#'             data = data)
 #' }
 #'
 plot_density <- function(model,
-                         data,
-                         var.regex) {
+                         data) {
 
   # data.frame listing SpARK samples, and their resistances to each antibiotic
   # class, as well as the posterior probability of being in the bad group
@@ -35,12 +32,14 @@ plot_density <- function(model,
   if(any(colnames(df) %in% "badgroup")) {
     labels <- get_labels(data)
     params <- get_params()
+    var.regex <- get_vars(model)
 
   }else {
     tmp <- data$lookup$antibiotic_class %>%
       dplyr::mutate(index = paste0("a.prob[", 1:13, "]"))
     labels <- list(tmp, NA, NA)
     params <- list(`probability of resistance` = "a.prob", "intercept", "sd")
+    var.regex <- get_vars(model)
   }
 
   model.ggs <- model %>%
@@ -230,9 +229,7 @@ plot_density <- function(model,
             paste("Trimethoprim", ind),
           classification == "Trimethoprim/Sulfamethoxazole" ~
             paste("Tri/Sul", ind)))
-      assertthat::assert_that(all(xaxis$index == c(plot_these)))
-      xaxis <- xaxis$classification
-      names(xaxis) <- plot_these
+      xaxis.labels <- setNames(xaxis$classification, xaxis$index)
 
       g <- g + ggplot2::geom_point(
         ggplot2::aes_string(x = "index",
@@ -247,7 +244,7 @@ plot_density <- function(model,
                                     values = manual_shapes,
                                     labels = labs) +
         ggplot2::scale_x_discrete(breaks = plot_these,
-                                  labels = xaxis) +
+                                  labels = xaxis.labels) +
         ggplot2::theme(legend.position = "bottom")
     }
 

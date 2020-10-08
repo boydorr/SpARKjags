@@ -4,14 +4,12 @@
 \alias{plot_density}
 \title{plot_density}
 \usage{
-plot_density(model, data, var.regex)
+plot_density(model, data)
 }
 \arguments{
 \item{model}{a \code{runjags} object containing model results}
 
 \item{data}{data input}
-
-\item{var.regex}{a regex \code{string} to filter variables}
 }
 \description{
 Generates a violin plot where violins represent the posterior probability of
@@ -26,8 +24,7 @@ data <- jags_data(classification = "all",
                   removeQuinPen = TRUE)
 res.a <- get_model("a", "goodbad_models")
 plot_density(model = res.a,
-            data = data,
-            var.regex = get_vars(res.a))
+            data = data)
 }
 
 }

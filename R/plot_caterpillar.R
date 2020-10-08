@@ -1,15 +1,14 @@
 #' plot_caterpillar
 #'
 #' @param model model
-#' @param var.regex var.regex
 #' @param filename filename
 #'
 #' @export
 #'
 plot_caterpillar <- function(model,
-                             var.regex,
                              filename) {
 
+  var.regex <- get_vars(model)
   model.ggs <- model %>%
     coda::as.mcmc.list() %>%
     ggmcmc::ggs(family = var.regex) %>%

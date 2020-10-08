@@ -4,12 +4,10 @@
 \alias{plot_autocorr}
 \title{plot_autocorr}
 \usage{
-plot_autocorr(model, var.regex, filename)
+plot_autocorr(model, filename)
 }
 \arguments{
 \item{model}{a \code{runjags} object containing model results}
-
-\item{var.regex}{a regex \code{string} to filter variables}
 
 \item{filename}{a \code{string} specifying the filename}
 }
@@ -19,8 +17,7 @@ plot_autocorr
 \examples{
 \dontrun{
 res.a_naive <- get_model("a_naive", "goodbad_models")
-plot_autocorr(model = res.a_naive,
-              var.regex = "(a.prob)|(intercept)|(sd)")
+plot_autocorr(res.a_naive)
 }
 
 }

@@ -4,10 +4,12 @@
 \alias{get_vars}
 \title{get_vars}
 \usage{
-get_vars(result)
+get_vars(result, ignore)
 }
 \arguments{
 \item{result}{result}
+
+\item{ignore}{vector}
 }
 \description{
 get_vars

@@ -55,7 +55,7 @@ res.a <- get_model(path)
 
 #' #### Posterior
 #+ res.a_naive, fig.height = 6
-res.a %>% plot_density(data, get_vars(.))
+res.a %>% plot_density(data)
 
 #' #### Diagnostics
 res.a %>% DIC() # 12262.57
@@ -64,11 +64,11 @@ res.a %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.a %>% plot_caterpillar(get_vars(.))
+res.a %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a %>% plot_autocorr(get_vars(.))
+res.a %>% plot_autocorr()
 
 #' #### Model
 res.a$model
@@ -86,7 +86,7 @@ res.asm <- get_model(path)
 
 #' #### Posterior
 #+ res.asm, fig.height = 6
-res.asm %>% plot_density(data, get_vars(.))
+res.asm %>% plot_density(data)
 
 #' #### Diagnostics
 res.asm %>% DIC() # 12011.55
@@ -95,11 +95,11 @@ res.asm %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asm %>% plot_caterpillar(get_vars(.))
+res.asm %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asm %>% plot_autocorr(get_vars(.))
+res.asm %>% plot_autocorr()
 
 #' #### Model
 res.asm$model
@@ -117,7 +117,7 @@ res.ass <- get_model(path)
 
 #' #### Posterior
 #+ res.ass, fig.height = 6
-res.ass %>% plot_density(data, get_vars(.))
+res.ass %>% plot_density(data)
 
 #' #### Diagnostics
 res.ass %>% DIC() # 12097.86
@@ -126,11 +126,11 @@ res.ass %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.ass %>% plot_caterpillar(get_vars(.))
+res.ass %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.ass %>% plot_autocorr(get_vars(.))
+res.ass %>% plot_autocorr()
 
 #' #### Model
 res.ass$model
@@ -157,7 +157,7 @@ res.asmg <- get_model(path)
 
 #' #### Posterior
 #+ res.asmg, fig.height = 6
-res.asmg %>% plot_density(data, get_vars(.))
+res.asmg %>% plot_density(data)
 
 #' #### Diagnostics
 res.asmg %>% DIC() # 11862.36
@@ -166,11 +166,11 @@ res.asmg %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmg %>% plot_caterpillar(get_vars(.))
+res.asmg %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmg %>% plot_autocorr(get_vars(.))
+res.asmg %>% plot_autocorr()
 
 
 
@@ -182,7 +182,7 @@ res.asmag <- get_model(path)
 
 #' #### Posterior
 #+ res.asmag, fig.height = 6
-res.asmag %>% plot_density(data, get_vars(.))
+res.asmag %>% plot_density(data)
 
 #' #### Diagnostics
 res.asmag %>% DIC() # 11786.2
@@ -191,11 +191,11 @@ res.asmag %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmag %>% plot_caterpillar(get_vars(.))
+res.asmag %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmag %>% plot_autocorr(get_vars(.))
+res.asmag %>% plot_autocorr()
 
 #' #### Model
 res.asmag$model
@@ -213,7 +213,7 @@ res.asmag2 <- get_model(path)
 
 #' #### Posterior
 #+ res.asmag2, fig.height = 6
-res.asmag2 %>% plot_density(data, get_vars(.))
+res.asmag2 %>% plot_density(data)
 
 #' #### Diagnostics
 res.asmag2 %>% DIC() # 11788.27
@@ -222,11 +222,11 @@ res.asmag2 %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmag2 %>% plot_caterpillar(get_vars(.))
+res.asmag2 %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmag2 %>% plot_autocorr(get_vars(.))
+res.asmag2 %>% plot_autocorr()
 
 #' #### Model
 res.asmag2$model
@@ -244,7 +244,7 @@ res.asmage <- get_model(path)
 
 #' #### Posterior
 #+ res.asmage, fig.height = 6
-res.asmage %>% plot_density(data, get_vars(.))
+res.asmage %>% plot_density(data)
 
 #' #### Diagnostics
 res.asmage %>% DIC() # 11993.5
@@ -253,7 +253,7 @@ res.asmage %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmage %>% plot_caterpillar(get_vars(.))
+res.asmage %>% plot_caterpillar()
 
 #' #### Model
 res.asmage$model
@@ -271,7 +271,7 @@ res.asmagesq <- get_model(path)
 
 #' #### Posterior
 #+ res.asmagesq, fig.height = 6
-res.asmagesq %>% plot_density(data, get_vars(.))
+res.asmagesq %>% plot_density(data)
 
 #' #### Diagnostics
 res.asmagesq %>% DIC() # 11836.08
@@ -280,7 +280,7 @@ res.asmagesq %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmagesq %>% plot_caterpillar(get_vars(.))
+res.asmagesq %>% plot_caterpillar()
 
 #' #### Model
 res.asmagesq$model
@@ -298,7 +298,7 @@ res.asmagg <- get_model(path)
 
 #' #### Posterior
 #+ res.asmagg, fig.height = 6
-res.asmagg %>% plot_density(data, get_vars(.))
+res.asmagg %>% plot_density(data)
 
 #' #### Diagnostics
 res.asmagg %>% DIC() # 11647.46
@@ -307,7 +307,7 @@ res.asmagg %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmagg %>% plot_caterpillar(get_vars(.))
+res.asmagg %>% plot_caterpillar()
 
 #' #### Model
 res.asmagg$model
@@ -335,7 +335,7 @@ res.asmaggh <- get_model(path)
 
 #' #### Posterior
 #+ res.asmaggh, fig.height = 6
-res.asmaggh %>% plot_density(data, get_vars(.))
+res.asmaggh %>% plot_density(data)
 
 #' #### Diagnostics
 res.asmaggh %>% DIC() # 10973.54
@@ -344,11 +344,11 @@ res.asmaggh %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmaggh %>% plot_caterpillar(get_vars(.))
+res.asmaggh %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmaggh %>% plot_autocorr(get_vars(.))
+res.asmaggh %>% plot_autocorr()
 
 #' #### Model
 res.asmaggh$model
@@ -366,7 +366,7 @@ res.asmaggwt <- get_model(path)
 
 #' #### Posterior
 #+ res.asmaggwt, fig.height = 6
-res.asmaggwt %>% plot_density(data, get_vars(.))
+res.asmaggwt %>% plot_density(data)
 
 #' #### Diagnostics
 res.asmaggwt %>% DIC() # 11057.68
@@ -375,7 +375,7 @@ res.asmaggwt %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmaggwt %>% plot_caterpillar(get_vars(.))
+res.asmaggwt %>% plot_caterpillar()
 
 #' #### Model
 res.asmaggwt$model
@@ -393,7 +393,7 @@ res.asmaggw <- get_model(path)
 
 #' #### Posterior
 #+ res.asmaggw, fig.height = 6
-res.asmaggw %>% plot_density(data, get_vars(.))
+res.asmaggw %>% plot_density(data)
 
 #' #### Diagnostics
 res.asmaggw %>% DIC() # 9914.729
@@ -402,7 +402,7 @@ res.asmaggw %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmaggw %>% plot_caterpillar(get_vars(.))
+res.asmaggw %>% plot_caterpillar()
 
 #' #### Model
 res.asmaggw$model
@@ -422,7 +422,7 @@ res.asmaggwt_w <- get_model(path)
 
 #' #### Posterior
 #+ res.asmaggwt_w, fig.height = 6
-res.asmaggwt_w %>% plot_density(data, get_vars(.))
+res.asmaggwt_w %>% plot_density(data)
 
 #' #### Diagnostics
 res.asmaggwt_w %>% DIC() # 9915.182
@@ -431,7 +431,7 @@ res.asmaggwt_w %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmaggwt_w %>% plot_caterpillar(get_vars(.))
+res.asmaggwt_w %>% plot_caterpillar()
 
 #' #### Model
 res.asmaggwt_w$model
@@ -451,7 +451,7 @@ res.asmagghwtw <- get_model(path)
 
 #' #### Posterior
 #+ res.asmagghwtw, fig.height = 6
-res.asmagghwtw %>% plot_density(data, get_vars(.))
+res.asmagghwtw %>% plot_density(data)
 
 #' #### Diagnostics
 res.asmagghwtw %>% DIC() # 9916.447
@@ -460,11 +460,11 @@ res.asmagghwtw %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmagghwtw %>% plot_caterpillar(get_vars(.))
+res.asmagghwtw %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmagghwtw %>% plot_autocorr(get_vars(.))
+res.asmagghwtw %>% plot_autocorr()
 
 #' #### Model
 res.asmagghwtw$model
@@ -484,7 +484,7 @@ res.asmaggh_wt_w <- get_model(path)
 
 #' #### Posterior
 #+ res.asmaggh_wt_w, fig.height = 6
-res.asmaggh_wt_w %>% plot_density(data, get_vars(.))
+res.asmaggh_wt_w %>% plot_density(data)
 
 #' #### Diagnostics
 res.asmaggh_wt_w %>% DIC() # 9916.827
@@ -493,11 +493,11 @@ res.asmaggh_wt_w %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmaggh_wt_w %>% plot_caterpillar(get_vars(.))
+res.asmaggh_wt_w %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmaggh_wt_w %>% plot_autocorr(get_vars(.))
+res.asmaggh_wt_w %>% plot_autocorr()
 
 #' #### Model
 res.asmaggh_wt_w$model
@@ -529,7 +529,7 @@ DICtable(c("res.asmaggh", "res.asmaggwt", "res.asmaggw", "res.asmaggwt_w",
 path <- run_SpARKjags_model(data, file.path(directory, "asmaggw.R"), thin = 10)
 res.asmaggw <- get_model(path)
 
-res.asmaggw %>% plot_density(data, get_vars(.))
+res.asmaggw %>% plot_density(data)
 
 
 #' ### Apply best null model to Carbapenem positive samples only
@@ -545,7 +545,7 @@ path <- run_SpARKjags_model(data.carb.res,
                             thin = 10)
 res.asmaggw_CarbRes <- get_model(path)
 
-res.asmaggw_CarbRes %>% plot_density(data, get_vars(.))
+res.asmaggw_CarbRes %>% plot_density(data)
 
 #' ### Apply best null model to Carbapenem susceptible samples only
 data.carb.sus <- jags_data(classification = "all",
@@ -560,7 +560,7 @@ path <- run_SpARKjags_model(data.carb.sus,
                             thin = 10)
 res.asmaggw_CarbSus <- get_model(path)
 
-res.asmaggw_CarbSus %>% plot_density(data, get_vars(.))
+res.asmaggw_CarbSus %>% plot_density(data)
 
 
 
@@ -579,7 +579,7 @@ res.asmaggwc <- get_model(path)
 
 #' #### Posterior
 #+ res.asmaggwc, fig.height = 6
-res.asmaggwc %>% plot_density(data, get_vars(.))
+res.asmaggwc %>% plot_density(data)
 
 #' #### Diagnostics
 res.asmaggwc %>% DIC() # 9911.505
@@ -588,11 +588,11 @@ res.asmaggwc %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmaggwc %>% plot_caterpillar(get_vars(.))
+res.asmaggwc %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmaggwc %>% plot_autocorr(get_vars(.))
+res.asmaggwc %>% plot_autocorr()
 
 #' #### Model
 res.asmaggwc$model
@@ -612,7 +612,7 @@ res.asmaggwcst <- get_model(path)
 
 #' #### Posterior
 #+ res.asmaggwcst, fig.height = 6
-res.asmaggwcst %>% plot_density(data, get_vars(.))
+res.asmaggwcst %>% plot_density(data)
 
 #' #### Diagnostics
 res.asmaggwcst %>% DIC() # 9764.723
@@ -621,11 +621,11 @@ res.asmaggwcst %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmaggwcst %>% plot_caterpillar(get_vars(.))
+res.asmaggwcst %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmaggwcst %>% plot_autocorr(get_vars(.))
+res.asmaggwcst %>% plot_autocorr()
 
 #' #### Model
 res.asmaggwcst$model
@@ -645,7 +645,7 @@ res.asmaggwc_st <- get_model(path)
 
 #' #### Posterior
 #+ res.asmaggwc_st, fig.height = 6
-res.asmaggwc_st %>% plot_density(data, get_vars(.))
+res.asmaggwc_st %>% plot_density(data)
 
 #' #### Diagnostics
 res.asmaggwc_st %>% DIC() # 9748.901
@@ -654,11 +654,11 @@ res.asmaggwc_st %>% testPSRF()
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmaggwc_st %>% plot_caterpillar(get_vars(.))
+res.asmaggwc_st %>% plot_caterpillar()
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmaggwc_st %>% plot_autocorr(get_vars(.))
+res.asmaggwc_st %>% plot_autocorr()
 
 #' #### Model
 res.asmaggwc_st$model
