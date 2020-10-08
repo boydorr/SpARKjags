@@ -128,8 +128,7 @@ res.a <- get_model(path)
 
 #' #### Posterior
 #+ res.a, fig.height = 10
-var.regex <- get_vars(res.a)
-res.a %>% plot_density(data, var.regex)
+res.a %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.a %>% summarise_samples(data)
@@ -244,8 +243,7 @@ res.a_livestock <- get_model(path)
 
 #' #### Posterior
 #+ res.a_livestock, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.a_livestock %>% plot_density(data_ah, var.regex)
+res.a_livestock %>% plot_density(data_ah, get_vars(.))
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -291,8 +289,7 @@ res.a_cattle <- get_model(path)
 
 #' #### Posterior
 #+ res.a_cattle, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.a_cattle %>% plot_density(data_ah, var.regex)
+res.a_cattle %>% plot_density(data_ah, get_vars(.))
 
 #' #### Statistics
 res.a_cattle %>% summarise_samples(data_ah)
@@ -336,8 +333,7 @@ res.a_pig <- get_model(path)
 
 #' #### Posterior
 #+ res.a_pig, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.a_pig %>% plot_density(data_ah, var.regex)
+res.a_pig %>% plot_density(data_ah, get_vars(.))
 
 #' #### Statistics
 res.a_pig %>% summarise_samples(data_ah)
@@ -382,8 +378,7 @@ res.a_chicken <- get_model(path)
 
 #' #### Posterior
 #+ res.a_chicken, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.a_chicken %>% plot_density(data_ah, var.regex)
+res.a_chicken %>% plot_density(data_ah, get_vars(.))
 
 #' #### Statistics
 res.a_chicken %>% summarise_samples(data_ah)
@@ -429,8 +424,7 @@ res.a_livestock_subsets <- get_model(path)
 
 #' #### Posterior
 #+ res.a_livestock_subsets, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.a_livestock_subsets %>% plot_density(data_ah, var.regex)
+res.a_livestock_subsets %>% plot_density(data_ah, get_vars(.))
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -476,8 +470,7 @@ res.a_companion <- get_model(path)
 
 #' #### Posterior
 #+ a_companion, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.a_companion %>% plot_density(data_ah, var.regex)
+res.a_companion %>% plot_density(data_ah, get_vars(.))
 
 #' #### Statistics
 res.a_companion %>% summarise_samples(data_ah)
@@ -523,8 +516,7 @@ res.a_companion_subsets <- get_model(path)
 
 #' #### Posterior
 #+ res.a_companion_subsets, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.a_companion_subsets %>% plot_density(data_ah, var.regex)
+res.a_companion_subsets %>% plot_density(data_ah, get_vars(.))
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -570,8 +562,7 @@ res.a_wild <- get_model(path)
 
 #' #### Posterior
 #+ a_wild, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.a_wild %>% plot_density(data_ah, var.regex)
+res.a_wild %>% plot_density(data_ah, get_vars(.))
 
 #' #### Statistics
 res.a_wild %>% summarise_samples(data_ah)
@@ -616,8 +607,7 @@ res.a_wild_subsets <- get_model(path)
 
 #' #### Posterior
 #+ res.a_wild_subsets, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.a_wild_subsets %>% plot_density(data_ah, var.regex)
+res.a_wild_subsets %>% plot_density(data_ah, get_vars(.))
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -663,8 +653,7 @@ res.a_types <- get_model(path)
 
 #' #### Posterior
 #+ res.a_types, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.a_types %>% plot_density(data_ah, var.regex)
+res.a_types %>% plot_density(data_ah, get_vars(.))
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -710,8 +699,7 @@ res.a_subsets <- get_model(path)
 
 #' #### Posterior
 #+ res.a_subsets, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.a_subsets %>% plot_density(data_ah, var.regex)
+res.a_subsets %>% plot_density(data_ah, get_vars(.))
 
 #' #### Statistics
 # Posterior probability of each sample being in the bad group
@@ -757,8 +745,7 @@ res.ac1 <- get_model(path)
 
 #' #### Posterior
 #+ res.ac1, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.ac1 %>% plot_density(data, var.regex)
+res.ac1 %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.ac1 %>% summarise_samples(data)
@@ -802,8 +789,7 @@ res.ac2 <- get_model(path)
 
 #' #### Posterior
 #+ res.ac2, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.ac2 %>% plot_density(data, var.regex)
+res.ac2 %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.ac2 %>% summarise_samples(data)
@@ -847,8 +833,7 @@ res.a_c <- get_model(path)
 
 #' #### Posterior
 #+ res.a_c, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.a_c %>% plot_density(data, var.regex)
+res.a_c %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.a_c %>% summarise_samples(data)
@@ -897,8 +882,7 @@ res.asm <- get_model(path)
 
 #' #### Posterior
 #+ res.asm, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.asm %>% plot_density(data, var.regex)
+res.asm %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.asm %>% summarise_samples(data)
@@ -942,8 +926,7 @@ res.ass <- get_model(path)
 
 #' #### Posterior
 #+ res.ass, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.ass %>% plot_density(data, var.regex)
+res.ass %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.ass %>% summarise_samples(data)
@@ -996,8 +979,7 @@ res.assg <- get_model(path)
 
 #' #### Posterior
 #+ res.assg, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.assg %>% plot_density(data, var.regex)
+res.assg %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.assg %>% summarise_samples(data)
@@ -1041,8 +1023,7 @@ res.assag <- get_model(path)
 
 #' #### Posterior
 #+ res.assag, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.assag %>% plot_density(data, var.regex)
+res.assag %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.assag %>% summarise_samples(data)
@@ -1086,8 +1067,7 @@ res.assag2 <- get_model(path)
 
 #' #### Posterior
 #+ res.assag2, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.assag2 %>% plot_density(data, var.regex)
+res.assag2 %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.assag2 %>% summarise_samples(data)
@@ -1131,8 +1111,7 @@ res.assage <- get_model(path)
 
 #' #### Posterior
 #+ res.assage, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.assage %>% plot_density(data, var.regex)
+res.assage %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.assage %>% summarise_samples(data)
@@ -1176,8 +1155,7 @@ res.assagesq <- get_model(path)
 
 #' #### Posterior
 #+ res.assagesq, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.assagesq %>% plot_density(data, var.regex)
+res.assagesq %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.assagesq %>% summarise_samples(data)
@@ -1222,8 +1200,7 @@ res.assagg <- get_model(path)
 
 #' #### Posterior
 #+ res.assagg, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.assagg %>% plot_density(data, var.regex)
+res.assagg %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.assagg %>% summarise_samples(data)
@@ -1278,8 +1255,7 @@ res.assagh <- get_model(path)
 
 #' #### Posterior
 #+ res.assagh, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.assagh %>% plot_density(data, var.regex)
+res.assagh %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.assagh %>% summarise_samples(data)
@@ -1323,8 +1299,7 @@ res.assagwt <- get_model(path)
 
 #' #### Posterior
 #+ res.assagwt, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.assagwt %>% plot_density(data, var.regex)
+res.assagwt %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.assagwt %>% summarise_samples(data)
@@ -1368,8 +1343,7 @@ res.assagw <- get_model(path)
 
 #' #### Posterior
 #+ res.assagw, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.assagw %>% plot_density(data, var.regex)
+res.assagw %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.assagw %>% summarise_samples(data)
@@ -1415,8 +1389,7 @@ res.assagwt_w <- get_model(path)
 
 #' #### Posterior
 #+ res.assagwt_w, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.assagwt_w %>% plot_density(data, var.regex)
+res.assagwt_w %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.assagwt_w %>% summarise_samples(data)
@@ -1461,8 +1434,7 @@ res.assaghwtw <- get_model(path)
 
 #' #### Posterior
 #+ res.assaghwtw, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.assaghwtw %>% plot_density(data, var.regex)
+res.assaghwtw %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.assaghwtw %>% summarise_samples(data)
@@ -1508,8 +1480,7 @@ res.assagh_wt_w <- get_model(path)
 
 #' #### Posterior
 #+ res.assagh_wt_w, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.assagh_wt_w %>% plot_density(data, var.regex)
+res.assagh_wt_w %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.assagh_wt_w %>% summarise_samples(data)
@@ -1566,8 +1537,7 @@ res.assagwc <- get_model(path)
 
 #' #### Posterior
 #+ res.assagwc, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.assagwc %>% plot_density(data, var.regex)
+res.assagwc %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.assagwc %>% summarise_samples(data)
@@ -1612,8 +1582,7 @@ res.assagwcst <- get_model(path)
 
 #' #### Posterior
 #+ res.assagwcst, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.assagwcst %>% plot_density(data, var.regex)
+res.assagwcst %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.assagwcst %>% summarise_samples(data)
@@ -1659,8 +1628,7 @@ res.assagwc_st <- get_model(path)
 
 #' #### Posterior
 #+ res.assagwc_st, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.assagwc_st %>% plot_density(data, var.regex)
+res.assagwc_st %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.assagwc_st %>% summarise_samples(data)
@@ -1705,8 +1673,7 @@ res.a_cssagwst <- get_model(path)
 
 #' #### Posterior
 #+ res.a_cssagwst, fig.height = 10
-var.regex <- "(a.prob)|(prob.of)|(intercept)|(sd)"
-res.a_cssagwst %>% plot_density(data, var.regex)
+res.a_cssagwst %>% plot_density(data, get_vars(.))
 
 #' #### Statistics
 res.a_cssagwst %>% summarise_samples(data)

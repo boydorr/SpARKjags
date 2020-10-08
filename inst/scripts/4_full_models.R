@@ -55,7 +55,7 @@ res.a <- get_model(path)
 
 #' #### Posterior
 #+ res.a_naive, fig.height = 6
-res.a %>% plot_density(data, get_vars(res.a))
+res.a %>% plot_density(data, get_vars(.))
 
 #' #### Diagnostics
 res.a %>% DIC() # 12262.57
@@ -86,7 +86,7 @@ res.asm <- get_model(path)
 
 #' #### Posterior
 #+ res.asm, fig.height = 6
-res.asm %>% plot_density(data, get_vars(res.asm))
+res.asm %>% plot_density(data, get_vars(.))
 
 #' #### Diagnostics
 res.asm %>% DIC() # 12011.55
@@ -117,7 +117,7 @@ res.ass <- get_model(path)
 
 #' #### Posterior
 #+ res.ass, fig.height = 6
-res.ass %>% plot_density(data, get_vars(res.ass))
+res.ass %>% plot_density(data, get_vars(.))
 
 #' #### Diagnostics
 res.ass %>% DIC() # 12097.86
@@ -157,7 +157,7 @@ res.asmg <- get_model(path)
 
 #' #### Posterior
 #+ res.asmg, fig.height = 6
-res.asmg %>% plot_density(data, get_vars(res.asmg))
+res.asmg %>% plot_density(data, get_vars(.))
 
 #' #### Diagnostics
 res.asmg %>% DIC() # 11862.36
@@ -182,7 +182,7 @@ res.asmag <- get_model(path)
 
 #' #### Posterior
 #+ res.asmag, fig.height = 6
-res.asmag %>% plot_density(data, get_vars(res.asmag))
+res.asmag %>% plot_density(data, get_vars(.))
 
 #' #### Diagnostics
 res.asmag %>% DIC() # 11786.2
@@ -213,7 +213,7 @@ res.asmag2 <- get_model(path)
 
 #' #### Posterior
 #+ res.asmag2, fig.height = 6
-res.asmag2 %>% plot_density(data, get_vars(res.asmag2))
+res.asmag2 %>% plot_density(data, get_vars(.))
 
 #' #### Diagnostics
 res.asmag2 %>% DIC() # 11788.27
@@ -244,7 +244,7 @@ res.asmage <- get_model(path)
 
 #' #### Posterior
 #+ res.asmage, fig.height = 6
-res.asmage %>% plot_density(data, get_vars(res.asmage))
+res.asmage %>% plot_density(data, get_vars(.))
 
 #' #### Diagnostics
 res.asmage %>% DIC() # 11993.5
@@ -271,7 +271,7 @@ res.asmagesq <- get_model(path)
 
 #' #### Posterior
 #+ res.asmagesq, fig.height = 6
-res.asmagesq %>% plot_density(data, get_vars(res.asmagesq))
+res.asmagesq %>% plot_density(data, get_vars(.))
 
 #' #### Diagnostics
 res.asmagesq %>% DIC() # 11836.08
@@ -298,7 +298,7 @@ res.asmagg <- get_model(path)
 
 #' #### Posterior
 #+ res.asmagg, fig.height = 6
-res.asmagg %>% plot_density(data, get_vars(res.asmagg))
+res.asmagg %>% plot_density(data, get_vars(.))
 
 #' #### Diagnostics
 res.asmagg %>% DIC() # 11647.46
@@ -335,7 +335,7 @@ res.asmaggh <- get_model(path)
 
 #' #### Posterior
 #+ res.asmaggh, fig.height = 6
-res.asmaggh %>% plot_density(data, get_vars(res.asmaggh))
+res.asmaggh %>% plot_density(data, get_vars(.))
 
 #' #### Diagnostics
 res.asmaggh %>% DIC() # 10973.54
@@ -366,7 +366,7 @@ res.asmaggwt <- get_model(path)
 
 #' #### Posterior
 #+ res.asmaggwt, fig.height = 6
-res.asmaggwt %>% plot_density(data, get_vars(res.asmaggwt))
+res.asmaggwt %>% plot_density(data, get_vars(.))
 
 #' #### Diagnostics
 res.asmaggwt %>% DIC() # 11057.68
@@ -393,7 +393,7 @@ res.asmaggw <- get_model(path)
 
 #' #### Posterior
 #+ res.asmaggw, fig.height = 6
-res.asmaggw %>% plot_density(data, get_vars(res.asmaggw))
+res.asmaggw %>% plot_density(data, get_vars(.))
 
 #' #### Diagnostics
 res.asmaggw %>% DIC() # 9914.729
@@ -422,7 +422,7 @@ res.asmaggwt_w <- get_model(path)
 
 #' #### Posterior
 #+ res.asmaggwt_w, fig.height = 6
-res.asmaggwt_w %>% plot_density(data, get_vars(res.asmaggwt_w))
+res.asmaggwt_w %>% plot_density(data, get_vars(.))
 
 #' #### Diagnostics
 res.asmaggwt_w %>% DIC() # 9915.182
@@ -451,7 +451,7 @@ res.asmagghwtw <- get_model(path)
 
 #' #### Posterior
 #+ res.asmagghwtw, fig.height = 6
-res.asmagghwtw %>% plot_density(data, get_vars(res.asmagghwtw))
+res.asmagghwtw %>% plot_density(data, get_vars(.))
 
 #' #### Diagnostics
 res.asmagghwtw %>% DIC() # 9916.447
@@ -484,7 +484,7 @@ res.asmaggh_wt_w <- get_model(path)
 
 #' #### Posterior
 #+ res.asmaggh_wt_w, fig.height = 6
-res.asmaggh_wt_w %>% plot_density(data, get_vars(res.asmaggh_wt_w))
+res.asmaggh_wt_w %>% plot_density(data, get_vars(.))
 
 #' #### Diagnostics
 res.asmaggh_wt_w %>% DIC() # 9916.827
@@ -529,7 +529,7 @@ DICtable(c("res.asmaggh", "res.asmaggwt", "res.asmaggw", "res.asmaggwt_w",
 path <- run_SpARKjags_model(data, file.path(directory, "asmaggw.R"), thin = 10)
 res.asmaggw <- get_model(path)
 
-res.asmaggw %>% plot_density(data, get_vars(res.asmaggw))
+res.asmaggw %>% plot_density(data, get_vars(.))
 
 
 #' ### Apply best null model to Carbapenem positive samples only
@@ -545,7 +545,7 @@ path <- run_SpARKjags_model(data.carb.res,
                             thin = 10)
 res.asmaggw_CarbRes <- get_model(path)
 
-res.asmaggw_CarbRes %>% plot_density(data, get_vars(res.asmaggw_CarbRes))
+res.asmaggw_CarbRes %>% plot_density(data, get_vars(.))
 
 #' ### Apply best null model to Carbapenem susceptible samples only
 data.carb.sus <- jags_data(classification = "all",
@@ -560,7 +560,7 @@ path <- run_SpARKjags_model(data.carb.sus,
                             thin = 10)
 res.asmaggw_CarbSus <- get_model(path)
 
-res.asmaggw_CarbSus %>% plot_density(data, get_vars(res.asmaggw_CarbSus))
+res.asmaggw_CarbSus %>% plot_density(data, get_vars(.))
 
 
 
@@ -579,7 +579,7 @@ res.asmaggwc <- get_model(path)
 
 #' #### Posterior
 #+ res.asmaggwc, fig.height = 6
-res.asmaggwc %>% plot_density(data, get_vars(res.asmaggwc))
+res.asmaggwc %>% plot_density(data, get_vars(.))
 
 #' #### Diagnostics
 res.asmaggwc %>% DIC() # 9911.505
@@ -612,7 +612,7 @@ res.asmaggwcst <- get_model(path)
 
 #' #### Posterior
 #+ res.asmaggwcst, fig.height = 6
-res.asmaggwcst %>% plot_density(data, get_vars(res.asmaggwcst))
+res.asmaggwcst %>% plot_density(data, get_vars(.))
 
 #' #### Diagnostics
 res.asmaggwcst %>% DIC() # 9764.723
@@ -645,7 +645,7 @@ res.asmaggwc_st <- get_model(path)
 
 #' #### Posterior
 #+ res.asmaggwc_st, fig.height = 6
-res.asmaggwc_st %>% plot_density(data, get_vars(res.asmaggwc_st))
+res.asmaggwc_st %>% plot_density(data, get_vars(.))
 
 #' #### Diagnostics
 res.asmaggwc_st %>% DIC() # 9748.901
