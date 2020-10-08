@@ -1,7 +1,7 @@
 # SpARKjags
 
 [![test-build](https://github.com/soniamitchell/SpARKjags/workflows/build/badge.svg)](https://github.com/soniamitchell/SpARKjags/actions)
-[![codecov](https://codecov.io/gh/soniamitchell/SpARKjags/branch/master/graph/badge.svg?=1)](https://codecov.io/gh/soniamitchell/SpARKjags)
+[![codecov](https://codecov.io/gh/soniamitchell/SpARKjags/branch/master/graph/badge.svg?token=0oOkymQf8t)](https://codecov.io/gh/soniamitchell/SpARKjags)
 
 ## Table of contents
 * [General info](#general-info)
