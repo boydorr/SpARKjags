@@ -7,8 +7,9 @@
 * [General info](#general-info)
 * [Setup](#setup)
 * [How to](#how-to)
-  * [List all of the models installed as part of this package](#List-all-of-the-models-installed-as-part-of-this-package)
-  * [Run one of the models included in the SpARKjags package](#Run-one-of-the-models-included-in-the-SpARKjags-package)
+  * [List all of the models included in the SpARKjags package](#List-all-of-the models-included-in-the-SpARKjags-package)
+  * [Run one of the SpARKjags models](#Run-one-of-the-SpARKjags-models)
+  * [Run one of your own models](#Run-one-of-your-own-models)
   * [Read model output into R](#Read-model-output-into-R)
   * [Delete SpARKjags model output](#Delete-SpARKjags-model-output)
 * [Function map](#function-map)
@@ -25,13 +26,13 @@ devtools::install_github("soniamitchell/SpARKjags")
 Note that you must have access to the SpARK project datasets for any of this code to work.
 
 ## How to
-### List all of the models installed as part of this package
+### List all of the models included in the SpARKjags package
   ```R
   list_models()
   ```
   If you have already run any of the models, outputs will also be listed.
 
-### Run one of the models included in the SpARKjags package
+### Run one of the SpARKjags models
   ```R
   # Generate JAGS input dataset
   data <- jags_data(classification = "Carbapenem",
@@ -54,7 +55,7 @@ Note that you must have access to the SpARK project datasets for any of this cod
                                 save_to = "myresults_dir/myresults.rds)
     ```
 
-* **Run your own model**
+### Run one of your own models
     ```R
     path <- run_custom_model(data = data,
                              custom_model = "mymodel_dir/mymodel.R")
