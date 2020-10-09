@@ -7,6 +7,10 @@
 * [General info](#general-info)
 * [Setup](#setup)
 * [How to](#how-to)
+  * [List all of the models installed as part of this package](#List-all-of-the-models-installed-as-part-of-this-package)
+  * [Run one of the models included in the SpARKjags package](#Run-one-of-the-models-included-in-the-SpARKjags-package)
+  * [Read model output into R](#Read-model-output-into-R)
+  * [Delete SpARKjags model output](#Delete-SpARKjags-model-output)
 * [Function map](#function-map)
 
 ## General info
@@ -21,13 +25,13 @@ devtools::install_github("soniamitchell/SpARKjags")
 Note that you must have access to the SpARK project datasets for any of this code to work.
 
 ## How to
-* **List all of the models installed as part of this package**
+### List all of the models installed as part of this package
   ```R
   list_models()
   ```
   If you have already run any of the models, outputs will also be listed.
 
-* **Run one of the models included in the SpARKjags package**
+### Run one of the models included in the SpARKjags package
   ```R
   # Generate JAGS input dataset
   data <- jags_data(classification = "Carbapenem",
@@ -43,25 +47,25 @@ Note that you must have access to the SpARK project datasets for any of this cod
   
   Warning! If you reinstall this package, any data files saved in the package directory will be deleted.
 
-  * **Choose your own model output save location**
+* **Choose your own model output save location**
     ```R
     path <- run_SpARKjags_model(data = data,
                                 SpARKjags_model = "individual_models/h.R",
                                 save_to = "myresults_dir/myresults.rds)
     ```
 
-  * **Run your own model**
+* **Run your own model**
     ```R
     path <- run_custom_model(data = data,
                              custom_model = "mymodel_dir/mymodel.R")
     ```
     Like `run_SpARKjags_model()`, `run_custom_model()` will save the model output in the same directory as the model script, unless the `save_to` argument is specified.
     
-* **Read model output into R**
+### Read model output into R
   ```R
   results <- get_model(path = path)
   ```
-* **Delete SpARKjags model output**  
+### Delete SpARKjags model output
   Remember that `run_SpARKjags_model()` will save the model output to the the same directory as the model script (within the SpARKjags package) if you don't define the `save_to` argument? To delete these outputs:
   ```R
   # Delete single model output
