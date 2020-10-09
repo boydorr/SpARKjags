@@ -235,7 +235,7 @@ get_human <- function(classification,
 
 
   # Combine all lookup tables
-  lookup_tables <- lapply(1:ncol(data), function(x) {
+  lookup_tables <- lapply(seq_len(ncol(data)), function(x) {
 
     if(colnames(data)[x] %in% c("class_interpretation", antibiotics)) {
       out <- resistance
@@ -370,10 +370,11 @@ get_human <- function(classification,
   assertthat::assert_that(nrow(dat_numeric) == nrow(hospital_dat) +
                             nrow(gp_dat) + nrow(outpatients_dat) +
                             nrow(volunteer_dat))
-  assertthat::assert_that(all(sample_dat$sample_GUID == 1:nrow(sample_dat)))
+  assertthat::assert_that(all(sample_dat$sample_GUID ==
+                                seq_len(nrow(sample_dat))))
   assertthat::assert_that(all(sample_type_dat$sample_type ==
-                                1:nrow(sample_type_dat)))
-  assertthat::assert_that(all(ward_dat$ward == 1:nrow(ward_dat)))
+                                seq_len(nrow(sample_type_dat))))
+  assertthat::assert_that(all(ward_dat$ward == seq_len(nrow(ward_dat))))
 
 
   # Output ------------------------------------------------------------------

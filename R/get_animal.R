@@ -178,7 +178,7 @@ get_animal <- function(classification,
 
 
   # Combine all lookup tables
-  lookup_tables <- lapply(1:ncol(data), function(x) {
+  lookup_tables <- lapply(seq_len(ncol(data)), function(x) {
 
     if(colnames(data)[x] %in% c("class_interpretation", antibiotics)) {
       out <- resistance
