@@ -48,12 +48,12 @@ This will save the model output to the same directory as the model script (withi
   
 Warning! If you reinstall this package, any data files saved in the package directory will be deleted.
 
-* **Choose your own model output save location**
-  ```R
-  path <- run_SpARKjags_model(data = data,
-                              SpARKjags_model = "individual_models/h.R",
-                              save_to = "myresults_dir/myresults.rds)
-  ```
+If you want to **choose your own model output save location**:
+```R
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = "individual_models/h.R",
+                            save_to = "myresults_dir/myresults.rds)
+```
 
 ### Run one of your own models
 ```R
