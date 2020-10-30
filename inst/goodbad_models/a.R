@@ -78,7 +78,7 @@ model {
   # Prior value for intercept
   intercept ~ dnorm(0, 0.001)
 
-  # Difference between distribution means of "good" and "bad" groups
+  # Difference between distribution means of the "good" and "bad" effect
   diff ~ dgamma(0.001, 0.001)
   intercept.plus <- intercept + diff
 
