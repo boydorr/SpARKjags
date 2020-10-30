@@ -84,19 +84,12 @@ model {
   intercept.plus <- intercept + diff
 
   # Probability of being in the bad group is dependent on clinical state
-  for (c in c(ncarr, nclin)) # 1, 2!
-  {
-    bad.hosp.effect[c] ~ dnorm(0, tau.clin)
-    logit(prob.of.bad.hosp[c]) <- bad.hosp.effect[c]
-  }
-
-  # Equivalent to bad.hosp.effect
-  bad.gp.effect ~ dnorm(0, tau.clin)
-  bad.vol.effect ~ dnorm(0, tau.clin)
-  bad.out.effect ~ dnorm(0, tau.clin)
-  logit(prob.of.bad.gp) <- bad.gp.effect
-  logit(prob.of.bad.vol) <- bad.vol.effect
-  logit(prob.of.bad.out) <- bad.out.effect
+  prob.of.bad.hosp[1] ~ dbeta(1, 1) # Carriage
+  prob.of.bad.hosp[2] ~ dbeta(1, 1) # Clinical
+  # Probability of being in the bad group
+  prob.of.bad.gp ~ dbeta(1, 1)
+  prob.of.bad.vol ~ dbeta(1, 1)
+  prob.of.bad.out ~ dbeta(1, 1)
 
   # Prior values for precision
   tau.class ~ dgamma(0.001, 0.001)
