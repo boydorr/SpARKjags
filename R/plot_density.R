@@ -115,7 +115,18 @@ plot_density <- function(model,
     # Plot prob of being in the badgroup / prob of resistance --------------
 
     if(grepl("^probability of resistance", title)) {
+
+      # Initialise variables for plotting
       all_labs <- unique(df$label)
+
+      labs <- c("Hospital\n(Carriage)",
+                "Hospital\n(Clinical)",
+                "GP",
+                "Outpatients",
+                "Volunteers")
+      labs <- c(labs, all_labs[!all_labs %in% labs])
+
+      this_many <- length(labs)
 
       # Extract data
       if(bad) df <- df %>% dplyr::filter(.data$badgroup == 1)
@@ -131,11 +142,6 @@ plot_density <- function(model,
 
       # Calculate the observed resistance probability -----------------------
 
-      # Count of the number of samples in each hospital-clinical group
-      n <- df %>%
-        dplyr::group_by(.data$label) %>%
-        dplyr::summarise(n = dplyr::n())
-
       # Define which columns should be used when the input is a goodbad model
       # or naive (e.g. res.a_naive)
       if(good | bad) {
@@ -150,21 +156,25 @@ plot_density <- function(model,
           colnames()
       }
 
+      # Count of the number of R and S samples in each hospital-clinical group
+      # for each antibiotic class (ignore NAs)
+      n <- df %>%
+        dplyr::group_by(.data$label) %>%
+        dplyr::summarise(dplyr::across(columns, ~sum(!is.na(.)))) %>%
+        reshape2::melt(id.vars = "label", measure.vars = columns,
+                       variable.name = "classification",
+                       value.name = "total")
+
       # Count of the number of samples with resistance to each antibiotic class
       # in each hospital-clinical group
       s <- df %>%
         dplyr::group_by(.data$label) %>%
-        dplyr::summarise_at(vars(contains(columns)), sum, na.rm = T)
+        dplyr::summarise(dplyr::across(columns, ~sum(. == 1, na.rm = TRUE))) %>%
+        reshape2::melt(id.vars = "label", measure.vars = columns,
+                       variable.name = "classification",
+                       value.name = "resistant")
 
-      labs <- c("Hospital\n(Carriage)",
-                "Hospital\n(Clinical)",
-                "GP",
-                "Outpatients",
-                "Volunteers")
-      labs <- c(labs, all_labs[!all_labs %in% labs])
-
-      this_many <- length(labs)
-
+      # Initialise variables for plotting
       if(this_many <= 12) {
         manual_colours <- stats::setNames(ggthemes::ptol_pal()(this_many),
                                           labs)
@@ -181,12 +191,8 @@ plot_density <- function(model,
 
       # Calculate the proportion of samples in each hospital-clinical group
       # that are resistant to each antibiotic class
-      probabilities <- merge(n, s) %>%
-        dplyr::mutate_at(vars(contains(columns)), ~ . / n) %>%
-        reshape2::melt(id.var = "label",
-                       measure.vars = columns,
-                       variable.name = "classification",
-                       value.name = "Probability") %>%
+      probabilities <- merge(n, s, by = c("label", "classification")) %>%
+        dplyr::mutate(Probability = .data$resistant / .data$total) %>%
         merge(labels[[this_set]]) %>%
         dplyr::mutate(name = dplyr::case_when(
           grepl("Hospital", label) ~ "Hospital",
