@@ -29,8 +29,7 @@ model {
     {
       # Response is different for each antibiotic and depending on
       # which pop it's from
-      response[gp_GUID[gp],a] ~ dbern(a.gp.prob[a,
-                                                index.bad.gp[gp]])
+      response[gp_GUID[gp],a] ~ dbern(a.gp.prob[a, index.bad.gp[gp]])
     }
   }
 
@@ -106,6 +105,8 @@ model {
   intercept.plus <- intercept + diff
 
   # Probability of being in the bad group
+  # A uniform/flat/noninformative prior constrained between 0 and 1
+  # Here we believe that the two possible outcomes are equally likely
   prob.of.bad.hosp ~ dbeta(1, 1)
   prob.of.bad.gp ~ dbeta(1, 1)
   prob.of.bad.vol ~ dbeta(1, 1)
