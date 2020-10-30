@@ -15,33 +15,53 @@ plot_antibiotics <- function(model, data) {
                                    -.data$clinical, -.data$mean.p.bad,
                                    -.data$badgroup, -.data$label)
 
+  # Determine order
+  plotthis <- response %>%
+    reshape2::melt(id.var = "GUID",
+                   variable.name = "class",
+                   value.name = "interpretation") %>%
+    merge(df %>%
+            dplyr::mutate(name = dplyr::case_when(
+              .data$name == "Hospital" & .data$clinical == "yes" ~
+                "Hospital\nClinical",
+              .data$name == "Hospital" & .data$clinical == "no" ~
+                "Hospital\nCarriage",
+              T ~ name)) %>%
+            dplyr::select(.data$GUID, .data$mean.p.bad, .data$name,
+                          .data$badgroup)) %>%
+    dplyr::filter(.data$badgroup == groups[i]) %>%
+    # Sort samples
+    dplyr::group_by(.data$GUID) %>%
+    dplyr::mutate(total.guid = sum(.data$interpretation, na.rm = T)) %>%
+    dplyr::arrange(.data$name, desc(.data$total.guid)) %>%
+    dplyr::ungroup() %>%
+    dplyr::mutate(GUID = factor(.data$GUID, levels = unique(.data$GUID))) %>%
+    # Sort antibiotic classes
+    dplyr::group_by(class) %>%
+    dplyr::mutate(total.class = sum(.data$interpretation, na.rm = T)) %>%
+    dplyr::arrange(desc(.data$total.class)) %>%
+    dplyr::ungroup() %>%
+    dplyr::mutate(class = factor(.data$class, levels = unique(.data$class)))
+  classorder <- levels(plotthis$class)
+
+
+
   # Plot results
   plots <- list()
   groups <- c(1, 0)
-  for (i in seq_along(groups)) {
-    plotthis <- response %>%
-      dplyr::rename(Ami = .data$Aminoglycoside,
-                    Carbape = .data$Carbapenem,
-                    Cephalo = .data$Cephalosporin,
-                    Colisti = .data$Colistin,
-                    Fluoroq = .data$Fluoroquinolone,
-                    Fosfomy = .data$Fosfomycin,
-                    Monobac = .data$Monobactam,
-                    Nitrofu = .data$Nitrofurantoin,
-                    `Pen (P)` = .data$`Penicillin (Penams)`,
-                    `Pen (C)` = .data$`Penicillin Combination`,
-                    Tetracy = .data$Tetracycline,
-                    Trimeth = .data$Trimethoprim,
-                    `Tri/Sul` = .data$`Trimethoprim/Sulfamethoxazole`) %>%
+  plotthis <- lapply(seq_along(groups), function(i) {
+    out <- response %>%
       reshape2::melt(id.var = "GUID",
                      variable.name = "class",
                      value.name = "interpretation") %>%
       merge(df %>%
               dplyr::mutate(name = dplyr::case_when(
                 .data$name == "Hospital" & .data$clinical == "yes" ~
-                  "Hospital\nClinical",
+                  "Hospital Clinical",
                 .data$name == "Hospital" & .data$clinical == "no" ~
-                  "Hospital\nCarriage",
+                  "Hospital Carriage",
+                .data$name == "Volunteers" & .data$clinical == "no" ~
+                  "Vol",
                 T ~ name)) %>%
               dplyr::select(.data$GUID, .data$mean.p.bad, .data$name,
                             .data$badgroup)) %>%
@@ -49,52 +69,47 @@ plot_antibiotics <- function(model, data) {
       # Sort samples
       dplyr::group_by(.data$GUID) %>%
       dplyr::mutate(total.guid = sum(.data$interpretation, na.rm = T)) %>%
-      dplyr::arrange(.data$name, .data$total.guid) %>%
+      dplyr::arrange(.data$name, desc(.data$total.guid)) %>%
       dplyr::ungroup() %>%
       dplyr::mutate(GUID = factor(.data$GUID, levels = unique(.data$GUID))) %>%
       # Sort antibiotic classes
       dplyr::group_by(class) %>%
       dplyr::mutate(total.class = sum(.data$interpretation, na.rm = T)) %>%
       dplyr::arrange(desc(.data$total.class)) %>%
+      dplyr::ungroup() %>%
+      dplyr::mutate(class = factor(.data$class, levels = classorder)) %>%
+      dplyr::group_by(name, badgroup) %>%
+      dplyr::mutate(xaxis = as.numeric(GUID)) %>%
+      dplyr::mutate(xaxis = xaxis - min(xaxis)) %>%
       dplyr::ungroup()
+  })
+  plotthis <- do.call(rbind.data.frame, plotthis) %>%
+    dplyr::mutate(interpretation = dplyr::case_when(
+      .data$interpretation == 1 ~ "Resistant",
+      .data$interpretation == 0 ~ "Susceptible"),
+      badgroup = dplyr::case_when(.data$badgroup == 1 ~ "Bad group",
+                                  .data$badgroup == 0 ~ "Good group"))
 
-    if(groups[i] == 1) {
-      plotthis <- plotthis %>%
-        dplyr::mutate(class = factor(.data$class, levels = unique(.data$class)))
-      classorder <- levels(plotthis$class)
-      title <- "Bad group"
-    }
-
-    if(groups[i] == 0) {
-      plotthis <- plotthis %>%
-        dplyr::mutate(class = factor(.data$class, levels = classorder))
-      title <- "Good group"
-    }
-
-    # Tidy labels
-    plotthis <- plotthis %>%
-      dplyr::mutate(interpretation = dplyr::case_when(
-        .data$interpretation == 1 ~ "Resistant",
-        .data$interpretation == 0 ~ "Susceptible"),
-        badgroup = dplyr::case_when(.data$badgroup == 1 ~ "Bad group",
-                                    .data$badgroup == 0 ~ "Good group"))
-
-    # Plot
-    g <- plotthis %>% ggplot2::ggplot() + ggplot2::theme_minimal() +
-      ggplot2::geom_tile(ggplot2::aes_string(x = "class", y = "GUID",
-                                             fill = "interpretation"),
-                         colour = "grey") +
-      ggplot2::scale_fill_manual(values = c("#d73027", "#fee08b")) +
-      ggplot2::facet_grid(name ~ ., scales = "free", space = "free") +
-      ggplot2::theme(axis.text.y = ggplot2::element_blank()) +
-      ggplot2::labs(x = "Antibiotic class", y = "SpARK ID", title = title) +
-      ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
-                     strip.text.y = ggplot2::element_text(angle = 0)) +
-      ggplot2::labs(fill = "") +
-      ggplot2::theme(legend.position = "bottom")
-
-    plots[[i]] <- g
-  }
-
-  egg::ggarrange(plots = plots, ncol = 2)
+  # Plot
+  breaks <- seq(0, 500, by = 10) - 0.5
+  labels <- c(0, rep("", 4), 50, rep("", 4), 100, rep("", 4), 150, rep("", 4),
+              200, rep("", 4), 250, rep("", 4), 300, rep("", 4), 350,
+              rep("", 4), 400, rep("", 4), 450, rep("", 4), 500)
+  g <- plotthis %>% ggplot2::ggplot() + ggplot2::theme_minimal() +
+    ggplot2::geom_tile(ggplot2::aes_string(x = "class", y = "xaxis",
+                                           fill = "interpretation"),
+                       colour = "grey") + ggplot2::coord_flip() +
+    ggplot2::scale_fill_manual(values = c("#d73027", "#fee08b")) +
+    ggplot2::facet_grid(badgroup ~ name, scales = "free", space = "free") +
+    ggplot2::scale_x_discrete(expand = c(0, 0)) +
+    ggplot2::scale_y_continuous(expand = c(0, 0),
+                                breaks = breaks,
+                                labels = labels) +
+    ggplot2::theme(panel.grid.major = element_blank(),
+                   panel.grid.minor = element_blank(),
+                   panel.border = element_rect(size = 0.5, colour = "grey",
+                                               fill = NA),
+                   legend.position = "bottom",
+                   axis.ticks.x = element_line(size = 0.25, colour = "grey")) +
+    ggplot2::labs(x = "Antibiotic class", y = "SpARK sample", fill = "")
 }
