@@ -29,7 +29,7 @@ plot_antibiotics <- function(model, data) {
               T ~ name)) %>%
             dplyr::select(.data$GUID, .data$mean.p.bad, .data$name,
                           .data$badgroup)) %>%
-    dplyr::filter(.data$badgroup == groups[i]) %>%
+    dplyr::filter(.data$badgroup == 1) %>% # bad group
     # Sort samples
     dplyr::group_by(.data$GUID) %>%
     dplyr::mutate(total.guid = sum(.data$interpretation, na.rm = T)) %>%
