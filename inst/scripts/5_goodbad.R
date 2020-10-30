@@ -1661,48 +1661,48 @@ res.assagwc_st
 
 
 
-#' ### res.a_cssagwst {.tabset}
-#' response ~ antibiotic_class_{goodbad,clinical} + sample_season + agegroup +
-#' ward + sampletype
+#' #' ### res.a_cssagwst {.tabset}
+#' #' response ~ antibiotic_class_{goodbad,clinical} + sample_season + agegroup +
+#' #' ward + sampletype
+#' #'
 #'
-
-path <- run_SpARKjags_model(data, file.path(directory, "a_cssagwst.R"),
-                            thin = 10)
-res.a_cssagwst <- get_model(path)
-
-#' #### Posterior
-#+ res.a_cssagwst, fig.height = 10
-res.a_cssagwst %>% plot_density(data)
-
-#' #### Statistics
-res.a_cssagwst %>% summarise_samples(data)
-
-#' #### AMR Summary
-#+ fig.height = 10
-res.a_cssagwst %>% plot_antibiotics(data)
-
-#' #### AMR Correlation
-#+ fig.height = 10
-res.a_cssagwst %>% plot_correlation(data)
-
-#' #### Diagnostics
-res.a_cssagwst %>% DIC() # 5773.768
-res.a_cssagwst %>% testSSEF()
-res.a_cssagwst %>% testPSRF()
-
-#' #### Trace plot
-#+ fig.height = 6
-res.a_cssagwst %>% plot_caterpillar()
-
-#' #### Autocorrelation
-#+ fig.height = 6
-res.a_cssagwst %>% plot_autocorr()
-
-#' #### Model
-res.a_cssagwst$model
-
-#' #### Results
-res.a_cssagwst
+#' path <- run_SpARKjags_model(data, file.path(directory, "a_cssagwst.R"),
+#'                             thin = 10)
+#' res.a_cssagwst <- get_model(path)
+#'
+#' #' #### Posterior
+#' #+ res.a_cssagwst, fig.height = 10
+#' res.a_cssagwst %>% plot_density(data)
+#'
+#' #' #### Statistics
+#' res.a_cssagwst %>% summarise_samples(data)
+#'
+#' #' #### AMR Summary
+#' #+ fig.height = 10
+#' res.a_cssagwst %>% plot_antibiotics(data)
+#'
+#' #' #### AMR Correlation
+#' #+ fig.height = 10
+#' res.a_cssagwst %>% plot_correlation(data)
+#'
+#' #' #### Diagnostics
+#' res.a_cssagwst %>% DIC() # 5773.768
+#' res.a_cssagwst %>% testSSEF()
+#' res.a_cssagwst %>% testPSRF()
+#'
+#' #' #### Trace plot
+#' #+ fig.height = 6
+#' res.a_cssagwst %>% plot_caterpillar()
+#'
+#' #' #### Autocorrelation
+#' #+ fig.height = 6
+#' res.a_cssagwst %>% plot_autocorr()
+#'
+#' #' #### Model
+#' res.a_cssagwst$model
+#'
+#' #' #### Results
+#' res.a_cssagwst
 
 
 #' ### Summary of DIC results {-}
@@ -1712,4 +1712,5 @@ DICtable(c("res.assg", "res.assag", "res.assag2", "res.assage",
            "res.assagesq", "res.assagg"))
 DICtable(c("res.assagh", "res.assagwt", "res.assagw", "res.assagwt_w",
            "res.assaghwtw", "res.assagh_wt_w"))
-DICtable(c("res.assagwc", "res.assagwcst", "res.assagwc_st", "res.a_cssagwst"))
+DICtable(c("res.assagwc", "res.assagwcst", "res.assagwc_st"))
+# "res.a_cssagwst"
