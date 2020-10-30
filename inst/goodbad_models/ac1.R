@@ -93,11 +93,9 @@ model {
 
   # Prior values for precision
   tau.class ~ dgamma(0.001, 0.001)
-  tau.clin ~ dgamma(0.001, 0.001)
 
   # Convert precisions to sd
   sd.class <- sqrt(1/tau.class)
-  sd.clin <- sqrt(1/tau.clin)
 
-  #monitor# full.pd, dic, deviance, a.prob, prob.of.bad.hosp, prob.of.bad.gp, prob.of.bad.vol, prob.of.bad.out, bad.p, bad.gp, bad.v, bad.o, intercept, sd.class, sd.clin
+  #monitor# full.pd, dic, deviance, a.prob, prob.of.bad.hosp, prob.of.bad.gp, prob.of.bad.vol, prob.of.bad.out, bad.p, bad.gp, bad.v, bad.o, intercept, sd.class
 }
