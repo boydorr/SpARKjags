@@ -24,13 +24,6 @@ test_that("plot_caterpillar runs without error", {
   expect_equal(class(g), c("gg", "ggplot"))
 })
 
-test_that("plot_antibiotics runs without error", {
-  expect_silent(g <- plot_antibiotics(model = res,
-                                      data = data))
-
-  expect_equal(class(g), c("egg", "gtable", "gTree", "grob", "gDesc"))
-})
-
 
 
 # write cache_model() function to replace run model
