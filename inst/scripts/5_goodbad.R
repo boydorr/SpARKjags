@@ -77,8 +77,9 @@ data$data.human$data %>%
 #'
 #' # 1. Control for the structure of the data
 #'
-#' * Posterior: The grey bar represents the 1st and 3rd quantile distance around
-#'   the median
+#' * Posterior: The tails of the violins are trimmed to the range of the data.
+#'   All violins are scaled to have the same maximum width. The grey line
+#'   represents the 1st and 3rd quantile distance around the median
 #' * AMR Correlation: calculated Pearson correlation using pairwise.complete.obs
 #' * Class interpretation: R when sample is resistant to at least one
 #'   antibiotic, S when sample is susceptible to at least one antibiotic,
