@@ -23,9 +23,10 @@ knitr::opts_chunk$set(warning = FALSE)
 
 # Find models here (installed with the package)
 directory <- "goodbad_models"
-# Save results here (make sure Desktop/git/SpARK/SpARKjags is your working
-# directory)
-res_dir <- file.path(getwd(), "results", directory)
+# Save results here (use absolute path so that results can be found when
+# RMarkdown report is generated)
+res_dir <- file.path("Users", "Soniam", "Desktop", "git", "SpARK", "SpARKjags",
+                     "results", directory)
 
 data_full <- jags_data(classification = "all",
                        categories = "human",
@@ -714,7 +715,8 @@ res.a_wild
 #'
 
 path <- run_SpARKjags_model(data = data_ah,
-                            SpARKjags_model = file.path(directory, "a_wild_subsets.R"),
+                            SpARKjags_model = file.path(directory,
+                                                        "a_wild_subsets.R"),
                             save_to = res_dir,
                             thin = 10)
 res.a_wild_subsets <- get_model(path)
