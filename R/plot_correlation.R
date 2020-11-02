@@ -59,12 +59,11 @@ plot_correlation <- function(model, data) {
                         label_alpha = T)
 
     if(groups[i] == 1) g <- g + ggplot2::labs(title = "Bad group")
-
     if(groups[i] == 0) g <- g + ggplot2::labs(title = "Good group")
 
     plots[[i]] <- g
   }
 
-  egg::ggarrange(plots = plots, nrow = 1)
+  egg::ggarrange(plots = plots, nrow = 2)
 }
 

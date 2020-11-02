@@ -289,5 +289,5 @@ plot_density <- function(model,
     ggplot2::ggsave(pdf_filename, output, width = 10, height = 10)
   }
 
-  return(output)
+  output
 }

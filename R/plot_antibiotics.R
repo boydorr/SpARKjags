@@ -95,7 +95,7 @@ plot_antibiotics <- function(model, data) {
   labels <- c(0, rep("", 4), 50, rep("", 4), 100, rep("", 4), 150, rep("", 4),
               200, rep("", 4), 250, rep("", 4), 300, rep("", 4), 350,
               rep("", 4), 400, rep("", 4), 450, rep("", 4), 500)
-  g <- plotthis %>% ggplot2::ggplot() + ggplot2::theme_minimal() +
+  output <- plotthis %>% ggplot2::ggplot() + ggplot2::theme_minimal() +
     ggplot2::geom_tile(ggplot2::aes_string(x = "class", y = "xaxis",
                                            fill = "interpretation"),
                        colour = "grey") + ggplot2::coord_flip() +
@@ -112,4 +112,6 @@ plot_antibiotics <- function(model, data) {
                    legend.position = "bottom",
                    axis.ticks.x = element_line(size = 0.25, colour = "grey")) +
     ggplot2::labs(x = "Antibiotic class", y = "SpARK sample", fill = "")
+
+  output
 }

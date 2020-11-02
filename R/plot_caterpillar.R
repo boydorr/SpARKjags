@@ -47,5 +47,5 @@ plot_caterpillar <- function(model,
     ggplot2::ggsave(pdf_filename, output, height = n/ncol, limitsize = F)
   }
 
-  return(output)
+  output
 }
