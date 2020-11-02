@@ -6,15 +6,14 @@
 #' @param SpARKjags_model a \code{string} specifying a model location within
 #' the SpARKjags package. The format should be dir/model (as listed in
 #' \code{list_models()}).
+#' @param save_to (optional) a \code{string} specifying a custom save location
+#' for the model output
 #' @param thin (optional; default = 1) an \code{integer} specifying (from
 #' \code{runjags::run.jags()}) the thinning interval to be used in JAGS.
 #' Increasing the thinning interval may reduce autocorrelation, and therefore
 #' reduce the number of samples required, but will increase the time required to
 #' run the simulation. Using this option thinning is performed directly in JAGS,
 #' rather than on an existing MCMC object.
-#' @param save_to (optional) a \code{string} specifying a custom save location
-#' for the model output. If save_to is missing, the model output will be
-#' saved in the same directory as the model script.
 #'
 #' @return Returns code{string} specifying the location of the model output
 #'
@@ -27,8 +26,8 @@
 #'
 run_SpARKjags_model <- function(data,
                                 SpARKjags_model,
-                                thin = 1,
-                                save_to) {
+                                save_to,
+                                thin = 1) {
 
   if(!grepl(".R$", SpARKjags_model))
     stop("SpARKjags_model must point to an *.R file")
@@ -43,14 +42,11 @@ run_SpARKjags_model <- function(data,
       stop("More than one model was found")
   }
 
-  # If the user doesn't provide a save_to location, save it in the same
-  # directory as the model
-  if(missing(save_to)) {
-    save_to <- gsub(".r$", "", location)
-    save_to <- gsub(".R$", "", location)
-    save_to <- paste0(save_to, ".rds")
-  }
-  assertthat::assert_that(grepl(".rds$", save_to))
+  # Determine where to save results
+  filename <- gsub(".r$", "", basename(location))
+  filename <- gsub(".R$", "", filename)
+  filename <- paste0(filename, ".rds")
+  save_to <- file.path(save_to, filename)
 
   # Run model
   run_model(data = data,
