@@ -4,7 +4,7 @@
 \alias{plot_caterpillar}
 \title{plot_caterpillar}
 \usage{
-plot_caterpillar(model, save_to, model_name, save_pdf)
+plot_caterpillar(model, save_to, model_name, save_pdf = FALSE)
 }
 \arguments{
 \item{model}{model}

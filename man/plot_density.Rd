@@ -4,7 +4,7 @@
 \alias{plot_density}
 \title{plot_density}
 \usage{
-plot_density(model, data, save_to, model_name, save_pdf)
+plot_density(model, data, save_to, model_name, save_pdf = FALSE)
 }
 \arguments{
 \item{model}{a \code{runjags} object containing model results}

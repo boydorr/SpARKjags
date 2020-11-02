@@ -10,7 +10,7 @@
 plot_caterpillar <- function(model,
                              save_to,
                              model_name,
-                             save_pdf) {
+                             save_pdf = FALSE) {
   # Is the plot cached?
   save_to <- file.path(save_to, "caterpillar_plots")
   filename <- paste0(gsub("res.", "", model_name), ".rds")
