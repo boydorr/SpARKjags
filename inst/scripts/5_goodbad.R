@@ -25,8 +25,8 @@ knitr::opts_chunk$set(warning = FALSE)
 directory <- "goodbad_models"
 # Save results here (use absolute path so that results can be found when
 # RMarkdown report is generated)
-res_dir <- file.path("Users", "Soniam", "Desktop", "git", "SpARK", "SpARKjags",
-                     "results", directory)
+res_dir <- file.path("", "Users", "Soniam", "Desktop", "git", "SpARK",
+                     "SpARKjags", "results", directory)
 
 data_full <- jags_data(classification = "all",
                        categories = "human",
