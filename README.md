@@ -31,7 +31,6 @@ Note that you must have access to the SpARK project datasets for any of this cod
 ```R
 list_models()
 ```
-If you have already run any of the models, outputs will also be listed.
 
 ### Run one of the SpARKjags models
 ```R
@@ -43,80 +42,13 @@ data <- jags_data(classification = "Carbapenem",
 
 # Run the model                  
 path <- run_SpARKjags_model(data = data,
-                            SpARKjags_model = "individual_models/h.R")
-```
-This will save the model output to the same directory as the model script (within the SpARKjags package). The `run_SpARKjags_model()` function will return the path of the model output.
-  
-Warning! If you reinstall this package, any data files saved in the package directory will be deleted.
-
-If you want to **choose your own model output save location**:
-```R
-path <- run_SpARKjags_model(data = data,
                             SpARKjags_model = "individual_models/h.R",
-                            save_to = "myresults_dir/myresults.rds)
+                            save_to = "results/individual_models")
 ```
+The `run_SpARKjags_model()` function will return the path of the model output.
 
-### Run one of your own models
-```R
-path <- run_custom_model(data = data,
-                             custom_model = "mymodel_dir/mymodel.R")
-```
-Like `run_SpARKjags_model()`, `run_custom_model()` will save the model output in the same directory as the model script, unless the `save_to` argument is specified.
     
 ### Read model output into R
 ```R
 results <- get_model(path = path)
 ```
-
-### Delete SpARKjags model output
-Remember that `run_SpARKjags_model()` will save the model output to the the same directory as the model script (within the SpARKjags package) if you don't define the `save_to` argument? To delete these outputs:
-```R
-# Delete single model output
-delete_results(SpARKjags_model = "individual_models/test.rds")
-  
-# Delete all model results in a particular directory
-delete_results(SpARKjags_model = "individual_models")
-```
-Again, you can use `list_models()` to see which model outputs currently exist.
-  
-## Function map
-
-| Function            | Description                  | Called by | Checked                | Tested                 |
-| ------------------- | ---------------------------- | --------- | ---------------------- | ---------------------- |
-| animal_data         | -                          | import_data | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| animal_lookup       | -     | badgroup_posterior & import_data | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| badgroup_posterior  | -                          | import_data | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| bin_ages            | -                            | get_human | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| check_fit           |  |                                       | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> |
-| data                | -                            | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| defineClinical      | -                            | get_human | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| delete_results      | Delete SpARKjags model results | -       | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| DIC                 | Get DIC                      | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| DICtable            |  |                                       | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| filter_pathogen     | -               | get_animal & get_human | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| get_animal          | -               | jags_data              | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| get_human           | -               | jags_data              | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| get_labels          | Generate labels argument |               | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| get_model           | Load model results           | -         | <ul><li>[x] </li></ul> | <ul><li>[x] </li></ul> |
-| get_parameters      |  |                                       | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> |
-| get_params          | Generate param argument |                | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| get_vars            | Generate var.regex argument |            | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| human_data          | -                          | import_data | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| import_data         | - | plot_antibiotics, _density & _correlation & summarise_samples | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| jags_data           | Get jags data                | -         | <ul><li>[x] </li></ul> | <ul><li>[x] </li></ul> |
-| monitored_variables |  | get_vars                              | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| onlyCarbapenem      | -               | get_animal & get_human | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| plot_antibiotics    | Generate antibiotics heatmap | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| plot_autocorr       | Plot autocorrelation         | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| plot_caterpillar    | Plot caterpillars |                      | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| plot_correlation    | Generate correlation plot    | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| plot_density        | Generate density plot        | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| plot_jags           |  |                                       | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> |
-| removeCarbapenem    | -               | get_animal & get_human | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| run_custom_model    | Run custom model             | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| run_model           | - | run_SpARKjags_model & run_custom_model | <ul><li>[x] </li></ul> | <ul><li>[x] </li></ul> |
-| run_SpARKjags_model | Run SpARKjags model          | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| summarise_samples   | Summarise samples            | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| testPSRF            | Test PSRF                    | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| testSSEF            | Test SSEF                    | -         | <ul><li>[x] </li></ul> | <ul><li>[ ] </li></ul> |
-| true_resistance     |  |                                       | <ul><li>[ ] </li></ul> | <ul><li>[ ] </li></ul> |

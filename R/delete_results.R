@@ -7,8 +7,6 @@
 #'
 #' @return Returns TRUE for each file deleted
 #'
-#' @export
-#'
 #' @examples
 #' \dontrun{
 #' # Delete single model results

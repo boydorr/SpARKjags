@@ -16,8 +16,6 @@
 #'
 #' @return Returns code{string} specifying the location of the model output
 #'
-#' @export
-#'
 #' @examples
 #' \dontrun{
 #' run_model(data, "individual_models/a.R")
