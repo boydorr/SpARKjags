@@ -4,12 +4,16 @@
 \alias{plot_caterpillar}
 \title{plot_caterpillar}
 \usage{
-plot_caterpillar(model, filename)
+plot_caterpillar(model, save_to, model_name, save_pdf)
 }
 \arguments{
 \item{model}{model}
 
-\item{filename}{filename}
+\item{save_to}{dir}
+
+\item{model_name}{model name}
+
+\item{save_pdf}{boolean}
 }
 \description{
 plot_caterpillar

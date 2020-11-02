@@ -4,12 +4,18 @@
 \alias{plot_density}
 \title{plot_density}
 \usage{
-plot_density(model, data)
+plot_density(model, data, save_to, model_name, save_pdf)
 }
 \arguments{
 \item{model}{a \code{runjags} object containing model results}
 
 \item{data}{data input}
+
+\item{save_to}{dir}
+
+\item{model_name}{model name}
+
+\item{save_pdf}{boolean}
 }
 \description{
 Generates a violin plot where violins represent the posterior probability of
