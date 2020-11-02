@@ -126,10 +126,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.a_naive$model
+get(model_name)$model
 
 #' #### Results
-res.a_naive
+get(model_name)
 
 
 
@@ -182,10 +182,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.a$model
+get(model_name)$model
 
 #' #### Results
-res.a
+get(model_name)
 
 data_ah$data.animal$response %>% data.frame() %>%
   select(Carbapenem) %>% sum(na.rm = T)
@@ -308,10 +308,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.a_livestock$model
+get(model_name)$model
 
 #' #### Results
-res.a_livestock
+get(model_name)
 
 
 
@@ -364,10 +364,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.a_cattle$model
+get(model_name)$model
 
 #' #### Results
-res.a_cattle
+get(model_name)
 
 
 
@@ -420,10 +420,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.a_pig$model
+get(model_name)$model
 
 #' #### Results
-res.a_pig
+get(model_name)
 
 
 
@@ -476,10 +476,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.a_chicken$model
+get(model_name)$model
 
 #' #### Results
-res.a_chicken
+get(model_name)
 
 
 
@@ -533,10 +533,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.a_livestock_subsets$model
+get(model_name)$model
 
 #' #### Results
-res.a_livestock_subsets
+get(model_name)
 
 
 
@@ -589,10 +589,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.a_companion$model
+get(model_name)$model
 
 #' #### Results
-res.a_companion
+get(model_name)
 
 
 
@@ -646,10 +646,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.a_companion_subsets$model
+get(model_name)$model
 
 #' #### Results
-res.a_companion_subsets
+get(model_name)
 
 
 
@@ -702,10 +702,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.a_wild$model
+get(model_name)$model
 
 #' #### Results
-res.a_wild
+get(model_name)
 
 
 
@@ -759,10 +759,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.a_wild_subsets$model
+get(model_name)$model
 
 #' #### Results
-res.a_wild_subsets
+get(model_name)
 
 
 
@@ -815,10 +815,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.a_types$model
+get(model_name)$model
 
 #' #### Results
-res.a_types
+get(model_name)
 
 
 
@@ -871,10 +871,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.a_subsets$model
+get(model_name)$model
 
 #' #### Results
-res.a_subsets
+get(model_name)
 
 
 
@@ -927,10 +927,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.ac1$model
+get(model_name)$model
 
 #' #### Results
-res.ac1
+get(model_name)
 
 
 
@@ -982,10 +982,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.ac2$model
+get(model_name)$model
 
 #' #### Results
-res.ac2
+get(model_name)
 
 
 
@@ -1037,10 +1037,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.a_c$model
+get(model_name)$model
 
 #' #### Results
-res.a_c
+get(model_name)
 
 
 #' ### Summary of DIC results {-}
@@ -1098,10 +1098,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.asm$model
+get(model_name)$model
 
 #' #### Results
-res.asm
+get(model_name)
 
 
 
@@ -1154,10 +1154,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.ass$model
+get(model_name)$model
 
 #' #### Results
-res.ass
+get(model_name)
 
 
 #' ### Summary of DIC results {-}
@@ -1219,10 +1219,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.assg$model
+get(model_name)$model
 
 #' #### Results
-res.assg
+get(model_name)
 
 
 
@@ -1275,10 +1275,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.assag$model
+get(model_name)$model
 
 #' #### Results
-res.assag
+get(model_name)
 
 
 
@@ -1331,10 +1331,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.assag2$model
+get(model_name)$model
 
 #' #### Results
-res.assag2
+get(model_name)
 
 
 
@@ -1387,10 +1387,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.assage$model
+get(model_name)$model
 
 #' #### Results
-res.assage
+get(model_name)
 
 
 
@@ -1443,10 +1443,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.assagesq$model
+get(model_name)$model
 
 #' #### Results
-res.assagesq
+get(model_name)
 
 
 
@@ -1500,10 +1500,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.assagg$model
+get(model_name)$model
 
 #' #### Results
-res.assagg
+get(model_name)
 
 
 #' ### Summary of DIC results {-}
@@ -1565,11 +1565,12 @@ plot_caterpillar(model = get(model_name),
 #' #### Autocorrelation
 #+ fig.height = 6
 plot_autocorr(model = get(model_name))
+
 #' #### Model
-res.assagh$model
+get(model_name)$model
 
 #' #### Results
-res.assagh
+get(model_name)
 
 
 
@@ -1622,10 +1623,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.assagwt$model
+get(model_name)$model
 
 #' #### Results
-res.assagwt
+get(model_name)
 
 
 
@@ -1678,10 +1679,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.assagw$model
+get(model_name)$model
 
 #' #### Results
-res.assagw
+get(model_name)
 
 
 
@@ -1735,10 +1736,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.assagwt_w$model
+get(model_name)$model
 
 #' #### Results
-res.assagwt_w
+get(model_name)
 
 
 
@@ -1791,10 +1792,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.assaghwtw$model
+get(model_name)$model
 
 #' #### Results
-res.assaghwtw
+get(model_name)
 
 
 
@@ -1848,10 +1849,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.assagh_wt_w$model
+get(model_name)$model
 
 #' #### Results
-res.assagh_wt_w
+get(model_name)
 
 
 #' ### Summary of DIC results {-}
@@ -1917,10 +1918,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.assagwc$model
+get(model_name)$model
 
 #' #### Results
-res.assagwc
+get(model_name)
 
 
 
@@ -1974,10 +1975,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.assagwcst$model
+get(model_name)$model
 
 #' #### Results
-res.assagwcst
+get(model_name)
 
 
 
@@ -2031,10 +2032,10 @@ plot_caterpillar(model = get(model_name),
 plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.assagwc_st$model
+get(model_name)$model
 
 #' #### Results
-res.assagwc_st
+get(model_name)
 
 
 
