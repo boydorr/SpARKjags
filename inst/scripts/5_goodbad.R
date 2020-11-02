@@ -117,7 +117,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -172,7 +173,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -297,7 +299,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -352,7 +355,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -407,7 +411,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -462,7 +467,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -518,7 +524,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -573,7 +580,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -629,7 +637,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -684,7 +693,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -739,7 +749,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -794,7 +805,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -849,7 +861,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -904,7 +917,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -958,7 +972,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -1012,7 +1027,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -1072,7 +1088,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -1127,7 +1144,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -1191,7 +1209,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -1246,7 +1265,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -1301,7 +1321,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -1356,7 +1377,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -1411,7 +1433,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -1467,7 +1490,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -1533,7 +1557,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -1587,7 +1612,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -1642,7 +1668,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -1698,7 +1725,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -1753,7 +1781,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -1809,7 +1838,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -1877,7 +1907,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -1933,7 +1964,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -1989,7 +2021,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir)
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
