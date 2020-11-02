@@ -104,24 +104,24 @@ model_name <- "res.a_naive"
 
 #' #### Posterior
 #+ res.a_naive, fig.height = 6
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.a_naive$model
@@ -145,38 +145,38 @@ model_name <- "res.a"
 
 #' #### Posterior
 #+ res.a, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.a$model
@@ -270,38 +270,38 @@ model_name <- "res.a_livestock"
 
 #' #### Posterior
 #+ res.a_livestock, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data_ah,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data_ah)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.a_livestock$model
@@ -325,38 +325,38 @@ model_name <- "res.a_cattle"
 
 #' #### Posterior
 #+ res.a_cattle, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data_ah,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data_ah)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.a_cattle$model
@@ -380,38 +380,38 @@ model_name <- "res.a_pig"
 
 #' #### Posterior
 #+ res.a_pig, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data_ah,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data_ah)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.a_pig$model
@@ -435,38 +435,38 @@ model_name <- "res.a_chicken"
 
 #' #### Posterior
 #+ res.a_chicken, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data_ah,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data_ah)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.a_chicken$model
@@ -491,38 +491,38 @@ model_name <- "res.a_livestock_subsets"
 
 #' #### Posterior
 #+ res.a_livestock_subsets, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data_ah,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data_ah)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.a_livestock_subsets$model
@@ -546,38 +546,38 @@ model_name <- "res.a_companion"
 
 #' #### Posterior
 #+ a_companion, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data_ah,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data_ah)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.a_companion$model
@@ -602,38 +602,38 @@ model_name <- "res.a_companion_subsets"
 
 #' #### Posterior
 #+ res.a_companion_subsets, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data_ah,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data_ah)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.a_companion_subsets$model
@@ -657,38 +657,38 @@ model_name <- "res.a_wild"
 
 #' #### Posterior
 #+ a_wild, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data_ah,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data_ah)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.a_wild$model
@@ -712,38 +712,38 @@ model_name <- "res.a_wild_subsets"
 
 #' #### Posterior
 #+ res.a_wild_subsets, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data_ah,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data_ah)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.a_wild_subsets$model
@@ -767,38 +767,38 @@ model_name <- "res.a_types"
 
 #' #### Posterior
 #+ res.a_types, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data_ah,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data_ah)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.a_types$model
@@ -822,38 +822,38 @@ model_name <- "res.a_subsets"
 
 #' #### Posterior
 #+ res.a_subsets, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data_ah,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data_ah)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.a_subsets$model
@@ -877,38 +877,38 @@ model_name <- "res.ac1"
 
 #' #### Posterior
 #+ res.ac1, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.ac1$model
@@ -931,38 +931,38 @@ model_name <- "res.ac2"
 
 #' #### Posterior
 #+ res.ac2, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.ac2$model
@@ -985,38 +985,38 @@ model_name <- "res.a_c"
 
 #' #### Posterior
 #+ res.a_c, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.a_c$model
@@ -1045,38 +1045,38 @@ model_name <- "res.asm"
 
 #' #### Posterior
 #+ res.asm, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.asm$model
@@ -1100,38 +1100,38 @@ model_name <- "res.ass"
 
 #' #### Posterior
 #+ res.ass, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.ass$model
@@ -1164,38 +1164,38 @@ model_name <- "res.assg"
 
 #' #### Posterior
 #+ res.assg, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.assg$model
@@ -1219,38 +1219,38 @@ model_name <- "res.assag"
 
 #' #### Posterior
 #+ res.assag, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.assag$model
@@ -1274,38 +1274,38 @@ model_name <- "res.assag2"
 
 #' #### Posterior
 #+ res.assag2, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.assag2$model
@@ -1329,38 +1329,38 @@ model_name <- "res.assage"
 
 #' #### Posterior
 #+ res.assage, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.assage$model
@@ -1384,38 +1384,38 @@ model_name <- "res.assagesq"
 
 #' #### Posterior
 #+ res.assagesq, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.assagesq$model
@@ -1440,38 +1440,38 @@ model_name <- "res.assagg"
 
 #' #### Posterior
 #+ res.assagg, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.assagg$model
@@ -1506,38 +1506,38 @@ model_name <- "res.assagh"
 
 #' #### Posterior
 #+ res.assagh, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 #' #### Model
 res.assagh$model
 
@@ -1560,38 +1560,38 @@ model_name <- "res.assagwt"
 
 #' #### Posterior
 #+ res.assagwt, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.assagwt$model
@@ -1615,38 +1615,38 @@ model_name <- "res.assagw"
 
 #' #### Posterior
 #+ res.assagw, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.assagw$model
@@ -1671,38 +1671,38 @@ model_name <- "res.assagwt_w"
 
 #' #### Posterior
 #+ res.assagwt_w, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.assagwt_w$model
@@ -1726,38 +1726,38 @@ model_name <- "res.assaghwtw"
 
 #' #### Posterior
 #+ res.assaghwtw, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.assaghwtw$model
@@ -1782,38 +1782,38 @@ model_name <- "res.assagh_wt_w"
 
 #' #### Posterior
 #+ res.assagh_wt_w, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.assagh_wt_w$model
@@ -1850,38 +1850,38 @@ model_name <- "res.assagwc"
 
 #' #### Posterior
 #+ res.assagwc, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.assagwc$model
@@ -1906,38 +1906,38 @@ model_name <- "res.assagwcst"
 
 #' #### Posterior
 #+ res.assagwcst, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.assagwcst$model
@@ -1962,38 +1962,38 @@ model_name <- "res.assagwc_st"
 
 #' #### Posterior
 #+ res.assagwc_st, fig.height = 10
-plot_density(model = get(modelname),
+plot_density(model = get(model_name),
              data = data,
              save_to = res_dir,
              model_name = model_name)
 
 #' #### Statistics
-summarise_samples(model = get(modelname),
+summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
 #+ fig.height = 10
-plot_antibiotics(model = get(modelname),
+plot_antibiotics(model = get(model_name),
                  data = data)
 
 #' #### AMR Correlation
 #+ fig.height = 10
-plot_correlation(model = get(modelname),
+plot_correlation(model = get(model_name),
                  data = data)
 
 #' #### Diagnostics
-DIC(model_name = get(modelname))
-testSSEF(model = get(modelname))
-testPSRF(model = get(modelname))
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-plot_caterpillar(model = get(modelname),
+plot_caterpillar(model = get(model_name),
                  save_to = res_dir)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-plot_autocorr(model = get(modelname))
+plot_autocorr(model = get(model_name))
 
 #' #### Model
 res.assagwc_st$model
