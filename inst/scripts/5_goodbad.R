@@ -20,6 +20,7 @@ set.seed(1234)
 knitr::opts_chunk$set(warning = FALSE)
 
 directory <- "goodbad_models"
+res_dir <- file.path(getwd(), "results", directory)
 
 data_full <- jags_data(classification = "all",
                        categories = "human",
@@ -89,7 +90,9 @@ data$data.human$data %>%
 #' response ~ antibiotic_class (naive model)
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "a_naive.R"))
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "a_naive.R"),
+                            save_to = res_dir)
 res.a_naive <- get_model(path)
 
 #' #### Posterior
@@ -122,7 +125,10 @@ res.a_naive
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "a.R"), thin = 10)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "a.R"),
+                            save_to = res_dir,
+                            thin = 10)
 res.a <- get_model(path)
 
 #' #### Posterior
@@ -236,7 +242,9 @@ dplyr::bind_rows(livestock, companion, wild) %>%
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory, "a_livestock.R"),
+path <- run_SpARKjags_model(data = data_ah,
+                            SpARKjags_model = file.path(directory, "a_livestock.R"),
+                            save_to = res_dir,
                             thin = 10)
 res.a_livestock <- get_model(path)
 
@@ -282,7 +290,9 @@ res.a_livestock
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory, "a_cattle.R"),
+path <- run_SpARKjags_model(data = data_ah,
+                            SpARKjags_model = file.path(directory, "a_cattle.R"),
+                            save_to = res_dir,
                             thin = 10)
 res.a_cattle <- get_model(path)
 
@@ -327,7 +337,10 @@ res.a_cattle
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory, "a_pig.R"), thin = 10)
+path <- run_SpARKjags_model(data = data_ah,
+                            SpARKjags_model = file.path(directory, "a_pig.R"),
+                            save_to = res_dir,
+                            thin = 10)
 res.a_pig <- get_model(path)
 
 #' #### Posterior
@@ -371,7 +384,9 @@ res.a_pig
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory, "a_chicken.R"),
+path <- run_SpARKjags_model(data = data_ah,
+                            SpARKjags_model = file.path(directory, "a_chicken.R"),
+                            save_to = res_dir,
                             thin = 10)
 res.a_chicken <- get_model(path)
 
@@ -416,8 +431,10 @@ res.a_chicken
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory,
+path <- run_SpARKjags_model(data = data_ah,
+                            SpARKjags_model = file.path(directory,
                                                "a_livestock_subsets.R"),
+                            save_to = res_dir,
                             thin = 10)
 res.a_livestock_subsets <- get_model(path)
 
@@ -463,7 +480,9 @@ res.a_livestock_subsets
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory, "a_companion.R"),
+path <- run_SpARKjags_model(data = data_ah,
+                            SpARKjags_model = file.path(directory, "a_companion.R"),
+                            save_to = res_dir,
                             thin = 10)
 res.a_companion <- get_model(path)
 
@@ -508,8 +527,10 @@ res.a_companion
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory,
+path <- run_SpARKjags_model(data = data_ah,
+                            SpARKjags_model = file.path(directory,
                                                "a_companion_subsets.R"),
+                            save_to = res_dir,
                             thin = 10)
 res.a_companion_subsets <- get_model(path)
 
@@ -555,7 +576,9 @@ res.a_companion_subsets
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory, "a_wild.R"),
+path <- run_SpARKjags_model(data = data_ah,
+                            SpARKjags_model = file.path(directory, "a_wild.R"),
+                            save_to = res_dir,
                             thin = 10)
 res.a_wild <- get_model(path)
 
@@ -600,7 +623,9 @@ res.a_wild
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory, "a_wild_subsets.R"),
+path <- run_SpARKjags_model(data = data_ah,
+                            SpARKjags_model = file.path(directory, "a_wild_subsets.R"),
+                            save_to = res_dir,
                             thin = 10)
 res.a_wild_subsets <- get_model(path)
 
@@ -646,7 +671,9 @@ res.a_wild_subsets
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory, "a_types.R"),
+path <- run_SpARKjags_model(data = data_ah,
+                            SpARKjags_model = file.path(directory, "a_types.R"),
+                            save_to = res_dir,
                             thin = 10)
 res.a_types <- get_model(path)
 
@@ -692,7 +719,9 @@ res.a_types
 #' response ~ antibiotic.class_{goodbad}
 #'
 
-path <- run_SpARKjags_model(data_ah, file.path(directory, "a_subsets.R"),
+path <- run_SpARKjags_model(data = data_ah,
+                            SpARKjags_model = file.path(directory, "a_subsets.R"),
+                            save_to = res_dir,
                             thin = 10)
 res.a_subsets <- get_model(path)
 
@@ -739,7 +768,9 @@ res.a_subsets
 #' goodbad ~ clinical
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "ac1.R"))
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "ac1.R"),
+                            save_to = res_dir)
 res.ac1 <- get_model(path)
 
 #' #### Posterior
@@ -783,7 +814,9 @@ res.ac1
 #' response ~ antibiotic.class_{goodbad} + clinical
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "ac2.R"))
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "ac2.R"),
+                            save_to = res_dir)
 res.ac2 <- get_model(path)
 
 #' #### Posterior
@@ -827,7 +860,9 @@ res.ac2
 #' response ~ antibiotic.class_{goodbad,clinical}
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "a_c.R"))
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "a_c.R"),
+                            save_to = res_dir)
 res.a_c <- get_model(path)
 
 #' #### Posterior
@@ -876,7 +911,10 @@ DICtable(c("res.ac1", "res.ac2", "res.a_c"))
 #' response ~ antibiotic.class_{goodbad} + sample.month
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "asm.R"), thin = 10)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "asm.R"),
+                            save_to = res_dir,
+                            thin = 10)
 res.asm <- get_model(path)
 
 #' #### Posterior
@@ -920,7 +958,10 @@ res.asm
 #' response ~ antibiotic_class_{goodbad} + sample_season
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "ass.R"), thin = 30)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "ass.R"),
+                            save_to = res_dir,
+                            thin = 30)
 res.ass <- get_model(path)
 
 #' #### Posterior
@@ -973,7 +1014,10 @@ DICtable(c("res.a_naive", "res.a", "res.asm", "res.ass"))
 #' response ~ antibiotic_class_{goodbad} + sample_season + gender
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "assg.R"), thin = 30)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "assg.R"),
+                            save_to = res_dir,
+                            thin = 30)
 res.assg <- get_model(path)
 
 #' #### Posterior
@@ -1017,7 +1061,10 @@ res.assg
 #' response ~ antibiotic_class_{goodbad} + sample_season + agegroup
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "assag.R"), thin = 30)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "assag.R"),
+                            save_to = res_dir,
+                            thin = 30)
 res.assag <- get_model(path)
 
 #' #### Posterior
@@ -1061,7 +1108,10 @@ res.assag
 #' response ~ antibiotic_class_{goodbad} + sample_season + agegroup2
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "assag2.R"), thin = 30)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "assag2.R"),
+                            save_to = res_dir,
+                            thin = 30)
 res.assag2 <- get_model(path)
 
 #' #### Posterior
@@ -1105,7 +1155,10 @@ res.assag2
 #' response ~ antibiotic_class_{goodbad} + sampling_month + age
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "assage.R"), thin = 20)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "assage.R"),
+                            save_to = res_dir,
+                            thin = 20)
 res.assage <- get_model(path)
 
 #' #### Posterior
@@ -1149,7 +1202,10 @@ res.assage
 #' response ~ antibiotic_class_{goodbad} + sample_season + age^2 + age
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "assagesq.R"), thin = 20)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "assagesq.R"),
+                            save_to = res_dir,
+                            thin = 20)
 res.assagesq <- get_model(path)
 
 #' #### Posterior
@@ -1194,7 +1250,10 @@ res.assagesq
 #' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + gender
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "assagg.R"), thin = 20)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "assagg.R"),
+                            save_to = res_dir,
+                            thin = 20)
 res.assagg <- get_model(path)
 
 #' #### Posterior
@@ -1249,7 +1308,10 @@ DICtable(c("res.assg", "res.assag", "res.assag2", "res.assage",
 #' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + hospital
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "assagh.R"), thin = 20)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "assagh.R"),
+                            save_to = res_dir,
+                            thin = 20)
 res.assagh <- get_model(path)
 
 #' #### Posterior
@@ -1293,7 +1355,10 @@ res.assagh
 #' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + wardtype
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "assagwt.R"), thin = 20)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "assagwt.R"),
+                            save_to = res_dir,
+                            thin = 20)
 res.assagwt <- get_model(path)
 
 #' #### Posterior
@@ -1337,7 +1402,10 @@ res.assagwt
 #' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + ward
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "assagw.R"), thin = 20)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "assagw.R"),
+                            save_to = res_dir,
+                            thin = 20)
 res.assagw <- get_model(path)
 
 #' #### Posterior
@@ -1382,7 +1450,9 @@ res.assagw
 #' wardtype_{ward}
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "assagwt_w.R"),
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "assagwt_w.R"),
+                            save_to = res_dir,
                             thin = 20)
 res.assagwt_w <- get_model(path)
 
@@ -1427,7 +1497,9 @@ res.assagwt_w
 #' wardtype + ward
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "assaghwtw.R"),
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "assaghwtw.R"),
+                            save_to = res_dir,
                             thin = 20)
 res.assaghwtw <- get_model(path)
 
@@ -1473,7 +1545,9 @@ res.assaghwtw
 #' hospital_{wardtype_{ward}}
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "assagh_wt_w.R"),
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "assagh_wt_w.R"),
+                            save_to = res_dir,
                             thin = 20)
 res.assagh_wt_w <- get_model(path)
 
@@ -1531,7 +1605,10 @@ DICtable(c("res.assagh", "res.assagwt", "res.assagw", "res.assagwt_w",
 #' clinical
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "assagwc.R"), thin = 20)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "assagwc.R"),
+                            save_to = res_dir,
+                            thin = 20)
 res.assagwc <- get_model(path)
 
 #' #### Posterior
@@ -1576,7 +1653,10 @@ res.assagwc
 #' clinical + sample_type
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "assagwcst.R"), thin = 30)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "assagwcst.R"),
+                            save_to = res_dir,
+                            thin = 30)
 res.assagwcst <- get_model(path)
 
 #' #### Posterior
@@ -1621,7 +1701,9 @@ res.assagwcst
 #' clinical_{sampletype}
 #'
 
-path <- run_SpARKjags_model(data, file.path(directory, "assagwc_st.R"),
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "assagwc_st.R"),
+                            save_to = res_dir,
                             thin = 30)
 res.assagwc_st <- get_model(path)
 
