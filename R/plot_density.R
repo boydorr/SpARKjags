@@ -84,7 +84,7 @@ plot_density <- function(model,
       ggplot2::theme_minimal() +
       ggplot2::geom_violin(ggplot2::aes_string(x = "Parameter",
                                                y = "value"),
-                           trim = FALSE,
+                           trim = TRUE,
                            colour = "grey70",
                            fill = "grey90",
                            scale = "width") +
