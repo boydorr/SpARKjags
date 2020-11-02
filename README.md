@@ -10,10 +10,7 @@
 * [How to](#how-to)
   * [List all of the models included in the SpARKjags package](#list-all-of-the-models-included-in-the-sparkjags-package)
   * [Run one of the SpARKjags models](#run-one-of-the-SpARKjags-models)
-  * [Run one of your own models](#run-one-of-your-own-models)
   * [Read model output into R](#read-model-output-into-R)
-  * [Delete SpARKjags model output](#delete-SpARKjags-model-output)
-* [Function map](#function-map)
 
 ## General info
 This package contains JAGS models and associated functionality for use with SpARK project data.
