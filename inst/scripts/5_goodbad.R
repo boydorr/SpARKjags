@@ -7,6 +7,8 @@
 #'     format: html_clean
 #'     code_folding: hide
 #'     highlight: pygments
+#'     toc: TRUE
+#'     toc_float: TRUE
 #' ---
 #' Last updated: `r Sys.time()`
 
