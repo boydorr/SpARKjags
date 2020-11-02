@@ -21,7 +21,10 @@ set.seed(1234)
 
 knitr::opts_chunk$set(warning = FALSE)
 
+# Find models here (installed with the package)
 directory <- "goodbad_models"
+# Save results here (make sure Desktop/git/SpARK/SpARKjags is your working
+# directory)
 res_dir <- file.path(getwd(), "results", directory)
 
 data_full <- jags_data(classification = "all",
