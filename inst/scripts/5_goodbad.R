@@ -158,7 +158,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -216,7 +216,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -271,7 +271,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -326,7 +326,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -387,7 +387,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -443,7 +443,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -508,7 +508,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -564,7 +564,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -620,7 +620,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -676,7 +676,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -732,7 +732,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -789,7 +789,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -856,7 +856,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -912,7 +912,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -968,7 +968,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -1025,7 +1025,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -1081,7 +1081,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -1138,7 +1138,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -1207,7 +1207,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -1264,7 +1264,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -1321,7 +1321,7 @@ summarise_samples(model = get(model_name),
                   data = data)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data)
 
@@ -1351,6 +1351,50 @@ get(model_name)$model
 #' #### Results
 get(model_name)
 
+
+
+#' #' ### res.a_cssagwst {.tabset}
+#' #' response ~ antibiotic_class_{goodbad,clinical} + sample_season + agegroup +
+#' #' ward + sampletype
+#' #'
+#'
+#' path <- run_SpARKjags_model(data, file.path(directory, "a_cssagwst.R"),
+#'                             thin = 10)
+#' res.a_cssagwst <- get_model(path)
+#'
+#' #' #### Posterior
+#' #+ res.a_cssagwst, fig.height = 10
+#' res.a_cssagwst %>% plot_density(data)
+#'
+#' #' #### Statistics
+#' res.a_cssagwst %>% summarise_samples(data)
+#'
+#' #' #### AMR Summary
+#' #+ fig.height = 10
+#' res.a_cssagwst %>% plot_antibiotics(data)
+#'
+#' #' #### AMR Correlation
+#' #+ fig.height = 10
+#' res.a_cssagwst %>% plot_correlation(data)
+#'
+#' #' #### Diagnostics
+#' res.a_cssagwst %>% DIC() # 5773.768
+#' res.a_cssagwst %>% testSSEF()
+#' res.a_cssagwst %>% testPSRF()
+#'
+#' #' #### Trace plot
+#' #+ fig.height = 6
+#' res.a_cssagwst %>% plot_caterpillar()
+#'
+#' #' #### Autocorrelation
+#' #+ fig.height = 6
+#' res.a_cssagwst %>% plot_autocorr()
+#'
+#' #' #### Model
+#' res.a_cssagwst$model
+#'
+#' #' #### Results
+#' res.a_cssagwst
 
 
 #'
@@ -1458,7 +1502,7 @@ summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
@@ -1514,7 +1558,7 @@ summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
@@ -1570,7 +1614,7 @@ summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
@@ -1626,7 +1670,7 @@ summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
@@ -1683,7 +1727,7 @@ summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
@@ -1739,7 +1783,7 @@ summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
@@ -1796,7 +1840,7 @@ summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
@@ -1852,7 +1896,7 @@ summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
@@ -1909,7 +1953,7 @@ summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
@@ -1965,7 +2009,7 @@ summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
@@ -2021,7 +2065,7 @@ summarise_samples(model = get(model_name),
                   data = data_ah)
 
 #' #### AMR Summary
-#+ fig.height = 10
+#+ fig.height = 8, fig.width = 10
 plot_antibiotics(model = get(model_name),
                  data = data_ah)
 
