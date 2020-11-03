@@ -722,7 +722,8 @@ data.carb.res <- jags_data(classification = "all",
 #+ best null carb res
 path <- run_SpARKjags_model(data.carb.res,
                             file.path(directory, "asmaggw_CarbRes.R"),
-                            thin = 10)
+                            thin = 10,
+                            save_to = res_dir)
 res.asmaggw_CarbRes <- get_model(path)
 model_name <- "res.asmaggw_CarbRes"
 
@@ -741,7 +742,8 @@ data.carb.sus <- jags_data(classification = "all",
 #+ best null carb sus
 path <- run_SpARKjags_model(data.carb.sus,
                             file.path(directory, "asmaggw_CarbSus.R"),
-                            thin = 10)
+                            thin = 10,
+                            save_to = res_dir)
 res.asmaggw_CarbSus <- get_model(path)
 model_name <- "res.asmaggw_CarbSus"
 
