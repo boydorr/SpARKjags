@@ -7,6 +7,9 @@
 #'     format: html_clean
 #'     code_folding: hide
 #'     highlight: pygments
+#'     toc: TRUE
+#'     toc_float: TRUE
+#'     toc_collapsed: true
 #' ---
 #' Last updated: `r Sys.time()`
 
@@ -19,7 +22,12 @@ set.seed(1234)
 
 knitr::opts_chunk$set(warning = FALSE)
 
+# Find models here (installed with the package)
 directory <- "full_models"
+# Save results here (use absolute path so that results can be found when
+# RMarkdown report is generated)
+res_dir <- file.path("", "Users", "Soniam", "Desktop", "git", "SpARK",
+                     "SpARKjags", "results", directory)
 
 data <- jags_data(classification = "all",
                   categories = "human",
@@ -30,13 +38,16 @@ data <- jags_data(classification = "all",
 
 #' ### null {.tabset}
 
-path <- run_SpARKjags_model(data, file.path(directory, "null.R"))
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "null.R"),
+                            save_to = res_dir)
 res.null <- get_model(path)
+model_name <- "res.null"
 
 #' #### Diagnostics
-res.null %>% DIC() # 13030.99
-res.null %>% testSSEF()
-res.null %>% testPSRF()
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 
 
@@ -50,93 +61,118 @@ res.null %>% testPSRF()
 
 #' ### res.a {.tabset}
 #' response ~ antibiotic class
-path <- run_SpARKjags_model(data, file.path(directory, "a.R"))
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "a.R"),
+                            save_to = res_dir)
 res.a <- get_model(path)
+model_name <- "res.a"
 
 #' #### Posterior
 #+ res.a_naive, fig.height = 6
-res.a %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 #' #### Diagnostics
-res.a %>% DIC() # 12262.57
-res.a %>% testSSEF()
-res.a %>% testPSRF()
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-res.a %>% plot_caterpillar()
+plot_caterpillar(model = get(model_name),
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.a %>% plot_autocorr()
+plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.a$model
+get(model_name)$model
 
 #' #### Results
-res.a
-
+get(model_name)
 
 
 
 #' ### res.asm {.tabset}
 #' response ~ antibiotic_class + sample_month
-path <- run_SpARKjags_model(data, file.path(directory, "asm.R"), thin = 20)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "asm.R"),
+                            thin = 20,
+                            save_to = res_dir)
 res.asm <- get_model(path)
+model_name <- "res.asm"
 
 #' #### Posterior
 #+ res.asm, fig.height = 6
-res.asm %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 #' #### Diagnostics
-res.asm %>% DIC() # 12011.55
-res.asm %>% testSSEF()
-res.asm %>% testPSRF()
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asm %>% plot_caterpillar()
+plot_caterpillar(model = get(model_name),
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asm %>% plot_autocorr()
+plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.asm$model
+get(model_name)$model
 
 #' #### Results
-res.asm
+get(model_name)
 
 
 
 
 #' ### res.ass {.tabset}
 #' response ~ antibiotic_class + sample_season
-path <- run_SpARKjags_model(data, file.path(directory, "ass.R"), thin = 20)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "ass.R"),
+                            thin = 20,
+                            save_to = res_dir)
 res.ass <- get_model(path)
+model_name <- "res.ass"
 
 #' #### Posterior
 #+ res.ass, fig.height = 6
-res.ass %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 #' #### Diagnostics
-res.ass %>% DIC() # 12097.86
-res.ass %>% testSSEF()
-res.ass %>% testPSRF()
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-res.ass %>% plot_caterpillar()
+plot_caterpillar(model = get(model_name),
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.ass %>% plot_autocorr()
+plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.ass$model
+get(model_name)$model
 
 #' #### Results
-res.ass
+get(model_name)
 
 
 #' ### Summary of DIC results
@@ -152,168 +188,241 @@ DICtable(c("res.null", "res.a", "res.asm", "res.ass"))
 
 #' ### res.asmg {.tabset}
 #' response ~ antibiotic_class + sample_month + gender
-path <- run_SpARKjags_model(data, file.path(directory, "asmg.R"), thin = 20)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "asmg.R"),
+                            thin = 20,
+                            save_to = res_dir)
 res.asmg <- get_model(path)
+model_name <- "res.asmg"
 
 #' #### Posterior
 #+ res.asmg, fig.height = 6
-res.asmg %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 #' #### Diagnostics
-res.asmg %>% DIC() # 11862.36
-res.asmg %>% testSSEF()
-res.asmg %>% testPSRF()
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmg %>% plot_caterpillar()
+plot_caterpillar(model = get(model_name),
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmg %>% plot_autocorr()
+plot_autocorr(model = get(model_name))
+
+#' #### Model
+get(model_name)$model
+
+#' #### Results
+get(model_name)
 
 
 
 
 #' ### res.asmag {.tabset}
 #' response ~ antibiotic_class + sample_month + agegroup
-path <- run_SpARKjags_model(data, file.path(directory, "asmag.R"), thin = 20)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "asmag.R"),
+                            thin = 20,
+                            save_to = res_dir)
 res.asmag <- get_model(path)
+model_name <- "res.asmag"
 
 #' #### Posterior
 #+ res.asmag, fig.height = 6
-res.asmag %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 #' #### Diagnostics
-res.asmag %>% DIC() # 11786.2
-res.asmag %>% testSSEF()
-res.asmag %>% testPSRF()
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmag %>% plot_caterpillar()
+plot_caterpillar(model = get(model_name),
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmag %>% plot_autocorr()
+plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.asmag$model
+get(model_name)$model
 
 #' #### Results
-res.asmag
+get(model_name)
 
 
 
 
 #' ### res.asmag2 {.tabset}
 #' response ~ antibiotic_class + sample_month + agegroup2
-path <- run_SpARKjags_model(data, file.path(directory, "asmag2.R"), thin = 20)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "asmag2.R"),
+                            thin = 20,
+                            save_to = res_dir)
 res.asmag2 <- get_model(path)
+model_name <- "res.asmag2"
 
 #' #### Posterior
 #+ res.asmag2, fig.height = 6
-res.asmag2 %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 #' #### Diagnostics
-res.asmag2 %>% DIC() # 11788.27
-res.asmag2 %>% testSSEF()
-res.asmag2 %>% testPSRF()
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmag2 %>% plot_caterpillar()
+plot_caterpillar(model = get(model_name),
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmag2 %>% plot_autocorr()
+plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.asmag2$model
+get(model_name)$model
 
 #' #### Results
-res.asmag2
+get(model_name)
 
 
 
 
 #' ### res.asmage {.tabset}
 #' response ~ antibiotic_class + sample_month + age
-path <- run_SpARKjags_model(data, file.path(directory, "asmage.R"), thin = 20)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "asmage.R"),
+                            thin = 20,
+                            save_to = res_dir)
 res.asmage <- get_model(path)
+model_name <- "res.asmage"
 
 #' #### Posterior
 #+ res.asmage, fig.height = 6
-res.asmage %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 #' #### Diagnostics
-res.asmage %>% DIC() # 11993.5
-res.asmage %>% testSSEF()
-res.asmage %>% testPSRF()
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmage %>% plot_caterpillar()
+plot_caterpillar(model = get(model_name),
+                 save_to = res_dir,
+                 model_name = model_name)
+
+#' #### Autocorrelation
+#+ fig.height = 6
+plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.asmage$model
+get(model_name)$model
 
 #' #### Results
-res.asmage
+get(model_name)
 
 
 
 
 #' ### res.asmagesq {.tabset}
 #' response ~ antibiotic_class + sample_month + age^2 + age
-path <- run_SpARKjags_model(data, file.path(directory, "asmagesq.R"), thin = 20)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory,
+                                                        "asmagesq.R"),
+                            thin = 20,
+                            save_to = res_dir)
 res.asmagesq <- get_model(path)
+model_name <- "res.asmagesq"
 
 #' #### Posterior
 #+ res.asmagesq, fig.height = 6
-res.asmagesq %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 #' #### Diagnostics
-res.asmagesq %>% DIC() # 11836.08
-res.asmagesq %>% testSSEF()
-res.asmagesq %>% testPSRF()
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmagesq %>% plot_caterpillar()
+plot_caterpillar(model = get(model_name),
+                 save_to = res_dir,
+                 model_name = model_name)
+
+#' #### Autocorrelation
+#+ fig.height = 6
+plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.asmagesq$model
+get(model_name)$model
 
 #' #### Results
-res.asmagesq
+get(model_name)
 
 
 
 
 #' ### res.asmagg {.tabset}
 #' response ~ antibiotic_class + sample_month + agegroup + gender
-path <- run_SpARKjags_model(data, file.path(directory, "asmagg.R"), thin = 20)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "asmagg.R"),
+                            thin = 20,
+                            save_to = res_dir)
 res.asmagg <- get_model(path)
+model_name <- "res.asmagg"
 
 #' #### Posterior
 #+ res.asmagg, fig.height = 6
-res.asmagg %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 #' #### Diagnostics
-res.asmagg %>% DIC() # 11647.46
-res.asmagg %>% testSSEF()
-res.asmagg %>% testPSRF()
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmagg %>% plot_caterpillar()
+plot_caterpillar(model = get(model_name),
+                 save_to = res_dir,
+                 model_name = model_name)
+
+#' #### Autocorrelation
+#+ fig.height = 6
+plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.asmagg$model
+get(model_name)$model
 
 #' #### Results
-res.asmagg
+get(model_name)
 
 
 #' ### Summary of DIC results
@@ -330,147 +439,202 @@ DICtable(c("res.asmg", "res.asmag", "res.asmag2",
 
 #' ### res.asmaggh {.tabset}
 #' response ~ antibiotic_class + sample_month + agegroup + gender + hospital
-path <- run_SpARKjags_model(data, file.path(directory, "asmaggh.R"), thin = 20)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "asmaggh.R"),
+                            thin = 20,
+                            save_to = res_dir)
 res.asmaggh <- get_model(path)
+model_name <- "res.asmaggh"
 
 #' #### Posterior
 #+ res.asmaggh, fig.height = 6
-res.asmaggh %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 #' #### Diagnostics
-res.asmaggh %>% DIC() # 10973.54
-res.asmaggh %>% testSSEF()
-res.asmaggh %>% testPSRF()
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmaggh %>% plot_caterpillar()
+plot_caterpillar(model = get(model_name),
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmaggh %>% plot_autocorr()
+plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.asmaggh$model
+get(model_name)$model
 
 #' #### Results
-res.asmaggh
+get(model_name)
 
 
 
 
 #' ### res.asmaggwt {.tabset}
 #' response ~ antibiotic_class + sample_month + agegroup + gender + wardtype
-path <- run_SpARKjags_model(data, file.path(directory, "asmaggwt.R"), thin = 10)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "asmaggwt.R"),
+                            thin = 10,
+                            save_to = res_dir)
 res.asmaggwt <- get_model(path)
+model_name <- "res.asmaggwt"
 
 #' #### Posterior
 #+ res.asmaggwt, fig.height = 6
-res.asmaggwt %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 #' #### Diagnostics
-res.asmaggwt %>% DIC() # 11057.68
-res.asmaggwt %>% testSSEF()
-res.asmaggwt %>% testPSRF()
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmaggwt %>% plot_caterpillar()
+plot_caterpillar(model = get(model_name),
+                 save_to = res_dir,
+                 model_name = model_name)
+
+#' #### Autocorrelation
+#+ fig.height = 6
+plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.asmaggwt$model
+get(model_name)$model
 
 #' #### Results
-res.asmaggwt
+get(model_name)
 
 
 
 
 #' ### res.asmaggw {.tabset}
 #' response ~ antibiotic_class + sample_month + agegroup + gender + ward
-path <- run_SpARKjags_model(data, file.path(directory, "asmaggw.R"), thin = 10)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "asmaggw.R"),
+                            thin = 10,
+                            save_to = res_dir)
 res.asmaggw <- get_model(path)
+model_name <- "res.asmaggw"
 
 #' #### Posterior
 #+ res.asmaggw, fig.height = 6
-res.asmaggw %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 #' #### Diagnostics
-res.asmaggw %>% DIC() # 9914.729
-res.asmaggw %>% testSSEF()
-res.asmaggw %>% testPSRF()
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmaggw %>% plot_caterpillar()
+plot_caterpillar(model = get(model_name),
+                 save_to = res_dir,
+                 model_name = model_name)
+
+#' #### Autocorrelation
+#+ fig.height = 6
+plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.asmaggw$model
+get(model_name)$model
 
 #' #### Results
-res.asmaggw
-
+get(model_name)
 
 
 
 #' ### res.asmaggwt_w {.tabset}
 #' response ~ antibiotic_class + sample_month + agegroup + gender +
 #' wardtype_{ward}
-path <- run_SpARKjags_model(data, file.path(directory, "asmaggwt_w.R"),
-                            thin = 10)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory,
+                                                        "asmaggwt_w.R"),
+                            thin = 10,
+                            save_to = res_dir)
 res.asmaggwt_w <- get_model(path)
+model_name <- "res.asmaggwt_w"
 
 #' #### Posterior
 #+ res.asmaggwt_w, fig.height = 6
-res.asmaggwt_w %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 #' #### Diagnostics
-res.asmaggwt_w %>% DIC() # 9915.182
-res.asmaggwt_w %>% testSSEF()
-res.asmaggwt_w %>% testPSRF()
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmaggwt_w %>% plot_caterpillar()
+plot_caterpillar(model = get(model_name),
+                 save_to = res_dir,
+                 model_name = model_name)
+
+#' #### Autocorrelation
+#+ fig.height = 6
+plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.asmaggwt_w$model
+get(model_name)$model
 
 #' #### Results
-res.asmaggwt_w
-
+get(model_name)
 
 
 
 #' res.asmagghwtw {.tabset}
 #' response ~ antibiotic_class + sample_month + agegroup + gender + hospital +
 #' wardtype + ward
-path <- run_SpARKjags_model(data, file.path(directory, "asmagghwtw.R"),
-                            thin = 10)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory,
+                                                        "asmagghwtw.R"),
+                            thin = 10,
+                            save_to = res_dir)
 res.asmagghwtw <- get_model(path)
+model_name <- "res.asmagghwtw"
 
 #' #### Posterior
 #+ res.asmagghwtw, fig.height = 6
-res.asmagghwtw %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 #' #### Diagnostics
-res.asmagghwtw %>% DIC() # 9916.447
-res.asmagghwtw %>% testSSEF()
-res.asmagghwtw %>% testPSRF()
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmagghwtw %>% plot_caterpillar()
+plot_caterpillar(model = get(model_name),
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmagghwtw %>% plot_autocorr()
+plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.asmagghwtw$model
+get(model_name)$model
 
 #' #### Results
-res.asmagghwtw
+get(model_name)
 
 
 
@@ -478,32 +642,41 @@ res.asmagghwtw
 #' ### res.asmaggh_wt_w {.tabset}
 #' response ~ antibiotic_class + sample_month + agegroup + gender +
 #' hospital_{wardtype_{ward}}
-path <- run_SpARKjags_model(data, file.path(directory, "asmaggh_wt_w.R"),
-                            thin = 10)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory,
+                                                        "asmaggh_wt_w.R"),
+                            thin = 10,
+                            save_to = res_dir)
 res.asmaggh_wt_w <- get_model(path)
+model_name <- "res.asmaggh_wt_w"
 
 #' #### Posterior
 #+ res.asmaggh_wt_w, fig.height = 6
-res.asmaggh_wt_w %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 #' #### Diagnostics
-res.asmaggh_wt_w %>% DIC() # 9916.827
-res.asmaggh_wt_w %>% testSSEF()
-res.asmaggh_wt_w %>% testPSRF()
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmaggh_wt_w %>% plot_caterpillar()
+plot_caterpillar(model = get(model_name),
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmaggh_wt_w %>% plot_autocorr()
+plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.asmaggh_wt_w$model
+get(model_name)$model
 
 #' #### Results
-res.asmaggh_wt_w
+get(model_name)
 
 
 #' ### Summary of DIC results
@@ -526,10 +699,17 @@ DICtable(c("res.asmaggh", "res.asmaggwt", "res.asmaggw", "res.asmaggwt_w",
 
 #' ### This is the best null model
 #+ best null
-path <- run_SpARKjags_model(data, file.path(directory, "asmaggw.R"), thin = 10)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "asmaggw.R"),
+                            thin = 10,
+                            save_to = res_dir)
 res.asmaggw <- get_model(path)
+model_name <- "res.asmaggw"
 
-res.asmaggw %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 
 #' ### Apply best null model to Carbapenem positive samples only
@@ -544,8 +724,12 @@ path <- run_SpARKjags_model(data.carb.res,
                             file.path(directory, "asmaggw_CarbRes.R"),
                             thin = 10)
 res.asmaggw_CarbRes <- get_model(path)
+model_name <- "res.asmaggw_CarbRes"
 
-res.asmaggw_CarbRes %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 #' ### Apply best null model to Carbapenem susceptible samples only
 data.carb.sus <- jags_data(classification = "all",
@@ -559,8 +743,12 @@ path <- run_SpARKjags_model(data.carb.sus,
                             file.path(directory, "asmaggw_CarbSus.R"),
                             thin = 10)
 res.asmaggw_CarbSus <- get_model(path)
+model_name <- "res.asmaggw_CarbSus"
 
-res.asmaggw_CarbSus %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 
 
@@ -574,31 +762,40 @@ res.asmaggw_CarbSus %>% plot_density(data)
 #' ### res.asmaggwc {.tabset}
 #' response ~ antibioticclass + sample_month + agegroup + gender + ward +
 #' clinical
-path <- run_SpARKjags_model(data, file.path(directory, "asmaggwc.R"), thin = 10)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory, "asmaggwc.R"),
+                            thin = 10,
+                            save_to = res_dir)
 res.asmaggwc <- get_model(path)
+model_name <- "res.asmaggwc"
 
 #' #### Posterior
 #+ res.asmaggwc, fig.height = 6
-res.asmaggwc %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 #' #### Diagnostics
-res.asmaggwc %>% DIC() # 9911.505
-res.asmaggwc %>% testSSEF()
-res.asmaggwc %>% testPSRF()
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmaggwc %>% plot_caterpillar()
+plot_caterpillar(model = get(model_name),
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmaggwc %>% plot_autocorr()
+plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.asmaggwc$model
+get(model_name)$model
 
 #' #### Results
-res.asmaggwc
+get(model_name)
 
 
 
@@ -606,32 +803,41 @@ res.asmaggwc
 #' ### res.asmaggwcst {.tabset}
 #' response ~ antibioticclass + sample_month + agegroup + gender + ward +
 #' clinical + sampletype
-path <- run_SpARKjags_model(data, file.path(directory, "asmaggwcst.R"),
-                            thin = 10)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory,
+                                                        "asmaggwcst.R"),
+                            thin = 10,
+                            save_to = res_dir)
 res.asmaggwcst <- get_model(path)
+model_name <- "res.asmaggwcst"
 
 #' #### Posterior
 #+ res.asmaggwcst, fig.height = 6
-res.asmaggwcst %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 #' #### Diagnostics
-res.asmaggwcst %>% DIC() # 9764.723
-res.asmaggwcst %>% testSSEF()
-res.asmaggwcst %>% testPSRF()
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmaggwcst %>% plot_caterpillar()
+plot_caterpillar(model = get(model_name),
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmaggwcst %>% plot_autocorr()
+plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.asmaggwcst$model
+get(model_name)$model
 
 #' #### Results
-res.asmaggwcst
+get(model_name)
 
 
 
@@ -639,32 +845,41 @@ res.asmaggwcst
 #' ### res.asmaggwc_st {.tabset}
 #' response ~ antibioticclass + sample_month + agegroup + gender + ward +
 #' clinical_{sampletype}
-path <- run_SpARKjags_model(data, file.path(directory, "asmaggwc_st.R"),
-                            thin = 10)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory,
+                                                        "asmaggwc_st.R"),
+                            thin = 10,
+                            save_to = res_dir)
 res.asmaggwc_st <- get_model(path)
+model_name <- "res.asmaggwc_st"
 
 #' #### Posterior
 #+ res.asmaggwc_st, fig.height = 6
-res.asmaggwc_st %>% plot_density(data)
+plot_density(model = get(model_name),
+             data = data,
+             save_to = res_dir,
+             model_name = model_name)
 
 #' #### Diagnostics
-res.asmaggwc_st %>% DIC() # 9748.901
-res.asmaggwc_st %>% testSSEF()
-res.asmaggwc_st %>% testPSRF()
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
 
 #' #### Trace plot
 #+ fig.height = 6
-res.asmaggwc_st %>% plot_caterpillar()
+plot_caterpillar(model = get(model_name),
+                 save_to = res_dir,
+                 model_name = model_name)
 
 #' #### Autocorrelation
 #+ fig.height = 6
-res.asmaggwc_st %>% plot_autocorr()
+plot_autocorr(model = get(model_name))
 
 #' #### Model
-res.asmaggwc_st$model
+get(model_name)$model
 
 #' #### Results
-res.asmaggwc_st
+get(model_name)
 
 #' ### Summary of DIC results
 
