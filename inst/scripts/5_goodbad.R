@@ -223,9 +223,9 @@ model_name <- "res.ac1"
 #' #### Posterior
 #+ res.ac1, fig.height = 10
 plot_density(model = get(model_name),
-             data = data,
-             save_to = file.path(res_dir, "density_plots"),
-             filename = paste0(gsub("res.", "", model_name), ".rds"))
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Statistics
 summarise_samples(model = get(model_name),
@@ -284,10 +284,10 @@ model_name <- "res.ac2"
 
 #' #### Posterior
 #+ res.ac2, fig.height = 10
-plot_density(model = get(model_name),
-             data = data,
-             save_to = file.path(res_dir, "density_plots"),
-             filename = paste0(gsub("res.", "", model_name), ".rds"))
+plot_density2(model = get(model_name),
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Statistics
 summarise_samples(model = get(model_name),
@@ -341,10 +341,10 @@ model_name <- "res.ac3"
 
 #' #### Posterior
 #+ res.ac3, fig.height = 10
-plot_density(model = get(model_name),
-             data = data,
-             save_to = file.path(res_dir, "density_plots"),
-             filename = paste0(gsub("res.", "", model_name), ".rds"))
+plot_density2(model = get(model_name),
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Statistics
 summarise_samples(model = get(model_name),
@@ -398,10 +398,10 @@ model_name <- "res.ac4"
 
 #' #### Posterior
 #+ res.ac4, fig.height = 10
-plot_density(model = get(model_name),
-             data = data,
-             save_to = file.path(res_dir, "density_plots"),
-             filename = paste0(gsub("res.", "", model_name), ".rds"))
+plot_density2(model = get(model_name),
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Statistics
 summarise_samples(model = get(model_name),
@@ -453,10 +453,10 @@ model_name <- "res.a_c"
 
 #' #### Posterior
 #+ res.a_c, fig.height = 10
-plot_density(model = get(model_name),
-             data = data,
-             save_to = file.path(res_dir, "density_plots"),
-             filename = paste0(gsub("res.", "", model_name), ".rds"))
+plot_density2(model = get(model_name),
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Statistics
 summarise_samples(model = get(model_name),
@@ -515,10 +515,10 @@ model_name <- "res.a_csm"
 
 #' #### Posterior
 #+ res.a_csm, fig.height = 10
-plot_density(model = get(model_name),
-             data = data,
-             save_to = file.path(res_dir, "density_plots"),
-             filename = paste0(gsub("res.", "", model_name), ".rds"))
+plot_density2(model = get(model_name),
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Statistics
 summarise_samples(model = get(model_name),
@@ -571,10 +571,10 @@ model_name <- "res.a_css"
 
 #' #### Posterior
 #+ res.a_css, fig.height = 10
-plot_density(model = get(model_name),
-             data = data,
-             save_to = file.path(res_dir, "density_plots"),
-             filename = paste0(gsub("res.", "", model_name), ".rds"))
+plot_density2(model = get(model_name),
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Statistics
 summarise_samples(model = get(model_name),
@@ -637,10 +637,10 @@ model_name <- "res.a_cssg"
 
 #' #### Posterior
 #+ res.a_cssg, fig.height = 10
-plot_density(model = get(model_name),
-             data = data,
-             save_to = file.path(res_dir, "density_plots"),
-             filename = paste0(gsub("res.", "", model_name), ".rds"))
+plot_density2(model = get(model_name),
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Statistics
 summarise_samples(model = get(model_name),
@@ -693,10 +693,10 @@ model_name <- "res.a_cssag"
 
 #' #### Posterior
 #+ res.a_cssag, fig.height = 10
-plot_density(model = get(model_name),
-             data = data,
-             save_to = file.path(res_dir, "density_plots"),
-             filename = paste0(gsub("res.", "", model_name), ".rds"))
+plot_density2(model = get(model_name),
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Statistics
 summarise_samples(model = get(model_name),
@@ -749,10 +749,10 @@ model_name <- "res.a_cssag2"
 
 #' #### Posterior
 #+ res.a_cssag2, fig.height = 10
-plot_density(model = get(model_name),
-             data = data,
-             save_to = file.path(res_dir, "density_plots"),
-             filename = paste0(gsub("res.", "", model_name), ".rds"))
+plot_density2(model = get(model_name),
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Statistics
 summarise_samples(model = get(model_name),
@@ -805,10 +805,10 @@ model_name <- "res.a_cssage"
 
 #' #### Posterior
 #+ res.a_cssage, fig.height = 10
-plot_density(model = get(model_name),
-             data = data,
-             save_to = file.path(res_dir, "density_plots"),
-             filename = paste0(gsub("res.", "", model_name), ".rds"))
+plot_density2(model = get(model_name),
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Statistics
 summarise_samples(model = get(model_name),
@@ -861,10 +861,10 @@ model_name <- "res.a_cssagesq"
 
 #' #### Posterior
 #+ res.a_cssagesq, fig.height = 10
-plot_density(model = get(model_name),
-             data = data,
-             save_to = file.path(res_dir, "density_plots"),
-             filename = paste0(gsub("res.", "", model_name), ".rds"))
+plot_density2(model = get(model_name),
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Statistics
 summarise_samples(model = get(model_name),
@@ -918,10 +918,10 @@ model_name <- "res.a_cssag2g"
 
 #' #### Posterior
 #+ res.a_cssag2g, fig.height = 10
-plot_density(model = get(model_name),
-             data = data,
-             save_to = file.path(res_dir, "density_plots"),
-             filename = paste0(gsub("res.", "", model_name), ".rds"))
+plot_density2(model = get(model_name),
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Statistics
 summarise_samples(model = get(model_name),
@@ -975,10 +975,10 @@ model_name <- "res.a_cssag2_g"
 
 #' #### Posterior
 #+ res.a_cssag2_g, fig.height = 10
-plot_density(model = get(model_name),
-             data = data,
-             save_to = file.path(res_dir, "density_plots"),
-             filename = paste0(gsub("res.", "", model_name), ".rds"))
+plot_density2(model = get(model_name),
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Statistics
 summarise_samples(model = get(model_name),
@@ -1043,10 +1043,10 @@ model_name <- "res.a_cssag2h"
 
 #' #### Posterior
 #+ res.a_cssag2h, fig.height = 10
-plot_density(model = get(model_name),
-             data = data,
-             save_to = file.path(res_dir, "density_plots"),
-             filename = paste0(gsub("res.", "", model_name), ".rds"))
+plot_density2(model = get(model_name),
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Statistics
 summarise_samples(model = get(model_name),
@@ -1100,10 +1100,10 @@ model_name <- "res.a_cssag2wt"
 
 #' #### Posterior
 #+ res.a_cssag2wt, fig.height = 10
-plot_density(model = get(model_name),
-             data = data,
-             save_to = file.path(res_dir, "density_plots"),
-             filename = paste0(gsub("res.", "", model_name), ".rds"))
+plot_density2(model = get(model_name),
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Statistics
 summarise_samples(model = get(model_name),
@@ -1156,10 +1156,68 @@ model_name <- "res.a_cssag2w"
 
 #' #### Posterior
 #+ res.a_cssag2w, fig.height = 10
-plot_density(model = get(model_name),
-             data = data,
-             save_to = file.path(res_dir, "density_plots"),
-             filename = paste0(gsub("res.", "", model_name), ".rds"))
+plot_density2(model = get(model_name),
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", model_name), ".rds"))
+
+#' #### Statistics
+summarise_samples(model = get(model_name),
+                  data = data)
+
+#' #### AMR Summary
+#+ fig.height = 8, fig.width = 10
+plot_antibiotics(model = get(model_name),
+                 data = data)
+
+#' #### AMR Correlation
+#+ fig.height = 10
+plot_correlation(model = get(model_name),
+                 data = data)
+
+#' #### Diagnostics
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
+
+#' #### Trace plot
+#+ fig.height = 6
+plot_caterpillar(model = get(model_name),
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", model_name), ".rds"))
+
+#' #### Autocorrelation
+#+ fig.height = 6
+plot_autocorr(model = get(model_name))
+
+#' #### Model
+#+ code = readLines(file.path(model_dir, paste0(gsub("res.", "", model_name), ".R"))), eval = FALSE, class.source = 'fold-show'
+
+#' #### Results
+get(model_name)
+
+
+
+
+#' ### (a_c)ss(ag2)wt_w {.tabset}
+#' response ~ antibiotic_class_{goodbad,clinical} + sample_season + agegroup +
+#' wardtype_{ward}
+#'
+
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory,
+                                                        "(a_c)ss(ag2)wt_w.R"),
+                            save_to = res_dir,
+                            thin = 20)
+res.a_cssag2wt_w <- get_model(path)
+model_name <- "res.a_cssag2wt_w"
+
+#' #### Posterior
+#+ res.a_cssag2wt_w, fig.height = 10
+plot_density2(model = get(model_name),
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Statistics
 summarise_samples(model = get(model_name),
@@ -1214,10 +1272,10 @@ model_name <- "res.a_cssag2h_wt_w"
 
 #' #### Posterior
 #+ res.a_cssag2h_wt_w, fig.height = 10
-plot_density(model = get(model_name),
-             data = data,
-             save_to = file.path(res_dir, "density_plots"),
-             filename = paste0(gsub("res.", "", model_name), ".rds"))
+plot_density2(model = get(model_name),
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Statistics
 summarise_samples(model = get(model_name),
@@ -1264,7 +1322,7 @@ DICtable(c("res.a_csm", "res.a_css"))
 DICtable(c("res.a_cssg", "res.a_cssag", "res.a_cssag2", "res.a_cssage",
            "res.a_cssagesq", "res.a_cssag2g", "res.a_cssag2_g"))
 DICtable(c("res.a_cssag2h", "res.a_cssag2wt", "res.a_cssag2w",
-           "res.a_cssag2h_wt_w"))
+           "res.a_cssag2wt_w", "res.a_cssag2h_wt_w"))
 
 
 #' ### res.assagwcst {.tabset}
