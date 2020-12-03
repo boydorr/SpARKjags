@@ -7,7 +7,8 @@
 run_SpARKjags_model(data, SpARKjags_model, save_to, thin = 1)
 }
 \arguments{
-\item{data}{a \code{list} output from the jags_data function}
+\item{data}{a \code{list} containing the data input for the runjags model,
+generated with \code{jags_data()}}
 
 \item{SpARKjags_model}{a \code{string} specifying a model location within
 the SpARKjags package. The format should be dir/model (as listed in
@@ -28,10 +29,4 @@ Returns code{string} specifying the location of the model output
 }
 \description{
 Run SpARKjags model. If model results already exists, return file location.
-}
-\examples{
-\dontrun{
-run_model(data, "individual_models/a.R")
-}
-
 }

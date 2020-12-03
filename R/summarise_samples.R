@@ -3,7 +3,7 @@
 #' Counts the number of samples identified as being in the good group or the
 #' bad group, extracted from posterior probabilities
 #'
-#' @param model model
+#' @param model a \code{runjags} object containing model results
 #' @param data data
 #'
 #' @export

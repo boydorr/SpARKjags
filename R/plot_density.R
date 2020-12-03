@@ -1,38 +1,31 @@
-#' plot_density
+#' Generate density plot
 #'
 #' Generates a violin plot where violins represent the posterior probability of
 #' resistance and points represent the calculated probability of resistance to
-#' each antibiotic class.
+#' each antibiotic class. If a file already exists, it is read into memory.
 #'
 #' @param model a \code{runjags} object containing model results
-#' @param data data input
-#' @param save_to dir
-#' @param model_name model name
-#' @param save_pdf boolean
+#' @param data a \code{list} containing the data input for the runjags model,
+#' generated with \code{jags_data()}
+#' @param save_to a \code{string} specifying the location in which the output
+#' (an \code{rds} file containing the density plot) should be saved
+#' @param filename a \code{string} specifying the name of the output (an
+#' \code{rds} file containing the density plot)
+#' @param save_pdf a \code{boolean} specifying whether or not a pdf should be
+#' saved
 #'
+#' @return Returns a density plot and saves an rds file
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' data <- jags_data(classification = "all",
-#'                   categories = "human",
-#'                   pathogen = "Klebsiella pneumoniae",
-#'                   removeQuinPen = TRUE)
-#' res.a <- get_model("a", "goodbad_models")
-#' plot_density(model = res.a,
-#'             data = data)
-#' }
 #'
 plot_density <- function(model,
                          data,
                          save_to,
-                         model_name,
+                         filename,
                          save_pdf = FALSE) {
-  # Is the plot cached?
-  save_to <- file.path(save_to, "density_plots")
-  filename <- paste0(gsub("res.", "", model_name), ".rds")
+
   filepath <- file.path(save_to, filename)
 
+  # Is the plot cached?
   if(file.exists(filepath)) {
     output <- readRDS(filepath)
 
@@ -44,11 +37,13 @@ plot_density <- function(model,
 
     # Labels
     if(any(colnames(df) %in% "badgroup")) {
+      # posterior plots are split into good and bad groups
       labels <- get_labels(data)
       params <- get_params()
       var.regex <- get_vars(model)
 
     }else {
+      # basic posterior plots
       tmp <- data$lookup$antibiotic_class %>%
         dplyr::mutate(index = paste0("a.prob[", 1:13, "]"))
       labels <- list(tmp, NA, NA)

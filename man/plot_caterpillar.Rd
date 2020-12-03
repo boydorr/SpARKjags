@@ -2,19 +2,26 @@
 % Please edit documentation in R/plot_caterpillar.R
 \name{plot_caterpillar}
 \alias{plot_caterpillar}
-\title{plot_caterpillar}
+\title{Generate caterpillar plot}
 \usage{
-plot_caterpillar(model, save_to, model_name, save_pdf = FALSE)
+plot_caterpillar(model, save_to, filename, save_pdf = FALSE)
 }
 \arguments{
-\item{model}{model}
+\item{model}{a \code{runjags} object containing model results}
 
-\item{save_to}{dir}
+\item{save_to}{a \code{string} specifying the location in which the output
+(an \code{rds} file containing the density plot) should be saved}
 
-\item{model_name}{model name}
+\item{filename}{a \code{string} specifying the name of the output (an
+\code{rds} file containing the density plot)}
 
-\item{save_pdf}{boolean}
+\item{save_pdf}{a \code{boolean} specifying whether or not a pdf should be
+saved}
+}
+\value{
+Returns a caterpillar plot and saves an rds file
 }
 \description{
-plot_caterpillar
+Generates a caterpillar plot (trace plot). If a file already exists, it is
+read into memory.
 }

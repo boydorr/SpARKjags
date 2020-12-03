@@ -7,7 +7,12 @@
 DICtable(models)
 }
 \arguments{
-\item{models}{models}
+\item{models}{a \code{vector} of \code{strings}, each specifying the name of
+a \code{runjags} object}
+}
+\value{
+Returns a \code{flextable} containing DIC values for each model
+output
 }
 \description{
 DICtable

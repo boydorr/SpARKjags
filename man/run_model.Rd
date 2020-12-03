@@ -7,7 +7,8 @@
 run_model(data, location, thin, save_to)
 }
 \arguments{
-\item{data}{a \code{list} output from the jags_data function}
+\item{data}{a \code{list} containing the data input for the runjags model,
+generated with \code{jags_data()}}
 
 \item{location}{a \code{string} specifying a model location}
 
@@ -23,7 +24,7 @@ for the model output. If save_to is missing, the model output will be
 saved in the same directory as the model script.}
 }
 \value{
-Returns code{string} specifying the location of the model output
+Returns \code{string} specifying the location of the model output
 }
 \description{
 Run model. If model results already exists, return file location.

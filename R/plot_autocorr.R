@@ -5,12 +5,6 @@
 #'
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' res.a_naive <- get_model("a_naive", "goodbad_models")
-#' plot_autocorr(res.a_naive)
-#' }
-#'
 plot_autocorr <- function(model,
                           filename) {
 

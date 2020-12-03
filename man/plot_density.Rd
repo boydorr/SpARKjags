@@ -2,35 +2,30 @@
 % Please edit documentation in R/plot_density.R
 \name{plot_density}
 \alias{plot_density}
-\title{plot_density}
+\title{Generate density plot}
 \usage{
-plot_density(model, data, save_to, model_name, save_pdf = FALSE)
+plot_density(model, data, save_to, filename, save_pdf = FALSE)
 }
 \arguments{
 \item{model}{a \code{runjags} object containing model results}
 
-\item{data}{data input}
+\item{data}{a \code{list} containing the data input for the runjags model,
+generated with \code{jags_data()}}
 
-\item{save_to}{dir}
+\item{save_to}{a \code{string} specifying the location in which the output
+(an \code{rds} file containing the density plot) should be saved}
 
-\item{model_name}{model name}
+\item{filename}{a \code{string} specifying the name of the output (an
+\code{rds} file containing the density plot)}
 
-\item{save_pdf}{boolean}
+\item{save_pdf}{a \code{boolean} specifying whether or not a pdf should be
+saved}
+}
+\value{
+Returns a density plot and saves an rds file
 }
 \description{
 Generates a violin plot where violins represent the posterior probability of
 resistance and points represent the calculated probability of resistance to
-each antibiotic class.
-}
-\examples{
-\dontrun{
-data <- jags_data(classification = "all",
-                  categories = "human",
-                  pathogen = "Klebsiella pneumoniae",
-                  removeQuinPen = TRUE)
-res.a <- get_model("a", "goodbad_models")
-plot_density(model = res.a,
-            data = data)
-}
-
+each antibiotic class. If a file already exists, it is read into memory.
 }

@@ -7,7 +7,7 @@
 summarise_samples(model, data)
 }
 \arguments{
-\item{model}{model}
+\item{model}{a \code{runjags} object containing model results}
 
 \item{data}{data}
 }

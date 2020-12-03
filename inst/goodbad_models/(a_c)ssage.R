@@ -12,12 +12,13 @@ model {
       # Response is different for each antibiotic and depending on
       # which pop it's from
       response[h_GUID[p],a] ~
-        dbern(ac.prob[a,
-                      index.bad.p[p],
-                      clinical[sample_type[h_sample_GUID[p]]]])
+        dbern(acsm.prob[a,
+                        index.bad.p[p],
+                        clinical[sample_type[h_sample_GUID[p]]],
+                        sample_season[h_sample_GUID[p]],
+                        h_sample_GUID[p]])
     }
   }
-
 
   for (gp in 1:N_gp)
   {
@@ -30,7 +31,11 @@ model {
     {
       # Response is different for each antibiotic and depending on
       # which pop it's from
-      response[gp_GUID[gp],a] ~ dbern(a.gp.prob[a, index.bad.gp[gp]])
+      response[gp_GUID[gp],a] ~
+        dbern(asm.gp.prob[a,
+                          index.bad.gp[gp],
+                          sample_season[gp_sample_GUID[gp]],
+                          gp_sample_GUID[gp]])
     }
   }
 
@@ -45,7 +50,10 @@ model {
     {
       # Response is different for each antibiotic and depending on
       # which pop it's from
-      response[v_GUID[v],a] ~ dbern(a.v.prob[a, index.bad.v[v]])
+      response[v_GUID[v],a] ~ dbern(asm.v.prob[a,
+                                               index.bad.v[v],
+                                               sample_season[v_sample_GUID[v]],
+                                               v_sample_GUID[v]])
     }
   }
 
@@ -60,7 +68,10 @@ model {
     {
       # Response is different for each antibiotic and depending on
       # which pop it's from
-      response[o_GUID[o],a] ~ dbern(a.o.prob[a, index.bad.o[o]])
+      response[o_GUID[o],a] ~ dbern(asm.o.prob[a,
+                                               index.bad.o[o],
+                                               sample_season[o_sample_GUID[o]],
+                                               o_sample_GUID[o]])
     }
   }
 
@@ -77,21 +88,54 @@ model {
     # always be higher than the good group
     antibiotic.class.effect[a, 2] ~ dnorm(intercept.plus, tau.class)
     logit(a.prob[a,2]) <- antibiotic.class.effect[a, 2]
+  }
 
+  for(s in 1:N_sample_season)
+  {
+    sampleseason.effect[s] ~ dnorm(0, tau.sampleseason)
+  }
+
+  age.effect ~ dnorm(0, 0.001)
+
+  for (n in 1:N_sample)
+  {
+    mu.age[n] <- age.effect * age[n]
+  }
+
+  for(a in 1:antibiotic_classes)
+  {
     for(b in 1:2)
     { # good bad
       for (c in c(ncarr, nclin)) # 1, 2!
       {
         ac.effect[a,b,c] ~ dnorm(antibiotic.class.effect[a,b], tau.clin)
-        logit(ac.prob[a,b,c]) <- ac.effect[a,b,c]
+
+        for(s in 1:N_sample_season)
+        {
+          for (n in 1:N_sample)
+          {
+            logit(acsm.prob[a,b,c,s,n]) <-
+              ac.effect[a,b,c] + sampleseason.effect[s] + mu.age[n]
+          }
+        }
       }
 
       a.gp.effect[a,b] <- ac.effect[a,b,gp_clinical]
       a.v.effect[a,b] <- ac.effect[a,b,v_clinical]
       a.o.effect[a,b] <- ac.effect[a,b,o_clinical]
-      logit(a.gp.prob[a,b]) <- a.gp.effect[a,b]
-      logit(a.v.prob[a,b]) <- a.v.effect[a,b]
-      logit(a.o.prob[a,b]) <- a.o.effect[a,b]
+
+      for(s in 1:N_sample_season)
+      {
+        for (n in 1:N_sample)
+        {
+          logit(asm.gp.prob[a,b,s,n]) <-
+            a.gp.effect[a,b] + sampleseason.effect[s] + mu.age[n]
+          logit(asm.v.prob[a,b,s,n]) <-
+            a.v.effect[a,b] + sampleseason.effect[s] + mu.age[n]
+          logit(asm.o.prob[a,b,s,n]) <-
+            a.o.effect[a,b] + sampleseason.effect[s] + mu.age[n]
+        }
+      }
     }
   }
 
@@ -111,10 +155,12 @@ model {
   # Prior values for precision
   tau.class ~ dgamma(0.001, 0.001)
   tau.clin ~ dgamma(0.001, 0.001)
+  tau.sampleseason ~ dgamma(0.001, 0.001)
 
   # Convert precisions to sd
   sd.class <- sqrt(1/tau.class)
   sd.clin <- sqrt(1/tau.clin)
+  sd.sampleseason <- sqrt(1/tau.sampleseason)
 
-  #monitor# full.pd, dic, deviance, a.prob, ac.prob, prob.of.bad.hosp, prob.of.bad.gp, prob.of.bad.vol, prob.of.bad.out, bad.p, bad.gp, bad.v, bad.o, intercept, sd.class, sd.clin
+  #monitor# full.pd, dic, deviance, a.prob, ac.prob, prob.of.bad.hosp, prob.of.bad.gp, prob.of.bad.vol, prob.of.bad.out, bad.p, bad.gp, bad.v, bad.o, intercept, sd.class, sd.clin, sd.sampleseason
 }

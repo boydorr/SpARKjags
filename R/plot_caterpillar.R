@@ -1,19 +1,24 @@
-#' plot_caterpillar
+#' Generate caterpillar plot
 #'
-#' @param model model
-#' @param save_to dir
-#' @param model_name model name
-#' @param save_pdf boolean
+#' Generates a caterpillar plot (trace plot). If a file already exists, it is
+#' read into memory.
 #'
+#' @param model a \code{runjags} object containing model results
+#' @param save_to a \code{string} specifying the location in which the output
+#' (an \code{rds} file containing the density plot) should be saved
+#' @param filename a \code{string} specifying the name of the output (an
+#' \code{rds} file containing the density plot)
+#' @param save_pdf a \code{boolean} specifying whether or not a pdf should be
+#' saved
+#'
+#' @return Returns a caterpillar plot and saves an rds file
 #' @export
 #'
 plot_caterpillar <- function(model,
                              save_to,
-                             model_name,
+                             filename,
                              save_pdf = FALSE) {
   # Is the plot cached?
-  save_to <- file.path(save_to, "caterpillar_plots")
-  filename <- paste0(gsub("res.", "", model_name), ".rds")
   filepath <- file.path(save_to, filename)
 
   if(file.exists(filepath)) {

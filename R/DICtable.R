@@ -1,7 +1,10 @@
 #' DICtable
 #'
-#' @param models models
+#' @param models a \code{vector} of \code{strings}, each specifying the name of
+#' a \code{runjags} object
 #'
+#' @return Returns a \code{flextable} containing DIC values for each model
+#' output
 #' @export
 #'
 DICtable <- function(models) {

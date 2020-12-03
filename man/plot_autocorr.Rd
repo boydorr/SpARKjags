@@ -14,10 +14,3 @@ plot_autocorr(model, filename)
 \description{
 plot_autocorr
 }
-\examples{
-\dontrun{
-res.a_naive <- get_model("a_naive", "goodbad_models")
-plot_autocorr(res.a_naive)
-}
-
-}

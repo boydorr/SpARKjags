@@ -2,7 +2,8 @@
 #'
 #' Run SpARKjags model. If model results already exists, return file location.
 #'
-#' @param data a \code{list} output from the jags_data function
+#' @param data a \code{list} containing the data input for the runjags model,
+#' generated with \code{jags_data()}
 #' @param SpARKjags_model a \code{string} specifying a model location within
 #' the SpARKjags package. The format should be dir/model (as listed in
 #' \code{list_models()}).
@@ -16,13 +17,7 @@
 #' rather than on an existing MCMC object.
 #'
 #' @return Returns code{string} specifying the location of the model output
-#'
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' run_model(data, "individual_models/a.R")
-#' }
 #'
 run_SpARKjags_model <- function(data,
                                 SpARKjags_model,

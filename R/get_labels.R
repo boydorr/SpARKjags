@@ -8,20 +8,15 @@
 #'
 get_labels <- function(data, ind, cat) {
 
-  tmp <- data$lookup$antibiotic_class %>%
-    mutate(index = paste0("a.prob[", 1:13, ",1]"))
+  tmp <- data$lookup$antibiotic_class
 
   tmp2 <- data.frame(index = paste0("prob.of.bad.",
                                     c("vol", "out", "gp", "hosp")),
                      stringsAsFactors = F) %>%
     mutate(category = c("Volunteer", "Outpatient", "GP", "Hospital"))
 
-  clinical <- data$lookup$clinical %>%
-    dplyr::filter(clinical == "yes")
-  clinical <- clinical$index
-  carriage <- data$lookup$clinical %>%
-    dplyr::filter(clinical == "no")
-  carriage <- carriage$index
+  clinical <- clinical(data, "index")
+  carriage <- carriage(data, 'index')
 
   tmp.clin <- data.frame(index = paste0("prob.of.bad.hosp[", clinical, "]"),
                          category = "Hospital (clinical)", stringsAsFactors = F)
@@ -30,7 +25,7 @@ get_labels <- function(data, ind, cat) {
 
   tmp2 <- tmp2 %>% dplyr::bind_rows(tmp.clin, tmp.car)
 
-  tmp.ainmals <- data.frame(index = c("prob.of.bad.livestock",
+  tmp.animals <- data.frame(index = c("prob.of.bad.livestock",
                                       "prob.of.bad.cattle",
                                       "prob.of.bad.pig",
                                       "prob.of.bad.chicken",
@@ -53,14 +48,15 @@ get_labels <- function(data, ind, cat) {
                                          "Turtle",
                                          "Crow"))
 
-  tmp2 <- tmp2 %>% dplyr::bind_rows(tmp.ainmals)
+  tmp2 <- tmp2 %>% dplyr::bind_rows(tmp.animals)
 
   if(!missing(ind) && !missing(cat)) {
     tmp3 <- data.frame(index = ind, category = cat, stringsAsFactors = F)
     tmp2 <- tmp2 %>% dplyr::bind_rows(tmp3)
   }
 
-
-  list(tmp2, tmp, tmp %>% mutate(index = gsub(",1", ",2", .data$index)),
+  list(category = tmp2,
+       good = tmp,
+       bad = tmp %>% mutate(index = gsub(",1", ",2", .data$index)),
        NA, NA)
 }

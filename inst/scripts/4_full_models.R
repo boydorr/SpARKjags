@@ -71,8 +71,8 @@ model_name <- "res.a"
 #+ res.a_naive, fig.height = 6
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Diagnostics
 DIC(model_name = get(model_name))
@@ -82,8 +82,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir,
-                 model_name = model_name)
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -110,8 +110,8 @@ model_name <- "res.asm"
 #+ res.asm, fig.height = 6
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Diagnostics
 DIC(model_name = get(model_name))
@@ -121,8 +121,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir,
-                 model_name = model_name)
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -150,8 +150,8 @@ model_name <- "res.ass"
 #+ res.ass, fig.height = 6
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Diagnostics
 DIC(model_name = get(model_name))
@@ -161,8 +161,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir,
-                 model_name = model_name)
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -199,8 +199,8 @@ model_name <- "res.asmg"
 #+ res.asmg, fig.height = 6
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Diagnostics
 DIC(model_name = get(model_name))
@@ -210,8 +210,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir,
-                 model_name = model_name)
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -239,8 +239,8 @@ model_name <- "res.asmag"
 #+ res.asmag, fig.height = 6
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Diagnostics
 DIC(model_name = get(model_name))
@@ -250,8 +250,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir,
-                 model_name = model_name)
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -279,8 +279,8 @@ model_name <- "res.asmag2"
 #+ res.asmag2, fig.height = 6
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Diagnostics
 DIC(model_name = get(model_name))
@@ -290,8 +290,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir,
-                 model_name = model_name)
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -319,8 +319,8 @@ model_name <- "res.asmage"
 #+ res.asmage, fig.height = 6
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Diagnostics
 DIC(model_name = get(model_name))
@@ -330,8 +330,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir,
-                 model_name = model_name)
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -360,8 +360,8 @@ model_name <- "res.asmagesq"
 #+ res.asmagesq, fig.height = 6
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Diagnostics
 DIC(model_name = get(model_name))
@@ -371,8 +371,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir,
-                 model_name = model_name)
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -400,8 +400,8 @@ model_name <- "res.asmagg"
 #+ res.asmagg, fig.height = 6
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Diagnostics
 DIC(model_name = get(model_name))
@@ -411,8 +411,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir,
-                 model_name = model_name)
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -450,8 +450,8 @@ model_name <- "res.asmaggh"
 #+ res.asmaggh, fig.height = 6
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Diagnostics
 DIC(model_name = get(model_name))
@@ -461,8 +461,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir,
-                 model_name = model_name)
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -490,8 +490,8 @@ model_name <- "res.asmaggwt"
 #+ res.asmaggwt, fig.height = 6
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Diagnostics
 DIC(model_name = get(model_name))
@@ -501,8 +501,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir,
-                 model_name = model_name)
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -530,8 +530,8 @@ model_name <- "res.asmaggw"
 #+ res.asmaggw, fig.height = 6
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Diagnostics
 DIC(model_name = get(model_name))
@@ -541,8 +541,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir,
-                 model_name = model_name)
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -571,8 +571,8 @@ model_name <- "res.asmaggwt_w"
 #+ res.asmaggwt_w, fig.height = 6
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Diagnostics
 DIC(model_name = get(model_name))
@@ -582,8 +582,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir,
-                 model_name = model_name)
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -612,8 +612,8 @@ model_name <- "res.asmagghwtw"
 #+ res.asmagghwtw, fig.height = 6
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Diagnostics
 DIC(model_name = get(model_name))
@@ -623,8 +623,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir,
-                 model_name = model_name)
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -654,8 +654,8 @@ model_name <- "res.asmaggh_wt_w"
 #+ res.asmaggh_wt_w, fig.height = 6
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Diagnostics
 DIC(model_name = get(model_name))
@@ -665,8 +665,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir,
-                 model_name = model_name)
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -708,8 +708,8 @@ model_name <- "res.asmaggw"
 
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 
 #' ### Apply best null model to Carbapenem positive samples only
@@ -729,8 +729,8 @@ model_name <- "res.asmaggw_CarbRes"
 
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' ### Apply best null model to Carbapenem susceptible samples only
 data.carb.sus <- jags_data(classification = "all",
@@ -749,8 +749,8 @@ model_name <- "res.asmaggw_CarbSus"
 
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 
 
@@ -775,8 +775,8 @@ model_name <- "res.asmaggwc"
 #+ res.asmaggwc, fig.height = 6
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Diagnostics
 DIC(model_name = get(model_name))
@@ -786,8 +786,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir,
-                 model_name = model_name)
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -817,8 +817,8 @@ model_name <- "res.asmaggwcst"
 #+ res.asmaggwcst, fig.height = 6
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Diagnostics
 DIC(model_name = get(model_name))
@@ -828,8 +828,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir,
-                 model_name = model_name)
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Autocorrelation
 #+ fig.height = 6
@@ -859,8 +859,8 @@ model_name <- "res.asmaggwc_st"
 #+ res.asmaggwc_st, fig.height = 6
 plot_density(model = get(model_name),
              data = data,
-             save_to = res_dir,
-             model_name = model_name)
+             save_to = file.path(res_dir, "density_plots"),
+             filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Diagnostics
 DIC(model_name = get(model_name))
@@ -870,8 +870,8 @@ testPSRF(model = get(model_name))
 #' #### Trace plot
 #+ fig.height = 6
 plot_caterpillar(model = get(model_name),
-                 save_to = res_dir,
-                 model_name = model_name)
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", model_name), ".rds"))
 
 #' #### Autocorrelation
 #+ fig.height = 6

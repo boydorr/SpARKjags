@@ -2,15 +2,19 @@
 % Please edit documentation in R/testPSRF.R
 \name{testPSRF}
 \alias{testPSRF}
-\title{testPSRF}
+\title{Potential Scale Reduction Factor}
 \usage{
-testPSRF(model, plot = F)
+testPSRF(model, plot = T)
 }
 \arguments{
-\item{model}{model}
+\item{model}{a \code{runjags} object containing model results}
 
-\item{plot}{plot}
+\item{plot}{a \code{boolean} object specifying whether or not a plot should
+be generated}
 }
 \description{
-testPSRF
+The Gelman and Rubin (1992) Potential Scale Reduction Factor (PSRF, or
+\eqn{\hat{R}}) is used to assess MCMC convergence. If the chains have not
+converged to a common distribution, the \eqn{\hat{R}} statistic will be
+greater than one. Values close to 1 are considered good.
 }

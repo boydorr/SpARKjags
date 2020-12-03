@@ -1,10 +1,12 @@
+# ac1 and a_c
 model {
   # Define likelihood model for data:
   for (p in 1:N_patients)
   {
-    # probability of belonging to the bad group
-    bad.p[p] ~ dbern(prob.of.bad.hosp)
-    # index the bad group in ac.prob
+    # probability of belonging to the bad group is different for clinical /
+    # carriage samples
+    bad.p[p] ~ dbern(prob.of.bad.hosp[clinical[sample_type[h_sample_GUID[p]]]])
+    # index the bad group in a.prob
     index.bad.p[p] <- bad.p[p] + 1
 
     for(a in 1:antibiotic_classes)
@@ -13,17 +15,16 @@ model {
       # which pop it's from
       response[h_GUID[p],a] ~
         dbern(ac.prob[a,
-                      index.bad.p[p],
-                      clinical[sample_type[h_sample_GUID[p]]]])
+                     index.bad.p[p],
+                     clinical[sample_type[h_sample_GUID[p]]]])
     }
   }
-
 
   for (gp in 1:N_gp)
   {
     # probability of belonging to the bad group
     bad.gp[gp] ~ dbern(prob.of.bad.gp)
-    # index the bad group in ac.prob
+    # index the bad group in a.prob
     index.bad.gp[gp] <- bad.gp[gp] + 1
 
     for(a in 1:antibiotic_classes)
@@ -38,7 +39,7 @@ model {
   {
     # probability of belonging to the bad group
     bad.v[v] ~ dbern(prob.of.bad.vol)
-    # index the bad group in ac.prob
+    # index the bad group in a.prob
     index.bad.v[v] <- bad.v[v] + 1
 
     for(a in 1:antibiotic_classes)
@@ -53,7 +54,7 @@ model {
   {
     # probability of belonging to the bad group
     bad.o[o] ~ dbern(prob.of.bad.out)
-    # index the bad group in ac.prob
+    # index the bad group in a.prob
     index.bad.o[o] <- bad.o[o] + 1
 
     for(a in 1:antibiotic_classes)
@@ -102,8 +103,10 @@ model {
   diff ~ dgamma(0.001, 0.001)
   intercept.plus <- intercept + diff
 
+  # Probability of being in the bad group is dependent on clinical state
+  prob.of.bad.hosp[1] ~ dbeta(1, 1) # Carriage
+  prob.of.bad.hosp[2] ~ dbeta(1, 1) # Clinical
   # Probability of being in the bad group
-  prob.of.bad.hosp ~ dbeta(1, 1)
   prob.of.bad.gp ~ dbeta(1, 1)
   prob.of.bad.vol ~ dbeta(1, 1)
   prob.of.bad.out ~ dbeta(1, 1)
@@ -116,5 +119,5 @@ model {
   sd.class <- sqrt(1/tau.class)
   sd.clin <- sqrt(1/tau.clin)
 
-  #monitor# full.pd, dic, deviance, a.prob, ac.prob, prob.of.bad.hosp, prob.of.bad.gp, prob.of.bad.vol, prob.of.bad.out, bad.p, bad.gp, bad.v, bad.o, intercept, sd.class, sd.clin
+  #monitor# full.pd, dic, deviance, a.prob, prob.of.bad.hosp, prob.of.bad.gp, prob.of.bad.vol, prob.of.bad.out, bad.p, bad.gp, bad.v, bad.o, intercept, sd.class, sd.clin
 }

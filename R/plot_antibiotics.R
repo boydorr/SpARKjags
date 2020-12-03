@@ -1,10 +1,11 @@
-#' plot_antibiotics
+#' Generate heatmap of resistance to antibiotics
 #'
-#' Identify bad group samples from bad.p and look at location, amr profile, and
+#' Identify bad group samples from bad.p and look at location, AMR profile, and
 #' general distribution
 #'
-#' @param model model
-#' @param data data
+#' @param model a \code{runjags} object containing model results
+#' @param data a \code{string} specifying the name of the output (an
+#' \code{rds} file containing the density plot)
 #'
 #' @export
 #'
@@ -43,8 +44,6 @@ plot_antibiotics <- function(model, data) {
     dplyr::ungroup() %>%
     dplyr::mutate(class = factor(.data$class, levels = unique(.data$class)))
   classorder <- levels(plotthis$class)
-
-
 
   # Plot results
   plots <- list()

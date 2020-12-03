@@ -1,7 +1,8 @@
 #' plot_correlation
 #'
-#' @param model model
-#' @param data data
+#' @param model a \code{runjags} object containing model results
+#' @param data a \code{list} containing the data input for the runjags model,
+#' generated with \code{jags_data()}
 #'
 #' @export
 #'

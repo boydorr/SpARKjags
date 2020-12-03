@@ -7,9 +7,10 @@
 plot_correlation(model, data)
 }
 \arguments{
-\item{model}{model}
+\item{model}{a \code{runjags} object containing model results}
 
-\item{data}{data}
+\item{data}{a \code{list} containing the data input for the runjags model,
+generated with \code{jags_data()}}
 }
 \description{
 plot_correlation
