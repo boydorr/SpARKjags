@@ -56,7 +56,7 @@ plot_density2 <- function(model,
                      length(parameters[!grepl("prob", parameters)]))
 
     p1 <- plot1(model.ggs, parameters, labels)
-    p2 <- plot2(model, data, parameters, labels)
+    p2 <- plot2(model, data, parameters, labels, var.regex)
     p3 <- plot3(model.ggs, parameters)
     plots <- list(p1, p2, p3)
 
@@ -96,18 +96,18 @@ plot1 <- function(model.ggs, parameters, labels) {
   g <- plot_this %>%
     ggplot2::ggplot() +
     ggplot2::theme_minimal() +
-    ggplot2::geom_violin(ggplot2::aes_string(x = "Parameter",
-                                             y = "value"),
+    ggplot2::geom_violin(ggplot2::aes(x = .data$Parameter,
+                                             y = .data$value),
                          trim = TRUE,
                          colour = "grey70",
                          fill = "grey90",
                          scale = "width") +
-    ggplot2::stat_summary(ggplot2::aes_string(x = "Parameter", y = "value"),
+    ggplot2::stat_summary(ggplot2::aes(x = .data$Parameter, y = .data$value),
                           fun = stats::median,
                           geom = "point",
                           position = ggplot2::position_dodge(width = 1),
                           colour = "grey33") +
-    ggplot2::stat_summary(ggplot2::aes_string(x = "Parameter", y = "value"),
+    ggplot2::stat_summary(ggplot2::aes(x = .data$Parameter, y = .data$value),
                           fun = function(z) {
                             stats::quantile(z, c(0.25, 0.75))
                           },
@@ -128,7 +128,7 @@ plot1 <- function(model.ggs, parameters, labels) {
 
 
 
-plot2 <- function(model, data, parameters, labels) {
+plot2 <- function(model, data, parameters, labels, var.regex) {
   model.ggs <- model %>%
     coda::as.mcmc.list() %>%
     ggmcmc::ggs(family = var.regex)
@@ -150,7 +150,7 @@ plot2 <- function(model, data, parameters, labels) {
 
   # Generate plot
   dat <- plot_this %>%
-    dplyr::mutate(Parameter = as.character(Parameter)) %>%
+    dplyr::mutate(Parameter = as.character(.data$Parameter)) %>%
     # Add 3rd index to denote clinical state for gp, volunteer, and outpatient
     # samples
     dplyr::mutate(Parameter = dplyr::case_when(
@@ -165,28 +165,29 @@ plot2 <- function(model, data, parameters, labels) {
     # Extract indices out into new columns corresponding to antimicrobial
     # class (index), goodbad, and clinical state
     mutate(index = gsub(".*\\[([0-9]+),[0-9],[0-9]\\]", "\\1",
-                        Parameter),
+                        .data$Parameter),
            goodbad = gsub(".*\\[[0-9]+,([0-9]),[0-9]\\]", "\\1",
-                          Parameter),
+                          .data$Parameter),
            clinical = gsub(".*\\[[0-9]+,[0-9],([0-9])\\]", "\\1",
-                           Parameter)) %>%
+                           .data$Parameter)) %>%
     mutate(index = as.numeric(index),
            goodbad = if_else(goodbad == good(), "Good group", "Bad group"),
            clinical = if_else(clinical == index_clinical,
                               "Clinical", "Carriage")) %>%
     # Merge human readable antibiotic class names by index
     left_join(labels$good, by = "index") %>%
-    select(-index) %>%
+    select(-.data$index) %>%
     mutate(Parameter = dplyr::case_when(
-      grepl("\\.gp\\.", Parameter) ~ "gp",
-      grepl("\\.v\\.", Parameter) ~ "vol",
-      grepl("\\.o\\.", Parameter) ~ "out",
-      grepl("^ac\\.", Parameter) ~ "hosp")) %>%
+      grepl("\\.gp\\.", .data$Parameter) ~ "gp",
+      grepl("\\.v\\.", .data$Parameter) ~ "vol",
+      grepl("\\.o\\.", .data$Parameter) ~ "out",
+      grepl("^ac\\.", .data$Parameter) ~ "hosp")) %>%
     # values are the same across groupings (for ac.prob and gr.prob, for
     # example), so find unique selections
-    select(-Parameter) %>%
+    select(-.data$Parameter) %>%
     unique() %>%
-    mutate(goodbad = factor(goodbad, levels = c("Good group", "Bad group")))
+    mutate(goodbad = factor(.data$goodbad,
+                            levels = c("Good group", "Bad group")))
 
   # Plot violins
   g <- dat %>%
@@ -290,11 +291,12 @@ plot2 <- function(model, data, parameters, labels) {
                   goodbad = dplyr::case_when(
                     goodbad == 1 ~ "Bad group",
                     goodbad == 0 ~ "Good group")) %>%
-    mutate(goodbad = factor(goodbad, levels = c("Good group", "Bad group"))) %>%
+    mutate(goodbad = factor(.data$goodbad,
+                            levels = c("Good group", "Bad group"))) %>%
     merge(labels$good) %>%
     dplyr::mutate(name = dplyr::case_when(
-      grepl("Hospital", label) ~ "Hospital",
-      T ~ label),
+      grepl("Hospital", .data$label) ~ "Hospital",
+      T ~ .data$label),
       label = factor(.data$label),
       label = forcats::fct_relevel(.data$label, labs))
   labs <- levels(probabilities$label)

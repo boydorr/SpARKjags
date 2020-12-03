@@ -77,9 +77,9 @@ plot_antibiotics <- function(model, data) {
       dplyr::arrange(desc(.data$total.class)) %>%
       dplyr::ungroup() %>%
       dplyr::mutate(class = factor(.data$class, levels = classorder)) %>%
-      dplyr::group_by(name, badgroup) %>%
-      dplyr::mutate(xaxis = as.numeric(GUID)) %>%
-      dplyr::mutate(xaxis = xaxis - min(xaxis)) %>%
+      dplyr::group_by(.data$name, .data$badgroup) %>%
+      dplyr::mutate(xaxis = as.numeric(.data$GUID)) %>%
+      dplyr::mutate(xaxis = .data$xaxis - min(.data$xaxis)) %>%
       dplyr::ungroup()
   })
   plotthis <- do.call(rbind.data.frame, plotthis) %>%
