@@ -121,5 +121,5 @@ model {
   # Convert precisions to sd
   sd.class <- sqrt(1/tau.class)
 
-  #monitor# full.pd, dic, deviance, a.prob,  ac.prob, a.gp.prob, a.v.prob, a.o.prob, prob.of.bad.hosp, prob.of.bad.gp, prob.of.bad.vol, prob.of.bad.out, bad.p, bad.gp, bad.v, bad.o, intercept, sd.class
+  #monitor# full.pd, dic, deviance, a.prob, ac.prob, a.gp.prob, a.v.prob, a.o.prob, prob.of.bad.hosp, prob.of.bad.gp, prob.of.bad.vol, prob.of.bad.out, bad.p, bad.gp, bad.v, bad.o, intercept, sd.class
 }

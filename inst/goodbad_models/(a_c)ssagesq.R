@@ -111,6 +111,7 @@ model {
       for (c in c(ncarr, nclin)) # 1, 2!
       {
         ac.effect[a,b,c] ~ dnorm(antibiotic.class.effect[a,b], tau.clin)
+        logit(ac.prob[a,b,c]) <- ac.effect[a,b,c]
 
         for(s in 1:N_sample_season)
         {
@@ -125,6 +126,9 @@ model {
       a.gp.effect[a,b] <- ac.effect[a,b,gp_clinical]
       a.v.effect[a,b] <- ac.effect[a,b,v_clinical]
       a.o.effect[a,b] <- ac.effect[a,b,o_clinical]
+      logit(a.gp.prob[a,b]) <- a.gp.effect[a,b]
+      logit(a.v.prob[a,b]) <- a.v.effect[a,b]
+      logit(a.o.prob[a,b]) <- a.o.effect[a,b]
 
       for(s in 1:N_sample_season)
       {
@@ -164,5 +168,5 @@ model {
   sd.clin <- sqrt(1/tau.clin)
   sd.sampleseason <- sqrt(1/tau.sampleseason)
 
-  #monitor# full.pd, dic, deviance, a.prob, ac.prob, prob.of.bad.hosp, prob.of.bad.gp, prob.of.bad.vol, prob.of.bad.out, bad.p, bad.gp, bad.v, bad.o, intercept, sd.class, sd.clin, sd.sampleseason
+  #monitor# full.pd, dic, deviance, a.prob,ac.prob, a.gp.prob, a.v.prob, a.o.prob, prob.of.bad.hosp, prob.of.bad.gp, prob.of.bad.vol, prob.of.bad.out, bad.p, bad.gp, bad.v, bad.o, intercept, sd.class, sd.clin, sd.sampleseason
 }
