@@ -6,6 +6,13 @@
 \usage{
 add_resistance(df, N, ac.prob.list)
 }
+\arguments{
+\item{df}{argument}
+
+\item{N}{argument}
+
+\item{ac.prob.list}{argument}
+}
 \description{
 add_resistance
 }

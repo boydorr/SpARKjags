@@ -244,7 +244,7 @@ plot_density <- function(model,
               paste("Trimethoprim", ind),
             classification == "Trimethoprim/Sulfamethoxazole" ~
               paste("Tri/Sul", ind)))
-        xaxis.labels <- setNames(xaxis$classification, xaxis$index)
+        xaxis.labels <- stats::setNames(xaxis$classification, xaxis$index)
 
         g <- g + ggplot2::geom_point(
           ggplot2::aes_string(x = "index",

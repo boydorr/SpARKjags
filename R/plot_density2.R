@@ -36,8 +36,8 @@ plot_density2 <- function(model,
 
     df <- import_data(model, data)
 
-    # Labels (posterior plots are split into good and bad groups as well as clinical
-    # and carriage)
+    # Labels (posterior plots are split into good and bad groups as well as
+    # clinical and carriage)
     labels <- get_labels(data)
     params <- get_params2()
     var.regex <- get_vars2(model)
@@ -165,30 +165,31 @@ plot2 <- function(model, data, parameters, labels, var.regex) {
     )) %>%
     # Extract indices out into new columns corresponding to antimicrobial
     # class (index), goodbad, and clinical state
-    mutate(index = gsub(".*\\[([0-9]+),[0-9],[0-9]\\]", "\\1",
-                        .data$Parameter),
-           goodbad = gsub(".*\\[[0-9]+,([0-9]),[0-9]\\]", "\\1",
-                          .data$Parameter),
-           clinical = gsub(".*\\[[0-9]+,[0-9],([0-9])\\]", "\\1",
-                           .data$Parameter)) %>%
-    mutate(index = as.numeric(index),
-           goodbad = if_else(goodbad == good(), "Good group", "Bad group"),
-           clinical = if_else(clinical == index_clinical,
-                              "Clinical", "Carriage")) %>%
+    dplyr::mutate(index = gsub(".*\\[([0-9]+),[0-9],[0-9]\\]", "\\1",
+                               .data$Parameter),
+                  goodbad = gsub(".*\\[[0-9]+,([0-9]),[0-9]\\]", "\\1",
+                                 .data$Parameter),
+                  clinical = gsub(".*\\[[0-9]+,[0-9],([0-9])\\]", "\\1",
+                                  .data$Parameter)) %>%
+    dplyr::mutate(index = as.numeric(.data$index),
+                  goodbad = if_else(.data$goodbad == good(), "Good group",
+                                    "Bad group"),
+                  clinical = if_else(.data$clinical == index_clinical,
+                                     "Clinical", "Carriage")) %>%
     # Merge human readable antibiotic class names by index
     left_join(labels$good, by = "index") %>%
-    select(-.data$index) %>%
-    mutate(Parameter = dplyr::case_when(
+    dplyr::select(-.data$index) %>%
+    dplyr::mutate(Parameter = dplyr::case_when(
       grepl("\\.gp\\.", .data$Parameter) ~ "gp",
       grepl("\\.v\\.", .data$Parameter) ~ "vol",
       grepl("\\.o\\.", .data$Parameter) ~ "out",
       grepl("^ac\\.", .data$Parameter) ~ "hosp")) %>%
     # values are the same across groupings (for ac.prob and gr.prob, for
     # example), so find unique selections
-    select(-.data$Parameter) %>%
+    dplyr::select(-.data$Parameter) %>%
     unique() %>%
-    mutate(goodbad = factor(.data$goodbad,
-                            levels = c("Good group", "Bad group")))
+    dplyr::mutate(goodbad = factor(.data$goodbad,
+                                   levels = c("Good group", "Bad group")))
 
   # Plot violins
   g <- dat %>%
@@ -245,8 +246,8 @@ plot2 <- function(model, data, parameters, labels, var.regex) {
   # or naive (e.g. res.a_naive)
 
   columns <- df %>%
-    select(-.data$GUID, -.data$name, -.data$hospital, -.data$clinical,
-           -.data$mean.p.bad, -.data$badgroup, -.data$label) %>%
+    dplyr::select(-.data$GUID, -.data$name, -.data$hospital, -.data$clinical,
+                  -.data$mean.p.bad, -.data$badgroup, -.data$label) %>%
     colnames()
 
 
@@ -289,7 +290,7 @@ plot2 <- function(model, data, parameters, labels, var.regex) {
   # that are resistant to each antibiotic class
   probabilities <- merge(n, s, by = c("label", "badgroup", "clinical",
                                       "classification")) %>%
-    rename(goodbad = badgroup) %>%
+    dplyr::rename(goodbad = .data$badgroup) %>%
     dplyr::mutate(Probability = .data$resistant / .data$total,
                   clinical = dplyr::case_when(
                     clinical == "yes" ~ "Clinical",
@@ -297,8 +298,8 @@ plot2 <- function(model, data, parameters, labels, var.regex) {
                   goodbad = dplyr::case_when(
                     goodbad == 1 ~ "Bad group",
                     goodbad == 0 ~ "Good group")) %>%
-    mutate(goodbad = factor(.data$goodbad,
-                            levels = c("Good group", "Bad group"))) %>%
+    dplyr::mutate(goodbad = factor(.data$goodbad,
+                                   levels = c("Good group", "Bad group"))) %>%
     merge(labels$good) %>%
     dplyr::mutate(name = dplyr::case_when(
       grepl("Hospital", .data$label) ~ "Hospital",

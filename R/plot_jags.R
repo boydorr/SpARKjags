@@ -47,7 +47,7 @@ plot_jags <- function(res, var, labels, intercept, condense = F) {
 
     if(!missing(labels))
       d2 <- d2 %>% merge(labels) %>%
-      dplyr::mutate(Label = factor(Label, levels = labels$Label))
+      dplyr::mutate(Label = factor(.data$Label, levels = labels$Label))
 
     g2 <- d2 %>%
       ggmcmc::ggs_caterpillar() + ggplot2::theme_minimal()

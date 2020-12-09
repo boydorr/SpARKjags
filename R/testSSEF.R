@@ -22,7 +22,7 @@ testSSEF <- function(model, plot = T) {
   # Label parameters with SSeff less than or equal to 300 as "bad"
   tmp <- data.frame(SSeff = model$mcse$sseff)
   tmp <- cbind.data.frame(tmp, Parameter = rownames(tmp)) %>%
-    dplyr::filter(!grepl("^bad.", Parameter)) %>%
+    dplyr::filter(!grepl("^bad.", .data$Parameter)) %>%
     dplyr::mutate(test = dplyr::case_when(.data$SSeff <= 300 ~ "bad",
                                           T ~ "good"))
 

@@ -6,6 +6,13 @@
 \usage{
 add_bad_column_hosp(df, N, prob.of.bad.hosp)
 }
+\arguments{
+\item{df}{argument}
+
+\item{N}{argument}
+
+\item{prob.of.bad.hosp}{argument}
+}
 \description{
 add_bad_column_hosp
 }
