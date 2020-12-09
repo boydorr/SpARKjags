@@ -33,6 +33,7 @@ plot_density2 <- function(model,
     # data.frame listing SpARK samples, and their resistances to each antibiotic
     # class, as well as the posterior probability of being in the bad group
     # (mean.p.bad), which defines the badgroup (1 if mean.p.bad > 0.5)
+
     df <- import_data(model, data)
 
     # Labels (posterior plots are split into good and bad groups as well as clinical
@@ -97,7 +98,7 @@ plot1 <- function(model.ggs, parameters, labels) {
     ggplot2::ggplot() +
     ggplot2::theme_minimal() +
     ggplot2::geom_violin(ggplot2::aes(x = .data$Parameter,
-                                             y = .data$value),
+                                      y = .data$value),
                          trim = TRUE,
                          colour = "grey70",
                          fill = "grey90",
@@ -224,13 +225,16 @@ plot2 <- function(model, data, parameters, labels, var.regex) {
 
   # Initialise variables for plotting
   df <- import_data(model, data)
+
   all_labs <- unique(df$label)
+
 
   labs <- c("Hospital\n(Carriage)",
             "Hospital\n(Clinical)",
             "GP",
             "Outpatients",
             "Volunteers")
+
   labs <- c(labs, all_labs[!all_labs %in% labs])
 
   this_many <- length(labs)
@@ -239,10 +243,12 @@ plot2 <- function(model, data, parameters, labels, var.regex) {
 
   # Define which columns should be used when the input is a goodbad model
   # or naive (e.g. res.a_naive)
+
   columns <- df %>%
     select(-.data$GUID, -.data$name, -.data$hospital, -.data$clinical,
            -.data$mean.p.bad, -.data$badgroup, -.data$label) %>%
     colnames()
+
 
   # Count of the number of R and S samples in each hospital-clinical group
   # for each antibiotic class (ignore NAs)
