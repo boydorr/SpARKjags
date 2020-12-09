@@ -435,6 +435,9 @@ plot_autocorr(model = get(model_name))
 get(model_name)
 
 
+#' ### Summary of DIC results {-}
+#'
+
 DICtable(c("res.test_ac1", "res.test_ac2", "res.test_ac3", "res.test_ac4",
            "res.test_a_c"))
 
