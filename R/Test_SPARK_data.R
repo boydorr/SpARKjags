@@ -77,11 +77,11 @@ get_test_data <- function() {
 
   ################################################################################
   #Set parameters
-  intercept <- 0
-  diff <- 0.5 #difference between good and bad
+  intercept <- -1.5
+  diff <- 2 #difference between good and bad
   intercept.plus <- intercept + diff
 
-  sd.class <- 0.1
+  sd.class <- 0.5
   sd.clin <- 0.1
 
   prob.of.bad.hosp <- c(0.6, 0.4) #Carriage, Clinical

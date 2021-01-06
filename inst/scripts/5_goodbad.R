@@ -204,7 +204,7 @@ data_ah$data.animal$response %>% data.frame() %>%
 
 # -------------------------------------------------------------------------
 
-#' # Louise's test data
+#' ## Louise's test data
 
 #' ### test_ac1 {.tabset}
 #' response ~ antibiotic.class_{goodbad}\
@@ -221,7 +221,8 @@ data_ah$data.animal$response %>% data.frame() %>%
 #'
 
 path <- run_SpARKjags_model(data = test_data,
-                            SpARKjags_model = file.path(directory, "test_ac1.R"),
+                            SpARKjags_model = file.path(directory,
+                                                        "test_ac1.R"),
                             save_to = res_dir)
 res.test_ac1 <- get_model(path)
 model_name <- "res.test_ac1"
@@ -265,7 +266,8 @@ get(model_name)
 #'
 
 path <- run_SpARKjags_model(data = test_data,
-                            SpARKjags_model = file.path(directory, "test_ac2.R"),
+                            SpARKjags_model = file.path(directory,
+                                                        "test_ac2.R"),
                             save_to = res_dir)
 res.test_ac2 <- get_model(path)
 model_name <- "res.test_ac2"
@@ -1521,55 +1523,56 @@ get(model_name)
 #' hospital_{wardtype_{ward}}
 #'
 
-#' path <- run_SpARKjags_model(data = data,
-#'                             SpARKjags_model = file.path(directory,
-#'                                                         "(a_c)ss(ag2)h_wt_w.R"),
-#'                             save_to = res_dir,
-#'                             thin = 20)
-#' res.a_cssag2h_wt_w <- get_model(path)
-#' model_name <- "res.a_cssag2h_wt_w"
-#'
-#' #' #### Posterior
-#' #+ res.a_cssag2h_wt_w, fig.height = 10
-#' plot_density2(model = get(model_name),
-#'               data = data,
-#'               save_to = file.path(res_dir, "density_plots"),
-#'               filename = paste0(gsub("res.", "", model_name), ".rds"))
-#'
-#' #' #### Statistics
-#' summarise_samples(model = get(model_name),
-#'                   data = data)
-#'
-#' #' #### AMR Summary
-#' #+ fig.height = 8, fig.width = 10
-#' plot_antibiotics(model = get(model_name),
-#'                  data = data)
-#'
-#' #' #### AMR Correlation
-#' #+ fig.height = 10
-#' plot_correlation(model = get(model_name),
-#'                  data = data)
-#'
-#' #' #### Diagnostics
-#' DIC(model_name = get(model_name))
-#' testSSEF(model = get(model_name))
-#' testPSRF(model = get(model_name))
-#'
-#' #' #### Trace plot
-#' #+ fig.height = 6
-#' plot_caterpillar(model = get(model_name),
-#'                  save_to = file.path(res_dir, "caterpillar_plots"),
-#'                  filename = paste0(gsub("res.", "", model_name), ".rds"))
-#'
-#' #' #### Autocorrelation
-#' #+ fig.height = 6
-#' plot_autocorr(model = get(model_name))
-#'
-#' #' #### Model
-#' #+ code = readLines(file.path(model_dir, paste0(gsub("res.", "", model_name), ".R"))), eval = FALSE, class.source = 'fold-show'
-#'
-#' #' #### Results
-#' get(model_name)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory,
+                                                        "(a_c)ss(ag2)h_wt_w.R"),
+                            save_to = res_dir,
+                            thin = 20)
+res.a_cssag2h_wt_w <- get_model(path)
+file_name <- "res.(a_c)ss(ag2)wt_w"
+model_name <- "res.a_cssag2h_wt_w"
+
+#' #### Posterior
+#+ res.a_cssag2h_wt_w, fig.height = 10
+plot_density2(model = get(model_name),
+              data = data,
+              save_to = file.path(res_dir, "density_plots"),
+              filename = paste0(gsub("res.", "", file_name), ".rds"))
+
+#' #### Statistics
+summarise_samples(model = get(model_name),
+                  data = data)
+
+#' #### AMR Summary
+#+ fig.height = 8, fig.width = 10
+plot_antibiotics(model = get(model_name),
+                 data = data)
+
+#' #### AMR Correlation
+#+ fig.height = 10
+plot_correlation(model = get(model_name),
+                 data = data)
+
+#' #### Diagnostics
+DIC(model_name = get(model_name))
+testSSEF(model = get(model_name))
+testPSRF(model = get(model_name))
+
+#' #### Trace plot
+#+ fig.height = 6
+plot_caterpillar(model = get(model_name),
+                 save_to = file.path(res_dir, "caterpillar_plots"),
+                 filename = paste0(gsub("res.", "", file_name), ".rds"))
+
+#' #### Autocorrelation
+#+ fig.height = 6
+plot_autocorr(model = get(model_name))
+
+#' #### Model
+#+ code = readLines(file.path(model_dir, paste0(gsub("res.", "", file_name), ".R"))), eval = FALSE, class.source = 'fold-show'
+
+#' #### Results
+get(model_name)
 
 
 #' ### Summary of DIC results {-}
@@ -1581,136 +1584,28 @@ DICtable(c("res.a_csm", "res.a_css"))
 DICtable(c("res.a_cssg", "res.a_cssag", "res.a_cssag2", "res.a_cssage",
            "res.a_cssagesq", "res.a_cssag2g", "res.a_cssag2_g"))
 DICtable(c("res.a_cssag2h", "res.a_cssag2wt", "res.a_cssag2w",
-           "res.a_cssag2wt_w"
-           # , "res.a_cssag2h_wt_w"
-           ))
-
-
-#' ### res.assagwcst {.tabset}
-#' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + ward +
-#' clinical + sample_type
-#'
-
-#' path <- run_SpARKjags_model(data = data,
-#'                             SpARKjags_model = file.path(directory, "assagwcst.R"),
-#'                             save_to = res_dir,
-#'                             thin = 30)
-#' res.assagwcst <- get_model(path)
-#' model_name <- "res.assagwcst"
-#'
-#' #' #### Posterior
-#' #+ res.assagwcst, fig.height = 10
-#' plot_density(model = get(model_name),
-#'              data = data,
-#'              save_to = file.path(res_dir, "density_plots"),
-#'              filename = paste0(gsub("res.", "", model_name), ".rds"))
-#'
-#' #' #### Statistics
-#' summarise_samples(model = get(model_name),
-#'                   data = data)
-#'
-#' #' #### AMR Summary
-#' #+ fig.height = 8, fig.width = 10
-#' plot_antibiotics(model = get(model_name),
-#'                  data = data)
-#'
-#' #' #### AMR Correlation
-#' #+ fig.height = 10
-#' plot_correlation(model = get(model_name),
-#'                  data = data)
-#'
-#' #' #### Diagnostics
-#' DIC(model_name = get(model_name))
-#' testSSEF(model = get(model_name))
-#' testPSRF(model = get(model_name))
-#'
-#' #' #### Trace plot
-#' #+ fig.height = 6
-#' plot_caterpillar(model = get(model_name),
-#'                  save_to = file.path(res_dir, "caterpillar_plots"),
-#'                  filename = paste0(gsub("res.", "", model_name), ".rds"))
-#'
-#' #' #### Autocorrelation
-#' #+ fig.height = 6
-#' plot_autocorr(model = get(model_name))
-#'
-#' #' #### Model
-#' get(model_name)$model
-#'
-#' #' #### Results
-#' get(model_name)
+           "res.a_cssag2wt_w", "res.a_cssag2h_wt_w"))
 
 
 
-
-#' ### res.assagwc_st {.tabset}
-#' response ~ antibiotic_class_{goodbad} + sample_season + agegroup + ward +
-#' clinical_{sampletype}
+#' ### Get SpARK ID of isolates in the Good and Bad groups from the best model {-}
 #'
 
-#' path <- run_SpARKjags_model(data = data,
-#'                             SpARKjags_model = file.path(directory, "assagwc_st.R"),
-#'                             save_to = res_dir,
-#'                             thin = 30)
-#' res.assagwc_st <- get_model(path)
-#' model_name <- "res.assagwc_st"
-#'
-#' #' #### Posterior
-#' #+ res.assagwc_st, fig.height = 10
-#' plot_density(model = get(model_name),
-#'              data = data,
-#'              save_to = file.path(res_dir, "density_plots"),
-#'              filename = paste0(gsub("res.", "", model_name), ".rds"))
-#'
-#' #' #### Statistics
-#' summarise_samples(model = get(model_name),
-#'                   data = data)
-#'
-#' #' #### AMR Summary
-#' #+ fig.height = 8, fig.width = 10
-#' plot_antibiotics(model = get(model_name),
-#'                  data = data)
-#'
-#' #' #### AMR Correlation
-#' #+ fig.height = 10
-#' plot_correlation(model = get(model_name),
-#'                  data = data)
-#'
-#' #' #### Diagnostics
-#' DIC(model_name = get(model_name))
-#' testSSEF(model = get(model_name))
-#' testPSRF(model = get(model_name))
-#'
-#' #' #### Trace plot
-#' #+ fig.height = 6
-#' plot_caterpillar(model = get(model_name),
-#'                  save_to = file.path(res_dir, "caterpillar_plots"),
-#'                  filename = paste0(gsub("res.", "", model_name), ".rds"))
-#'
-#' #' #### Autocorrelation
-#' #+ fig.height = 6
-#' plot_autocorr(model = get(model_name))
-#'
-#' #' #### Model
-#' get(model_name)$model
-#'
-#' #' #### Results
-#' get(model_name)
+path <- run_SpARKjags_model(data = data,
+                            SpARKjags_model = file.path(directory,
+                                                        "(a_c)ss(ag2)wt_w.R"),
+                            save_to = res_dir,
+                            thin = 20)
+model <- get_model(path)
 
+df <- import_data(model, data) %>%
+  dplyr::select(.data$GUID, .data$clinical, .data$mean.p.bad,
+                .data$badgroup, .data$label) %>%
+  dplyr::mutate(badgroup = dplyr::case_when(badgroup == 1 ~ "yes",
+                                            badgroup == 0 ~ "no"))
 
+write.csv2(df, "spark_guids.csv")
 
-
-#'
-#' ### Summary of DIC results {-}
-#'
-# DICtable(c("res.a_naive", "res.a", "res.asm", "res.ass"))
-# DICtable(c("res.assg", "res.assag", "res.assag2", "res.assage",
-#            "res.assagesq", "res.assagg"))
-# DICtable(c("res.assagh", "res.assagwt", "res.assagw", "res.assagwt_w",
-#            "res.assaghwtw"))
-# , "res.assagh_wt_w"))
-# DICtable(c("res.assagwc", "res.assagwcst", "res.assagwc_st"))
-# "res.a_cssagwst"
 
 
 #'
