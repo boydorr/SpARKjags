@@ -51,7 +51,7 @@ badgroup_posterior <- function(model, data) {
     merge(GUID.lookup, all.x = T)
   vol <- cbind.data.frame(vol, row_number = seq_len(nrow(vol)))
 
-  humanGUID <- dplyr::bind_rows(hospital, gp, out, vol) %>%
+  humanGUID <- do.call(rbind.data.frame, list(hospital, gp, out, vol)) %>%
     dplyr::select(-.data$GUIDindex)
 
   pp.badhuman <- pp.badgroup %>%

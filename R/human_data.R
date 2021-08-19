@@ -32,7 +32,7 @@ human_data <- function(data) {
     select(.data$GUID, everything())
 
   # Combine data
-  dfGUID <- dplyr::bind_rows(p, gp, v, o) %>%
+  dfGUID <- do.call(rbind.data.frame, list(p, gp, v, o)) %>%
     merge(tmp$lookup_tables$GUID %>%
             dplyr::rename(GUIDindex = .data$index), all.x = TRUE) %>%
     merge(tag, all.x = TRUE) %>%

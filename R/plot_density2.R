@@ -26,7 +26,7 @@ plot_density2 <- function(model,
   filepath <- file.path(save_to, filename)
 
   # Is the plot cached?
-  if(file.exists(filepath)) {
+  if (file.exists(filepath)) {
     output <- readRDS(filepath)
 
   } else {
@@ -40,7 +40,7 @@ plot_density2 <- function(model,
     # clinical and carriage)
     labels <- get_labels(data)
     params <- get_params2()
-    var.regex <- get_vars2(model)
+    var.regex <- get_vars(model)
 
     model.ggs <- model %>%
       coda::as.mcmc.list() %>%
@@ -130,6 +130,7 @@ plot1 <- function(model.ggs, parameters, labels) {
 
 
 plot2 <- function(model, data, parameters, labels, var.regex) {
+
   model.ggs <- model %>%
     coda::as.mcmc.list() %>%
     ggmcmc::ggs(family = var.regex)
@@ -140,50 +141,70 @@ plot2 <- function(model, data, parameters, labels, var.regex) {
     c()
 
   plot_this <- model.ggs %>%
-    dplyr::filter(.data$Parameter %in% plot_these)
+    dplyr::filter(.data$Parameter %in% plot_these) %>%
+    dplyr::mutate(Parameter = as.character(.data$Parameter))
 
   index_clinical <- clinical(data, "index")
   index_carriage <- carriage(data, "index")
 
-  gp <- if_else(clinical(data, "gp"), index_clinical, index_carriage)
-  out <- if_else(clinical(data, "out"), index_clinical, index_carriage)
-  vol <- if_else(clinical(data, "vol"), index_clinical, index_carriage)
+  index_good <- good()
+  index_bad <- bad()
 
-  # Generate plot
-  dat <- plot_this %>%
-    dplyr::mutate(Parameter = as.character(.data$Parameter)) %>%
-    # Add 3rd index to denote clinical state for gp, volunteer, and outpatient
-    # samples
-    dplyr::mutate(Parameter = dplyr::case_when(
-      grepl("\\.gp\\.", .data$Parameter) ~ gsub("\\]", paste0(",", gp, "]"),
-                                                .data$Parameter),
-      grepl("\\.v\\.", .data$Parameter) ~ gsub("\\]", paste0(",", vol, "]"),
-                                               .data$Parameter),
-      grepl("\\.o\\.", .data$Parameter) ~ gsub("\\]", paste0(",", out, "]"),
-                                               .data$Parameter),
-      T ~ .data$Parameter
-    )) %>%
-    # Extract indices out into new columns corresponding to antimicrobial
-    # class (index), goodbad, and clinical state
-    dplyr::mutate(index = gsub(".*\\[([0-9]+),[0-9],[0-9]\\]", "\\1",
-                               .data$Parameter),
-                  goodbad = gsub(".*\\[[0-9]+,([0-9]),[0-9]\\]", "\\1",
+  if (any(grepl("\\.gp\\.", plot_this$Parameter))) {
+    gp <- if_else(clinical(data, "gp"), index_clinical, index_carriage)
+    out <- if_else(clinical(data, "out"), index_clinical, index_carriage)
+    vol <- if_else(clinical(data, "vol"), index_clinical, index_carriage)
+
+    dat <- plot_this %>%
+      # Add 3rd index to denote clinical state for gp, volunteer, and outpatient
+      # samples
+      dplyr::mutate(Parameter = dplyr::case_when(
+        grepl("\\.gp\\.", .data$Parameter) ~ gsub("\\]", paste0(",", gp, "]"),
+                                                  .data$Parameter),
+        grepl("\\.v\\.", .data$Parameter) ~ gsub("\\]", paste0(",", vol, "]"),
+                                                 .data$Parameter),
+        grepl("\\.o\\.", .data$Parameter) ~ gsub("\\]", paste0(",", out, "]"),
+                                                 .data$Parameter),
+        T ~ .data$Parameter)) %>%
+      # Extract indices out into new columns corresponding to antimicrobial
+      # class (index), goodbad, and clinical state
+      dplyr::mutate(index = gsub(".*\\[([0-9]+),[0-9],[0-9]\\]", "\\1",
                                  .data$Parameter),
-                  clinical = gsub(".*\\[[0-9]+,[0-9],([0-9])\\]", "\\1",
-                                  .data$Parameter)) %>%
-    dplyr::mutate(index = as.numeric(.data$index),
-                  goodbad = if_else(.data$goodbad == good(), "Good group",
-                                    "Bad group"),
-                  clinical = if_else(.data$clinical == index_clinical,
-                                     "Clinical", "Carriage")) %>%
+                    goodbad = gsub(".*\\[[0-9]+,([0-9]),[0-9]\\]", "\\1",
+                                   .data$Parameter),
+                    clinical = gsub(".*\\[[0-9]+,[0-9],([0-9])\\]", "\\1",
+                                    .data$Parameter)) %>%
+      dplyr::mutate(index = as.numeric(.data$index),
+                    goodbad = if_else(.data$goodbad == index_good, "Good group",
+                                      "Bad group"),
+                    clinical = if_else(.data$clinical == index_clinical,
+                                       "Clinical", "Carriage")) %>%
+      dplyr::mutate(Parameter = dplyr::case_when(
+        grepl("\\.gp\\.", .data$Parameter) ~ "gp",
+        grepl("\\.v\\.", .data$Parameter) ~ "vol",
+        grepl("\\.o\\.", .data$Parameter) ~ "out",
+        grepl("^ac\\.", .data$Parameter) ~ "hosp"))
+
+    by_clinical <- TRUE
+
+  } else {
+    # Extract indices out into new columns corresponding to antimicrobial
+    # class (index) and goodbad
+    dat <- plot_this %>%
+      dplyr::mutate(index = gsub(".*\\[([0-9]+),[0-9]\\]", "\\1",
+                                 .data$Parameter),
+                    goodbad = gsub(".*\\[[0-9]+,([0-9])\\]", "\\1",
+                                   .data$Parameter)) %>%
+      dplyr::mutate(index = as.numeric(.data$index),
+                    goodbad = dplyr::case_when(
+                      .data$goodbad == index_good ~ "Good group",
+                      .data$goodbad == index_bad ~ "Bad group"))
+  }
+
+  dat <- dat %>%
     # Merge human readable antibiotic class names by index
     left_join(labels$good, by = "index") %>%
     dplyr::select(-.data$index) %>%
-    dplyr::mutate(Parameter = dplyr::case_when(
-      grepl("\\.gp\\.", .data$Parameter) ~ "gp",
-      grepl("\\.v\\.", .data$Parameter) ~ "vol",
-      grepl("\\.o\\.", .data$Parameter) ~ "out",
-      grepl("^ac\\.", .data$Parameter) ~ "hosp")) %>%
     # values are the same across groupings (for ac.prob and gr.prob, for
     # example), so find unique selections
     dplyr::select(-.data$Parameter) %>%
@@ -191,19 +212,143 @@ plot2 <- function(model, data, parameters, labels, var.regex) {
     dplyr::mutate(goodbad = factor(.data$goodbad,
                                    levels = c("Good group", "Bad group")))
 
+  # Initialise variables for plotting
+  df <- import_data(model, data)
+
+  all_labs <- unique(df$label)
+
+  labs <- c("Hospital\n(Carriage)",
+            "Hospital\n(Clinical)",
+            "GP",
+            "Outpatients",
+            "Volunteers")
+  labs <- c(labs, all_labs[!all_labs %in% labs])
+
+  this_many <- length(labs)
+
+
+  # Calculate the observed resistance probability
+
+  # Define which columns should be used when the input is a goodbad model
+  # or naive (e.g. res.a_naive)
+
+  columns <- df %>%
+    dplyr::select(-.data$GUID, -.data$name, -.data$hospital, -.data$clinical,
+                  -.data$mean.p.bad, -.data$badgroup, -.data$label) %>%
+    colnames()
+
+
+  # Count of the number of R and S samples in each hospital-clinical group
+  # for each antibiotic class (ignore NAs)
+
+  if (by_clinical) {
+    n <- df %>%
+      dplyr::group_by(.data$label, .data$badgroup, .data$clinical) %>%
+      dplyr::summarise(dplyr::across(columns, ~sum(!is.na(.)))) %>%
+      reshape2::melt(id.vars = c("label", "badgroup", "clinical"),
+                     measure.vars = columns,
+                     variable.name = "classification",
+                     value.name = "total")
+  } else {
+    n <- df %>%
+      dplyr::group_by(.data$label, .data$badgroup) %>%
+      dplyr::summarise(dplyr::across(columns, ~sum(!is.na(.)))) %>%
+      reshape2::melt(id.vars = c("label", "badgroup"),
+                     measure.vars = columns,
+                     variable.name = "classification",
+                     value.name = "total")
+  }
+
+
+  # Count of the number of samples with resistance to each antibiotic class
+  # in each hospital-clinical group
+  if (by_clinical) {
+    s <- df %>%
+      dplyr::group_by(.data$label, .data$badgroup, .data$clinical) %>%
+      dplyr::summarise(dplyr::across(columns, ~sum(. == 1, na.rm = TRUE))) %>%
+      reshape2::melt(id.vars = c("label", "badgroup", "clinical"),
+                     measure.vars = columns,
+                     variable.name = "classification",
+                     value.name = "resistant")
+  } else {
+    s <- df %>%
+      dplyr::group_by(.data$label, .data$badgroup) %>%
+      dplyr::summarise(dplyr::across(columns, ~sum(. == 1, na.rm = TRUE))) %>%
+      reshape2::melt(id.vars = c("label", "badgroup"),
+                     measure.vars = columns,
+                     variable.name = "classification",
+                     value.name = "resistant")
+  }
+
+  # Initialise variables for plotting
+  if(this_many <= 12) {
+    manual_colours <- stats::setNames(ggthemes::ptol_pal()(this_many),
+                                      labs)
+
+  } else {
+    colours <- ggthemes::ptol_pal()(12)
+    manual_colours <- stats::setNames(
+      grDevices::colorRampPalette(colours)(this_many), labs)
+  }
+
+  manual_shapes <- stats::setNames(c(16, 16, 1:(this_many-2)), labs)
+
+  labs <- labs[which(labs %in% s$label)]
+
+  # Calculate the proportion of samples in each hospital-clinical group
+  # that are resistant to each antibiotic class
+  if (by_clinical) {
+    probabilities <- merge(n, s, by = c("label", "badgroup", "clinical",
+                                        "classification")) %>%
+      dplyr::mutate(clinical = dplyr::case_when(
+        clinical == "yes" ~ "Clinical",
+        clinical == "no" ~ "Carriage"))
+
+  } else {
+    probabilities <- merge(n, s, by = c("label", "badgroup", "classification"))
+  }
+
+  probabilities <- probabilities %>%
+    dplyr::rename(goodbad = .data$badgroup) %>%
+    dplyr::mutate(Probability = .data$resistant / .data$total,
+                  goodbad = dplyr::case_when(
+                    goodbad == 1 ~ "Bad group",
+                    goodbad == 0 ~ "Good group")) %>%
+    dplyr::mutate(goodbad = factor(.data$goodbad,
+                                   levels = c("Good group", "Bad group"))) %>%
+    merge(labels$good) %>%
+    dplyr::mutate(name = dplyr::case_when(
+      grepl("Hospital", .data$label) ~ "Hospital",
+      T ~ .data$label),
+      label = factor(.data$label),
+      label = forcats::fct_relevel(.data$label, labs))
+  labs <- levels(probabilities$label)
+
   # Plot violins
-  g <- dat %>%
-    ggplot2::ggplot() +
-    ggplot2::theme_minimal() +
+
+  if (by_clinical) {
+    g <- dat %>%
+      ggplot2::ggplot() +
+      geom_split_violin(ggplot2::aes(x = .data$classification,
+                                     y = .data$value,
+                                     fill = clinical),
+                        trim = TRUE,
+                        colour = "grey70",
+                        scale = "width")
+  } else {
+    g <- dat %>%
+      ggplot2::ggplot() +
+      ggplot2::geom_violin(ggplot2::aes(x = .data$classification,
+                                        y = .data$value),
+                           trim = TRUE,
+                           colour = "grey70",
+                           fill = "grey90",
+                           scale = "width")
+  }
+
+  g <- g + ggplot2::theme_minimal() +
     ggplot2::facet_grid(.~goodbad, scales = "free") +
-    geom_split_violin(ggplot2::aes(x = .data$classification,
-                                   y = .data$value,
-                                   fill = clinical),
-                      trim = TRUE,
-                      colour = "grey70",
-                      scale = "width") +
     ggplot2::scale_fill_manual(name = "",
-                               # values = c("#f1b6da", "#b8e186")) +
                                values = c("grey90", "white")) +
     ggplot2::stat_summary(ggplot2::aes(x = .data$classification,
                                        y = .data$value),
@@ -224,94 +369,10 @@ plot2 <- function(model, data, parameters, labels, var.regex) {
                   y = "Probability of resistance") +
     ggplot2::coord_flip(ylim = c(0, 1))
 
-  # Initialise variables for plotting
-  df <- import_data(model, data)
-
-  all_labs <- unique(df$label)
-
-
-  labs <- c("Hospital\n(Carriage)",
-            "Hospital\n(Clinical)",
-            "GP",
-            "Outpatients",
-            "Volunteers")
-
-  labs <- c(labs, all_labs[!all_labs %in% labs])
-
-  this_many <- length(labs)
-
-  # Calculate the observed resistance probability
-
-  # Define which columns should be used when the input is a goodbad model
-  # or naive (e.g. res.a_naive)
-
-  columns <- df %>%
-    dplyr::select(-.data$GUID, -.data$name, -.data$hospital, -.data$clinical,
-                  -.data$mean.p.bad, -.data$badgroup, -.data$label) %>%
-    colnames()
-
-
-  # Count of the number of R and S samples in each hospital-clinical group
-  # for each antibiotic class (ignore NAs)
-  n <- df %>%
-    dplyr::group_by(.data$label, .data$badgroup, .data$clinical) %>%
-    dplyr::summarise(dplyr::across(columns, ~sum(!is.na(.)))) %>%
-    reshape2::melt(id.vars = c("label", "badgroup", "clinical"),
-                   measure.vars = columns,
-                   variable.name = "classification",
-                   value.name = "total")
-
-  # Count of the number of samples with resistance to each antibiotic class
-  # in each hospital-clinical group
-  s <- df %>%
-    dplyr::group_by(.data$label, .data$badgroup, .data$clinical) %>%
-    dplyr::summarise(dplyr::across(columns, ~sum(. == 1, na.rm = TRUE))) %>%
-    reshape2::melt(id.vars = c("label", "badgroup", "clinical"),
-                   measure.vars = columns,
-                   variable.name = "classification",
-                   value.name = "resistant")
-
-  # Initialise variables for plotting
-  if(this_many <= 12) {
-    manual_colours <- stats::setNames(ggthemes::ptol_pal()(this_many),
-                                      labs)
-
-  } else {
-    colours <- ggthemes::ptol_pal()(12)
-    manual_colours <- stats::setNames(
-      grDevices::colorRampPalette(colours)(this_many), labs)
-  }
-
-  manual_shapes <- stats::setNames(c(16, 16, 1:(this_many-2)), labs)
-
-  labs <- labs[which(labs %in% s$label)]
-
-  # Calculate the proportion of samples in each hospital-clinical group
-  # that are resistant to each antibiotic class
-  probabilities <- merge(n, s, by = c("label", "badgroup", "clinical",
-                                      "classification")) %>%
-    dplyr::rename(goodbad = .data$badgroup) %>%
-    dplyr::mutate(Probability = .data$resistant / .data$total,
-                  clinical = dplyr::case_when(
-                    clinical == "yes" ~ "Clinical",
-                    clinical == "no" ~ "Carriage"),
-                  goodbad = dplyr::case_when(
-                    goodbad == 1 ~ "Bad group",
-                    goodbad == 0 ~ "Good group")) %>%
-    dplyr::mutate(goodbad = factor(.data$goodbad,
-                                   levels = c("Good group", "Bad group"))) %>%
-    merge(labels$good) %>%
-    dplyr::mutate(name = dplyr::case_when(
-      grepl("Hospital", .data$label) ~ "Hospital",
-      T ~ .data$label),
-      label = factor(.data$label),
-      label = forcats::fct_relevel(.data$label, labs))
-  labs <- levels(probabilities$label)
-
   manual_colours <- manual_colours[labs]
   manual_shapes <- manual_shapes[labs]
 
-  g + ggplot2::geom_point(ggplot2::aes(x = .data$index,
+  g + ggplot2::geom_point(ggplot2::aes(x = .data$classification,
                                        y = .data$Probability,
                                        colour = .data$label,
                                        shape = .data$label),

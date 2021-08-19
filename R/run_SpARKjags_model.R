@@ -27,25 +27,42 @@ run_SpARKjags_model <- function(data,
   if(!grepl(".R$", SpARKjags_model))
     stop("SpARKjags_model must point to an *.R file")
 
-  # Find model script
-  if(grepl("/", SpARKjags_model)) {
-    location <- system.file(SpARKjags_model,
-                            package = "SpARKjags")
-    if(length(location) == 0)
-      stop("SpARKjags_model not found")
-    if(length(location) > 1)
-      stop("More than one model was found")
-  }
-
   # Determine where to save results
-  filename <- gsub(".r$", "", basename(location))
+  filename <- gsub(".r$", "", basename(SpARKjags_model))
   filename <- gsub(".R$", "", filename)
   filename <- paste0(filename, ".rds")
   save_to <- file.path(save_to, filename)
 
+  location <- SpARKjags_model
+
   # Run model
-  run_model(data = data,
-            location = location,
-            thin = thin,
-            save_to = save_to)
+  # If file already exists, return its path
+  if(file.exists(save_to)) {
+    message("File already exists")
+    return(save_to)
+
+  } else {
+    # If directory doesn't exist, create it
+    if(!grepl("/", save_to))
+      save_to <- paste0("./", save_to)
+    directory <- dirname(save_to)
+    if(!file.exists(directory))
+      dir.create(directory, recursive = TRUE)
+
+    # Run model
+    results <- runjags::run.jags(location,
+                                 data = data$jags,
+                                 n.chains = 2,
+                                 silent.jags = T,
+                                 thin = thin)
+
+    # If a results summary hasn't been generated, generate it
+    if(!results$summary.available) {
+      results <- runjags::add.summary(results)
+    }
+
+    # Save results
+    saveRDS(results, save_to)
+    return(save_to)
+  }
 }

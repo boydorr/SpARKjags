@@ -138,8 +138,8 @@ plot_density <- function(model,
         this_many <- length(labs)
 
         # Extract data
-        if(bad) df <- df %>% dplyr::filter(.data$badgroup == 1)
-        if(good) df <- df %>% dplyr::filter(.data$badgroup == 0)
+        if(bad) this_df <- df %>% dplyr::filter(.data$badgroup == 1)
+        if(good) this_df <- df %>% dplyr::filter(.data$badgroup == 0)
 
         # Note that hospital-clinical groups are defined as:
         # Hospital\n(Carriage),
@@ -154,12 +154,12 @@ plot_density <- function(model,
         # Define which columns should be used when the input is a goodbad model
         # or naive (e.g. res.a_naive)
         if(good | bad) {
-          columns <- df %>%
+          columns <- this_df %>%
             select(-.data$GUID, -.data$name, -.data$hospital, -.data$clinical,
                    -.data$mean.p.bad, -.data$badgroup, -.data$label) %>%
             colnames()
         } else {
-          columns <- df %>%
+          columns <- this_df %>%
             select(-.data$GUID, -.data$name, -.data$hospital, -.data$clinical,
                    -.data$label) %>%
             colnames()
@@ -167,7 +167,7 @@ plot_density <- function(model,
 
         # Count of the number of R and S samples in each hospital-clinical group
         # for each antibiotic class (ignore NAs)
-        n <- df %>%
+        n <- this_df %>%
           dplyr::group_by(.data$label) %>%
           dplyr::summarise(dplyr::across(columns, ~sum(!is.na(.)))) %>%
           reshape2::melt(id.vars = "label", measure.vars = columns,
@@ -176,7 +176,7 @@ plot_density <- function(model,
 
         # Count of the number of samples with resistance to each antibiotic class
         # in each hospital-clinical group
-        s <- df %>%
+        s <- this_df %>%
           dplyr::group_by(.data$label) %>%
           dplyr::summarise(dplyr::across(columns, ~sum(. == 1, na.rm = TRUE))) %>%
           reshape2::melt(id.vars = "label", measure.vars = columns,

@@ -23,7 +23,7 @@ get_labels <- function(data, ind, cat) {
   tmp.car <- data.frame(index = paste0("prob.of.bad.hosp[", carriage, "]"),
                         category = "Hospital (carriage)", stringsAsFactors = F)
 
-  tmp2 <- tmp2 %>% dplyr::bind_rows(tmp.clin, tmp.car)
+  tmp2 <- do.call(rbind.data.frame, list(tmp2, tmp.clin, tmp.car))
 
   tmp.animals <- data.frame(index = c("prob.of.bad.livestock",
                                       "prob.of.bad.cattle",
@@ -48,7 +48,7 @@ get_labels <- function(data, ind, cat) {
                                          "Turtle",
                                          "Crow"))
 
-  tmp2 <- tmp2 %>% dplyr::bind_rows(tmp.animals)
+  tmp2 <- do.call(rbind.data.frame, list(tmp2, tmp.animals))
 
   if(!missing(ind) && !missing(cat)) {
     tmp3 <- data.frame(index = ind, category = cat, stringsAsFactors = F)
