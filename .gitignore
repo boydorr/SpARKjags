@@ -6,9 +6,11 @@
 *.rds
 *.html
 *.csv
-/plots/*
-
+*.pdf
+*.Rproj
 *.png
 *.js
 *.spin.R
 *.spin.Rmd
+
+plots/
